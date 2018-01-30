@@ -1,0 +1,37 @@
+<div class="ui-g-12 global-sales">
+  <p-panel>
+    <p-header>
+        {{header}}
+        <span class="header-helper">Last Update: {{lastUpdate}}</span>
+    </p-header>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>Total Sales</th>
+          <th>Change</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of data; let i=index;">
+        <tr>
+          <td>{{i+1}}</td>
+          <td><img library="serenity-layout" src="{{item.img}}" width="45"></td>
+          <td>{{item.label}}</td>
+          <td>{{item.figure}}</td>
+          <td>{{item.percent}}</td>
+          <td>
+            <i *ngIf="item.change > 0" class="material-icons up-arrow"></i>
+            <i *ngIf="item.change < 0" class="material-icons down-arrow"></i>
+          </td>
+          <td>
+              <button class="remove-btn ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" icon="ui-icon-close" pbutton="" title="Reply" type="button"><span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-close"></span><span class="ui-button-text ui-clickable">ui-btn</span></button>
+              <button class="message-btn secondary-btn ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" icon="ui-icon-message" pbutton="" title="Reply" type="button"><span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-message"></span><span class="ui-button-text ui-clickable">ui-btn</span></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </p-panel>
+</div>

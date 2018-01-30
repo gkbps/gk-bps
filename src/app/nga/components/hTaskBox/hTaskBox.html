@@ -1,0 +1,15 @@
+<div class="task-box {{style}}">
+    <div class="task-box-header">
+        <i class="material-icons">refresh</i>
+    </div>
+    <div class="task-box-content">
+        <h3>{{header}}</h3>
+        <p>{{text}}</p>
+    </div>
+    <div class="task-box-footer">
+        <span class="task-status">{{status}}</span>
+        <ng-container *ngFor="let item of members; let i=index;">
+          <img src="{{item}}">
+        </ng-container>
+    </div>
+</div>

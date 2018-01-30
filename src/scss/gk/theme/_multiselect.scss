@@ -1,0 +1,149 @@
+body .ui-multiselect {
+  border-bottom: 1px solid #bdbdbd;
+  box-sizing: border-box;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -moz-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+}
+
+body .ui-multiselect .ui-multiselect-label-container {
+  padding-right: 1.5em;
+}
+
+body .ui-multiselect .ui-multiselect-label-container .ui-multiselect-label {
+  padding: 0px 2px 0px 2px;
+}
+
+body .ui-multiselect .ui-multiselect-trigger {
+  height: 1.5em;
+  width: 1.5em;
+  margin-top: 0;
+  padding: 0;
+  bottom: 0;
+  top: auto;
+}
+
+body .ui-multiselect .ui-multiselect-trigger .fa {
+  color: #757575;
+  margin-top: auto;
+  margin-left: auto;
+}
+
+body .ui-multiselect.ui-state-focus {
+  border-bottom: 2px solid #607D8B;
+}
+
+body .ui-multiselect-panel.ui-widget {
+  padding: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  min-width: 12.5em;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  padding: 0.625em 1em;
+  position: relative;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-chkbox {
+  float: none;
+  margin: 0 .5em 0 -.125em;
+  position: static;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-chkbox .ui-chkbox-box {
+  border-color: #ffffff;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-chkbox .ui-chkbox-box .ui-chkbox-icon {
+  border-color: #ffffff;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-chkbox .ui-chkbox-box.ui-state-active .ui-chkbox-icon {
+  border-color: #ffffff;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-chkbox .ui-chkbox-box.ui-state-focus {
+  background-color: #90A4AE;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-multiselect-filter-container {
+  width: 70%;
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+  margin-left: 0;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-multiselect-filter-container .fa {
+  top: 0;
+  left: 0;
+  color: #ffffff;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-multiselect-filter-container .ui-inputtext {
+  color: #ffffff;
+  padding-left: 1.5em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-multiselect-filter-container .ui-inputtext:focus {
+  border-bottom-color: #ffffff;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-multiselect-close {
+  position: absolute;
+  right: .5em;
+  top: .625em;
+  height: 1.5em;
+  width: 1.5em;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-multiselect-close span {
+  color: #ffffff;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-header .ui-multiselect-close:hover {
+  background-color: #90A4AE;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-item {
+  font-size: 1em;
+  padding: 0.625em 1em;
+  color: #212121;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-item:not(.ui-state-highlight):hover {
+  background-color: #e8e8e8;
+  color: #000000;
+}
+
+body .ui-multiselect-panel.ui-widget .ui-multiselect-item.ui-state-highlight {
+  color: #ffffff;
+}

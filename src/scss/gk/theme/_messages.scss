@@ -1,0 +1,174 @@
+body {
+  /* Messages */;
+}
+
+body .ui-messages {
+  padding: 0.625em 1em;
+}
+
+body .ui-messages ul {
+  display: inline-block;
+  margin-left: 0;
+}
+
+body .ui-messages.ui-messages-info {
+  background-color: #2196F3;
+  border-color: #2196F3;
+  color: #ffffff;
+}
+
+body .ui-messages.ui-messages-warn {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #ffffff;
+}
+
+body .ui-messages.ui-messages-error {
+  background-color: #e62a10;
+  border-color: #e62a10;
+  color: #ffffff;
+}
+
+body .ui-messages.ui-messages-fatal {
+  background-color: #212121;
+  border-color: #212121;
+  color: #ffffff;
+}
+
+body .ui-messages.ui-messages-success {
+  background-color: #8BC34A;
+  border-color: #8BC34A;
+  color: #ffffff;
+}
+
+body .ui-messages .ui-messages-close {
+  text-decoration: none;
+  color: #fff;
+  right: .25em;
+}
+
+body .ui-messages .ui-messages-icon {
+  background: none;
+  color: #fff;
+  margin-top: -2px;
+}
+
+body .ui-messages .ui-messages-icon.fa-info-circle {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+      /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+      /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+      /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+      /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+      /* Support for IE. */
+  font-feature-settings: 'liga';
+  font-size: 1.75em;
+}
+
+body .ui-messages .ui-messages-icon.fa-info-circle:before {
+  content: "info";
+}
+
+body .ui-messages .ui-messages-icon.fa-warning {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+      /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+      /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+      /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+      /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+      /* Support for IE. */
+  font-feature-settings: 'liga';
+  font-size: 1.75em;
+}
+
+body .ui-messages .ui-messages-icon.fa-warning:before {
+  content: "warning";
+}
+
+body .ui-messages .ui-messages-icon.fa-close {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+      /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+      /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+      /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+      /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+      /* Support for IE. */
+  font-feature-settings: 'liga';
+  font-size: 1.75em;
+}
+
+body .ui-messages .ui-messages-icon.fa-close:before {
+  content: "error_outline";
+}
+
+body .ui-messages .ui-messages-icon.fa-check {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+      /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+      /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+      /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+      /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+      /* Support for IE. */
+  font-feature-settings: 'liga';
+  font-size: 1.75em;
+}
+
+body .ui-messages .ui-messages-icon.fa-check:before {
+  content: "check_circle";
+}

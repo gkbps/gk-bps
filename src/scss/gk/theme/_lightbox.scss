@@ -1,0 +1,51 @@
+body .ui-lightbox.ui-shadow {
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+body .ui-lightbox .ui-lightbox-caption {
+  padding: 0.625em 1em;
+}
+
+body .ui-lightbox .ui-lightbox-caption .ui-lightbox-caption-text {
+  margin: 0;
+}
+
+body .ui-lightbox .ui-lightbox-caption .ui-lightbox-close {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+  padding: 0;
+  margin: 0;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+body .ui-lightbox .ui-lightbox-caption .ui-lightbox-close:hover {
+  background-color: #90A4AE;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+body .ui-lightbox .ui-lightbox-content-wrapper .ui-lightbox-nav-right, body .ui-lightbox .ui-lightbox-content-wrapper .ui-lightbox-nav-left {
+  top: 40%;
+}
+
+body .ui-lightbox .ui-lightbox-content-wrapper .ui-lightbox-nav-right .fa, body .ui-lightbox .ui-lightbox-content-wrapper .ui-lightbox-nav-left .fa {
+  -moz-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+  font-size: 3em;
+  color: #90A4AE;
+}

@@ -1,0 +1,31 @@
+.contact-item {
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.contact-item img {
+  display: inline-block;
+  margin: 24px;
+  vertical-align: middle;
+}
+
+.contact-item button {
+  margin: 24px 12px 0 0;
+  float: right;
+}
+
+.contact-details {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.ui-inputtext {
+  color: #ffffff;
+}
+
+.ui-inputtext:focus {
+    border-width: 0 0 1px 0;
+    border-color: #ffffff;
+    padding-bottom: 0px;
+}
+
+// , body .ui-inputtext.ui-state-focus

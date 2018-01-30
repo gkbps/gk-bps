@@ -1,0 +1,24 @@
+<h1>View Changes</h1>
+<p>Guidelines to read changes of document</p>
+<ul>
+  <li>
+    <b>Kind</b> - indicates the kind of change; will be one of the following:  
+    <ul>
+      <li><b>N</b> - indicates a newly added property/element</li>
+      <li><b>D</b> - indicates a property/element was deleted</li>
+      <li><b>E</b> - indicates a property/element was edited</li>
+      <li><b>A</b> - indicates a change occurred within an array</li>
+      <ul>
+        <li><code>index</code> - when kind === 'A', indicates the array index where the change occurred</li>
+        <li><code>item</code> - when kind === 'A', contains a nested change record indicating the change that occurred at the array index</li>
+      </ul>
+    </ul>
+  </li>
+  <li><b>Info</b> - the property path (from the left-hand-side root)</li>
+  <li><b>Before</b> - the value on the left-hand-side of the comparison (undefined if kind === 'N')</li>
+  <li><b>After</b> - the value on the right-hand-side of the comparison (undefined if kind === 'D')</li>        
+</ul>
+
+<i>
+  Changes are arranged in the order of recent event
+</i>

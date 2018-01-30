@@ -1,0 +1,24 @@
+<h1>Xem thay đổi</h1>
+<p>Hướng dẫn cách đọc các thay đổi liên quan đến tài liệu như sau</p>
+<ul>
+  <li>
+    <b>Loại</b> - liên quan đến loại thay đổi, bao gồm:
+    <ul>
+      <li><b>N</b> - thêm một thuộc tính / phần tử mới</li>
+      <li><b>D</b> - xoá một thuộc tính / phần tử</li>
+      <li><b>E</b> - sửa đổi một thuộc tính / phần tử</li>
+      <li><b>A</b> - thay đổi diễn ra trong một mảng dữ liệu</li>
+      <ul>
+        <li><code>Chỉ mục</code> - khi loại === 'A', là chỉ mục của mảng dữ liệu nơi có thay đổi</li>
+        <li><code>Bản ghi</code> - khi loại === 'A', là bản ghi thay đổi của mảng dữ liệu ở chỉ mục</li>
+        </ul>
+    </ul>
+  </li>
+  <li><b>Thông tin</b> - là định danh thông tin phát sinh thay đổi</li>
+  <li><b>Trước đây</b> - giá trị của thuộc tính / phần tử trước khi thay đổi (không xác định nếu loại thay đổi  === 'N')</li>
+  <li><b>Đã thay đổi</b> - giá trị của thuộc tính / phần tử sau khi thay đổi (không xác định nếu loại thay đổi === 'D')</li>  
+</ul> 
+
+<i>
+  Các thay đổi được sắp xếp theo trình tự thời gian gần nhất          
+</i>

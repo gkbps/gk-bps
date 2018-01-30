@@ -1,0 +1,8 @@
+<div *ngIf="wkBarStatus" class="layout-working">
+  <div class="layout-working-lge">
+    <p-dropdown [options]="lges" [(ngModel)]="selectedLge" (onChange)="changeLge()"></p-dropdown>
+  </div>
+  <div class="layout-working-year">
+    <p-dropdown [options]="years" [(ngModel)]="selectedYear" (onChange)="changeYear()"></p-dropdown>
+  </div>
+</div>

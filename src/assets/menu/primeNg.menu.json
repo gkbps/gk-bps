@@ -1,0 +1,155 @@
+[  
+  {
+    "data": {"label": "Input", "icon": "flip"},
+    "children": [
+      {"data": { "label": "Input Group", "icon": "check", "url": "/prime/prime01/inputgroup"}},
+      {"data": {"label": "Calendar", "icon": "check", "url": "/prime/prime01/calendar"}},
+      {"data": {"label": "Chips", "icon": "check", "url": "/prime/prime01/chips"}},
+      {"data": {"label": "Dropdown", "icon": "check","url": "/prime/prime01/dropdown"}},
+      {"data": {"label": "Input Switch", "icon": "check","url": "/prime/prime01/inputSwitch"}},
+      {"data": {"label": "Input Text Area", "icon": "check","url": "/prime/prime01/inputTextArea"}},
+      {"data": {"label": "Mask", "icon": "check","url": "/prime/prime01/mask"}},
+      {"data": {"label": "Password", "icon": "check","url": "/prime/prime01/password"}},
+      {"data": {"label": "Rating", "icon": "check","url": "/prime/prime01/rating"}},
+      {"data": {"label": "Spinner", "icon": "check","url": "/prime/prime01/spinner"}},
+      {"data": {"label": "Toggle Button", "icon": "check","url": "/prime/prime01/toggleButton"}},
+      {"data": {"label": "Auto Complete", "icon": "check","url": "/prime/prime01/autoComplete"}},
+      {"data": {"label": "Check Box", "icon": "check","url": "/prime/prime01/checkBox"}},
+      {"data": {"label": "Color Picker", "icon": "check","url": "/prime/prime01/colorPicker"}},
+      {"data": {"label": "Editor", "icon": "check","url": "/prime/prime01/editor"}},
+      {"data": {"label": "Input Text", "icon": "check","url": "/prime/prime01/inputText"}},
+      {"data": {"label": "List Box",  "icon": "close","url": "/prime/prime01/listBox"}},
+      {"data": {"label": "Multi Select", "icon": "check","url": "/prime/prime01/multiSelect"}},
+      {"data": {"label": "Radio Button", "icon": "check","url": "/prime/prime01/radioButton"}},
+      {"data": {"label": "Slider", "icon": "check","url": "/prime/prime01/slider"}},
+      {"data": {"label": "Select Button", "icon": "check","url": "/prime/prime01/selectButton"}},
+      {"data": {"label": "Tri Checkbox", "icon": "check","url": "/prime/prime01/triCheckbox"}}
+    ]
+  },
+
+  {
+    "data":{"label": "Button", "icon": "flip"},
+    "children": [
+      {"data": {"label": "Button", "icon": "check","url": "/prime/prime02/button"}},
+      {"data": {"label": "Split Button", "icon": "check","url": "/prime/prime02/splitButton"}}
+    ]
+  },
+
+  {
+    "data":{"label": "Data", "icon": "flip"},
+    "children": [
+      {"data": {"label": "Carousel", "icon": "check","url": "/prime/prime03/carousel"}},
+      {"data": {"label": "Data List", "icon": "check","url": "/prime/prime03/dataList"}},
+      {"data": {"label": "Data Table", "icon": "check","url": "/prime/prime03/dataTable"}},
+      {"data": {"label": "Order List", "icon": "close","url": "/prime/prime03/orderList"}},
+      {"data": {"label": "Paginator", "icon": "check","url": "/prime/prime03/paginator"}},
+      {"data": {"label": "Schedule", "icon": "check","url": "/prime/prime03/schedule"}},
+      {"data": {"label": "Tree Table", "icon": "check","url": "/prime/prime03/treeTable"}},
+      {"data": {"label": "Data Grid", "icon": "check","url": "/prime/prime03/dataGrid"}},
+      {"data": {"label": "Data Scroller", "icon": "check","url": "/prime/prime03/dataScroller"}},
+      {"data": {"label": "Org Chart", "icon": "check","url": "/prime/prime03/orgChart"}},
+      {"data": {"label": "GMap", "icon": "close","url": "/prime/prime03/gmap"}},
+      {"data": {"label": "Pick List", "icon": "close","url": "/prime/prime03/pickList"}},
+      {"data": {"label": "Tree", "icon": "check","url": "/prime/prime03/tree"}}
+    ]
+  },
+
+  {
+    "data":{"label": "Panel", "icon": "flip"},
+    "children": [
+      {"data": {"label": "Accordion", "icon": "check", "url": "/prime/prime04/accordion"}},
+      {"data": {"label": "Panel", "icon": "close","url": "/prime/prime04/panel"}},
+      {"data": {"label": "Tab View", "icon": "close","url": "/prime/prime04/tabView"}},
+      {"data": {"label": "Field Set", "icon": "close", "url": "/prime/prime04/fieldSet"}},
+      {"data": {"label": "Grid", "icon": "check", "url": "/prime/prime04/grid"}},
+      {"data": {"label": "Toolbar", "icon": "close", "url": "/prime/prime04/toolbar"}}
+    ]
+  },
+
+  {
+    "data":{"label": "Overlay", "icon": "flip"},
+    "children": [
+      {"data": {"label": "Confirm Dialog", "icon": "check", "url": "/prime/prime05/confirmDialog"}},
+      {"data": {"label": "Light Box", "icon": "check", "url": "/prime/prime05/lightBox"}},
+      {"data": {"label": "Tool Tip", "icon": "check","url": "/prime/prime05/toolTip"}},
+      {"data": {"label": "Dialog", "icon": "check", "url": "/prime/prime05/dialog"}},
+      {"data": {"label": "Overlay Panel", "icon": "check", "url": "/prime/prime05/overlayPanel"}}
+    ]
+  },
+
+  {
+    "data":{"label": "File", "icon": "flip"},
+    "children": [
+      {"data": {"label": "Upload", "icon": "check", "url": "/prime/prime06/upload"}}
+    ]
+  },
+
+  {
+    "data":{"label": "Menu", "icon": "flip"},
+    "children": [
+      {"data": {"label": "Menu Model", "icon": "check", "url": "/prime/prime07/menu"}},
+      {"data": {"label": "Context Menu", "icon": "check", "url": "/prime/prime07/contextMenu"}},
+      {"data": {"label": "Menu", "icon": "check", "url": "/prime/prime07/menu"}},
+      {"data": {"label": "Panel Menu", "icon": "check", "url": "/prime/prime07/panelMenu"}},
+      {"data": {"label": "Steps", "icon": "check", "url": "/prime/prime07/step"}},
+      {"data": {"label": "Tiered Menu", "icon": "check", "url": "/prime/prime07/tieredMenu"}},
+      {"data": {"label": "Breadcum", "icon": "check", "url": "/prime/prime07/breadcum"}},
+      {"data": {"label": "Mega Menu", "icon": "close", "url": "/prime/prime07/megaMenu"}},
+      {"data": {"label": "Menu Bar", "icon": "close", "url": "/prime/prime07/menuBar"}},
+      {"data": {"label": "Slide Menu", "icon": "close", "url": "/prime/prime07/slideMenu"}},
+      {"data": {"label": "Tab Menu", "icon": "close", "url": "/prime/prime07/tabMenu"}}
+    ]
+  },
+
+  {
+    "data":{"label": "Chart", "icon": "flip"},
+    "children": [
+      {"data": {"label": "Chart Model", "icon": "close", "url": "/prime/prime08/chartModel"}},
+      {"data": {"label": "Doughnut", "icon": "check", "url": "/prime/prime08/doughnut"}},
+      {"data": {"label": "Polar Area", "icon": "check", "url": "/prime/prime08/polarArea"}},
+      {"data": {"label": "Radar", "icon": "check", "url": "/prime/prime08/radar"}},
+      {"data": {"label": "Bar", "icon": "check", "url": "/prime/prime08/bar"}},
+      {"data": {"label": "Line", "icon": "check", "url": "/prime/prime08/line"}},
+      {"data": {"label": "Pie", "icon": "check", "url": "/prime/prime08/pie"}}
+    ]
+  },
+
+  {
+    "data":{"label": "Messages", "icon": "flip"},
+    "children": [
+      {"data": {"label": "Messages", "icon": "check", "url": "/prime/prime09/message"}},
+      {"data": {"label": "Growl", "icon": "check", "url": "/prime/prime09/growl"}}
+    ]
+  },
+
+  {
+    "data":{"label": "Multimedia", "icon": "flip"},
+    "children": [
+      {"data": {"label": "Galarie", "icon": "check", "url": "/prime/prime10/galarie"}}
+    ]
+  },
+
+  {
+    "data":{"label": "Drag & Drop", "icon": "flip"},
+    "children": [
+      {"data": {"label": "Drag & Drop", "icon": "check","url": "/prime/prime11/dragDrop"}}
+    ]
+  },
+
+  {
+    "data":{"label": "Misc", "icon": "flip"},
+    "children": [
+      {"data": {"label": "Responsive", "icon": "check", "url": "/prime/prime12/responsive"}},
+      {"data": {"label": "Defer", "icon": "close", "url": "/prime/prime12/defer"}},
+      {"data": {"label": "Captcha", "icon": "close", "url": "/prime/prime12/captcha"}},
+      {"data": {"label": "Validation", "icon": "check", "url": "/prime/prime12/validation"}},
+      {"data": {"label": "Code Highlighter", "icon": "close", "url": "/prime/prime12/codeHighlighter"}},
+      {"data": {"label": "RTL", "icon": "close", "url": "/prime/prime12/rtl"}},
+      {"data": {"label": "Block UI", "icon": "close", "url": "/prime/prime12/blockUI"}},
+      {"data": {"label": "Inplace", "icon": "check", "url": "/prime/prime12/inplace"}},
+      {"data": {"label": "Progress Bar", "icon": "check", "url": "/prime/prime12/progressBar"}},
+      {"data": {"label": "Terminal", "icon": "check", "url": "/prime/prime12/terminal"}}
+    ]
+  }
+
+]

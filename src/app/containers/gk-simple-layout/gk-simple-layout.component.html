@@ -1,0 +1,8 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <p-growl *ngIf="notificationMode && notificationType" [value]="msgs"></p-growl>
+    <p-messages *ngIf="notificationMode && (!notificationType)" [value]="msgs"></p-messages>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

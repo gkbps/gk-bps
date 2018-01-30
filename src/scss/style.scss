@@ -1,0 +1,15 @@
+ @charset "UTF-8";
+// Import vendors styles
+// @import "vendors/vendors";
+
+// Fix Serenity layout theme
+@import "serenityfixed";
+
+//Admin LTE
+@import "adminLTE/adminLTE";
+
+// Custom styles
+@import "custom";
+
+// @import "primeng.scss"; 
+// For study only - import directly to .angular-cli.js

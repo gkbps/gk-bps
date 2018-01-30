@@ -1,0 +1,35 @@
+
+<div id="layout-wrapper" class="layout-wrapper layout-wrapper-static">  <!-- static: layout-wrapper-static; overlay menu: -->
+  <div id="layout-sidebar" class="layout-sidebar" gkLayoutSidebarToggleWebMode>     <!-- mouseenter: layout-sidebar-active; mouseleave: -->
+    <gk-logo></gk-logo>
+    <gk-sidebar-wrapper></gk-sidebar-wrapper>
+  </div>
+
+  <div class="layout-main">
+    <div class="layout-topbar">
+      <gk-header></gk-header>
+    </div>
+
+    <gk-breadcrumbs></gk-breadcrumbs>
+
+    <gk-working></gk-working>
+
+    <!-- <p-progressBar *ngIf="blocked" mode="indeterminate" [style]="{'height': '3px'}"></p-progressBar> -->
+    <ng2-slim-loading-bar height="3px"></ng2-slim-loading-bar>
+
+    <div class="layout-content">
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <p-growl *ngIf="notificationMode && notificationType" [value]="msgs"></p-growl>
+          <p-messages *ngIf="notificationMode && (!notificationType)" [value]="msgs"></p-messages>
+        </div>
+      </div>
+
+      <router-outlet></router-outlet>
+    </div>
+
+    <div class="fixed-layout-footer">
+      <gk-footer></gk-footer>
+    </div>
+  </div>
+</div>

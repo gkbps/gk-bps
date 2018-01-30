@@ -1,0 +1,77 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <div class="card card-w-title">
+      <div class="ui-datatable ui-widget ui-datatable-reflow">
+
+        <div class="ui-datatable-header ui-widget-header">
+          <p-header>{{'view_change'|translate}}</p-header>
+        </div>
+
+        <div class="ui-datatable-tablewrapper">
+          <table>
+
+            <thead class="ui-datatable-thead">
+              <tr class="ui-state-default">
+                <th class="ui-state-default ui-unselectable-text" style="width:10%">
+                  <span class="ui-column-title"><b>{{'seq'|translate}}</b></span>
+                </th>
+                <th class="ui-state-default ui-unselectable-text" style="width:30%">
+                  <span class="ui-column-title"><b>{{'username'|translate}}</b></span>
+                </th>
+                <th class="ui-state-default ui-unselectable-text" style="width:30%">
+                  <span class="ui-column-title"><b>{{'tcode'|translate}}</b></span>
+                </th>
+                <th class="ui-state-default ui-unselectable-text" style="width:30%">
+                  <span class="ui-column-title"><b>{{'date_time'|translate}}</b></span>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody class="ui-datatable-data ui-widget-content ui-datatable-hoverable-rows">
+              <ng-container *ngFor="let change of data; let i=index;">
+                <tr class="ui-datatable-even ui-widget-content">
+                  <td><span class="ui-cell-data"><b>{{first + i+1}}</b></span></td>
+                  <td><span class="ui-cell-data"><b>{{change.username}}</b></span></td>
+                  <td><span class="ui-cell-data"><b>{{change.tcode}}</b></span></td>
+                  <td><span class="ui-cell-data"><b>{{change.created_at}}</b></span></td>
+                </tr>
+                <tr>
+                  <td colspan="4"><b>{{'change_details'|translate}}</b></td>
+                </tr>
+                <tr>
+                  <td><span class="ui-cell-data"><i>{{'kind'|translate}}</i></span></td>
+                  <td><span class="ui-cell-data"><i>{{'info'|translate}}</i></span></td>
+                  <td><span class="ui-cell-data"><i>{{'lhs'|translate}}</i></span></td>
+                  <td><span class="ui-cell-data"><i>{{'rhs'|translate}}</i></span></td>
+                </tr>
+
+                <ng-container *ngFor="let diff of change.diff; let j=index;">
+                  <tr [ngStyle]="{'background-color': (diff.kind=='U' ? 'red' : '')}">
+                    <!-- [ngClass]="{'ui-datatable-even': (diff.kind=='U')}" -->
+                    <td>{{i+1}}.{{j+1}} - {{diff.kind}}</td>
+                    <td>{{diff.path[0]|translate}}</td>
+                    <td>{{diff.lhs|json}}</td>
+
+                    <td *ngIf="diff.kind=='A'">
+                      {{diff.index}} - {{diff.item|json}}
+                    </td>
+                    <td *ngIf="(diff.kind=='U')">
+                      <a href="#" (click)="getUploadFile(diff.rhs);">{{diff.rhs}}</a>
+                    </td>
+                    <td *ngIf="(diff.kind!='A') && (diff.kind!='U')">
+                      {{diff.rhs|json}}
+                    </td>
+
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+
+          </table>
+          <p-paginator rows="{{rows}}" totalRecords="{{totalRecords}}" [rowsPerPageOptions]="[10,20,30]" (onPageChange)="paginate($event)"></p-paginator>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

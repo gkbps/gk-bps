@@ -1,0 +1,126 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="card card-w-title">
+      <h1>{{'gkcln'|translate}}</h1>
+
+      <div class="ui-g form-group">
+
+        <!-- HEADER -->
+        <div class="ui-g-12">
+          <h-request-header
+            [tcode]="tcode"
+            (getAction)="getAction($event)">
+          </h-request-header>
+        </div>
+        <!-- ./HEADER -->
+
+        <!-- BODY -->
+        <div *ngIf="id" class="ui-g-12">
+          <p-panel [toggleable]="true" [collapsed]="false">
+            <p-header>
+              <span class="ui-panel-title"><i class="fa ui-icon-subject"></i> {{'req_body'|translate}}</span>
+            </p-header>
+
+            <div class="ui-g">
+              <div class="ui-g-12">
+                <gkclient-form
+                  #myRequestBody
+                  (getRequestBodyChange)="getRequestBodyChange($event)"
+                  [isRequest]="'true'"
+                  [isEditableRequest] = "isEditableRequest"
+                  [tcode]="tcode">
+                </gkclient-form>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+        <!-- ./BODY -->
+
+        <!-- DOCUMENTS -->
+        <div *ngIf="id" class="ui-g-12">
+          <h-request-documents
+            [tcode]="tcode">
+          </h-request-documents>
+        </div>
+        <!-- ./DOCUMENTS -->
+
+        <!-- APPROVAL -->
+        <div *ngIf="id" class="ui-g-12">
+          <h-request-approval-flow>
+          </h-request-approval-flow>
+        </div>
+        <!-- ./APPROVAL -->
+
+        <!-- AJE -->
+        <div *ngIf="id" class="ui-g-12">
+          <p-panel [toggleable]="true" [collapsed]="true">
+            <p-header>
+              <span class="ui-panel-title"><i class="fa ui-icon-ac-unit"></i> {{'req_aje'|translate}}</span>
+            </p-header>
+            <div class="ui-g">
+              <div class="ui-g-12">
+                Auto Journal Entry is here
+              </div>
+            </div>
+          </p-panel>
+        </div>
+        <!-- ./AJE -->
+
+        <!-- COMMENTS -->
+        <div *ngIf="id" class="ui-g-12">
+          <p-panel [toggleable]="true" [collapsed]="true">
+            <p-header>
+              <span class="ui-panel-title"><i class="fa ui-icon-question-answer"></i> {{'req_comment'|translate}}</span>
+            </p-header>
+            <div class="ui-g">
+              <div class="ui-g-12">
+                Comment is here
+              </div>
+            </div>
+          </p-panel>
+        </div>
+        <!-- ./COMMENTS -->
+
+        <!-- HISTORY -->
+        <div *ngIf="id" class="ui-g-12">
+          <p-panel [toggleable]="true" [collapsed]="true">
+            <p-header>
+              <span class="ui-panel-title"><i class="fa ui-icon-history"></i> {{'req_history'|translate}}</span>
+            </p-header>
+            <div class="ui-g">
+              <div class="ui-g-12">
+                History is here
+              </div>
+            </div>
+          </p-panel>
+        </div>
+        <!-- ./HISTORY -->
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<br />
+<p-panel header ="{{'debug'|translate}}" [toggleable]="true" [collapsed]="true">
+  <!-- *ngIf="debugMode"  -->
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="ui-helper-clearfix" style="margin-top:10px">
+        <pre>{{'requestHeader'|translate}}: <br>{{requestHeader | json}}</pre>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-helper-clearfix" style="margin-top:10px">
+        <pre>{{'requestBody'|translate}}: <br>{{requestBody | json}}</pre>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-helper-clearfix" style="margin-top:10px">
+        <pre>{{'requestFooter'|translate}}: <br>{{requestFooter | json}}</pre>
+      </div>
+    </div>
+  </div>
+</p-panel>

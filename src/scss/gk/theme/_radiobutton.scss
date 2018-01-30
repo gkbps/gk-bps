@@ -1,0 +1,54 @@
+body .ui-radiobutton {
+  position: relative;
+  margin: 0 .25em 0 0;
+  vertical-align: middle;
+}
+
+body .ui-radiobutton .ui-radiobutton-box {
+  border: 2px solid #757575;
+  width: 1.286em;
+  height: 1.286em;
+  -moz-transition: box-shadow 0.3s;
+  -o-transition: box-shadow 0.3s;
+  -webkit-transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+
+body .ui-radiobutton .ui-radiobutton-box.ui-state-focus {
+  border-color: #607D8B;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  -moz-transition: box-shadow 0.3s, background-color 0.3s;
+  -o-transition: box-shadow 0.3s, background-color 0.3s;
+  -webkit-transition: box-shadow 0.3s, background-color 0.3s;
+  transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+body .ui-radiobutton .ui-radiobutton-box.ui-state-active {
+  border-color: #607D8B;
+  background-color: transparent;
+}
+
+body .ui-radiobutton .ui-radiobutton-box .ui-radiobutton-icon {
+  display: block;
+  box-sizing: border-box;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  font-size: 1em;
+  transition: -webkit-transform ease .28s;
+  transition: transform ease .28s;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  margin: 0;
+}
+
+body .ui-radiobutton .ui-radiobutton-box .fa-circle {
+  background-color: #607D8B;
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+}

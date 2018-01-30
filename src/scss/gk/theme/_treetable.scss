@@ -1,0 +1,124 @@
+body .ui-treetable .ui-treetable-header {
+  padding: 0.625em 1em;
+  font-size: 1em;
+}
+
+body .ui-treetable thead tr {
+  border-bottom: 1px solid #dbdbdb;
+}
+
+body .ui-treetable thead tr th {
+  background-color: #ffffff;
+  padding: .625em .875em;
+  border: 0 none;
+}
+
+body .ui-treetable thead tr th .fa {
+  color: #757575;
+}
+
+body .ui-treetable thead tr th:first-child {
+  border-left: 1px solid #dbdbdb;
+}
+
+body .ui-treetable thead tr th:last-child {
+  border-right: 1px solid #dbdbdb;
+}
+
+body .ui-treetable thead tr th .ui-sortable-column-icon {
+  vertical-align: middle;
+  margin: -.25em 0 0 0;
+}
+
+body .ui-treetable thead tr th.ui-state-active {
+  background-color: #7CB342;
+  color: #ffffff;
+}
+
+body .ui-treetable thead tr th.ui-state-active .fa {
+  color: #ffffff;
+}
+
+body .ui-treetable thead tr th .ui-column-resizer {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+      /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+      /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+      /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+      /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+      /* Support for IE. */
+  font-feature-settings: 'liga';
+  font-size: 1em;
+  color: #757575;
+}
+
+body .ui-treetable thead tr th .ui-column-resizer:before {
+  content: "code";
+}
+
+body .ui-treetable tfoot td {
+  border: 0 none;
+  padding: .625em .875em;
+}
+
+body .ui-treetable tbody .ui-treetable-row {
+  background-color: #ffffff;
+}
+
+body .ui-treetable tbody .ui-treetable-row td {
+  border: 0 none;
+  padding: .625em .875em;
+}
+
+body .ui-treetable tbody .ui-treetable-row td .ui-treetable-toggler {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 .167em;
+  float: none;
+}
+
+body .ui-treetable tbody .ui-treetable-row td .ui-chkbox {
+  margin-right: .5em;
+}
+
+body .ui-treetable tbody .ui-treetable-row td.ui-treetable-child-table-container {
+  padding: 0;
+}
+
+body .ui-treetable tbody .ui-treetable-row.ui-treetable-row-selectable:not(.ui-state-highlight):hover {
+  background-color: #e8e8e8;
+  color: #000000;
+}
+
+body .ui-treetable tbody .ui-treetable-row.ui-state-highlight {
+  background-color: #7CB342;
+  color: #ffffff;
+}
+
+body .ui-treetable tbody .ui-treetable-row.ui-state-highlight .ui-chkbox .ui-chkbox-box {
+  border-color: #ffffff;
+}
+
+body .ui-treetable.ui-treetable-scrollable .ui-treetable-scrollable-header, body .ui-treetable.ui-treetable-scrollable .ui-treetable-scrollable-footer {
+  background-color: transparent;
+  border: 0 none;
+}
+
+body .ui-treetable.ui-treetable-scrollable thead th {
+  background-color: #ffffff;
+  color: #212121;
+}

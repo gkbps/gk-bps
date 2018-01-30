@@ -1,0 +1,82 @@
+<div id="ui-view" style="opacity: 1;">
+  <div class="card">
+    <div class="card-header">
+      <div class="ui-g">
+        <div class="ui-g-12">
+          VIDEO
+          <strong>Player</strong>
+          Media Url: {{currentStream.source}}
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-4">
+          <p-dataList [value]="streams" [paginator]="true" [rows]="5">
+              <p-header>
+                  {{'contacts'|translate}}
+              </p-header>
+
+                <ng-template let-stream pTemplate="item">
+                    <div class="clearfix contact-item">
+                      <img width="48" src="http://localhost:4000/repo/5984859800807d033901d481/users/htdong.png">
+                      <div class="contact-details">
+                          <p>{{stream.label}}</p>
+                          <!-- <p style="color:#757575">{{stream.desc}}</p> -->
+                      </div>
+                      <button [disabled]="currentStream === stream" type="button" pButton class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" icon="ui-icon-play-arrow" (click)="onClickStream(stream)"></button>
+                      <!-- <button pbutton="" type="button"  class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only">
+                        <span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-add"></span>
+                        <span class="ui-button-text ui-clickable">ui-btn</span>
+                      </button> -->
+                      <!-- (click)="addIntoRoom(user.username)" -->
+                      <!-- (click)="chatWith(user.username)" -->
+                      <!-- [disabled]="username == user.username" -->
+                    </div>
+                </ng-template>
+          </p-dataList>
+        </div>
+
+        <div class="ui-g-12 ui-md-8">
+          <div class="row mb-4">
+            <vg-player (onPlayerReady)="onPlayerReady($event)">
+                <vg-overlay-play></vg-overlay-play>
+                <vg-buffering></vg-buffering>
+
+                <vg-controls>
+                    <vg-play-pause></vg-play-pause>
+
+
+                    <vg-scrub-bar>
+                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                    </vg-scrub-bar>
+
+                    <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+
+                    <vg-mute></vg-mute>
+                    <vg-volume></vg-volume>
+
+                    <vg-fullscreen></vg-fullscreen>
+                </vg-controls>
+
+                <video #media
+                       [vgMedia]="media"
+                       [vgDash]="currentStream.source"
+                       [vgHls]="currentStream.source"
+                       [vgDRMToken]="currentStream.token"
+                       [vgDRMLicenseServer]="currentStream.licenseServers"
+                       id="singleVideo"
+                       crossorigin>
+                </video>
+            </vg-player>
+          </div>
+
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

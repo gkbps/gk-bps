@@ -1,0 +1,211 @@
+<img alt="logo" class="mobile-logo" src="./assets/images/logo/logo-slim.png">
+
+<!--Sidebar toggle in mobile layout-->
+<a class="menu-btn">
+  <i class="material-icons" gkLayoutSidebarToggleMobileMode></i>
+</a>
+
+<a class="topbar-menu-btn" href="#">
+  <i class="material-icons" gkNavProfileMobile></i>
+</a>
+
+<div class="layout-topbar-menu-wrapper">
+  <ul id="profile-item-mobile" class="topbar-menu fadeInDown">
+
+    <!-- PROFILE MENU -->
+    <li id="profile-item" class="profile-item" gkNavProfile>
+      <a href="#">
+        <span class="profile-image-wrapper">
+          <img [src]="avatar">
+        </span>
+        <span class="topbar-item-name profile-name">{{fullname}}</span>
+      </a>
+
+      <ul class="fadeInDown">
+        <li role="menuitem">
+          <a href="#" (click)="gotoTcode('profile')">
+            <i class="material-icons">account_circle</i>
+            <span>{{'profile'|translate}}</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" (click)="gotoTcode('policy')">
+            <i class="material-icons">verified_user</i>
+            <span>{{'policy'|translate}}</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" (click)="gotoTcode('setting')">
+            <i class="material-icons">settings_application</i>
+            <span>{{'settings'|translate}}</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" (click)="gotoTcode('lockscreen')">
+            <i class="material-icons">lock</i>
+            <span>{{'lock_system'|translate}}</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" (click)="logOut(); false">
+            <i class="material-icons">exit_to_app</i>
+            <span>{{'logout'|translate}}</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- ./PROFILE MENU -->
+
+    <!-- WORKING BAR -->
+    <li id="setting-item" class="">
+      <!-- gkNavSetting -->
+      <a href="#" (click)="toggleWkBar(); false">
+        <i *ngIf="currentWkBarStatus" class="topbar-icon material-icons">layers</i>
+        <i *ngIf="!currentWkBarStatus" class="topbar-icon material-icons">layers_clear</i>
+        <!-- keyboard_arrow_up keyboard_arrow_down -->
+        <!-- arrow_upward arrow_downward -->
+        <span class="topbar-item-name">Settings</span>
+      </a>
+    </li>
+    <!-- WORKING BAR -->
+
+    <!-- LANGUAGE -->
+    <li id="language-item" class="" gkNavLanguage>
+      <a href="#">
+        <i class="topbar-icon material-icons">language</i>
+        <span class="topbar-badge animated rubberBand">{{lang}}</span>
+        <span class="topbar-item-name">Language</span>
+      </a>
+      <ul class="fadeInDown">
+        <li role="menuitem">
+          <a href="#" (click)="changeLanguage('en'); false">
+            <img src="assets/modules/lang/en_square.svg" class="img-flag"/>
+            <span>{{'langEnglish'|translate}}</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" (click)="changeLanguage('vn'); false">
+            <img src="assets/modules/lang/vn_square.svg" class="img-flag"/>
+            <span>{{'langVietnamese'|translate}}</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" (click)="changeLanguage('jp'); false">
+            <img src="assets/modules/lang/jp_square.svg" class="img-flag"/>
+            <span>{{'langJapanese'|translate}}</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" (click)="changeLanguage('kr'); false">
+            <img src="assets/modules/lang/kr_square.svg" class="img-flag"/>
+            <span>{{'langKorean'|translate}}</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" (click)="changeLanguage('ch'); false">
+            <img src="assets/modules/lang/ch_square.svg" class="img-flag"/>
+            <span>{{'langChinese'|translate}}</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" (click)="changeLanguage('fr'); false">
+            <img src="assets/modules/lang/fr_square.svg" class="img-flag"/>
+            <span>{{'langFrench'|translate}}</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- ./LANGUAGE -->
+
+    <!-- MESSAGE -->
+    <li id="message-item" gkNavMessage>
+      <a href="#">
+        <i class="topbar-icon material-icons animated swing"></i>
+        <span class="topbar-badge animated rubberBand">5</span>
+        <span class="topbar-item-name">Messages</span>
+      </a>
+      <ul class="fadeInDown">
+        <li role="menuitem">
+          <a class="topbar-message" href="#">
+            <img src="./assets/images/avatar1.png" width="35">
+            <span>Give me a call</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a class="topbar-message" href="#">
+            <img src="./assets/images/avatar2.png" width="35">
+            <span>Sales reports attached</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a class="topbar-message" href="#">
+            <img src="./assets/images/avatar3.png" width="35">
+            <span>About your invoice</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a class="topbar-message" href="#">
+            <img src="./assets/images/avatar2.png" width="35">
+            <span>Meeting today at 10pm</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a class="topbar-message" href="#">
+            <img src="./assets/images/avatar4.png" width="35">
+            <span>Out of office</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- ./MESSAGE -->
+
+    <!-- NOTIFICATION -->
+    <li id="notification-item" class="" gkNavNotification>
+      <a href="#">
+        <i class="topbar-icon material-icons">notifications</i>
+        <span class="topbar-badge animated rubberBand">4</span>
+        <span class="topbar-item-name">Notifications</span>
+      </a>
+      <ul class="fadeInDown">
+        <li role="menuitem">
+          <a href="#">
+            <i class="material-icons">bug_report</i>
+            <span>Pending tasks</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#">
+            <i class="material-icons">event</i>
+            <span>Meeting today at 3pm</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#">
+            <i class="material-icons">cloud_download</i>
+            <span>Download documents</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#">
+            <i class="material-icons">flight</i>
+            <span>Book flight</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <!-- ./NOTIFICATION -->
+
+    <!-- TRANSACTION CODE -->
+    <li class="search-item">
+      <form (keydown)="keyDownFunction($event)">
+        <span class="md-inputfield">
+          <input pInputText type="text" [(ngModel)]="tcodeExecution" name="tcode" class="ui-inputtext ui-corner-all ui-state-default ui-widget" [ngClass]="{'ui-state-filled': (tcodeExecution.length >0)}">
+          <label>{{'transactionCode'|translate}}</label>
+          <i class="topbar-icon material-icons">navigation</i>
+        </span>
+      </form>
+    </li>
+    <!-- ./TRANSACTION CODE -->
+
+  </ul>
+</div>

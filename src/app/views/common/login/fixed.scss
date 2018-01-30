@@ -1,0 +1,37 @@
+// fixed css for login-body
+ .login-body {
+  &.login {
+    // background-image: url("./assets/images/login/login-bg.jpg");
+    .login-panel {
+      height: 570px;
+      top: 50%;
+    }
+  }
+  &.forgot {
+    // background-image: url("../../../../assets/images/login/forgot-bg.jpg");
+    .login-panel {
+      height: 520px;
+      top: 50%;
+    }
+  }
+  &.register {
+    //background-image: url("./assets/images/login/register-bg.jpg");
+    .login-panel {
+      height: 750px !important;
+      top: 35%;
+    }
+  }
+
+  .login-panel-content{
+    p {
+      text-align: center;;
+      margin-bottom: 0;
+    }
+  }
+
+}
+
+.error-msg {
+  margin-top: 10px;
+  color: red;
+}

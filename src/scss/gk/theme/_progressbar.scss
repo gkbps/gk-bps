@@ -1,0 +1,15 @@
+body .ui-progressbar {
+  height: .5em;
+  background-color: #90A4AE;
+  overflow: hidden;
+  border: 0 none;
+}
+
+body .ui-progressbar .ui-progressbar-value {
+  height: .5em;
+}
+
+body .ui-progressbar .ui-progressbar-label {
+  color: #ffffff;
+  display: none !important;
+}

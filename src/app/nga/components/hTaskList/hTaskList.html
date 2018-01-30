@@ -1,0 +1,26 @@
+<div class="task-list">
+  <p-panel header="{{header}}">
+    <button class="secondary-btn ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" icon="ui-icon-menu" pbutton type="button" (click)="menu.toggle($event)">
+      <span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-menu"></span>
+      <span class="ui-button-text ui-clickable">ui-btn</span>
+    </button>
+    <p-menu #menu popup="popup" [model]="menuItems" appendTo="body"></p-menu>
+
+    <ul class="task-list-container" *ngFor="let task of taskList; let i=index">
+      <li >
+        <p-checkbox binary="true" [(ngModel)]="task.status">
+          <div class="ui-chkbox ui-widget">
+              <div class="ui-helper-hidden-accessible">
+                  <input type="checkbox" name="undefined" value="undefined">
+              </div>
+              <div class="ui-chkbox-box ui-widget ui-corner-all ui-state-default">
+                  <span class="ui-chkbox-icon ui-clickable"></span>
+              </div>
+          </div>
+        </p-checkbox>
+        <span class="task-name">{{task.label}}</span>
+        <i class="material-icons">{{task.icon}}</i>
+      </li>
+    </ul>
+  </p-panel>
+</div>

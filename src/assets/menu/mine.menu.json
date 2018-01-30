@@ -1,0 +1,25 @@
+[
+  {"data": { "label": "time_management", "icon": "schedule", "url": "/mine" }},
+  {
+    "data": { "label": "workflows", "icon": "swap_horiz", "url": ""},
+    "children": [
+      {"data": { "label": "navBoard", "icon": "dashboard", "url": "/tray/tray00" }},
+      {
+        "data": { "label": "myTasks", "icon": "thumbs_up_down", "url": ""},
+        "children": [
+          {"data": { "label": "inbox", "icon": "inbox", "url": "/tray/tray01" }},
+          {"data": { "label": "outbox", "icon": "check", "url": "/tray/tray02" }}
+        ]
+      },
+      {
+        "data": { "label": "myDocuments", "icon": "content_copy", "url": ""},
+        "children": [
+          {"data": { "label": "draft", "icon": "playlist_add", "url": "/tray/tray11" }},
+          {"data": { "label": "inProgress", "icon": "playlist_play", "url": "/tray/tray12" }},
+          {"data": { "label": "completed", "icon": "playlist_add_check", "url": "/tray/tray13" }}
+        ]
+      }
+    ]
+
+  }
+]

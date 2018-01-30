@@ -1,0 +1,26 @@
+<div class="user-card card">
+  <div class="user-card-header">
+      <img library="serenity-layout" src="{{bgImage}}" width="100">
+  </div>
+  <div class="user-card-content">
+    <img library="serenity-layout" src="{{userAvatar}}">
+    <button class="secondary-btn ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" icon="ui-icon-settings" pbutton="" type="button"><span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-settings"></span><span class="ui-button-text ui-clickable">ui-btn</span><span class="ink ripple-animate" style="height: 36px; width: 36px; top: -2.96875px; left: 5.39062px; pointer-events: none;"></span></button>
+
+    <div class="user-card-name">
+        <span>{{userName}}</span>
+    </div>
+
+    <div class="user-detail">
+     <ul>
+       <li class="clearfix" *ngFor="let item of data">
+         <i class="material-icons">{{item.icon}}</i>
+         <span class="project-title">{{item.label}}</span>
+         <span class="project-detail">{{item.text}}</span>
+         <div class="project-progressbar">
+             <div class="project-progressbar-value" [style.width]="item.progress"></div>
+         </div>
+       </li>
+     </ul>
+    </div>
+  </div>
+</div>

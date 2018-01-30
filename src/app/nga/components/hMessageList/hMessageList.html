@@ -1,0 +1,17 @@
+<div class="messages">
+  <p-panel header="{{header}}">
+    <ul *ngFor="let message of messageList;">
+      <li>
+        <div>
+          <img src="{{message.img}}" width="45">
+          <div>
+            <span class="name">{{message.name}}</span>
+            <span class="message">{{message.text}}</span>
+          </div>
+          <button class="remove-btn ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" icon="ui-icon-close" pbutton="" title="Reply" type="button"><span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-close"></span><span class="ui-button-text ui-clickable">ui-btn</span></button>
+          <button class="message-btn secondary-btn ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" icon="ui-icon-message" pbutton="" title="Reply" type="button"><span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-message"></span><span class="ui-button-text ui-clickable">ui-btn</span></button>
+        </div>
+      </li>
+    </ul>
+  </p-panel>
+</div>

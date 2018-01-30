@@ -1,0 +1,48 @@
+<div class="login-body forgot">
+  <div class="login-panel ui-fluid">
+      <div class="login-panel-header">
+          <img src="assets/images/logo/logo-slim.png">
+      </div>
+      <div class="login-panel-content">
+          <div class="ui-g">
+            <div class="ui-g-12">
+                <h1>{{'forgot'|translate}} {{'password'|translate}}</h1>
+                <p *ngIf="!message" class="text-muted">{{'getResetPasswordViaEmail'|translate}}</p>
+                <p *ngIf="message" class="error-msg">{{message|translate}}</p>
+            </div>
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+                <div class="ui-g-12">
+                    <span class="md-inputfield">
+                        <input [formControl]="email" [(ngModel)]="model.email" type="email" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (email.touched && email.value)}"  autocomplete="off">
+                        <label>{{'email'|translate}} *</label>
+                    </span>
+                </div>
+
+                <div class="ui-g-12">
+                    <span class="md-inputfield">
+                        <input [formControl]="token" [(ngModel)]="model.token" type="text" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (token.value)}" autocomplete="off">
+                        <label>{{'token'|translate}} *</label>
+                    </span>
+                </div>
+
+                <div class="ui-g-12">
+                    <button [disabled]="!form.valid" type="submit" class="ui-button ui-widget ui-corner-all ui-button-text-icon-left" style="width:100%">
+                        <span class="ui-button-icon-left fa ui-icon-person"></span>
+                        <span class="ui-button-text">{{'reset'|translate}}</span>
+                        <span class="ink ripple-animate" style="height: 322px; width: 322px; top: -139.5px; left: 66px; pointer-events: none;"></span>
+                  </button>
+                </div>
+                <div class="ui-g-12">
+                    <div class="ui-g-6">
+                      <a href="#" (click)="gotoPage('login'); false;">{{'havePassword'|translate}}</a>
+                    </div>
+                    <div class="ui-g-6">
+                      <a href="#" (click)="gotoPage('register'); false;">{{'signUp'|translate}}</a>
+                    </div>
+                </div>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>

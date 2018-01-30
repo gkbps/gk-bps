@@ -1,0 +1,90 @@
+body .fc button {
+  height: 2.25em;
+  padding: 0 1em;
+}
+
+body .fc .fc-button-group .ui-icon-circle-triangle-e {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+  text-indent: 0;
+  position: relative;
+  top: 1px;
+}
+
+body .fc .fc-button-group .ui-icon-circle-triangle-e:before {
+  content: "play_circle_outline";
+}
+
+body .fc .fc-button-group .ui-icon-circle-triangle-w {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+  text-indent: 0;
+  position: relative;
+  top: 1px;
+}
+
+body .fc .fc-button-group .ui-icon-circle-triangle-w:before {
+  content: "play_circle_outline";
+}
+
+body .fc .fc-button-group .ui-state-active {
+  background-color: #7CB342;
+}
+
+body .fc .fc-event {
+  background-color: #90A4AE;
+  color: #ffffff;
+}
+
+body .fc table {
+  box-sizing: border-box;
+}
+
+body .fc table th {
+  padding: 0.625em 1em;
+}

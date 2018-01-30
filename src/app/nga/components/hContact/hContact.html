@@ -1,0 +1,41 @@
+<p-panel [formGroup]="contactItem">
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <span class="ui-panel-title">{{'contact'|translate}} {{item + 1}}</span>
+      <a class="ui-panel-titlebar-icon">
+        <span *ngIf="formEditable" class="fa fa-fw fa-close" (click)="removeContact()"></span>
+      </a>
+    </div>
+  </p-header>
+
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-3">
+      <span class="md-inputfield fixed-form">
+        <input type="text" pInputText name="title" formControlName="title">
+        <label>{{'title'|translate}} * <small *ngIf="!contactItem.controls.title.valid && contactItem.controls.title.dirty" class="text-warning">{{'required'|translate}}</small></label>
+      </span>
+    </div>
+
+    <div class="ui-g-12 ui-md-3">
+      <span class="md-inputfield fixed-form">
+        <input type="text" pInputText name="name" formControlName="name">
+        <label>{{'name'|translate}} * <small *ngIf="!contactItem.controls.name.valid && contactItem.controls.name.dirty" class="text-warning">{{'required'|translate}}</small></label>
+      </span>
+    </div>
+
+    <div class="ui-g-12 ui-md-3">
+      <span class="md-inputfield fixed-form">
+        <input type="text" pInputText name="phone" formControlName="phone">
+        <label>{{'phone'|translate}} * <small *ngIf="!contactItem.controls.phone.valid && contactItem.controls.phone.dirty" class="text-warning">{{'numeric'|translate}}</small></label>
+      </span>
+    </div>
+
+    <div class="ui-g-12 ui-md-3">
+      <span class="md-inputfield fixed-form">
+        <input type="text" pInputText name="email" formControlName="email">
+        <label>{{'email'|translate}} * <small *ngIf="!contactItem.controls.email.valid && contactItem.controls.email.dirty" class="text-warning">{{'invalidEmail'|translate}}</small></label>
+      </span>
+    </div>
+  </div>
+
+</p-panel>

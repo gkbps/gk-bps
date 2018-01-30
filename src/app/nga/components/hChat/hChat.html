@@ -1,0 +1,79 @@
+<div class="ui-g-12 ui-md-4">
+
+  <p-dataList [value]="userList" [paginator]="true" [rows]="6">
+      <p-header>
+          {{'contacts'|translate}}
+          <br />
+          <form (keydown)="searchContact($event)">
+            <span class="md-inputfield">
+              <input pInputText placeholder="{{'contact'|translate}}" type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" [(ngModel)]="contact" name="contact">
+              <i class="topbar-icon material-icons">search</i>
+            </span>
+          </form>
+      </p-header>
+
+        <ng-template let-user pTemplate="item">
+            <div class="clearfix contact-item">
+              <img width="48" [src]="getAvatar(user.avatar)">
+              <div class="contact-details">
+                  <p>{{user.firstname}} {{user.lastname}}</p>
+                  <p style="color:#757575">{{user.title}}</p>
+              </div>
+              <button [disabled]="username == user.username" pbutton="" type="button" (click)="chatWith(user.username)" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"><span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-message"></span><span class="ui-button-text ui-clickable">ui-btn</span></button>
+              <button [disabled]="username == user.username" pbutton="" type="button" (click)="addIntoRoom(user.username)" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"><span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-add"></span><span class="ui-button-text ui-clickable">ui-btn</span></button>
+            </div>
+        </ng-template>
+  </p-dataList>
+</div>
+
+<div class="ui-g-12 ui-md-8">
+  <p-panel header="{{'chat'|translate}}">
+    <p-tabView (onChange)="onTabChange($event)" [controlClose]="true" (onClose)="onTabClose($event)" [activeIndex]="selectedChatRoomIndex">
+      <div style="overflow-y: scroll; height:560px; padding-top: 10px;">
+        <ng-container *ngFor="let room of chatData; let i=index;" >
+          <p-tabPanel *ngIf="i==0" header="{{'about'|translate}}" [selected]="selectedChatRoomIndex == i">
+              <br />
+              <br />
+              Chat is desgined and developed by Hoang Thanh Dong. <br />
+              All rights reserved, 2017.
+              <hr />
+              <br />
+              <br />
+              <br />
+              <button pbutton="" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"><span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-add"></span><span class="ui-button-text ui-clickable">ui-btn</span></button>
+              Invite a contact to join an existing chat room
+              <br />
+              <br />
+              <br />
+              <button pbutton="" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"><span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-message"></span><span class="ui-button-text ui-clickable">ui-btn</span></button>
+              Create a new room to chat with the selected contact.
+          </p-tabPanel>
+          <p-tabPanel *ngIf="i!==0" header="{{'chat'|translate}} {{i-1}}" [closable]="true" [selected]="selectedChatRoomIndex == i">
+              <ul class="chat-messages">
+                <ng-container *ngFor="let message of room.messages; let j=index;">
+                  <li [ngClass]="{ 'message-own': message.id == username, 'message-from': message.id !== username }">
+                      <img *ngIf="message.img" library="serenity-layout" [src]="getAvatar(message.img)">
+                      <!-- <span [innerHTML]="message.text"></span> -->
+                      <span>{{message.text}}</span>
+                  </li>
+                </ng-container>
+              </ul>
+          </p-tabPanel>
+        </ng-container>
+      </div>
+    </p-tabView>
+
+    <div *ngIf="selectedChatRoomIndex!==0" class="new-message">
+      <div class="message-attachment">
+          <i class="material-icons"></i>
+      </div>
+      <div class="message-input">
+        <form (keydown)="keyDownFunction($event)">
+          <input placeholder="Write a message" type="text" [(ngModel)]="comment" [ngModelOptions]="{standalone: true}">
+        </form>
+      </div>
+    </div>
+  </p-panel>
+</div>
+
+<p-confirmDialog header="{{'chat_information'|translate}}" icon="ui-icon-question-answer" width="425"></p-confirmDialog>

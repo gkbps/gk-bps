@@ -1,0 +1,80 @@
+<div class="login-body register">
+  <div class="login-panel ui-fluid">
+      <div class="login-panel-header">
+          <img src="assets/images/logo/logo-slim.png">
+      </div>
+      <div class="login-panel-content">
+          <div class="ui-g">
+              <div class="ui-g-12">
+                  <h1>{{'register'|translate}}</h1>
+                  <p *ngIf="!message" class="text-muted">{{'createYourAccount'|translate}}</p>
+                  <p *ngIf="message" class="error-msg">{{message|translate}}</p>
+                  <p *ngIf="!passwords.valid && (password.touched || repeatPassword.touched)" class="error-msg">{{'msgSamePassword'|translate}}</p>
+              </div>
+
+              <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+
+                  <div class="ui-g-12">
+                      <span class="md-inputfield">
+                          <input [formControl]="firstname" [(ngModel)]="model.firstname" type="text" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (firstname.touched && firstname.value)}"  autocomplete="off">
+                          <label>{{'firstname'|translate}} *</label>
+                      </span>
+                  </div>
+
+                  <div class="ui-g-12">
+                      <span class="md-inputfield">
+                          <input [formControl]="lastname" [(ngModel)]="model.lastname" type="text" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (lastname.touched && lastname.value)}"  autocomplete="off">
+                          <label>{{'lastname'|translate}} *</label>
+                      </span>
+                  </div>
+
+                  <div class="ui-g-12">
+                      <span class="md-inputfield">
+                          <input [formControl]="username" [(ngModel)]="model.username" type="text" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (username.touched && username.value)}"  autocomplete="off">
+                          <label>{{'username'|translate}} *</label>
+                      </span>
+                  </div>
+
+                  <div class="ui-g-12">
+                      <span class="md-inputfield">
+                          <input [formControl]="email" [(ngModel)]="model.email" type="email" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (email.touched && email.value)}"  autocomplete="off">
+                          <label>{{'email'|translate}} *</label>
+                      </span>
+                  </div>
+
+                  <div class="ui-g-12">
+                      <span class="md-inputfield">
+                          <input [formControl]="password" [(ngModel)]="model.password" type="password" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (password.touched && password.value)}" autocomplete="new-password">
+                          <label>{{'password'|translate}} *</label>
+                      </span>
+                  </div>
+
+                  <div class="ui-g-12">
+                      <span class="md-inputfield">
+                          <input [formControl]="repeatPassword" type="password" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (repeatPassword.touched && repeatPassword.value)}" autocomplete="new-password">
+                          <label>{{'password'|translate}} *</label>
+                      </span>
+                  </div>
+
+                  <div class="ui-g-12">
+                      <span class="md-inputfield">
+                          <input [formControl]="token" [(ngModel)]="model.token" type="text" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (token.value)}" autocomplete="off">
+                          <label>{{'token'|translate}} *</label>
+                      </span>
+                  </div>
+
+                  <div class="ui-g-12">
+                      <button [disabled]="!form.valid" type="submit" class="ui-button ui-widget ui-corner-all ui-button-text-icon-left" style="width:100%">
+                          <span class="ui-button-icon-left fa ui-icon-person"></span>
+                          <span class="ui-button-text">{{'create'|translate}} {{'account'|translate}}</span>
+                          <span class="ink ripple-animate" style="height: 322px; width: 322px; top: -139.5px; left: 66px; pointer-events: none;"></span>
+                      </button>
+                  </div>
+                  <div class="ui-g-12">
+                      <a href="#" (click)="gotoPage('login'); false;">{{'havePassword'|translate}}</a>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>

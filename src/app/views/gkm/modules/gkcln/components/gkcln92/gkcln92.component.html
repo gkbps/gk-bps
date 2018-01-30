@@ -1,0 +1,18 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="card card-w-title">
+      <h1>{{'approval'|translate}}</h1>
+
+      <div class="ui-g form-group">
+        <div class="ui-g-12">
+          <ng-container *ngFor="let item of tcodes">
+            <h-request-approval
+              [tcode]="item"
+              [standardApprovalItems]="standardApprovalItems">
+            </h-request-approval>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

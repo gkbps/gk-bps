@@ -1,0 +1,26 @@
+body .ui-calendar .ui-datepicker-trigger {
+  bottom: 2px;
+  right: 0;
+  background-color: transparent;
+  color: #212121;
+  height: 1.5em;
+  width: 1.5em;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+body .ui-calendar .ui-datepicker-trigger .fa {
+  color: #757575;
+}
+
+body .ui-calendar .ui-datepicker-trigger:enabled:hover {
+  background-color: transparent;
+}
+
+body .ui-fluid .ui-calendar.ui-calendar-w-btn .ui-inputtext {
+  width: 100%;
+}

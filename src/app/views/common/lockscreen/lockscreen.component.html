@@ -1,0 +1,39 @@
+<div class="lockscreen-wrapper">
+  <div class="lockscreen-logo">
+    <a href="#"><b>GK</b>|BPS</a>
+  </div>
+
+  <div class="lockscreen-name">{{fullname}}</div>
+
+  <div class="lockscreen-item">
+    <div class="lockscreen-image">
+      <img src="{{avatar}}" alt="User Image">
+    </div>
+
+    <form class="lockscreen-credentials" (keydown)="keyDownFunction($event)">
+      <div class="input-group">
+        <input type="password" class="form-control" placeholder="{{'password'|translate}}" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+        <div class="input-group-btn">
+          <button type="button" class="btn" (click)="returnSession()"><i class="fa fa-arrow-right text-muted"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="error-msg text-center">
+    <span *ngIf="message">
+      {{message|translate}}
+    </span>
+  </div>
+
+  <div *ngIf="!message" class="help-block text-center">
+    {{'retrieve_session'|translate}}
+  </div>
+  <div class="text-center">
+    <a href="#/login">{{'sign_in_other_user'|translate}}</a>
+  </div>
+  <div class="lockscreen-footer text-center">
+    {{'copyright1'|translate}} 2018 <b><a href="https://gkbps.io" class="text-black">GK|BPS</a></b><br>
+    {{'copyright2'|translate}}
+  </div>
+</div>

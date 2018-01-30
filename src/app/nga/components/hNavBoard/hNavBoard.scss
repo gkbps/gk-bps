@@ -1,0 +1,85 @@
+.no-bg {
+  overflow: hidden;
+  position: relative;
+  padding: 20px;
+  // border: 1px solid #DFDFDF;
+  // color: rgba(255, 255, 255, 0.8);
+  //
+  // background-color: #ffffff;
+  // -webkit-border-radius: 7px;
+  // -moz-border-radius: 7px;
+  // -ms-border-radius: 7px;
+  // border-radius: 7px;
+}
+
+.with-bg {
+  overflow: hidden;
+  position: relative;
+  padding: 20px;
+
+  border: 1px solid, rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.8);
+
+  background-color: #52d3aa;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  border-radius: 7px;
+
+  // IE9, iOS 3.2+
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiMzZjk1ZWEiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iIzUyZDNhYSIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
+  background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, #3f95ea), color-stop(1, #52d3aa));
+
+  // Android 2.3
+  background-image: -webkit-repeating-linear-gradient(top left, #3f95ea 0%, #52d3aa 100%);
+
+  // IE10+
+  background-image: repeating-linear-gradient(to bottom right, #3f95ea 0%, #52d3aa 100%);
+  background-image: -ms-repeating-linear-gradient(top left, #3f95ea 0%, #52d3aa 100%);
+
+  padding-bottom: 55px;
+}
+
+.navBoard {
+  padding: 20px 20px;
+  margin: 20px auto 20px;
+}
+
+@media (min-width: 425px) {
+	.navBoard{
+	  max-width: 200px;
+	}
+}
+
+@media (min-width: 768px) {
+	.navBoard{
+	  max-width: 600px;
+	}
+}
+
+@media (min-width: 992px) {
+	.navBoard{
+	  max-width: 700px;
+	}
+}
+
+@media (min-width: 1430px) {
+	.navBoard {
+	 	max-width: 1200px;
+	}
+}
+
+section {
+  width: 100%;
+}
+
+.img-square {
+  height: 100%;
+}
+
+.navItem {
+  display: flex;            // one item issue
+  align-items: center;      //vertical
+  justify-content: center;  //horizontal
+  margin-bottom: 30px;
+}

@@ -1,0 +1,25 @@
+<div class="exception-body accessdenied">
+    <div class="exception-panel">
+        <div class="exception-code">
+            <img src="./assets/layout/images/exception/401.svg">
+        </div>
+
+        <div class="exception-detail">
+            <div class="exception-icon">
+                <i class="material-icons">verified_user</i>
+            </div>
+            <h1>{{'401'|translate}}</h1>
+            <p>{{'401Msg'|translate}}</p>
+            <div class="ui-g form-group">
+                <div class="ui-g-12">
+                    <form (keydown)="keyDownFunction($event)">
+                        <div class="ui-inputgroup">
+                          <button pbutton type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" ><i class="fa ui-icon-home" [routerLink]="['/home']"></i></button>
+                          <input pinputtext type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget ui-state-filled" placeholder="{{'transactionCode'|translate}}" [(ngModel)]="tcodeExecution" name="tcode">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

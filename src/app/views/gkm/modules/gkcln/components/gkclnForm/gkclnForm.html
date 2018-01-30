@@ -1,0 +1,166 @@
+<div *ngIf="!isRequest" class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <h-individual-nav [prefix]="prefix"></h-individual-nav>
+  </div>
+</div>
+
+<form [formGroup]="myForm" novalidate>
+  <!-- CLIENT SESSION -->
+  <div *ngIf="hasClient" class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <!-- <div class="card card-w-title">
+        <h1 *ngIf="!isRequest">{{'gkcln'|translate}}</h1> -->
+
+      <div *ngIf="!isRequest" class="ui-g">
+        <div class="ui-g-12">
+          <div class="ui-g-12">
+            <p-toolbar>
+              <div class="ui-toolbar-group-left">
+                <span>{{'id'|translate}}: <span class="badge bg-info">{{myForm.controls._id.value ? myForm.controls._id.value : 'New'}}</span></span>
+              </div>
+
+              <div class="ui-toolbar-group-right">
+                <span>{{'status'|translate}}: <span class="badge" [ngClass]="{'bg-warning': (myForm.controls.status1.value=='Inactive'), 'bg-info': (myForm.controls.status1.value=='Active')}">{{myForm.controls.status1.value}}</span></span>
+                <span>. | {{'marked'|translate}}: <span class="badge" [ngClass]="{'bg-danger': (myForm.controls.status2.value=='Marked'), 'bg-info': (myForm.controls.status2.value=='Unmarked')}">{{myForm.controls.status2.value}}</span></span>
+              </div>
+            </p-toolbar>
+          </div>
+        </div>
+
+        <div class="ui-g-12">
+          <div *ngIf="formEditable" class="ui-g-12">
+            <div class="ui-helper-clearfix">
+              <button style="float:right; width: auto;" pButton type="button" icon="ui-icon-check" label="{{'save'|translate}}" class="ui-button-primary" [disabled]="!myForm.valid" (click)="submitForm()"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="ui-g form-group">
+          <!-- GENERAL -->
+          <div class="ui-g-12">
+            <p-panel header ="{{'general'|translate}}" [toggleable]="true" [collapsed]="false">
+              <div class="ui-g">
+                <div class="ui-g-12">
+
+                  <!-- Only for Request Debug -->
+                  <div *ngIf="isRequest && debugMode" class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield fixed-form">
+                      <input type="text" pInputText  name="_id" formControlName="_id" [disableControl]="!formEditable">
+                      <label>{{'id'|translate}} * <small *ngIf="!myForm.controls._id.valid && myForm.controls._id.dirty" class="text-warning">{{'required'|translate}}</small></label>
+                    </span>
+                  </div>
+
+                  <div *ngIf="isRequest && debugMode" class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield fixed-form">
+                      <span class="fixed-label">{{'status'|translate}} * <small *ngIf="!myForm.controls.status1.valid && myForm.controls.status1.dirty" class="text-warning">{{'required'|translate}}</small></span>
+                    </span>
+                    <p-dropdown [options]="status1List" name="status1" formControlName="status1" [style]="{'width': '100%'}" [disableControl]="!formEditable"></p-dropdown>
+                  </div>
+
+                  <div *ngIf="isRequest && debugMode" class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield fixed-form">
+                      <span class="fixed-label">{{'marked'|translate}} * <small *ngIf="!myForm.controls.status2.valid && myForm.controls.status2.dirty" class="text-warning">{{'required'|translate}}</small></span>
+                    </span>
+                    <p-dropdown [options]="status2List" name="status2" formControlName="status2" [style]="{'width': '100%'}" [disableControl]="!formEditable"></p-dropdown>
+                  </div>
+                  <div class="clearfix"></div>
+                  <!-- Only for Request Debug -->
+
+                  <div class="ui-g-12 ui-md-8">
+                    <span class="md-inputfield fixed-form">
+                      <input type="text" pInputText  name="name" formControlName="name" [disableControl]="!formEditable">
+                      <label *ngIf="!isEditableRequest">{{'name'|translate}} * <small *ngIf="!myForm.controls.name.valid && myForm.controls.name.dirty" class="text-warning">{{'minChar'|translate:"{value: 5}" }}</small></label>
+                      <label *ngIf="isEditableRequest">{{'name'|translate}} * <small *ngIf="!myForm.controls.name.valid" class="text-warning">{{'minChar'|translate:"{value: 5}" }}</small></label>
+                    </span>
+                  </div>
+
+                  <div class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield fixed-form">
+                      <input type="text" pInputText name="clientDb" formControlName="clientDb" [disableControl]="!formEditable">
+                      <label *ngIf="!isEditableRequest">{{'db'|translate}} * <small *ngIf="!myForm.controls.clientDb.valid && myForm.controls.clientDb.dirty" class="text-warning">{{'alphaNum'|translate}}. {{'minChar'|translate:"{value: 3}"}}</small></label>
+                      <label *ngIf="isEditableRequest">{{'db'|translate}} * <small *ngIf="!myForm.controls.clientDb.valid" class="text-warning">{{'alphaNum'|translate}}. {{'minChar'|translate:"{value: 3}"}}</small></label>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </p-panel>
+          </div>
+          <!-- ./GENERAL -->
+
+          <!-- DETAILS -->
+          <div class="ui-g-12">
+            <p-tabView (onChange)="onTabChange($event)">
+                <!-- Addresses -->
+                <p-tabPanel header="{{'addresses'|translate}}" [selected]="true">
+                  <div class="ui-g">
+                    <div class="ui-g-12" [style]="{'margin-bottom':'30px'}" *ngFor="let address of myForm.controls.addresses.controls; let i=index">
+                        <h-address
+                          [formEditable]="formEditable"
+                          [item]="i"
+                          [(formGroup)]="myForm.controls.addresses.controls[i]"
+                          (itemEvent)="handleEvent($event)">
+                        </h-address>
+                    </div>
+                  </div>
+                  <p-footer *ngIf="formEditable">
+                    <div class="ui-helper-clearfix">
+                      <button style="float:left; width: auto;" pButton type="button" icon="fa-plus" label="{{'new'|translate}} {{'address'|translate}}" class="ui-button-success" (click)="newAddress()"></button>
+                      <button style="float:right; width: auto;" *ngIf="myForm.controls.addresses.controls.length && !isRequest" pButton type="button" icon="ui-icon-check" label="{{'save'|translate}}" class="ui-button-primary" [disabled]="!myForm.valid" (click)="submitForm()"></button>
+                    </div>
+                  </p-footer>
+                </p-tabPanel>
+                <!-- ./Addresses -->
+
+                <!-- Contacts -->
+                <p-tabPanel header="{{'contacts'|translate}}">
+                  <div class="ui-g">
+                    <div class="ui-g-12" [style]="{'margin-bottom':'30px'}" *ngFor="let contact of myForm.controls.contacts.controls; let i=index">
+                      <h-contact
+                      [formEditable]="formEditable"
+                      [item]="i"
+                      [(formGroup)]="myForm.controls.contacts.controls[i]"
+                      (itemEvent)="handleEvent($event)">
+                    </h-contact>
+                    </div>
+                  </div>
+                  <p-footer *ngIf="formEditable">
+                    <div class="ui-helper-clearfix">
+                      <button style="float:left; width: auto;" pButton type="button" icon="fa-plus" label="{{'new'|translate}} {{'contact'|translate}}" class="ui-button-success" (click)="newContact()"></button>
+                      <button style="float:right; width: auto;" *ngIf="myForm.controls.contacts.controls.length && !isRequest" pButton type="button" icon="ui-icon-check" label="{{'save'|translate}}" class="ui-button-primary" [disabled]="!myForm.valid" (click)="submitForm()"></button>
+                    </div>
+                  </p-footer>
+                </p-tabPanel>
+                <!-- ./Contacts -->
+
+                <!-- <p-tabPanel header="Godfather III">
+                    After a break of more than  15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
+                </p-tabPanel>
+
+                <p-tabPanel header="Godfather IV" [disabled]="true">
+                    After a break of more than  15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
+                </p-tabPanel> -->
+            </p-tabView>
+          </div>
+          <!-- ./DETAILS -->
+        </div>
+      <!-- </div> -->
+    </div>
+  </div>
+</form>
+
+<!-- && !isRequest -->
+<div *ngIf="hasClient && debugMode && !isRequest" class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <p-panel header ="{{'debug'|translate}}" [toggleable]="true" [collapsed]="true">
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <div class="ui-helper-clearfix" style="margin-top:10px">
+            <pre>{{'formValid'|translate}}?: <br>{{myForm.valid | json}}</pre>
+            <pre>{{'formValue'|translate}}: <br>{{myForm.value | json}}</pre>
+          </div>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+</div>

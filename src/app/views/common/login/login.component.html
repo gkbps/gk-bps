@@ -1,0 +1,54 @@
+<div class="login-body login">
+  <div class="login-panel ui-fluid">
+      <div class="login-panel-header">
+          <img src="assets/images/logo/logo-slim.png">
+      </div>
+      <div class="login-panel-content">
+          <div class="ui-g">
+              <div class="ui-g-12">
+                  <h1>{{'login'|translate}}</h1>
+                  <p *ngIf="!message" class="text-muted">{{'loginMsg'|translate}}</p>
+                  <p *ngIf="message" class="error-msg">{{message|translate}}</p>
+              </div>
+              <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+
+                <div class="ui-g-12">
+                    <span class="md-inputfield">
+                        <input [formControl]="username" [(ngModel)]="model.username" type="text" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (username.touched && username.value)}"  autocomplete="off">
+                        <label>{{'username'|translate}} *</label>
+                    </span>
+                </div>
+
+                <div class="ui-g-12">
+                    <span class="md-inputfield">
+                        <input [formControl]="password" [(ngModel)]="model.password" type="password" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (password.touched && password.value)}" autocomplete="new-password">
+                        <label>{{'password'|translate}} *</label>
+                    </span>
+                </div>
+
+                <div class="ui-g-12">
+                    <span class="md-inputfield">
+                        <input [formControl]="token" [(ngModel)]="model.token" type="text" class="ui-inputtext ui-corner-all ui-widget" [ngClass]="{'ui-state-filled': (token.value)}" autocomplete="off">
+                        <label>{{'token'|translate}} *</label>
+                    </span>
+                </div>
+
+                <div class="ui-g-12">
+                    <button [disabled]="!form.valid" type="submit" class="ui-button ui-widget ui-corner-all ui-button-text-icon-left" style="width:100%">
+                        <span class="ui-button-icon-left fa ui-icon-person"></span>
+                        <span class="ui-button-text">{{'login'|translate}}</span>
+                        <span class="ink ripple-animate" style="height: 322px; width: 322px; top: -139.5px; left: 66px; pointer-events: none;"></span>
+                    </button>
+                </div>
+
+                  <div class="ui-g-6" style="text-align: center;">
+                    <a href="#" (click)="gotoPage('register'); false;">{{'signUp'|translate}}</a>
+                  </div>
+                  <div class="ui-g-6" style="text-align: center;">
+                    <a href="#" (click)="gotoPage('forgot'); false">{{'forgot'|translate}}</a> {{'password'|translate}}?.
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>

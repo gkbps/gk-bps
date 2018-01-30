@@ -1,0 +1,218 @@
+<p-toolbar>
+  <div class="ui-toolbar-group-left">
+    <button pButton type="button" icon="ui-icon-navigation" (click)="openFavExpandSection()" class="ui-button-warning" pTooltip="{{langList.execute}}" tooltipPosition="top"></button>
+    <i class="material-icons" >more_vert</i>
+
+    <button pButton type="button" icon="ui-icon-create-new-folder" (click)="showRenameSectionDialog(false, null)" pTooltip="{{langList.newSection}}" tooltipPosition="top"></button>
+    <button pButton type="button" icon="ui-icon-favorite-border" (click)="showRenameItemDialog(false, null)" pTooltip="{{langList.newItem}}" tooltipPosition="top"></button>
+    <button pButton type="button" icon="ui-icon-create" (click)="renameSectionOrItem(selectedNode)" pTooltip="{{langList.rename}}" tooltipPosition="top"></button>
+    <button pButton type="button" icon="ui-icon-delete" (click)="confirmDelete()" pTooltip="{{langList.delete}}" tooltipPosition="top"></button>
+    <button pButton type="button" icon="ui-icon-open-with" (click)="moveInTree()" pTooltip="{{langList.move}}" tooltipPosition="top"></button>
+  </div>
+
+  <div class="ui-toolbar-group-right">
+    <button pButton type="button" icon="ui-icon-vertical-align-bottom" (click)="sortTreeAsc()" pTooltip="{{langList.sortAZ}}" tooltipPosition="top"></button>
+    <button pButton type="button" icon="ui-icon-vertical-align-top" (click)="sortTreeDesc()" pTooltip="{{langList.sortZA}}" tooltipPosition="top"></button>
+    <button pButton type="button" icon="ui-icon-expand-more" (click)="expandAll()" pTooltip="{{langList.expandAll}}" tooltipPosition="top"></button>
+    <button pButton type="button" icon="ui-icon-expand-less" (click)="collapseAll()" pTooltip="{{langList.collapseAll}}" tooltipPosition="top"></button>
+    <i class="material-icons">more_vert</i>
+    <button pButton type="button" icon="ui-icon-flag" (click)="flagDocument()" class="ui-button-danger" pTooltip="{{langList.flag}}" tooltipPosition="top"></button>
+  </div>
+</p-toolbar>
+
+<div style="overflow-y: scroll; height:500px;">
+  <p-treeTable
+    [value]="favList"
+    selectionMode="single"
+    [(selection)]="selectedNode"
+    (onNodeSelect)="nodeSelect($event)"
+    (onNodeUnselect)="nodeUnselect($event)"
+    [contextMenu]="cm">
+
+      <p-header>{{'myFavourites'|translate}}</p-header>
+
+      <p-column field="name" header="{{'description'|translate}}" [style]="{'border-bottom': '1px solid #c9bbbb'}">
+          <ng-template let-node="rowData" pTemplate="body">
+            <span *ngIf="node.data.type =='section'"><b>{{node.data.label}}</b></span>
+            <span *ngIf="node.data.type =='tcode'">{{node.data.label}}</span>
+          </ng-template>
+      </p-column>
+
+      <p-column field="icon" header="{{'icon'|translate}}" [style]="{'width':'10%', 'text-align': 'center', 'border-left': '1px solid #c9bbbb', 'border-bottom': '1px solid #c9bbbb'}">
+          <ng-template let-node="rowData" pTemplate="body">
+            <span><i class="material-icons">{{node.data.icon}}</i></span>
+          </ng-template>
+      </p-column>
+
+      <p-column field="desc" header="{{'description'|translate}}" [style]="{'width':'25%', 'text-align': 'center', 'border-left': '1px solid #c9bbbb', 'border-bottom': '1px solid #c9bbbb'}">
+          <ng-template let-node="rowData" pTemplate="body">
+              <span>{{node.data.desc}}</span>
+          </ng-template>
+      </p-column>
+
+      <p-column field="url" header="{{'url'|translate}}" [style]="{'width':'15%', 'text-align': 'center', 'border-left': '1px solid #c9bbbb', 'border-bottom': '1px solid #c9bbbb'}">
+          <ng-template let-node="rowData" pTemplate="body">
+              <span>{{node.data.url}}</span>
+          </ng-template>
+      </p-column>
+
+      <p-column field="flag" header="{{'flag'|translate}}" [style]="{'width':'10%', 'text-align': 'center', 'border-left': '1px solid #c9bbbb', 'border-bottom': '1px solid #c9bbbb'}">
+          <ng-template let-node="rowData" pTemplate="body">
+              <span *ngIf="(node.data.type =='tcode')&&(node.data.flag)" class="{{node.data.flag}}"><i style="color: red" class="material-icons" >flag</i></span>
+          </ng-template>
+      </p-column>
+
+  </p-treeTable>
+  <p-contextMenu #cm [model]="items"></p-contextMenu>
+</div>
+
+
+<!--  MOVE TO -->
+<p-dialog header="{{'moveTo'|translate}}" [(visible)]="displayMoveDialog" modal="modal" width="600" [responsive]="true">
+  <div style="overflow-y: scroll; height:500px; padding-top: 10px;">
+    <p-treeTable
+      [value]="favList"
+      selectionMode="single"
+      [(selection)]="targetNode">
+        <p-header><span><b>{{'myFavourites'|translate}}</b></span></p-header>
+        <p-column>
+            <!--
+            <ng-template pTemplate="header" style="margin-top:10px;">
+              <span><b>{{'myFavourites'|translate}}</b></span>
+            </ng-template>
+            -->
+            <ng-template let-col let-node="rowData" pTemplate="body">
+                <span *ngIf="node.data.type =='section'"><b>{{node.data.label}}</b></span>
+                <span *ngIf="node.data.type =='tcode'">{{node.data.label}}</span>
+            </ng-template>
+        </p-column>
+    </p-treeTable>
+    <p>Move to: {{targetNode ? targetNode.data.label : 'none'}}</p>
+  </div>
+  <p-footer>
+      <button type="button" pButton icon="fa-check" (click)="moveNode()" [disabled]="!targetNode" label="{{'yes'|translate}}"></button>
+      <button type="button" pButton icon="fa-close" (click)="cancelDialog()" label="{{'no'|translate}}"></button>
+  </p-footer>
+</p-dialog>
+
+<!-- SHARED FORM -->
+<!-- <p-dialog header="{{dialogTitle}}" [(visible)]="displaySharedDialog" modal="modal" width="300" [responsive]="true">
+  <form [formGroup]="sharedForm">
+    <div class="my-form">
+      <div class="ui-g">
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <input id="label" type="text" style="width: 100%" pInputText [(ngModel)]="labelInput" formControlName="label" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
+            <label for="label">{{'label'|translate}} <span *ngIf="!sharedForm.controls['label'].valid && sharedForm.controls['label'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
+          </span>
+        </div>
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <input id="icon" type="text" style="width: 100%" pInputText [(ngModel)]="iconInput" formControlName="icon" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
+            <label for="icon">{{'icon'|translate}}</label>
+          </span>
+        </div>
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <input id="desc" type="text" style="width: 100%" pInputText [(ngModel)]="descInput" formControlName="desc" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
+            <label for="icon">{{'description'|translate}}</label>
+          </span>
+        </div>
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <input id="url" type="text" style="width: 100%" pInputText [(ngModel)]="urlInput" formControlName="url">
+            <label for="url">{{'url'|translate}} <span *ngIf="!sharedForm.controls['url'].valid && sharedForm.controls['url'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </form>
+  <p-footer>
+      <button *ngIf="isSectionDialog" type="button" pButton icon="fa-check" [disabled]="!sharedForm.valid" (click)="saveSection()" label="{{'yes'|translate}}"></button>
+      <button *ngIf="!isSectionDialog" type="button" pButton icon="fa-check" [disabled]="!sharedForm.valid" (click)="renameDocument()" label="{{'yes'|translate}}"></button>
+      <button type="button" pButton icon="fa-close" (click)="cancelDialog()" label="{{'no'|translate}}"></button>
+  </p-footer>
+</p-dialog> -->
+
+<!-- SECTION FORM -->
+<p-dialog header="{{dialogTitle}}" [(visible)]="displaySectionDialog" modal="modal" width="300" [responsive]="true">
+  <form [formGroup]="sectionForm">
+    <div class="my-form">
+      <div class="ui-g">
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <input id="sectionLabel" type="text" style="width: 100%" pInputText formControlName="sectionLabel" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
+            <label for="sectionLabel">{{'label'|translate}} <span *ngIf="!sectionForm.controls['sectionLabel'].valid && sectionForm.controls['sectionLabel'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
+          </span>
+        </div>
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <input id="sectionIcon" type="text" style="width: 100%" pInputText formControlName="sectionIcon" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
+            <label for="sectionIcon">{{'icon'|translate}}</label>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </form>
+  <p-footer>
+      <button type="button" pButton icon="fa-check" [disabled]="!sectionForm.valid" (click)="saveSection()" label="{{'yes'|translate}}"></button>
+      <button type="button" pButton icon="fa-close" (click)="cancelDialog()" label="{{'no'|translate}}"></button>
+  </p-footer>
+</p-dialog>
+
+<!-- DOCUMENT FORM -->
+<p-dialog header="{{dialogTitle}}" [(visible)]="displayDocumentDialog" modal="modal" width="600" [responsive]="true">
+  <form [formGroup]="documentForm">
+    <!-- tab menu here -->
+    <div class="ui-g">
+
+      <div class="ui-g-9">
+        <span class="md-inputfield fixed-form">
+          <input id="documentLabel" type="text" style="width: 100%" pInputText formControlName="documentLabel">
+          <label for="label">{{'label'|translate}} <span *ngIf="!documentForm.controls['documentLabel'].valid && documentForm.controls['documentLabel'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
+        </span>
+      </div>
+
+      <div class="ui-g-3">
+        <span class="md-inputfield fixed-form">
+          <input id="documentIcon" type="text" style="width: 100%" pInputText formControlName="documentIcon">
+          <label for="documentIcon">{{'icon'|translate}}</label>
+        </span>
+      </div>
+
+      <div class="ui-g-12">
+        <span class="md-inputfield fixed-form">
+          <input id="documentDesc" type="text" style="width: 100%" pInputText formControlName="documentDesc">
+          <label for="documentDesc">{{'description'|translate}}</label>
+        </span>
+      </div>
+
+      <div class="ui-g-12">
+        <span class="md-inputfield fixed-form">
+          <input id="documentUrl" type="text" style="width: 100%" pInputText formControlName="documentUrl">
+          <label for="documentUrl">{{'url'|translate}} <span *ngIf="!documentForm.controls['documentUrl'].valid && documentForm.controls['documentUrl'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
+        </span>
+      </div>
+
+    </div>
+  </form>
+  <p-footer>
+      <button type="button" pButton icon="fa-check" [disabled]="!documentForm.valid" (click)="saveDocument()" label="{{'yes'|translate}}"></button>
+      <button type="button" pButton icon="fa-close" (click)="cancelDialog()" label="{{'no'|translate}}"></button>
+  </p-footer>
+</p-dialog>
+
+<!--  CONFIRM DIALOG -->
+<p-confirmDialog></p-confirmDialog>
+
+<br />
+
+<p>Selected Node: {{selectedNode ? selectedNode.data.label : 'none'}}</p>

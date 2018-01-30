@@ -1,0 +1,12 @@
+[
+  {
+    "data": { "label": "Company News", "icon": "dashboard", "url": ""},
+    "children": [
+      {"data": { "label": "Department 1", "icon": "grain", "url": "/news/dept/1" }},
+      {"data": { "label": "Department 2", "icon": "grain", "url": "/news/dept/2" }},
+      {"data": { "label": "Department 3", "icon": "grain", "url": "/news/dept/3" }},
+      {"data": { "label": "Department 4", "icon": "grain", "url": "/news/dept/4" }},
+      {"data": { "label": "Department 5", "icon": "grain", "url": "/news/dept/5" }}
+    ]
+  }
+]

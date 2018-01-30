@@ -1,0 +1,25 @@
+  <div class="layout-breadcrumb">
+    <ul>
+      <li><a href="#" [routerLink]="['/home']"><i class="material-icons">home</i></a></li>
+
+      <li class="material-icons">navigate_next</li>
+
+      <ng-container *ngFor="let item of this.breadcrumbs; let i=index;">
+        <li class="" *ngIf="item.label.title"><a href="#" [routerLink]="item.url">{{item.label.title|translate}}</a></li>
+        <li class="material-icons" *ngIf="item.label.title">navigate_next</li>
+      </ng-container>
+    </ul>
+
+    <div class="layout-breadcrumb-options">
+      <a href="#" (click)="returnPrevious()" title="{{'returnPrevious'|translate}}"><i class="material-icons">keyboard_backspace</i></a>
+      <a href="#" [routerLink]="['/fav']" title="{{'myFavourites'|translate}}"><i class="material-icons">star_border</i></a>
+      <a href="#" (click)="opHelp.toggle($event); false;" title="{{'help'|translate}}"><i class="material-icons">help_outline</i></a>
+
+      <p-overlayPanel #opHelp [showCloseIcon]="true" [dismissable]="true" appendTo="body" [style]="{'width': '500px'}">
+          <div [innerHTML]="helpContext"></div>
+      </p-overlayPanel>
+
+      <a href="#" [routerLink]="['/setting']" title="{{'settings'|translate}}"><i class="material-icons">settings_application</i></a>
+      <a href="#" [routerLink]="['/login']" title="{{'logout'|translate}}"><i class="material-icons">power_settings_new</i></a>
+    </div>
+  </div>

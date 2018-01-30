@@ -1,0 +1,69 @@
+body .ui-listbox {
+  min-width: 12.5em;
+  background-color: #ffffff;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+body .ui-listbox.ui-inputtext {
+  padding: 0;
+}
+
+body .ui-listbox .ui-listbox-list {
+  padding: 0;
+}
+
+body .ui-listbox .ui-listbox-item {
+  overflow: hidden;
+  font-size: 1em;
+  padding: 0.625em 1em;
+  margin: 0;
+  color: #212121;
+  position: relative;
+  overflow: hidden;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+body .ui-listbox .ui-listbox-item.ui-state-highlight {
+  background-color: #7CB342;
+  color: #ffffff;
+}
+
+body .ui-listbox:not(.ui-state-disabled) .ui-listbox-item:not(.ui-state-highlight):hover {
+  background-color: #e8e8e8;
+  color: #000000;
+}
+
+body .ui-listbox .ui-listbox-header {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  padding: 0.625em 1em;
+}
+
+body .ui-listbox .ui-listbox-header .ui-chkbox .ui-chkbox-box {
+  border-color: #ffffff;
+}
+
+body .ui-listbox .ui-listbox-header .ui-listbox-filter-container .ui-inputtext {
+  color: #ffffff;
+  padding: 2px 2px 1px 2px;
+  padding-left: 1.5em;
+}
+
+body .ui-listbox .ui-listbox-header .ui-listbox-filter-container .ui-inputtext:focus {
+  padding-bottom: 0;
+  border-bottom-color: #ffffff;
+}
+
+body .ui-listbox .ui-listbox-header .ui-listbox-filter-container .fa {
+  top: 0;
+  left: 0;
+}

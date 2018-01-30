@@ -1,0 +1,65 @@
+[
+  {
+    "data":{"label": "solution", "icon": "business_center"},
+    "children": [
+      {
+        "data":{"label": "overview", "icon": "lightbulb_outline"},
+        "children": [
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gksol/gksol00" }},
+          { "data":{"label": "masterList", "icon": "line_style", "url": "/gksol/gksol01" }}
+        ]
+      },
+
+      {
+        "data":{"label": "individual", "icon": "done"},
+        "children": [
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gksol/gksol10" }},
+          { "data":{"label": "create", "icon": "add", "url": "/gksol/gksol11" }},
+          { "data":{"label": "view", "icon": "search", "url": "/gksol/gksol12" }},
+          { "data":{"label": "edit", "icon": "edit", "url": "/gksol/gksol13" }},
+          { "data":{"label": "disable", "icon": "bookmark", "url": "/gksol/gksol14" }},
+          { "data":{"label": "enable", "icon": "bookmark_border", "url": "/gksol/gksol15" }},
+          { "data":{"label": "mark", "icon": "visibility_off", "url": "/gksol/gksol16" }},
+          { "data":{"label": "unmark", "icon": "visibility", "url": "/gksol/gksol17" }},
+          { "data":{"label": "delete", "icon": "delete_forever", "url": "/gksol/gksol18" }},
+          { "data":{"label": "viewChange", "icon": "track_changes", "url": "/gksol/gksol19" }}
+        ]
+      },
+
+      {
+        "data":{"label": "collective", "icon": "done_all"},
+        "children": [
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gksol/gksol20" }},
+          { "data":{"label": "upload", "icon": "file_upload", "url": "/gksol/gksol21" }},
+          { "data":{"label": "download", "icon": "file_download", "url": "/gksol/gksol22" }},
+          { "data":{"label": "upsert", "icon": "publish", "url": "/gksol/gksol23" }},
+          { "data":{"label": "inactivate", "icon": "layers_clear", "url": "/gksol/gksol24" }},
+          { "data":{"label": "activate", "icon": "layers", "url": "/gksol/gksol25" }},
+          { "data":{"label": "mark", "icon": "visibility_off", "url": "/gksol/gksol26" }},
+          { "data":{"label": "unmark", "icon": "visibility", "url": "/gksol/gksol27" }},
+          { "data":{"label": "clean", "icon": "delete_sweep", "url": "/gksol/gksol28" }},
+          { "data":{"label": "history", "icon": "history", "url": "/gksol/gksol29" }}
+        ]
+      },
+
+      {
+        "data":{"label": "dashboard", "icon": "dashboard"},
+        "children": [
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gksol/gksol50"} },
+          { "data":{"label": "kpis", "icon": "insert_chart", "url": "/gksol/gksol51"} }
+        ]
+      },
+
+      {
+        "data":{"label": "reports", "icon": "book"},
+        "children": [
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gksol/gksol60"} },
+          { "data":{"label": "summaryReports", "icon": "chrome_reader_mode", "url": "/gksol/gksol61"} },
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gksol/gksol70"} },
+          { "data":{"label": "detailReports", "icon": "chrome_reader_mode", "url": "/gksol/gksol71"} }
+        ]
+      }
+    ]
+  }
+
+]

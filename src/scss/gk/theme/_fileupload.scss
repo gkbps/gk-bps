@@ -1,0 +1,28 @@
+body .ui-fileupload .ui-fileupload-buttonbar {
+  padding: 0.625em 1em;
+}
+
+body .ui-fileupload .ui-fileupload-buttonbar .fa-arrowreturnthick-1-n:before {
+  content: "file_upload";
+}
+
+body .ui-fileupload .ui-fileupload-buttonbar .ui-button {
+  background-color: #7CB342;
+}
+
+body .ui-fileupload .ui-fileupload-buttonbar .ui-button:enabled:hover {
+  background-color: #9CCC65;
+}
+
+body .ui-fileupload .ui-fileupload-content .ui-messages-error .fa {
+  color: #ffffff;
+}
+
+body .ui-fileupload-choose:not(.ui-state-disabled):hover.ui-button,
+  body .ui-fileupload-choose.ui-state-focus.ui-button {
+  background-color: #6fa03b;
+}
+
+body .ui-fileupload-choose:not(.ui-state-disabled):active.ui-button {
+  background-color: #628e34;
+}

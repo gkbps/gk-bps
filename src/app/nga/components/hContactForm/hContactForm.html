@@ -1,0 +1,32 @@
+<div class="contact-form">
+  <p-panel header="Contact Us">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <p-dropdown [options]="cities" [(ngModel)]="selectedCity"></p-dropdown>
+      </div>
+      <div class="ui-g-12">
+        <span class="md-inputfield">
+          <input id="name" pinputtext="" type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
+          <!-- [ngClass]="{'ui-state-filled': (username.touched && username.value)}" -->
+          <label for="name">Name</label>
+        </span>
+      </div>
+      <div class="ui-g-12">
+        <span class="md-inputfield">
+          <input id="age" pinputtext="" type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
+          <label for="age">Age</label>
+        </span>
+      </div>
+      <div class="ui-g-12">
+        <span class="md-inputfield">
+          <input id="message" pinputtext="" type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
+          <label for="message">Message</label>
+        </span>
+      </div>
+    </div>
+    <button icon="ui-icon-send" label="Send" pbutton="" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left">
+      <span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-send"></span>
+      <span class="ui-button-text ui-clickable">Send</span>
+    </button>
+  </p-panel>
+</div>

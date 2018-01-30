@@ -1,0 +1,51 @@
+body .ui-spinner .ui-spinner-button {
+  width: 1em;
+  height: .75em;
+  padding: 0;
+  margin-right: .25em;
+  background-color: transparent;
+  color: #212121;
+  z-index: auto;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+body .ui-spinner .ui-spinner-button .fa-triangle-1-n {
+  color: #212121;
+}
+
+body .ui-spinner .ui-spinner-button .fa-triangle-1-s {
+  color: #212121;
+}
+
+body .ui-spinner .ui-spinner-button .fa {
+  top: 0px;
+  height: .5em;
+  color: #757575;
+}
+
+body .ui-spinner .ui-spinner-button:enabled:hover, body .ui-spinner .ui-spinner-button:active {
+  background-color: transparent;
+}
+
+body .ui-spinner .ui-spinner-up .fa {
+  top: .25em;
+}
+
+body .ui-spinner .ui-spinner-down .fa {
+  top: .167em;
+}
+
+body .ui-spinner .ui-spinner-input {
+  padding-right: 30px;
+}
+
+body .ui-fluid .ui-spinner .ui-spinner-button {
+  width: 1em;
+  height: .75em;
+}
+
+body .ui-fluid .ui-spinner .ui-spinner-button .fa {
+  left: auto;
+}

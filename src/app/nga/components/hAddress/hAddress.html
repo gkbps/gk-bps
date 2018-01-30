@@ -1,0 +1,55 @@
+<p-panel [formGroup]="addressItem">
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <span class="ui-panel-title">{{'address'|translate}} {{item + 1}}</span>
+      <a class="ui-panel-titlebar-icon">
+        <span *ngIf="formEditable" class="fa fa-fw fa-close" (click)="removeAddress()"></span>
+      </a>
+    </div>
+  </p-header>
+
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-3">
+      <span class="md-inputfield fixed-form">
+        <input pInputText type="text" name="type" formControlName="type"/>
+        <label>{{'type'|translate}} * <small *ngIf="!addressItem.controls.type.valid && addressItem.controls.type.dirty" class="text-warning">{{'minChar'|translate: "{value: 3}"}}</small></label>
+      </span>
+    </div>
+
+    <div class="ui-g-12 ui-md-12">
+      <span class="md-inputfield fixed-form">
+        <input pInputText type="text" name="line1" formControlName="line1"/>
+        <label>{{'line'|translate}} 1 * <small *ngIf="!addressItem.controls.line1.valid && addressItem.controls.line1.dirty" class="text-warning">{{'required'|translate}}</small></label>
+      </span>
+    </div>
+
+    <div class="ui-g-12 ui-md-3">
+      <span class="md-inputfield fixed-form">
+        <input pInputText type="text" name="line2" formControlName="line2"/>
+        <label>{{'line'|translate}} 2</label>
+      </span>
+    </div>
+
+    <div class="ui-g-12 ui-md-3">
+      <span class="md-inputfield fixed-form">
+        <input pInputText type="text" name="line3" formControlName="line3"/>
+        <label>{{'line'|translate}} 3</label>
+      </span>
+    </div>
+
+    <div class="ui-g-12 ui-md-3">
+      <span class="md-inputfield fixed-form">
+        <input pInputText type="text" name="line4" formControlName="line4"/>
+        <label>{{'line'|translate}} 4</label>
+      </span>
+    </div>
+
+    <div class="ui-g-12 ui-md-3">
+      <span class="md-inputfield fixed-form">
+        <input pInputText type="text" name="line5" formControlName="line5"/>
+        <label>{{'line'|translate}} 5</label>
+      </span>
+    </div>
+  </div>
+
+</p-panel>

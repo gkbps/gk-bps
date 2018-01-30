@@ -1,0 +1,12 @@
+<!-- Menu Item -->
+<li *ngFor="let item of menu" (click)="selectMenu($event, item)" [ngClass]="{'active-menuitem': (item==selectedMenu)}">
+  <a class="ripplelink" href="#" (click)="gotoURL(item.data.url)">
+    <i class="material-icons">{{item.data.icon}}</i>
+    <span class="menuitem-text" translate>{{item.data.label}}</span>
+    <i *ngIf="item.children" class="material-icons layout-submenu-toggler">keyboard_arrow_down</i>
+  </a>
+
+  <ul gkSidebarMenu [menu]="item.children" *ngIf="item.children && (item==selectedMenu)"></ul>
+
+</li>
+<!-- ./Menu Item -->

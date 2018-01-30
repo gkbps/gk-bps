@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 137 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <circle cx="68.417" cy="68.417" r="63.333" style="fill:rgb(143,131,118);"/>
+    <g transform="matrix(0.249868,0,0,0.254485,6.43311,3.62228)">
+        <path d="M445.1,354.4L59.9,354.4C56.8,354.4 54.8,357.7 56.3,360.4L62.4,371.8C67.2,380.8 76.5,386.3 86.7,386.3L418.3,386.3C428.5,386.3 437.8,380.7 442.6,371.8L448.7,360.4C450.1,357.7 448.2,354.4 445.1,354.4Z" style="fill:rgb(50,74,94);fill-rule:nonzero;"/>
+        <path d="M417.2,354.4L90.4,354.4C89,354.4 87.8,353.3 87.8,351.8L87.8,124.5C87.8,123.1 88.9,121.9 90.4,121.9L417.2,121.9C418.6,121.9 419.8,123 419.8,124.5L419.8,351.8C419.7,353.2 418.6,354.4 417.2,354.4Z" style="fill:rgb(43,59,78);fill-rule:nonzero;"/>
+        <rect x="103.2" y="146.8" width="301.2" height="187.1" style="fill:white;"/>
+        <circle cx="253.8" cy="134.1" r="5.7" style="fill:rgb(50,74,94);"/>
+        <rect x="138.3" y="163.2" width="25.4" height="25.4" style="fill:rgb(255,208,91);"/>
+        <rect x="178.9" y="163.2" width="60.2" height="8.6" style="fill:rgb(230,233,238);"/>
+        <rect x="178.9" y="180" width="33.1" height="8.6" style="fill:rgb(230,233,238);"/>
+        <rect x="268.5" y="163.2" width="25.4" height="25.4" style="fill:rgb(84,192,235);"/>
+        <rect x="309" y="163.2" width="60.2" height="8.6" style="fill:rgb(230,233,238);"/>
+        <rect x="309" y="180" width="33.1" height="8.6" style="fill:rgb(230,233,238);"/>
+        <rect x="145.8" y="227.7" width="26.2" height="79.7" style="fill:rgb(230,233,238);"/>
+        <rect x="193.2" y="227.7" width="26.2" height="79.7" style="fill:rgb(230,233,238);"/>
+        <rect x="240.7" y="227.7" width="26.2" height="79.7" style="fill:rgb(230,233,238);"/>
+        <rect x="288.1" y="227.7" width="26.2" height="79.7" style="fill:rgb(230,233,238);"/>
+        <rect x="335.6" y="227.7" width="26.2" height="79.7" style="fill:rgb(230,233,238);"/>
+        <rect x="145.8" y="260.7" width="26.2" height="46.7" style="fill:rgb(76,219,196);"/>
+        <rect x="193.2" y="278.2" width="26.2" height="29.2" style="fill:rgb(76,219,196);"/>
+        <rect x="240.7" y="242.9" width="26.2" height="64.5" style="fill:rgb(76,219,196);"/>
+        <rect x="288.1" y="264.9" width="26.2" height="42.6" style="fill:rgb(76,219,196);"/>
+        <rect x="335.6" y="249.6" width="26.2" height="57.8" style="fill:rgb(76,219,196);"/>
+        <path d="M295.7,361.6L209.3,361.6L202,354.4L303,354.4L295.7,361.6Z" style="fill:rgb(172,179,186);fill-rule:nonzero;"/>
+    </g>
+</svg>

@@ -1,0 +1,30 @@
+[
+  {
+    "data": {
+      "label": "bulletinBoard",
+      "icon": "dashboard",
+      "url": "/news"
+    }
+  },
+  {
+    "data": {
+      "label": "time_management",
+      "icon": "schedule",
+      "url": "/mine"
+    }
+  },
+  {
+    "data": {
+      "label": "workflows",
+      "icon": "swap_horiz",
+      "url": "/tray"
+    }
+  },
+  {
+    "data": {
+      "label": "systems",
+      "icon": "cloud_queue",
+      "url": "/systems"
+    }
+  }
+]

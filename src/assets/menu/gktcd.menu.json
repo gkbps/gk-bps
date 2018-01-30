@@ -1,0 +1,67 @@
+[
+  {
+    "data":{"label": "tcodes", "icon": "device_hub"},
+    "children": [
+
+      {
+        "data":{"label": "overview", "icon": "lightbulb_outline"},
+        "children": [
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gktcd/gktcd00" }},
+          { "data":{"label": "masterList", "icon": "line_style", "url": "/gktcd/gktcd01" }}
+        ]
+      },
+
+      {
+        "data":{"label": "individual", "icon": "done"},
+        "children": [
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gktcd/gktcd10" }},
+          { "data":{"label": "create", "icon": "add", "url": "/gktcd/gktcd11" }},
+          { "data":{"label": "view", "icon": "search", "url": "/gktcd/gktcd12" }},
+          { "data":{"label": "edit", "icon": "edit", "url": "/gktcd/gktcd13" }},
+          { "data":{"label": "disable", "icon": "bookmark", "url": "/gktcd/gktcd14" }},
+          { "data":{"label": "enable", "icon": "bookmark_border", "url": "/gktcd/gktcd15" }},
+          { "data":{"label": "mark", "icon": "visibility_off", "url": "/gktcd/gktcd16" }},
+          { "data":{"label": "unmark", "icon": "visibility", "url": "/gktcd/gktcd17" }},
+          { "data":{"label": "delete", "icon": "delete_forever", "url": "/gktcd/gktcd18" }},
+          { "data":{"label": "viewChange", "icon": "track_changes", "url": "/gktcd/gktcd19" }}
+        ]
+      },
+
+      {
+        "data":{"label": "collective", "icon": "done_all"},
+        "children": [
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gktcd/gktcd20" }},
+          { "data":{"label": "upload", "icon": "file_upload", "url": "/gktcd/gktcd21" }},
+          { "data":{"label": "download", "icon": "file_download", "url": "/gktcd/gktcd22" }},
+          { "data":{"label": "upsert", "icon": "publish", "url": "/gktcd/gktcd23" }},
+          { "data":{"label": "inactivate", "icon": "layers_clear", "url": "/gktcd/gktcd24" }},
+          { "data":{"label": "activate", "icon": "layers", "url": "/gktcd/gktcd25" }},
+          { "data":{"label": "mark", "icon": "visibility_off", "url": "/gktcd/gktcd26" }},
+          { "data":{"label": "unmark", "icon": "visibility", "url": "/gktcd/gktcd27" }},
+          { "data":{"label": "clean", "icon": "delete_sweep", "url": "/gktcd/gktcd28" }},
+          { "data":{"label": "history", "icon": "history", "url": "/gktcd/gktcd29" }}
+        ]
+      },
+
+      {
+        "data":{"label": "dashboard", "icon": "dashboard"},
+        "children": [
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gktcd/gktcd50" }},
+          { "data":{"label": "kpis", "icon": "insert_chart", "url": "/gktcd/gktcd51" }}
+        ]
+      },
+
+      {
+        "data":{"label": "reports", "icon": "book"},
+        "children": [
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gktcd/gktcd60" }},
+          { "data":{"label": "summaryReports", "icon": "chrome_reader_mode", "url": "/gktcd/gktcd61" }},
+          { "data":{"label": "navBoard", "icon": "view_module", "url": "/gktcd/gktcd70" }},
+          { "data":{"label": "detailReports", "icon": "chrome_reader_mode", "url": "/gktcd/gktcd71" }}
+        ]
+      }
+
+    ]
+  }
+
+]

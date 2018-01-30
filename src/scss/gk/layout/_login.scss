@@ -1,0 +1,92 @@
+.login-body {
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &.login {
+    background-image: url("../assets/images/login/login-bg.jpg");
+    .login-panel {
+      height: 550px;
+      top: 50%;
+    }
+  }
+  &.forgot {
+    background-image: url("../assets/images/login/forgot-bg.jpg");
+    .login-panel {
+      height: 500px;
+      top: 50%;
+    }
+  }
+  &.register {
+    background-image: url("../assets/images/login/register-bg.jpg");
+    .login-panel {
+      height: 750px;
+      top: 35%;
+    }
+  }
+  .login-panel {
+    width: 550px;
+    //height: 550px;
+    background-color: #ffffff;
+    position: absolute;
+    left: 50%;
+    //top: 50%;
+    margin-left: -275px;
+    margin-top: -240px;
+    padding: 0;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    .login-panel-header {
+      background-color: #607D8B;
+      text-align: center;
+      padding: 8px 10px;
+      img {
+        vertical-align: middle;
+        width: 50px;
+      }
+    }
+    .login-panel-content {
+      padding: 20px 40px;
+      h1 {
+        font-size: 16px;
+        margin-top: 0;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .ui-g-12, .ui-g-6 {
+        padding: 1em;
+      }
+      .ui-g-12:last-child, .ui-g-6:last-child {
+        text-align: center;
+      }
+      .ui-g-12:last-child a, .ui-g-6:last-child a {
+        color: #7CB342;
+      }
+      .password-reset {
+        text-align: right;
+        a {
+          color: #757575;
+        }
+      }
+      .ui-chkbox-label {
+        margin: 0 0 0 8px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .login-body .login-panel {
+    left: 0;
+    margin-left: 0;
+    width: 100%;
+    .login-panel-content {
+      padding: 8px 10px;
+    }
+  }
+}

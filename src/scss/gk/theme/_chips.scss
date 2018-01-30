@@ -1,0 +1,38 @@
+body .ui-chips > ul.ui-inputtext {
+  padding: 2px 2px 1px 2px;
+}
+
+body .ui-chips > ul.ui-inputtext.ui-state-focus {
+  padding-bottom: 0;
+}
+
+body .ui-chips > ul.ui-inputtext .ui-chips-input-token {
+  padding-bottom: 2px;
+}
+
+body .ui-chips > ul.ui-inputtext .ui-chips-input-token > input {
+  padding: 0;
+  font-size: 14px;
+  margin: 0;
+  vertical-align: bottom;
+}
+
+body .ui-chips > ul.ui-inputtext .ui-chips-input-token input.ui-state-disabled {
+  width: 0;
+}
+
+body .ui-chips > ul.ui-inputtext .ui-chips-token {
+  display: inline-block;
+  float: none;
+  vertical-align: middle;
+  font-size: 1em;
+}
+
+body .ui-chips > ul.ui-inputtext .ui-chips-token .ui-chips-token-label {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+body .ui-chips > ul.ui-inputtext.ui-state-disabled {
+  border-bottom: 1px dotted;
+}

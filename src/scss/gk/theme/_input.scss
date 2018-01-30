@@ -1,0 +1,77 @@
+body .ui-inputtext {
+  background: transparent;
+  border-width: 0 0 1px 0;
+  padding: 2px 2px 1px 2px;
+  font-size: 1em;
+  border-color: #bdbdbd;
+  border-style: solid;
+  -moz-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+
+body .ui-inputtext:focus, body .ui-inputtext.ui-state-focus {
+  border-width: 0 0 2px 0;
+  border-color: #607D8B;
+  padding-bottom: 0px;
+}
+
+body .ui-inputtext:disabled {
+  border-bottom: 1px dotted;
+}
+
+body .ui-inputtext.ui-widget-content {
+  border-width: 1px;
+}
+
+body .ui-inputtext.ui-state-error {
+  border-color: #e62a10;
+}
+
+body .md-inputfield {
+  display: block;
+  position: relative;
+}
+
+body .md-inputfield label {
+  color: #999;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 1px;
+  transition: 0.3s ease all;
+  -moz-transition: 0.3s ease all;
+  -webkit-transition: 0.3s ease all;
+}
+
+body .md-inputfield input:focus ~ label,
+    body .md-inputfield input.ui-state-filled ~ label,
+    body .md-inputfield .ui-inputwrapper-focus ~ label,
+    body .md-inputfield .ui-inputwrapper-filled ~ label {
+  top: -20px;
+  font-size: 12px;
+  color: #607D8B;
+}
+
+body .md-inputfield .input:-webkit-autofill ~ label {
+  top: -20px;
+  font-size: 12px;
+  color: #607D8B;
+}
+
+body .md-inputfield input.ng-dirty.ng-invalid ~ label {
+  color: #e62a10;
+}
+
+body .md-inputfield .ui-message.ui-messages-error {
+  background-color: transparent;
+  border: 0 none;
+  margin: 0px;
+  color: #e62a10;
+  font-size: .75em;
+}

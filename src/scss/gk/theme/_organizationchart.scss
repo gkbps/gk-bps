@@ -1,0 +1,88 @@
+body .ui-organizationchart .ui-organizationchart-node-content.ui-organizationchart-selectable-node:not(.ui-state-highlight):hover {
+  background-color: #e8e8e8;
+  color: #000000;
+}
+
+body .ui-organizationchart .ui-organizationchart-node-content.ui-state-highlight .ui-node-toggler i {
+  color: #3b5620;
+}
+
+body .ui-organizationchart .ui-organizationchart-line-down {
+  background-color: #bfbfbf;
+}
+
+body .ui-organizationchart .ui-organizationchart-line-left {
+  border-right: 1px solid #bfbfbf;
+}
+
+body .ui-organizationchart .ui-organizationchart-line-top {
+  border-top: 1px solid #bfbfbf;
+}
+
+body .ui-organizationchart .ui-organizationchart-node-content {
+  border-color: #bfbfbf;
+}
+
+body .ui-organizationchart .ui-organizationchart-node-content .ui-node-toggler {
+  bottom: -1.143em;
+  margin-left: -.825em;
+  color: #bfbfbf;
+}
+
+body .ui-organizationchart .ui-organizationchart-node-content .ui-node-toggler .fa-chevron-down {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+    /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+    /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+body .ui-organizationchart .ui-organizationchart-node-content .ui-node-toggler .fa-chevron-down:before {
+  content: "keyboard_arrow_down";
+}
+
+body .ui-organizationchart .ui-organizationchart-node-content .ui-node-toggler .fa-chevron-up {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+    /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+    /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+body .ui-organizationchart .ui-organizationchart-node-content .ui-node-toggler .fa-chevron-up:before {
+  content: "keyboard_arrow_up";
+}

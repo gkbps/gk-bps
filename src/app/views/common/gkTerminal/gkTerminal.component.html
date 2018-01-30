@@ -1,0 +1,22 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="card card-w-title">
+      <h1>{{'terminal'|translate}}</h1>
+      <span>{{'terminalText'|translate}}</span>
+
+      <div class="ui-g">
+
+        <div class="ui-g-12">
+          <p-terminal welcomeMessage="{{'terminalWelcome'|translate}}" prompt="{{user.username}} $"></p-terminal>
+        </div>
+
+        <div class="ui-g-12">
+          <pre>
+            {{response|json}}          
+          </pre>                    
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

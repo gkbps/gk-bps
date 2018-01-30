@@ -1,0 +1,13 @@
+<div class="status-bars">
+  <div class="card">
+    <ul *ngFor="let status of statusList">
+      <li>
+        <div class="status-bar {{status.style}}">
+            <div class="status-bar-value" [style.width]="status.progress">{{status.progress}}</div>
+        </div>
+        <span>{{status.label}}</span>
+        <i class="material-icons">{{status.icon}}</i>
+      </li>
+    </ul>
+  </div>
+</div>

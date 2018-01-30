@@ -1,0 +1,80 @@
+body .ui-tree {
+  padding: 0.625em 1em/2;
+}
+
+body .ui-tree .ui-treenode-children {
+  padding-left: 1.75em;
+}
+
+body .ui-tree .ui-treenode-content .ui-chkbox {
+  margin-right: .5em;
+}
+
+body .ui-tree .ui-treenode-content .ui-chkbox .fa {
+  color: #757575;
+}
+
+body .ui-tree .ui-treenode-content .ui-tree-toggler {
+  vertical-align: middle;
+  margin: 0 0 0 .25em;
+}
+
+body .ui-tree .ui-treenode-content .ui-treenode-icon {
+  vertical-align: middle;
+  margin: 0 .25em;
+}
+
+body .ui-tree .ui-treenode-content .ui-chkbox {
+  margin: 0 .25em;
+}
+
+body .ui-tree .ui-treenode-content .ui-treenode-label {
+  margin: 0;
+  vertical-align: middle;
+}
+
+body .ui-tree .ui-treenode-content.ui-treenode-selectable .ui-treenode-label:not(.ui-state-highlight):hover {
+  background-color: #e8e8e8;
+  color: #000000;
+}
+
+body .ui-tree .ui-treenode-content.ui-treenode-dragover {
+  background: #90A4AE;
+}
+
+body .ui-tree .ui-treenode-content.ui-treenode-dragover > span {
+  color: #ffffff;
+}
+
+body .ui-tree.ui-tree-horizontal {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+body .ui-tree.ui-tree-horizontal .ui-treenode-content {
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
+}
+
+body .ui-tree.ui-tree-horizontal .ui-treenode-content .ui-tree-toggler {
+  vertical-align: top;
+}
+
+body .ui-tree.ui-tree-horizontal .ui-treenode-content .ui-treenode-icon {
+  vertical-align: top;
+  margin-right: .25em;
+}
+
+body .ui-tree.ui-tree-horizontal .ui-treenode-content.ui-treenode-selectable:hover {
+  background-color: #e8e8e8;
+  color: #000000;
+}
+
+body .ui-tree.ui-tree-horizontal .ui-treenode-content.ui-state-highlight {
+  background-color: #7CB342;
+  color: #ffffff;
+}
+
+body .ui-tree-draghelper {
+  border: 1px solid #607D8B;
+}

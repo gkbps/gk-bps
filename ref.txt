@@ -1,0 +1,51 @@
+.e-title {
+  margin: 10px 0 0 10px;
+  .e-desc1 {
+    margin: 10px 0 0 10px;
+  }
+
+
+
+
+<div class="card">
+  Content here
+</div>
+
+<div class="card card-w-title">
+  <h1>Card with title<h1>
+  Content here
+</div>
+
+<span class="md-inputfield">
+  <input type="text" pInputText>
+  <label>Name</label>
+</span>
+
+
+<button type="button" pButton label="ui-icon-check" icon="ui-icon-check"></button>
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="card card-w-title">
+      <h1>Multiple</h1>
+
+
+      <div class="ui-g form-group">
+
+        <div class="ui-g-12">
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+"../node_modules/primeng/resources/primeng.min.css",
+"nanoscroller": "^0.8.7",
+"ngx-bootstrap": "1.9.1",
+"streamsaver": "^1.0.1",
+"deep-diff": "^0.3.8",
+"file-saver": "^1.3.3",
+    "@types/file-saver": "0.0.1",
+
+     style="margin:10px auto;"

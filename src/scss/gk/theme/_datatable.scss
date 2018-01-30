@@ -1,0 +1,240 @@
+body .ui-datatable .ui-datatable-header,
+body .ui-datatable .ui-datatable-footer {
+  padding: 0.625em 1em;
+}
+
+body .ui-datatable .ui-datatable-header .ui-inputtext,
+  body .ui-datatable .ui-datatable-footer .ui-inputtext {
+  color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-header .ui-inputtext:focus,
+    body .ui-datatable .ui-datatable-footer .ui-inputtext:focus {
+  border-color: #ffffff;
+}
+
+body .ui-datatable .ui-paginator {
+  padding: 0.625em 1em;
+}
+
+body .ui-datatable .ui-datatable-thead > tr {
+  border-color: #cacaca;
+}
+
+body .ui-datatable .ui-datatable-thead > tr > th {
+  padding: .625em .875em;
+  background-color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-thead > tr > th.ui-sortable-column:not(.ui-state-active):hover {
+  background-color: #e8e8e8;
+  color: #000000;
+}
+
+body .ui-datatable .ui-datatable-thead > tr > th .ui-column-title {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+body .ui-datatable .ui-datatable-thead > tr > th .ui-sortable-column-icon {
+  vertical-align: middle;
+  color: #757575;
+}
+
+body .ui-datatable .ui-datatable-thead > tr > th.ui-state-active, body .ui-datatable .ui-datatable-thead > tr > th.ui-state-highlight {
+  background-color: #7CB342;
+  color: #ffffff;
+  border-top-color: #7CB342;
+}
+
+body .ui-datatable .ui-datatable-thead > tr > th.ui-state-active .fa, body .ui-datatable .ui-datatable-thead > tr > th.ui-state-highlight .fa {
+  color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-thead > tr > th.ui-state-active .ui-inputtext, body .ui-datatable .ui-datatable-thead > tr > th.ui-state-highlight .ui-inputtext {
+  color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-thead > tr > th.ui-state-active .ui-inputtext.ui-state-focus, body .ui-datatable .ui-datatable-thead > tr > th.ui-state-highlight .ui-inputtext.ui-state-focus {
+  border-color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-thead > tr > th.ui-selection-column .ui-chkbox-box {
+  box-sizing: content-box;
+}
+
+body .ui-datatable .ui-datatable-tfoot > tr > td {
+  padding: .625em .875em;
+  border: 1px solid #bdbdbd;
+  background-color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-datatable-even {
+  background-color: #f4f4f4;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-datatable-even.ui-state-highlight {
+  background-color: #7CB342;
+  color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr {
+  border: 1px solid #cacaca;
+}
+
+body .ui-datatable .ui-datatable-data tr td {
+  padding: .625em .875em;
+}
+
+body .ui-datatable .ui-datatable-data tr td .ui-row-toggler {
+  display: inherit;
+}
+
+body .ui-datatable .ui-datatable-data tr td.ui-state-highlight .ui-inputtext {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr td.ui-state-highlight .ui-inputtext:focus {
+  border-color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr td.ui-state-error {
+  background-color: #e62a10;
+  border-color: #e62a10;
+  color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr td input.ui-cell-editor {
+  padding: 2px 2px 1px 2px;
+  font-size: 1em;
+}
+
+body .ui-datatable .ui-datatable-data tr td.ui-selection-column .ui-chkbox-box, body .ui-datatable .ui-datatable-data tr td.ui-selection-column .ui-radiobutton-box {
+  box-sizing: content-box;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-state-highlight {
+  background-color: #7CB342;
+  border-color:   #7CB342;
+  color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr .ui-cell-editor-input input {
+  color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-state-error {
+  background-color: #e62a10;
+  border-color: #e62a10;
+  color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-state-error .ui-inputtext,
+  body .ui-datatable .ui-datatable-data tr.ui-state-error .ui-inputtext.ui-state-error {
+  border-color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-state-highlight td.ui-selection-column .ui-radiobutton-box {
+  border-color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-state-highlight td.ui-selection-column .ui-radiobutton-box .ui-radiobutton-icon {
+  background-color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-state-highlight td.ui-selection-column .ui-chkbox-box {
+  border-color: #ffffff;
+  background-color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-state-highlight td.ui-selection-column .ui-chkbox-box .ui-chkbox-icon {
+  color: #757575;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-state-highlight .ui-inputtext {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-state-highlight .ui-inputtext:focus {
+  border-color: #ffffff;
+}
+
+body .ui-datatable .ui-datatable-data tr.ui-rowgroup-header td a {
+  height: 1.5em;
+}
+
+body .ui-datatable .ui-datatable-data.ui-datatable-hoverable-rows > tr.ui-widget-content:not(.ui-state-highlight):hover {
+  cursor: pointer;
+  background-color: #e8e8e8;
+  color: #000000;
+}
+
+body .ui-datatable.ui-datatable-scrollable .ui-datatable-scrollable-header, body .ui-datatable.ui-datatable-scrollable .ui-datatable-scrollable-footer {
+  border: 0 none;
+  background-color: transparent;
+}
+
+body .ui-datatable.ui-datatable-scrollable .ui-datatable-scrollable-header .ui-datatable-data td, body .ui-datatable.ui-datatable-scrollable .ui-datatable-scrollable-footer .ui-datatable-data td {
+  color: #212121;
+}
+
+body .ui-datatable.ui-datatable-scrollable thead tr th {
+  color: #212121;
+  font-size: 14px;
+}
+
+body .ui-datatable.ui-datatable-scrollable tfoot tr td {
+  color: #212121;
+  font-size: 14px;
+}
+
+body .ui-datatable .ui-datatable-loading-content {
+  top: 30%;
+}
+
+body .ui-datatable .ui-datatable-loading-content .fa {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+    /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+    /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+  font-feature-settings: 'liga';
+  font-size: 2em;
+  -webkit-animation-delay: 0;
+  -webkit-animation-duration: 1000ms;
+  -webkit-animation-name: spin;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-delay: 0;
+  -moz-animation-duration: 1000ms;
+  -moz-animation-name: spin;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  animation-delay: 0;
+  animation-duration: 1000ms;
+  animation-name: spin;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+body .ui-datatable .ui-datatable-loading-content .fa:before {
+  content: "refresh";
+}
