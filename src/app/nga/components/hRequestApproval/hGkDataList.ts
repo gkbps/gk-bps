@@ -1,8 +1,11 @@
-import {NgModule,Component,ElementRef,AfterViewInit,AfterContentInit,DoCheck,OnInit,OnDestroy,Input,Output,SimpleChange,EventEmitter,ContentChild,ContentChildren,TemplateRef,QueryList,IterableDiffers} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {SharedModule,Header,Footer,PrimeTemplate} from 'primeng/primeng';
-import {PaginatorModule} from 'primeng/primeng';
-import {BlockableUI} from 'primeng/primeng';
+import { NgModule,Component,ElementRef,AfterViewInit,AfterContentInit,DoCheck,OnInit,OnDestroy,Input,Output,SimpleChange,EventEmitter,ContentChild,ContentChildren,TemplateRef,QueryList,IterableDiffers } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from 'primeng/shared';
+import { Header } from 'primeng/shared';
+import { Footer } from 'primeng/shared';
+import { PrimeTemplate } from 'primeng/shared';
+import { PaginatorModule } from 'primeng/paginator';
+import { BlockUIModule } from 'primeng/blockui';
 
 // Insert
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -32,7 +35,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
         </div>
     `
 })
-export class HGkDataList implements OnInit,AfterViewInit,AfterContentInit,DoCheck,BlockableUI {
+export class HGkDataList implements OnInit,AfterViewInit,AfterContentInit,DoCheck,BlockUIModule {
 
     @Input() paginator: boolean;
 

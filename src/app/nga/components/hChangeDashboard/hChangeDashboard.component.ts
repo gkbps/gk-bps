@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/Subscription';
 
-// import { PanelModule } from 'primeng/primeng';
-import { Header, Footer } from 'primeng/primeng';
+import { Header } from 'primeng/shared';
+import { Footer } from 'primeng/shared';
 
 @Component({
   selector: 'h-change-dashboard',

@@ -2,8 +2,9 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { MenubarModule, MenuItem } from 'primeng/primeng';
-import { SelectItem } from 'primeng/primeng';
+import { MenubarModule } from 'primeng/menubar';
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 
 import { Subscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,18 +20,7 @@ import {
  } from '../../../../../../nga/services';
 
  import {
-  DbGrid3,
-  DbGrid4,
-  DbGrid5,
-  DbGrid6,
-  DbGrid7,
-  DbGrid8,
-  DbGrid9,
-  DbGrid12,
-  GkClnDbOverviewAll,
-  GkClnDbOverviewActive,
-  GkClnDbOverviewInactive,
-  GkClnDbOverviewMarked,
+
   GkClnDbChartDoughnut,
   GkClnDbChartPie,
   GkClnDbChartRadar,
@@ -40,7 +30,20 @@ import {
 
 import { GkCln51Service } from './gkcln51.service';
 
-export interface DbItem {
+import { HNewsComponent } from '../../../../../../nga/components/hNews/hNews.component';
+import { HDashboardBlankComponent } from '../../../../../../nga/components/hDashboardBlank/hDashboardBlank.component';
+import { HDashboardKPIActiveComponent } from '../../../../../../nga/components/hDashboardKPIActive/hDashboardKPIActive.component';
+import { HDashboardKPIInactiveComponent } from '../../../../../../nga/components/hDashboardKPIInactive/hDashboardKPIInactive.component';
+import { HDashboardKPIMarkedComponent } from '../../../../../../nga/components/hDashboardKPIMarked/hDashboardKPIMarked.component';
+import { HDashboardKPIUnmarkedComponent } from '../../../../../../nga/components/hDashboardKPIUnmarked/hDashboardKPIUnmarked.component';
+
+import { HDashboardChartDoughnutComponent } from '../../../../../../nga/components/hDashboardChartDoughnut/hDashboardChartDoughnut.component';
+import { HDashboardChartPieComponent } from '../../../../../../nga/components/hDashboardChartPie/hDashboardChartPie.component';
+import { HDashboardChartRadarComponent } from '../../../../../../nga/components/hDashboardChartRadar/hDashboardChartRadar.component';
+import { HDashboardChartPolarAreaComponent } from '../../../../../../nga/components/hDashboardChartPolarArea/hDashboardChartPolarArea.component';
+import { HDashboardChartLineComponent } from '../../../../../../nga/components/hDashboardChartLine/hDashboardChartLine.component';
+
+export interface DashboardbItem {
      img: string;
      label: string;
      grid: string;
@@ -68,18 +71,19 @@ export class GkCln51Component implements OnInit, OnDestroy {
   myScope = 'gkcln-51';
 
   DB_COMPONENTS = {
-    'DbGrid3': DbGrid3,
-    'DbGrid4': DbGrid4,
-    'DbGrid5': DbGrid5,
-    'DbGrid6': DbGrid6,
-    'DbGrid7': DbGrid7,
-    'DbGrid8': DbGrid8,
-    'DbGrid9': DbGrid9,
-    'DbGrid12': DbGrid12,
-    'GkClnDbOverviewAll': GkClnDbOverviewAll,
-    'GkClnDbOverviewActive': GkClnDbOverviewActive,
-    'GkClnDbOverviewInactive': GkClnDbOverviewInactive,
-    'GkClnDbOverviewMarked': GkClnDbOverviewMarked,
+    'HNewsComponent': HNewsComponent,
+    'HDashboardBlankComponent': HDashboardBlankComponent,
+    'HDashboardKPIActiveComponent': HDashboardKPIActiveComponent,
+    'HDashboardKPIInactiveComponent': HDashboardKPIInactiveComponent,
+    'HDashboardKPIMarkedComponent': HDashboardKPIMarkedComponent,
+    'HDashboardKPIUnmarkedComponent': HDashboardKPIUnmarkedComponent,
+
+    'HDashboardChartDoughnutComponent':HDashboardChartDoughnutComponent,
+    'HDashboardChartPieComponent': HDashboardChartPieComponent,
+    'HDashboardChartRadarComponent': HDashboardChartRadarComponent,
+    'HDashboardChartPolarAreaComponent': HDashboardChartPolarAreaComponent,
+    'HDashboardChartLineComponent': HDashboardChartLineComponent,
+
     'GkClnDbChartDoughnut': GkClnDbChartDoughnut,
     'GkClnDbChartPie': GkClnDbChartPie,
     'GkClnDbChartRadar': GkClnDbChartRadar,
@@ -91,23 +95,27 @@ export class GkCln51Component implements OnInit, OnDestroy {
   prefix = '/gkcln';
   userRights: Array<any>;
 
-  // Dashboard Pages
-  dbPages: SelectItem[];
-  selectedDbPage: any;
-
-  // Toggle Customization Panel
-  customizeDb = false;
-
   // Standard layout
   stdLayoutList = [];
-  selectedLayout: any;
+  selectedDashboardGrid: any;
 
   // Dashboard Page Items
   dbItems: any[];
 
-  availableDbItems: any[]; // dbItem[];
-  selectedDbItems: any[]; // dbItem[];
-  adaptedDbItems: any[]; // Items in selected Pick List to be adopt layout
+  availableDashboardItems: any[];
+  selectedDashboardItems: any[];
+
+  blankId = 0;
+  blankDashboardItem = {
+    'id': 0,
+    'img': 'ee8a89d8',
+    'label': 'Blank',
+    'grid': 'ui-g-3',
+    'component': 'HDashboardBlankComponent',
+    'blank': true
+  };
+
+  adaptedDashboardItems: any[];
 
   inputs: any;
   outputs: any;
@@ -135,10 +143,9 @@ export class GkCln51Component implements OnInit, OnDestroy {
     this.userRights = this.securityService.getMana();
 
     this.initDashboardPages();
-    this.selectedDbItems = [];
+    this.selectedDashboardItems = [];
 
     this.initDashboardItems();
-    this.availableDbItems = [];
 
     this.inputs = {
       hello: 'world',
@@ -152,178 +159,78 @@ export class GkCln51Component implements OnInit, OnDestroy {
   }
 
   initDashboardItems() {
-    // this.availableDbItems = this.gkCln51Service.getDbList()
-    this.dbItems = [
+    // this.availableDashboardItems = this.gkCln51Service.getDbList()
+    this.availableDashboardItems = [
       {
         'img': 'ee8a89d8',
-        'label': 'Blank 3',
-        'grid': 'ui-g-3',
-        'component': 'DbGrid3',
-        'blank': true
-      },
-      {
-        'img': '642b3edc',
-        'label': 'Blank 4',
-        'grid': 'ui-g-4',
-        'component': 'DbGrid4',
-        'blank': true
-      },
-      {
-        'img': '19ec7580',
-        'label': 'Blank 5',
-        'grid': 'ui-g-5',
-        'component': 'DbGrid5',
-        'blank': true
-      },
-      {
-        'img': '39980f30',
-        'label': 'Blank 6',
-        'grid': 'ui-g-6',
-        'component': 'DbGrid6',
-        'blank': true
-      },
-      {
-        'img': '39980f31',
-        'label': 'Blank 7',
-        'grid': 'ui-g-7',
-        'component': 'DbGrid7',
-        'blank': true
-      },
-      {
-        'img': '39980f32',
-        'label': 'Blank 8',
-        'grid': 'ui-g-8',
-        'component': 'DbGrid8',
-        'blank': true
-      },
-      {
-        'img': '39980f30',
-        'label': 'Blank 9',
-        'grid': 'ui-g-9',
-        'component': 'DbGrid9',
-        'blank': true
-      },
-      {
-        'img': '39980f34',
-        'label': 'Blank 12',
+        'label': 'HNews',
         'grid': 'ui-g-12',
-        'component': 'DbGrid12',
+        'component': 'HNewsComponent',
         'blank': true
       },
       {
-        'img': '39980f34',
-        'label': 'Overview All',
+        'img': 'ee8a89d8',
+        'label': 'Active KPI',
         'grid': 'ui-g-3',
-        'component': 'GkClnDbOverviewAll',
+        'component': 'HDashboardKPIActiveComponent',
+        'blank': true
       },
       {
-        'img': '39980f34',
-        'label': 'Overview Active',
+        'img': 'ee8a89d8',
+        'label': 'Inactive KPI',
         'grid': 'ui-g-3',
-        'component': 'GkClnDbOverviewActive'
+        'component': 'HDashboardKPIInactiveComponent',
+        'blank': true
       },
       {
-        'img': '39980f34',
-        'label': 'Overview Inactive',
+        'img': 'ee8a89d8',
+        'label': 'Marked KPI',
         'grid': 'ui-g-3',
-        'component': 'GkClnDbOverviewInactive'
+        'component': 'HDashboardKPIMarkedComponent',
+        'blank': true
       },
       {
-        'img': '39980f34',
-        'label': 'Overview Marked',
+        'img': 'ee8a89d8',
+        'label': 'Unmarked KPI',
         'grid': 'ui-g-3',
-        'component': 'GkClnDbOverviewMarked'
+        'component': 'HDashboardKPIUnmarkedComponent',
+        'blank': true
       },
+
       {
         'img': '39980f34',
-        'label': 'Composition Doughnut',
+        'label': 'New Doughnut',
         'grid': 'ui-g-3',
-        'component': 'GkClnDbChartDoughnut'
+        'component': 'HDashboardChartDoughnutComponent'
       },
       {
         'img': '39980f34',
-        'label': 'Composition Pie',
+        'label': 'New Pie',
         'grid': 'ui-g-3',
-        'component': 'GkClnDbChartPie'
+        'component': 'HDashboardChartPieComponent'
       },
       {
         'img': '39980f34',
-        'label': 'Radar',
-        'grid': 'ui-g-6',
-        'component': 'GkClnDbChartRadar'
+        'label': 'New Radar',
+        'grid': 'ui-g-3',
+        'component': 'HDashboardChartRadarComponent'
       },
       {
         'img': '39980f34',
-        'label': 'Polar Area',
-        'grid': 'ui-g-6',
-        'component': 'GkClnDbChartPolarArea'
+        'label': 'New Polar Area',
+        'grid': 'ui-g-3',
+        'component': 'HDashboardChartPolarAreaComponent'
       },
       {
         'img': '39980f34',
-        'label': 'Line',
-        'grid': 'ui-g-6',
-        'component': 'GkClnDbChartLine'
-      },
+        'label': 'New Line',
+        'grid': 'ui-g-3',
+        'component': 'HDashboardChartLineComponent'
+      }
     ];
   }
 
   initDashboardPages() {
-    this.dbPages =
-    [
-      {
-        label: 'Dashboard 1',
-        value: {
-          label: 'Dashboard 1',
-          value: [
-            {
-              'img': '39980f34',
-              'label': 'Overview All',
-              'grid': 'ui-g-3',
-              'component': 'GkClnDbOverviewAll',
-            },
-            {
-              'img': '39980f34',
-              'label': 'Overview Active',
-              'grid': 'ui-g-3',
-              'component': 'GkClnDbOverviewActive'
-            },
-            {
-              'img': '39980f34',
-              'label': 'Overview Inactive',
-              'grid': 'ui-g-3',
-              'component': 'GkClnDbOverviewInactive'
-            },
-            {
-              'img': '39980f34',
-              'label': 'Overview Marked',
-              'grid': 'ui-g-3',
-              'component': 'GkClnDbOverviewMarked'
-            },
-          ]
-        }
-      },
-
-      {
-        label: 'Dashboard 2',
-        value: {
-          label: 'Dashboard 2',
-          value: [
-            {
-              'img': '39980f34',
-              'label': 'Polar Area',
-              'grid': 'ui-g-6',
-              'component': 'GkClnDbChartPolarArea'
-            },
-            {
-              'img': '39980f34',
-              'label': 'Line',
-              'grid': 'ui-g-6',
-              'component': 'GkClnDbChartLine'
-            },
-          ]
-        }
-      },
-    ];
 
     this.stdLayoutList = [
       {
@@ -359,36 +266,26 @@ export class GkCln51Component implements OnInit, OnDestroy {
         value: 'ui-g-12'
       },
     ];
-    this.selectedLayout = this.stdLayoutList[0];
+    this.selectedDashboardGrid = this.stdLayoutList[0];
   }
 
-  changePage() {
-    console.log(this.selectedDbItems);
-    this.selectedDbItems = this.selectedDbPage.value;
-    this.availableDbItems = this.arrayService.getAvailable(this.dbItems, this.selectedDbPage.value);
-  }
-
-  toggleCustomize() {
-    this.customizeDb = !this.customizeDb;
-  }
-
-  selectItems($event) {
+  selectDashboardItems($event) {
     // console.log(this.selectedLayout);
     // console.log($event);
-    this.adaptedDbItems = JSON.parse(JSON.stringify($event.items));
+    this.adaptedDashboardItems = JSON.parse(JSON.stringify($event.items));
     if ($event.items.length === 1) {
-      this.selectedLayout = $event.items[0]['grid'];
+      this.selectedDashboardGrid = $event.items[0]['grid'];
     }
   }
 
-  adaptLayout() {
-    if (this.adaptedDbItems) {
-      for (let i = 0; i < this.adaptedDbItems.length; i++) {
-        for (let j = 0; j < this.selectedDbItems.length; j++) {
-          if (JSON.stringify(this.adaptedDbItems[i]) === JSON.stringify(this.selectedDbItems[j])) {
-            if (this.selectedLayout) {
-                this.adaptedDbItems[i]['grid'] = this.selectedLayout;
-                this.selectedDbItems[j]['grid'] = this.selectedLayout;
+  adaptDashboardGrid() {
+    if (this.adaptedDashboardItems) {
+      for (let i = 0; i < this.adaptedDashboardItems.length; i++) {
+        for (let j = 0; j < this.selectedDashboardItems.length; j++) {
+          if (JSON.stringify(this.adaptedDashboardItems[i]) === JSON.stringify(this.selectedDashboardItems[j])) {
+            if (this.selectedDashboardGrid) {
+                this.adaptedDashboardItems[i]['grid'] = this.selectedDashboardGrid;
+                this.selectedDashboardItems[j]['grid'] = this.selectedDashboardGrid;
             }
             break;
           }
@@ -397,9 +294,16 @@ export class GkCln51Component implements OnInit, OnDestroy {
     }
   }
 
-  savePageLayout() {
-    console.log(this.selectedDbPage.label);
-    console.log(this.selectedDbItems);
+  saveDashboard() {
+    console.log(this.selectedDashboardItems);
+  }
+
+  addBlankItem() {
+    this.blankId = this.blankId + 1;
+    let newBlankDashboardItem = JSON.parse(JSON.stringify(this.blankDashboardItem));
+    newBlankDashboardItem.id = this.blankId;
+
+    this.selectedDashboardItems.push(newBlankDashboardItem);
   }
 
   ngOnDestroy() {

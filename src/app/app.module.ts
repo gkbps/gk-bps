@@ -37,17 +37,13 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
  * Overlay panel: Show HELP overlay panel (gk-breadcrumbs)
  * Dropdown: Show list of working years and legal entities (gk-working)
  */
-import { ProgressBarModule } from 'primeng/primeng';
-import {
-  GrowlModule,
-  MessagesModule,
-  OverlayPanelModule,
-  DropdownModule,
-} from 'primeng/primeng';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { GrowlModule } from 'primeng/growl';
+import { MessagesModule } from 'primeng/messages';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { DropdownModule } from 'primeng/dropdown';
 
-import {
-  ConfirmationService
-} from 'primeng/primeng';
+import { ConfirmationService } from 'primeng/api';
 
 // Translate
 import { TranslateService } from '@ngx-translate/core';

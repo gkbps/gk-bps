@@ -10,18 +10,6 @@ import { HNavBoardModule } from '../../../../../../nga/components/hNavBoard';
 import { GkCln70Component } from './gkcln70.component';
 import { GkCln70RoutingModule } from './gkcln70-routing.module';
 
-import {
-  SharedModule,
-  PaginatorModule,
-  // ToolbarModule,
-  // ButtonModule,
-  // TooltipModule,
-  // PanelModule,
-  // DropdownModule,
-  // InputTextModule,
-
-} from 'primeng/primeng';
-
 @NgModule({
   declarations: [
     GkCln70Component

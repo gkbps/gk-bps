@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Message } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api';
 
 import { GlobalState } from '../../global.state';
 import {

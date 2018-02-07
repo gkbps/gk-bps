@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { HChangeDashboardComponent } from './hChangeDashboard.component';
 
-import { PanelModule } from 'primeng/primeng';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   declarations: [

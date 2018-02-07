@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
-import { Message } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api';
 
 import { AppConfig } from '../../../app.config';
 import { GlobalState } from '../../../global.state';

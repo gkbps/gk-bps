@@ -7,16 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HHistory } from './hHistory.component';
 
-import {
-  PaginatorModule,
-  // ToolbarModule,
-  // ButtonModule,
-  // TooltipModule,
-  // PanelModule,
-  // DropdownModule,
-  // InputTextModule,
-
-} from 'primeng/primeng';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -30,12 +21,6 @@ import {
     TranslateModule,
 
     PaginatorModule,
-    // ToolbarModule,
-    // ButtonModule,
-    // TooltipModule,
-    // PanelModule,
-    // DropdownModule,
-    // InputTextModule,
   ],
   exports: [
     HHistory

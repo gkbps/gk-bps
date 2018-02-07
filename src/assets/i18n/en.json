@@ -1,4 +1,9 @@
 {
+	"add_blank":"Add blank",
+	"export_csv": "Export CSV",
+	"application": "Application",
+	"modules": "Modules",
+	"master_data": "Master Data",
 	"app_dictionary": "Application Dictionary",
 	"dictionary": "Dictionary",
 	"navigation": "Navigation",

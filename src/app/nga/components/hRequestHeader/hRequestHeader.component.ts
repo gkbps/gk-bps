@@ -2,9 +2,10 @@ import { Component, OnInit, Input, Output, OnDestroy, EventEmitter, OnChanges, S
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AbstractControl, FormControl } from '@angular/forms';
-import { Message } from 'primeng/primeng';
-import { MenuItem, SelectItem } from 'primeng/primeng';
-import { ConfirmationService } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api';
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 

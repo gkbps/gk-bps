@@ -19,7 +19,7 @@ import { BaseComponent } from '../../base';
 export class ProfileComponent extends BaseComponent implements OnInit, OnDestroy {
   // Override Base class properties
   pageTitle = 'profile';
-  sidebarMenuJSONFile = 'blank.menu.json';
+  sidebarMenuJSONFile = 'home.menu.json';
   globalConfig = {
     language: true,
     trackHistory: true

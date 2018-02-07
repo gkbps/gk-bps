@@ -7,17 +7,8 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HViewChanges } from './hViewChanges.component';
 
-import {
-  SharedModule,
-  PaginatorModule,
-  // ToolbarModule,
-  // ButtonModule,
-  // TooltipModule,
-  // PanelModule,
-  // DropdownModule,
-  // InputTextModule,
-
-} from 'primeng/primeng';
+import { SharedModule } from 'primeng/shared';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -31,7 +22,7 @@ import {
     TranslateModule,
 
     SharedModule,
-    PaginatorModule,    
+    PaginatorModule,
   ],
   exports: [
     HViewChanges

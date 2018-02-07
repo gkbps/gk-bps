@@ -6,10 +6,6 @@ import { CommonModule } from '@angular/common';
 
 import { HStatusBarComponent } from './hStatusBar.component';
 
-// import {
-//
-// } from 'primeng/primeng';
-
 @NgModule({
   declarations: [
     HStatusBarComponent

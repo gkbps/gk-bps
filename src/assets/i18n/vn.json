@@ -1,4 +1,9 @@
 {
+	"add_blank":"Khoảng trắng",
+	"export_csv": "Xuất tệp CSV",
+	"application": "Ứng dụng",
+	"modules": "Các phân hệ",
+	"master_data": "Dữ liệu chủ",
 	"app_dictionary": "Từ điển ứng dụng",
 	"dictionary": "Từ điển",
 	"navigation": "Điều hướng",

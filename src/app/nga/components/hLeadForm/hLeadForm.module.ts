@@ -7,12 +7,9 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HLeadForm } from './hLeadForm.component';
 
-import {
-  PanelModule,
-  InputTextModule,
-  ButtonModule,
-
-} from 'primeng/primeng';
+import { PanelModule } from 'primeng/panel';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [

@@ -7,7 +7,9 @@ import {
 
 import { Component, OnInit, OnDestroy, AfterViewChecked, Input, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
+
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 import { Subscription } from 'rxjs/Subscription';
 import { AppConfig } from '../../../app.config';
@@ -114,13 +116,13 @@ export class HChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   initContactList() {
     this.userList = [
-        { username: 'htdong', avatar: 'htdong.png', firstname: 'Dong', lastname: 'Hoang', title: 'Founder & CEO'},
-        { username: 'ltpthao', avatar: 'ltpthao.png', firstname: 'Thao', lastname: 'Le', title: 'CFO & Admin'},
-        { username: 'hgkhanh', avatar: 'hgkhanh.png', firstname: 'Khanh', lastname: 'Hoang', title: 'Chairman'},
-        { username: 'htdong', avatar: 'htdong.png', firstname: 'Dong', lastname: 'Hoang', title: 'Founder & CEO'},
-        { username: 'ltpthao', avatar: 'ltpthao.png', firstname: 'Thao', lastname: 'Le', title: 'CFO & Admin'},
-        { username: 'hgkhanh', avatar: 'hgkhanh.png', firstname: 'Khanh', lastname: 'Hoang', title: 'Chairman'},
-        { username: 'htdong', avatar: 'htdong.png', firstname: 'Dong', lastname: 'Hoang', title: 'Founder & CEO'},
+        { username: 'sender', avatar: 'htdong.png', firstname: 'Sender', lastname: 'GK|BPS', title: 'Sender'},
+        { username: 'requestor', avatar: 'ltpthao.png', firstname: 'Requestor', lastname: 'GK|BPS', title: 'Requestor'},
+        { username: 'gkpic', avatar: 'hgkhanh.png', firstname: 'PIC', lastname: 'GK|BPS', title: 'PIC'},
+        { username: 'approver1', avatar: 'htdong.png', firstname: 'Approver 1', lastname: 'GK|BPS', title: 'Approver 1'},
+        { username: 'approver2', avatar: 'ltpthao.png', firstname: 'Approver 2', lastname: 'GK|BPS', title: 'Approver 2'},
+        { username: 'lastapprover', avatar: 'hgkhanh.png', firstname: 'Last Approver', lastname: 'GK|BPS', title: 'Last Approver'},
+        { username: 'invited', avatar: 'htdong.png', firstname: 'Invited Approver', lastname: 'GK|BPS', title: 'Invited Approver'},
         { username: 'ltpthao', avatar: 'ltpthao.png', firstname: 'Thao', lastname: 'Le', title: 'CFO & Admin'},
         { username: 'hgkhanh', avatar: 'hgkhanh.png', firstname: 'Khanh', lastname: 'Hoang', title: 'Chairman'},
         { username: 'htdong', avatar: 'htdong.png', firstname: 'Dong', lastname: 'Hoang', title: 'Founder & CEO'},

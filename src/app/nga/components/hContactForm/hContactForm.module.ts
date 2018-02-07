@@ -4,13 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { HContactFormComponent } from './hContactForm.component';
 
-import {
-  PanelModule,
-  DropdownModule,
-  InputTextModule,
-  ButtonModule,
-
-} from 'primeng/primeng';
+import { PanelModule } from 'primeng/panel';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [

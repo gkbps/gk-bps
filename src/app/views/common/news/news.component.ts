@@ -20,7 +20,7 @@ export class NewsComponent extends BaseComponent implements OnInit, OnDestroy {
 
   // Override Base class properties
   pageTitle = 'news';
-  sidebarMenuJSONFile = 'news.menu.json';
+  sidebarMenuJSONFile = 'home.menu.json';
   globalConfig = {
     language: true,
     trackHistory: true,

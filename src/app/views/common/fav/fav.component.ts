@@ -1,6 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
-import { Message, TreeNode, MenuItem, ConfirmationService } from 'primeng/primeng';
+
+import { Message } from 'primeng/api';
+import { TreeNode } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
+
 import * as _ from 'lodash';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -13,6 +18,7 @@ import {
   TcodeService,
   ArrayService,
 } from '../../../nga/services';
+import { IconsService } from '../../../nga/common/icons.service';
 import { BaseComponent } from '../../base';
 
 import { FavTcodeService } from './favTcode.service';
@@ -29,7 +35,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
 
   // Override Base class properties
   pageTitle = 'home';
-  sidebarMenuJSONFile = 'blank.menu.json';
+  sidebarMenuJSONFile = 'home.menu.json';
   globalConfig = {
     language: false,
     trackHistory: true
@@ -86,6 +92,8 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     no: 'no'
   };
 
+  iconList = [];
+
   constructor(
     // Base class services
     public translateService: TranslateService,
@@ -100,11 +108,13 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     private tcodeService: TcodeService,
     private arrayService: ArrayService,
     private favListService: FavTcodeService,
+    private iconsService: IconsService
   ) {
     // Base class constructor: Re-injection for inheritance
     super(translateService, globalState, localStorageService, navigationService, menuService);
 
     // Derive class constructor
+    this.iconList = iconsService.getIconsMenu();
   }
 
   ngOnInit() {
@@ -184,6 +194,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     this.documentForm = this.fb.group({
       'documentLabel': new FormControl('', Validators.compose([Validators.required, Validators.minLength(3)])),
       'documentIcon': new FormControl('favorite'),
+      'documentIcon1': new FormControl(''),
       'documentDesc': new FormControl(''),
       'documentUrl': new FormControl('', Validators.compose([Validators.required, Validators.minLength(3)])),
     });
@@ -392,6 +403,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
       this.documentForm = this.fb.group({
         'documentLabel': new FormControl('', Validators.compose([Validators.required, Validators.minLength(3)])),
         'documentIcon': new FormControl('favorite'),
+        'documentIcon1': new FormControl(''),
         'documentDesc': new FormControl(''),
         'documentUrl': new FormControl('', Validators.compose([Validators.required, Validators.minLength(3)])),
       });
@@ -413,6 +425,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
             Validators.compose([Validators.required, Validators.minLength(3)])
           ),
           'documentIcon': new FormControl(this.selectedNode.data.icon),
+          'documentIcon1': new FormControl(this.selectedNode.data.icon1),
           'documentDesc': new FormControl(this.selectedNode.data.desc),
           'documentUrl': new FormControl(this.selectedNode.data.url, Validators.compose([Validators.required, Validators.minLength(3)])),
         });
@@ -490,6 +503,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
           'data': {
             'label': this.documentForm.controls.documentLabel.value,
             'icon': this.documentForm.controls.documentIcon.value,
+            'icon1': this.documentForm.controls.documentIcon1.value,
             'desc': this.documentForm.controls.documentDesc.value,
             'url': this.documentForm.controls.documentUrl.value,
             'flag': false,
@@ -501,6 +515,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
           'data': {
             'label': this.documentForm.controls.documentLabel.value,
             'icon': this.documentForm.controls.documentIcon.value,
+            'icon1': this.documentForm.controls.documentIcon1.value,
             'desc': this.documentForm.controls.documentDesc.value,
             'url': this.documentForm.controls.documentUrl.value,
             'flag': false,

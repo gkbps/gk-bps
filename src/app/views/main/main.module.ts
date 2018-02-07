@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
-import {
-  DataListModule,
-  ButtonModule
-} from 'primeng/primeng';
+import { DataListModule } from 'primeng/datalist';
+import { ButtonModule } from 'primeng/button';
 
 import { VgCoreModule } from "videogular2/core";
 import { VgControlsModule } from "videogular2/controls";

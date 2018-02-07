@@ -12,27 +12,12 @@ import { HContactModule } from '../../../../../../nga/components/hContact';
 
 import { GkClnForm } from './gkclnForm.component';
 
-import {
-  ToolbarModule,
-  ButtonModule,
-  PanelModule,
-  DropdownModule,
-  InputTextModule,
-  TabViewModule,
-
-  // InputTextareaModule,
-  // CalendarModule,
-  // AutoCompleteModule,
-  // SplitButtonModule,
-  // PasswordModule,
-  // ListboxModule,
-  // RadioButtonModule,
-  // DialogModule,
-} from 'primeng/primeng';
-
-// import {
-//   ConfirmationService
-// } from 'primeng/primeng';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { PanelModule } from 'primeng/panel';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   imports: [
@@ -47,15 +32,6 @@ import {
     DropdownModule,
     InputTextModule,
     TabViewModule,
-
-    // InputTextareaModule,
-    // CalendarModule,
-    // AutoCompleteModule,
-    // SplitButtonModule,
-    // PasswordModule,
-    // ListboxModule,
-    // RadioButtonModule,
-    // DialogModule,
 
     NgaModule,
     // HoangModule,

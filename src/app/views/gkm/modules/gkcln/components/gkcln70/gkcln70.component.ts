@@ -1,7 +1,9 @@
 // External
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenubarModule, MenuItem } from 'primeng/primeng';
+
+import { MenubarModule } from 'primeng/menubar';
+import { MenuItem } from 'primeng/api';
 
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../../../../../global.state';

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/filter';
 
-import { Message } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api';
 
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../global.state';
@@ -19,9 +19,9 @@ export class GkBreadcrumbsComponent implements OnInit, OnDestroy {
   myScope = 'gk-breadcrumbs';
 
   helpFile: String = 'intro';
+  helpContext: String;
 
   breadcrumbs: Array<Object>;
-  helpContext: String;
 
   msgs: Message[] = [];
 

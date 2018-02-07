@@ -27,6 +27,14 @@ export class HomeComponent extends BaseComponent implements OnInit, OnDestroy {
     trackHistory: true
   };
 
+  htmlBody = [
+    {
+      layout: 'ui-g-12',
+      content: [
+        {}
+      ]
+    }
+  ];
   constructor(
     // Base class services
     public translateService: TranslateService,

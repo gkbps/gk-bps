@@ -24,7 +24,7 @@ export class GkTerminalComponent extends BaseComponent implements OnInit, OnDest
 
   // Override Base class properties
   pageTitle = 'terminal';
-  sidebarMenuJSONFile = 'blank.menu.json';
+  sidebarMenuJSONFile = 'home.menu.json';
   globalConfig = {
     language: true,
     trackHistory: true

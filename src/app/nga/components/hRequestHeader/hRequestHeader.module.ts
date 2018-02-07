@@ -2,25 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {
-  ToolbarModule,
-  MenubarModule,
-  PanelModule,
-  InputTextModule,
-  InputTextareaModule,
-  AutoCompleteModule,
-  ChipsModule,
-  DropdownModule,
-  ConfirmDialogModule,
-  ButtonModule,
-
-  // CalendarModule,
-  // SplitButtonModule,
-  // PasswordModule,
-  // ListboxModule,
-  // RadioButtonModule,
-  // DialogModule,
-} from 'primeng/primeng';
+import { ToolbarModule } from 'primeng/toolbar';
+import { MenubarModule } from 'primeng/menubar';
+import { PanelModule } from 'primeng/panel';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ChipsModule } from 'primeng/chips';
+import { DropdownModule } from 'primeng/dropdown';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ButtonModule } from 'primeng/button';
 
 import { AppTranslationModule } from '../../../app.translation.module';
 import { NgaModule } from '../../../nga/nga.module';

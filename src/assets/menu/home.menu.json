@@ -14,17 +14,44 @@
     }
   },
   {
-    "data": {
-      "label": "workflows",
-      "icon": "swap_horiz",
-      "url": "/tray"
-    }
+    "data": { "label": "tray", "icon": "inbox", "url": ""},
+    "children": [
+      {"data": { "label": "navBoard", "icon": "dashboard", "url": "/tray/tray00" }},
+      {
+        "data": { "label": "myTasks", "icon": "thumbs_up_down", "url": ""},
+        "children": [
+          {"data": { "label": "inbox", "icon": "move_to_inbox", "url": "/tray/tray01" }},
+          {"data": { "label": "outbox", "icon": "check", "url": "/tray/tray02" }}
+        ]
+      },
+      {
+        "data": { "label": "myDocuments", "icon": "content_copy", "url": ""},
+        "children": [
+          {"data": { "label": "draft", "icon": "playlist_add", "url": "/tray/tray11" }},
+          {"data": { "label": "inProgress", "icon": "playlist_play", "url": "/tray/tray12" }},
+          {"data": { "label": "completed", "icon": "playlist_add_check", "url": "/tray/tray13" }}
+        ]
+      }
+    ]
   },
   {
-    "data": {
-      "label": "systems",
-      "icon": "cloud_queue",
-      "url": "/systems"
-    }
+    "data": { "label": "systems", "icon": "apps", "url": "" },
+    "children": [
+      { "data": { "label": "workflows", "icon": "swap_horiz", "url": "/tray" }},
+      { "data": { "label": "modules", "icon": "cloud_queue", "url": "/systems" }},
+      { "data": { "label": "master_data", "icon": "verified_user", "url": "/masterdata" }}
+    ]
+  },
+  {
+    "data": { "label": "application", "icon": "public", "url": "" },
+    "children": [
+      { "data": { "label": "about", "icon": "account_circle", "url": "/about" }},
+      { "data": { "label": "profile", "icon": "account_circle", "url": "/profile" }},
+      { "data": { "label": "policy", "icon": "verified_user", "url": "/policy" }},
+      { "data": { "label": "myFavourites", "icon": "star_border", "url": "/fav" }},
+      { "data": { "label": "settings", "icon": "settings_application", "url": "/setting" }},
+      { "data": { "label": "lock_system", "icon": "lock", "url": "/lockscreen" }},
+      { "data": { "label": "logout", "icon": "exit_to_app", "url": "/login" }}
+    ]
   }
 ]

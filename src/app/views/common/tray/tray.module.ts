@@ -2,15 +2,15 @@ import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import {
-  SharedModule,
-  MenubarModule,
-  DataTableModule,
-  ButtonModule,
-  MultiSelectModule,
-  InputTextModule,
-  ContextMenuModule
-} from 'primeng/primeng';
+import { SharedModule } from 'primeng/shared';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TooltipModule } from 'primeng/tooltip';
+// import { MenubarModule } from 'primeng/menubar';
+import { DataTableModule } from 'primeng/datatable';
+import { ButtonModule } from 'primeng/button';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputTextModule } from 'primeng/inputtext';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
 import { NgaModule } from '../../../nga/nga.module';
 // import { HoangModule } from '../../../nga/hoang.module';
@@ -41,7 +41,9 @@ import { GkRequestService } from '../../../store/_services/gkRequest.service';
     FormsModule,
 
     SharedModule,
-    MenubarModule,
+    ToolbarModule,
+    TooltipModule,
+    // MenubarModule,
     DataTableModule,
     ButtonModule,
     MultiSelectModule,

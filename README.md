@@ -39,3 +39,22 @@ nga
 500 - Done
 
 chat - Done
+dict - Incomplete
+fav - Done
+
+forgot - Done
+lockscreen - Done
+login - Done
+register - Done
+home - Done
+
+mine - Calendar update into database + Task list
+gkTerminal - define available command and how to display
+intro - content | mimic local erp cloud
+policy - load policy file into page - SISO
+profile - workday
+news - landing pages | News, corners, departments menu
+help - structure of help and content
+main - video for training, intro, etc...
+
+gkm - Next review

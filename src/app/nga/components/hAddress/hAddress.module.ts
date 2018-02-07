@@ -6,10 +6,8 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HAddress } from './hAddress.component';
 
-import {
-  PanelModule,
-  InputTextModule,
-} from 'primeng/primeng';
+import { PanelModule } from 'primeng/panel';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [

@@ -6,9 +6,7 @@ import { CommonModule } from '@angular/common';
 
 import { HImageBoxComponent } from './hImageBox.component';
 
-import {
-  ButtonModule,
-} from 'primeng/primeng';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [

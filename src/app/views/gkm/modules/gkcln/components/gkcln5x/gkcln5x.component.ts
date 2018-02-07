@@ -1,5 +1,11 @@
 import { Component, OnInit,  OnDestroy } from '@angular/core';
-import { Header, Footer, MenuItem, SelectItem, LazyLoadEvent } from 'primeng/primeng';
+
+import { Header } from 'primeng/shared';
+import { Footer } from 'primeng/shared';
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -16,6 +22,8 @@ import {
 
 import { GkClient } from '../../../../../../store/_models/gkClient.model';
 import { GkClientService } from '../../../../../../store/_services/gkClient.service';
+
+import { Dashboard } from '../../../../../../store/_models/dashboard.model';
 
 import { BaseComponent } from '../../../../../base';
 
@@ -52,7 +60,8 @@ export class GkCln5xComponent extends BaseComponent implements OnInit, OnDestroy
   items: MenuItem[];            // Items of menubar and context menu
 
   // Redux based variables
-  paginatedGkClients: Observable<Array<GkClient>>;
+  // paginatedGkClients: Observable<Array<GkClient>>;
+  paginatedGkClientsDashboard: Observable<Array<Dashboard>>;
   private subscription: Subscription;
 
   constructor(
@@ -73,7 +82,8 @@ export class GkCln5xComponent extends BaseComponent implements OnInit, OnDestroy
 
     // Derive class constructor
     this.rows = this.localStorageService.getRows();
-    this.paginatedGkClients = gkClientService.paginatedGkClients;
+    // this.paginatedGkClients = gkClientService.paginatedGkClients;
+    this.paginatedGkClientsDashboard = gkClientService.paginatedGkClientsDashboard;
   }
 
   ngOnInit() {
@@ -93,16 +103,16 @@ export class GkCln5xComponent extends BaseComponent implements OnInit, OnDestroy
   }
 
   initDataTableColumn() {
-    this.translateService.get(['id', 'description', 'db', 'status', 'marked', 'selected_item_label'])
+    this.translateService.get(['id', 'description', 'type', 'status', 'marked', 'selected_item_label'])
       .subscribe((res) => {
         this.selectedItemsLabel = res.selected_item_label;
 
         this.cols = [
           { field: '_id', header: res.id, width: '20%' },
-          { field: 'name', header: res.description, width: '45%'  },
-          { field: 'clientDb', header: res.db, width: '15%'  },
-          { field: 'status1', header: res.status, width: '10%'},
-          { field: 'status2', header: res.marked, width: '10%' },
+          { field: 'name', header: res.description, width: '40%'  },
+          { field: 'type', header: res.type, width: '10%' },
+          { field: 'status1', header: res.status, width: '15%'},
+          { field: 'status2', header: res.marked, width: '15%' },
         ];
 
         this.columnOptions = [];
@@ -121,56 +131,64 @@ export class GkCln5xComponent extends BaseComponent implements OnInit, OnDestroy
         this.items = [
           {
             label: res.create, icon: 'ui-icon-add',
-            command: (event) => this.tcodeService.executeTCode('gkcln11'),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln11', this.userRights),
+            command: (event) => this.tcodeService.executeTCode('gkcln51'),
+            disabled: this.notInRights('gkcln51'),
           },
           {
             label: res.view, icon: 'ui-icon-search',
-            command: (event) => this.tcodeService.executeTCode('gkcln12', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln12', this.userRights),
+            command: (event) => this.executeTcode('gkcln52'),
+            disabled: this.notInRights('gkcln52'),
           },
           {
             label: res.edit, icon: 'ui-icon-edit',
-            command: (event) => this.tcodeService.executeTCode('gkcln13', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln13', this.userRights),
+            command: (event) => this.executeTcode('gkcln53'),
+            disabled: this.notInRights('gkcln53'),
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.disable, icon: 'ui-icon-bookmark',
-            command: (event) => this.tcodeService.executeTCode('gkcln14', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln14', this.userRights),
+            command: (event) => this.executeTcode('gkcln54'),
+            disabled: this.notInRights('gkcln54'),
           },
           {
             label: res.enable, icon: 'ui-icon-bookmark-border',
-            command: (event) => this.tcodeService.executeTCode('gkcln15', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln15', this.userRights),
+            command: (event) => this.executeTcode('gkcln55'),
+            disabled: this.notInRights('gkcln55'),
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.mark, icon: 'ui-icon-visibility-off',
-            command: (event) => this.tcodeService.executeTCode('gkcln16', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln16', this.userRights),
+            command: (event) => this.executeTcode('gkcln56'),
+            disabled: this.notInRights('gkcln56'),
           },
           {
             label: res.unmark, icon: 'ui-icon-visibility',
-            command: (event) => this.tcodeService.executeTCode('gkcln17', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln17', this.userRights),
+            command: (event) => this.executeTcode('gkcln57'),
+            disabled: this.notInRights('gkcln57'),
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.delete, icon: 'ui-icon-delete-forever',
-            command: (event) => this.tcodeService.executeTCode('gkcln18', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln18', this.userRights),
+            command: (event) => this.executeTcode('gkcln58'),
+            disabled: this.notInRights('gkcln58'),
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.viewChange, icon: 'ui-icon-track-changes',
-            command: (event) => this.tcodeService.executeTCode('gkcln19', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln19', this.userRights),
+            command: (event) => this.executeTcode('gkcln59'),
+            disabled: this.notInRights('gkcln59'),
           },
         ];
 
       });
+  }
+
+  notInRights(tcode) {
+    return !this.tcodeService.checkTcodeInEncodeArray(tcode, this.userRights);
+  }
+
+  executeTcode(tcode) {
+    this.tcodeService.executeTCode(tcode, this.selectedClient ? this.selectedClient._id : null)
   }
 
   loadData(event: LazyLoadEvent) {
@@ -184,7 +202,8 @@ export class GkCln5xComponent extends BaseComponent implements OnInit, OnDestroy
     }
     // console.log(sort);
 
-    this.gkClientService.findMasterListPagination(event.globalFilter, JSON.stringify(sort), event.first, event.rows);
+    // this.gkClientService.findMasterListPagination(event.globalFilter, JSON.stringify(sort), event.first, event.rows);
+    this.gkClientService.findDashboardPagination(event.globalFilter, JSON.stringify(sort), event.first, event.rows);
     //this.first = event.first;
     this.rows = event.rows;
     console.log(this.first, this.rows);
@@ -208,7 +227,8 @@ export class GkCln5xComponent extends BaseComponent implements OnInit, OnDestroy
     });
 
     // Redux store + initial value
-    this.subscription = this.paginatedGkClients
+    // this.subscription = this.paginatedGkClients
+    this.subscription = this.paginatedGkClientsDashboard
     .subscribe(responseBody => {
       this.totalRecords = responseBody['total'];
       this.clients = responseBody['data'];

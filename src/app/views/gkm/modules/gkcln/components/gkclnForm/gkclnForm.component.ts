@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, OnDestroy, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { Message } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 

@@ -95,50 +95,6 @@
   </p-footer>
 </p-dialog>
 
-<!-- SHARED FORM -->
-<!-- <p-dialog header="{{dialogTitle}}" [(visible)]="displaySharedDialog" modal="modal" width="300" [responsive]="true">
-  <form [formGroup]="sharedForm">
-    <div class="my-form">
-      <div class="ui-g">
-
-        <div class="ui-g-12">
-          <span class="md-inputfield fixed-form">
-            <input id="label" type="text" style="width: 100%" pInputText [(ngModel)]="labelInput" formControlName="label" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
-            <label for="label">{{'label'|translate}} <span *ngIf="!sharedForm.controls['label'].valid && sharedForm.controls['label'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
-          </span>
-        </div>
-
-        <div class="ui-g-12">
-          <span class="md-inputfield fixed-form">
-            <input id="icon" type="text" style="width: 100%" pInputText [(ngModel)]="iconInput" formControlName="icon" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
-            <label for="icon">{{'icon'|translate}}</label>
-          </span>
-        </div>
-
-        <div class="ui-g-12">
-          <span class="md-inputfield fixed-form">
-            <input id="desc" type="text" style="width: 100%" pInputText [(ngModel)]="descInput" formControlName="desc" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
-            <label for="icon">{{'description'|translate}}</label>
-          </span>
-        </div>
-
-        <div class="ui-g-12">
-          <span class="md-inputfield fixed-form">
-            <input id="url" type="text" style="width: 100%" pInputText [(ngModel)]="urlInput" formControlName="url">
-            <label for="url">{{'url'|translate}} <span *ngIf="!sharedForm.controls['url'].valid && sharedForm.controls['url'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
-          </span>
-        </div>
-
-      </div>
-    </div>
-  </form>
-  <p-footer>
-      <button *ngIf="isSectionDialog" type="button" pButton icon="fa-check" [disabled]="!sharedForm.valid" (click)="saveSection()" label="{{'yes'|translate}}"></button>
-      <button *ngIf="!isSectionDialog" type="button" pButton icon="fa-check" [disabled]="!sharedForm.valid" (click)="renameDocument()" label="{{'yes'|translate}}"></button>
-      <button type="button" pButton icon="fa-close" (click)="cancelDialog()" label="{{'no'|translate}}"></button>
-  </p-footer>
-</p-dialog> -->
-
 <!-- SECTION FORM -->
 <p-dialog header="{{dialogTitle}}" [(visible)]="displaySectionDialog" modal="modal" width="300" [responsive]="true">
   <form [formGroup]="sectionForm">
@@ -147,17 +103,33 @@
 
         <div class="ui-g-12">
           <span class="md-inputfield fixed-form">
+            <span class="fixed-label">{{'icon'|translate}}</span>
+            <!-- * <small *ngIf="!myForm.controls.status1.valid && myForm.controls.status1.dirty" class="text-warning">{{'required'|translate}}</small> -->
+          </span>
+          <p-dropdown formControlName="sectionIcon" [style]="{'width': '100%'}" [options]="iconList" [style]="{'width':'150px'}" filter="true">
+            <ng-template let-item pTemplate="selectedItem">
+                <!-- <i class="material-icons" style="width:16px;vertical-align:middle">{{item.vale}}</i> -->
+                <i class="fa ui-icon-{{item.label}}" style="width:16px;vertical-align:middle"></i>
+                <span style="vertical-align:middle; float:right;">{{item.label}}</span>
+            </ng-template>
+            <ng-template let-icon pTemplate="item">
+                <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                    <!-- <i class="material-icons" style="width:24px;position:absolute;top:1px;left:5px">{{item.vale}}</i> -->
+                    <i class="fa ui-icon-{{icon.label}}" style="width:24px;position:absolute;top:1px;left:5px"></i>
+                    <div style="font-size:14px;float:right;margin-top:4px">{{icon.label}}</div>
+                </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
             <input id="sectionLabel" type="text" style="width: 100%" pInputText formControlName="sectionLabel" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
             <label for="sectionLabel">{{'label'|translate}} <span *ngIf="!sectionForm.controls['sectionLabel'].valid && sectionForm.controls['sectionLabel'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
           </span>
         </div>
 
-        <div class="ui-g-12">
-          <span class="md-inputfield fixed-form">
-            <input id="sectionIcon" type="text" style="width: 100%" pInputText formControlName="sectionIcon" class="ui-inputtext ui-corner-all ui-state-default ui-widget">
-            <label for="sectionIcon">{{'icon'|translate}}</label>
-          </span>
-        </div>
+        <div class="ui-helper-clearfix" style="margin-bottom: 250px;"></div>
 
       </div>
     </div>
@@ -174,17 +146,38 @@
     <!-- tab menu here -->
     <div class="ui-g">
 
-      <div class="ui-g-9">
+      <div class="ui-g-6">
         <span class="md-inputfield fixed-form">
-          <input id="documentLabel" type="text" style="width: 100%" pInputText formControlName="documentLabel">
-          <label for="label">{{'label'|translate}} <span *ngIf="!documentForm.controls['documentLabel'].valid && documentForm.controls['documentLabel'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
+          <span class="fixed-label">{{'icon'|translate}}</span>
+          <!-- * <small *ngIf="!myForm.controls.status1.valid && myForm.controls.status1.dirty" class="text-warning">{{'required'|translate}}</small> -->
+        </span>
+        <p-dropdown formControlName="documentIcon" [style]="{'width': '100%'}" [options]="iconList" [style]="{'width':'150px'}" filter="true">
+          <ng-template let-item pTemplate="selectedItem">
+              <!-- <i class="material-icons" style="width:16px;vertical-align:middle">{{item.vale}}</i> -->
+              <i class="fa ui-icon-{{item.label}}" style="width:16px;vertical-align:middle"></i>
+              <span style="vertical-align:middle; float:right;">{{item.label}}</span>
+          </ng-template>
+          <ng-template let-icon pTemplate="item">
+              <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                  <!-- <i class="material-icons" style="width:24px;position:absolute;top:1px;left:5px">{{item.vale}}</i> -->
+                  <i class="fa ui-icon-{{icon.label}}" style="width:24px;position:absolute;top:1px;left:5px"></i>
+                  <div style="font-size:14px;float:right;margin-top:4px">{{icon.label}}</div>
+              </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+
+      <div class="ui-g-12">
+        <span class="md-inputfield fixed-form">
+          <input id="documentUrl" type="text" style="width: 100%" pInputText formControlName="documentUrl">
+          <label for="documentUrl">{{'url'|translate}} <span *ngIf="!documentForm.controls['documentUrl'].valid && documentForm.controls['documentUrl'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
         </span>
       </div>
 
-      <div class="ui-g-3">
+      <div class="ui-g-12">
         <span class="md-inputfield fixed-form">
-          <input id="documentIcon" type="text" style="width: 100%" pInputText formControlName="documentIcon">
-          <label for="documentIcon">{{'icon'|translate}}</label>
+          <input id="documentLabel" type="text" style="width: 100%" pInputText formControlName="documentLabel">
+          <label for="label">{{'label'|translate}} <span *ngIf="!documentForm.controls['documentLabel'].valid && documentForm.controls['documentLabel'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
         </span>
       </div>
 
@@ -195,15 +188,10 @@
         </span>
       </div>
 
-      <div class="ui-g-12">
-        <span class="md-inputfield fixed-form">
-          <input id="documentUrl" type="text" style="width: 100%" pInputText formControlName="documentUrl">
-          <label for="documentUrl">{{'url'|translate}} <span *ngIf="!documentForm.controls['documentUrl'].valid && documentForm.controls['documentUrl'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
-        </span>
-      </div>
-
     </div>
+    <div class="ui-helper-clearfix" style="margin-bottom: 100px;"></div>
   </form>
+
   <p-footer>
       <button type="button" pButton icon="fa-check" [disabled]="!documentForm.valid" (click)="saveDocument()" label="{{'yes'|translate}}"></button>
       <button type="button" pButton icon="fa-close" (click)="cancelDialog()" label="{{'no'|translate}}"></button>

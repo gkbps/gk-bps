@@ -1,5 +1,11 @@
 import { Component, OnInit,  OnDestroy } from '@angular/core';
-import { Header, Footer, MenuItem, SelectItem, LazyLoadEvent } from 'primeng/primeng';
+
+import { Header } from 'primeng/shared';
+import { Footer } from 'primeng/shared';
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -40,8 +46,10 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
   selectedClient: any;          // Type: simplified GkClient;
 
   loading: boolean;
+
   cols: any[];                  // Header columns on the fly
   columnOptions: SelectItem[];
+  selectedColumns: any[];
   selectedItemsLabel = '{0} items selected';
 
   first = 0;
@@ -105,6 +113,8 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
           { field: 'status2', header: res.marked, width: '10%' },
         ];
 
+        this.selectedColumns = JSON.parse(JSON.stringify(this.cols));
+
         this.columnOptions = [];
         for (let i = 0; i < this.cols.length; i++) {
             this.columnOptions.push({ label: this.cols[i].header, value: this.cols[i] });
@@ -122,59 +132,66 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
           {
             label: res.create, icon: 'ui-icon-add',
             command: (event) => this.tcodeService.executeTCode('gkcln11'),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln11', this.userRights),
+            disabled: this.notInRights('gkcln11'),
           },
           {
             label: res.view, icon: 'ui-icon-search',
-            command: (event) => this.tcodeService.executeTCode('gkcln12', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln12', this.userRights),
+            command: (event) => this.executeTcode('gkcln12'),
+            disabled: this.notInRights('gkcln12'),
           },
           {
             label: res.edit, icon: 'ui-icon-edit',
-            command: (event) => this.tcodeService.executeTCode('gkcln13', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln13', this.userRights),
+            command: (event) => this.executeTcode('gkcln13'),
+            disabled: this.notInRights('gkcln13'),
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.disable, icon: 'ui-icon-bookmark',
-            command: (event) => this.tcodeService.executeTCode('gkcln14', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln14', this.userRights),
+            command: (event) => this.executeTcode('gkcln14'),
+            disabled: this.notInRights('gkcln14'),
           },
           {
             label: res.enable, icon: 'ui-icon-bookmark-border',
-            command: (event) => this.tcodeService.executeTCode('gkcln15', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln15', this.userRights),
+            command: (event) => this.executeTcode('gkcln15'),
+            disabled: this.notInRights('gkcln15'),
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.mark, icon: 'ui-icon-visibility-off',
-            command: (event) => this.tcodeService.executeTCode('gkcln16', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln16', this.userRights),
+            command: (event) => this.executeTcode('gkcln16'),
+            disabled: this.notInRights('gkcln16'),
           },
           {
             label: res.unmark, icon: 'ui-icon-visibility',
-            command: (event) => this.tcodeService.executeTCode('gkcln17', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln17', this.userRights),
+            command: (event) => this.executeTcode('gkcln17'),
+            disabled: this.notInRights('gkcln17'),
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.delete, icon: 'ui-icon-delete-forever',
-            command: (event) => this.tcodeService.executeTCode('gkcln18', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln18', this.userRights),
+            command: (event) => this.executeTcode('gkcln18'),
+            disabled: this.notInRights('gkcln18'),
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.viewChange, icon: 'ui-icon-track-changes',
-            command: (event) => this.tcodeService.executeTCode('gkcln19', this.selectedClient ? this.selectedClient._id : null),
-            disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln19', this.userRights),
+            command: (event) => this.executeTcode('gkcln19'),
+            disabled: this.notInRights('gkcln19'),
           },
         ];
 
       });
   }
 
-  loadData(event: LazyLoadEvent) {
+  notInRights(tcode) {
+    return !this.tcodeService.checkTcodeInEncodeArray(tcode, this.userRights);
+  }
 
+  executeTcode(tcode) {
+    this.tcodeService.executeTCode(tcode, this.selectedClient ? this.selectedClient._id : null)
+  }
+
+  loadData(event: LazyLoadEvent) {
     // Start datatable's loading indicator
     this.loading = true;
 
@@ -184,7 +201,7 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
     }
     // console.log(sort);
 
-    this.gkClientService.findMasterListPagination(event.globalFilter, JSON.stringify(sort), event.first, event.rows);
+    this.gkClientService.findMasterListPagination(event.globalFilter? event.globalFilter: '', JSON.stringify(sort), event.first, event.rows);
     //this.first = event.first;
     this.rows = event.rows;
     console.log(this.first, this.rows);

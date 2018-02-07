@@ -1,5 +1,9 @@
 import { Component, OnInit,  OnDestroy } from '@angular/core';
-import { MenuItem, SelectItem, Message } from 'primeng/primeng';
+
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import { Message } from 'primeng/api';
+
 import { Subscription } from 'rxjs/Subscription';
 
 import { TranslateService } from '@ngx-translate/core';

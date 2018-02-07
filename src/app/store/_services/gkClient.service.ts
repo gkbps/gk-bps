@@ -6,6 +6,7 @@ import { AppStore } from '../app.store';
 
 import { HttpClientService } from '../../nga/services/';
 import { GkClient } from '../_models/gkClient.model';
+import { Dashboard } from '../_models/dashboard.model';
 
 @Injectable()
 export class GkClientService {
@@ -18,6 +19,9 @@ export class GkClientService {
   gkClients: Observable<Array<GkClient>>;
   selectedGkClient: Observable<GkClient>;
 
+  paginatedGkClientsDashboard: Observable<Array<Dashboard>>;
+  selectedGkClientDashboard: Observable<Dashboard>;
+
   constructor(
     private httpClientService: HttpClientService,
     private store: Store<AppStore>
@@ -25,6 +29,8 @@ export class GkClientService {
     this.paginatedGkClients = store.select( myStore => myStore.paginatedGkClients );
     this.gkClients = store.select( myStore => myStore.gkClients );
     this.selectedGkClient = store.select( myStore => myStore.selectedGkClient );
+    this.paginatedGkClientsDashboard = store.select( myStore => myStore.paginatedGkClientsDashboard );
+    this.selectedGkClientDashboard = store.select( myStore => myStore.selectedGkClientDashboard );
   }
 
   /**************************************************************************************
@@ -69,8 +75,31 @@ export class GkClientService {
       .subscribe((action) => {
         this.store.dispatch(action);
       });
-    }
+  }
 
+  findDashboardPagination(filter: string, sort: string, first: number, rows: number) {
+    const pagination = {
+      filter: filter,
+      sort: sort,
+      first: first,
+      rows: rows
+    };
+
+    const reqOptions = {
+      params: pagination
+    };
+
+    return this.httpClientService.get(this.suffixUrl + '/dashboardPagination', reqOptions)
+      .map((res) => {
+        return res.body || {};
+      })
+      .map((payload) => {
+        return { type: 'PAGINATE_GKCLIENTS_DASHBOARD', payload };
+      })
+      .subscribe((action) => {
+        this.store.dispatch(action);
+      });
+  }
   /**
    * createBlankItem
    */

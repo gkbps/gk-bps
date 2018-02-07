@@ -20,7 +20,7 @@ export class PolicyComponent extends BaseComponent implements OnInit, OnDestroy 
 
   // Override Base class properties
   pageTitle = 'policy';
-  sidebarMenuJSONFile = 'blank.menu.json';
+  sidebarMenuJSONFile = 'home.menu.json';
   globalConfig = {
     language: true,
     trackHistory: true

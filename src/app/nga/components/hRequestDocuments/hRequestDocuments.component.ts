@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { FileUpload } from 'primeng/primeng';
-import { MenuItem, SelectItem } from 'primeng/primeng';
-import { ConfirmationService } from 'primeng/primeng';
-import { Message } from 'primeng/primeng';
+
+import { FileUpload } from 'primeng/fileupload';
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
+import { Message } from 'primeng/components/common/api';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 

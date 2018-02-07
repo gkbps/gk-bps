@@ -1,5 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Header, Footer, MenuItem, SelectItem, LazyLoadEvent } from 'primeng/primeng';
+
+import { Header } from 'primeng/shared';
+import { Footer } from 'primeng/shared';
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -24,8 +30,8 @@ import { BaseComponent } from '../base.component';
 export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestroy {
 
   // Override Base class properties
-  pageTitle = 'mine';
-  sidebarMenuJSONFile = 'mine.menu.json';
+  pageTitle = 'tray';
+  sidebarMenuJSONFile = 'home.menu.json';
   globalConfig = {
     language: false,
     trackHistory: true
@@ -175,6 +181,18 @@ export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestro
     this.rows = event.rows;
     console.log(this.first, this.rows);
     this.localStorageService.setRows(event.rows);
+  }
+
+  viewRequest() {
+    if (this.selectedRequest) {
+      this.tcodeService.executeTCode(this.selectedRequest.tcode, this.selectedRequest._id);
+    } else {
+      alert('Select an item to proceed!');
+    }
+  }
+
+  gotoTcode(tcode) {
+    this.tcodeService.executeTCode(tcode);
   }
 
   ngOnDestroy() {

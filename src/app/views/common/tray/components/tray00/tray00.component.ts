@@ -1,5 +1,11 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Header, Footer, MenuItem, SelectItem, LazyLoadEvent } from 'primeng/primeng';
+
+import { Header } from 'primeng/shared';
+import { Footer } from 'primeng/shared';
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
@@ -28,7 +34,7 @@ export class Tray00Component extends BaseComponent implements OnInit, OnDestroy 
 
   // Override Base class properties
   pageTitle = 'tray';
-  sidebarMenuJSONFile = 'mine.menu.json';
+  sidebarMenuJSONFile = 'home.menu.json';
   globalConfig = {
     language: false,
     trackHistory: true
@@ -110,7 +116,7 @@ export class Tray00Component extends BaseComponent implements OnInit, OnDestroy 
         'squareImg': this.squareImgPath + 'finished.svg',
         'tcode': 'tray13',
         'title': 'completed' // 'GK Clients Management'
-      },      
+      },
     ];
 
   }

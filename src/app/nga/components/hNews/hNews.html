@@ -1,29 +1,63 @@
-<p-panel header="{{header}}">
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <section class="m-sectiongrid"> <!-- section-hidden section-visible -->
-        <div class="container">
-          <div class="row">
-            <div class="ui-g-12 ui-md-4 ui-lg-3" *ngFor="let item of news; let i=index;">
-              <a href="#" class="e-item {{colours[i%5]}} bg">
-                <img src="{{item.image}}" alt="Chatting at a networking event" class=" lazyloaded">
-                <div class="e-text" data-mh="box-heights" style="height: 170px;">
-                  <h3 class="e-title">{{item.title}}</h3>
-                  <p class="e-desc1">{{item.headline}}</p>
-                  <p class="e-cta">{{'readmore'|translate}}</p>
-                  <div class="e-content">
-                    <div class="e-contenttext">
-                      <h3>{{item.title}}</h3>
-                      <p>{{item.headline}}</p>
-                      <p class="e-cta">{{'readmore'|translate}}</p>
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="card">
+      <div class="ui-g">
+
+        <div class="ui-g-12">
+          <p-toolbar>
+            <div class="ui-toolbar-group-left">
+              <button pButton type="button" icon="ui-icon-search" (click)="viewRequest()" pTooltip="{{'view'|translate}}" tooltipPosition="top"></button>
+            </div>
+
+            <div class="ui-toolbar-group-right">
+                <button pButton type="button" icon="ui-icon-move-to-inbox" (click)="gotoTcode('tray01')" pTooltip="{{'inbox'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-check" (click)="gotoTcode('tray02')" pTooltip="{{'outbox'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-playlist-add" (click)="gotoTcode('tray11')" pTooltip="{{'draft'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-playlist-play" (click)="gotoTcode('tray12')" pTooltip="{{'inProgress'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-playlist-add-check" (click)="gotoTcode('tray13')" pTooltip="{{'completed'|translate}}" tooltipPosition="top"></button>
+            </div>
+          </p-toolbar>
+        </div>
+
+        <div class="ui-g-12">
+          
+          <p-panel header="{{header}}">
+            <div class="ui-g">
+              <div class="ui-g-12">
+
+              <section class="m-sectiongrid"> <!-- section-hidden section-visible -->
+                <div class="container">
+                  <div class="row">
+                    <div class="ui-g-12 ui-md-4 ui-lg-3" *ngFor="let item of news; let i=index;">
+                      <a href="#" class="e-item {{colours[i%5]}} bg">
+                        <img src="{{item.image}}" alt="Chatting at a networking event" class=" lazyloaded">
+                        <div class="e-text" data-mh="box-heights" style="height: 170px;">
+                          <h3 class="e-title">{{item.title}}</h3>
+                          <p class="e-desc1">{{item.headline}}</p>
+                          <p class="e-cta">{{'readmore'|translate}}</p>
+                          <div class="e-content">
+                            <div class="e-contenttext">
+                              <h3>{{item.title}}</h3>
+                              <p>{{item.headline}}</p>
+                              <p class="e-cta">{{'readmore'|translate}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
                     </div>
                   </div>
                 </div>
-              </a>
+              </section>
+
+              </div>
             </div>
-          </div>
+          </p-panel>
+
         </div>
-      </section>
+
+        <!-- <div class="ui-helper-clearfix" style="margin-bottom:20px"></div> -->
+
+      </div>
     </div>
   </div>
-</p-panel>
+</div>

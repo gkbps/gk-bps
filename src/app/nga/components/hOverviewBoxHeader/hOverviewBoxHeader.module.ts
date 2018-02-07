@@ -7,15 +7,9 @@ import { CommonModule } from '@angular/common';
 
 import { HOverviewBoxHeaderComponent } from './hOverviewBoxHeader.component';
 
-import {
-  ToolbarModule,
-  ButtonModule,
-  TooltipModule,
-  // PanelModule,
-  // DropdownModule,
-  // InputTextModule,
-
-} from 'primeng/primeng';
+// import { ToolbarModule } from 'primeng/toolbar';
+// import { ButtonModule } from 'primeng/button';
+// import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [

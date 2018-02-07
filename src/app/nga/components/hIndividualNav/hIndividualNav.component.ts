@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem, SelectItem } from 'primeng/primeng';
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 import { Subscription } from 'rxjs/Subscription';
 
 // Internal
@@ -56,7 +57,7 @@ export class HIndividualNav implements OnInit, OnDestroy {
             label: res.edit, icon: 'ui-icon-edit',
             command: (event) => this.executeTCode('13')
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.disable, icon: 'ui-icon-bookmark',
             command: (event) => this.executeTCode('14')
@@ -65,7 +66,7 @@ export class HIndividualNav implements OnInit, OnDestroy {
             label: res.enable, icon: 'ui-icon-bookmark-border',
             command: (event) => this.executeTCode('15')
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.mark, icon: 'ui-icon-visibility-off',
             command: (event) => this.executeTCode('16')
@@ -74,12 +75,12 @@ export class HIndividualNav implements OnInit, OnDestroy {
             label: res.unmark, icon: 'ui-icon-visibility',
             command: (event) => this.executeTCode('17')
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.delete, icon: 'ui-icon-delete-forever',
             command: (event) => this.executeTCode('18')
           },
-          { separator: true },
+          // { separator: true },
           {
             label: res.viewChange, icon: 'ui-icon-track-changes',
             command: (event) => this.executeTCode('19')

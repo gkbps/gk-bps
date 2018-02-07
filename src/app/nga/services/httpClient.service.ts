@@ -15,7 +15,7 @@ import {
 import { AppConfig } from '../../app.config';
 import { LoaderService } from './loader.service';
 import { APIResultHandlingService } from './apiResultHandling.service';
-import { Message } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api';
 import { GlobalState } from '../../global.state';
 
 @Injectable()

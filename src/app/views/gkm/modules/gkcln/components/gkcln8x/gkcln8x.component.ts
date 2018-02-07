@@ -1,5 +1,11 @@
 import { Component, OnInit,  OnDestroy } from '@angular/core';
-import { Header, Footer, MenuItem, SelectItem, LazyLoadEvent } from 'primeng/primeng';
+
+import { Header } from 'primeng/shared';
+import { Footer } from 'primeng/shared';
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 

@@ -3,7 +3,8 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { MenubarModule, MenuItem } from 'primeng/primeng';
+import { MenubarModule } from 'primeng/menubar';
+import { MenuItem } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 // TranslatePipe
 

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges  } from '@angular/core';
-import { MenuItem, SelectItem } from 'primeng/primeng';
-import { ConfirmationService } from 'primeng/primeng';
-import { Message } from 'primeng/primeng';
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
+import { Message } from 'primeng/components/common/api';
 
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../../global.state';

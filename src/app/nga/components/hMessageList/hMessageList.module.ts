@@ -4,12 +4,8 @@ import { CommonModule } from '@angular/common';
 
 import { HMessageListComponent } from './hMessageList.component';
 
-import {
-  PanelModule,
-  // DropdownModule,
-  // InputTextModule,
-  ButtonModule
-} from 'primeng/primeng';
+import { PanelModule } from 'primeng/panel';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -20,8 +16,6 @@ import {
     // FormsModule,
 
     PanelModule,
-    // DropdownModule,
-    // InputTextModule,
     ButtonModule
   ],
   exports: [

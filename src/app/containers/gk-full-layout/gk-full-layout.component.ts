@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
-import { Message } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { GlobalState } from '../../global.state';
@@ -12,7 +12,8 @@ import {
 
 @Component({
   selector: 'gk-full-layout',
-  templateUrl: './gk-full-layout.component.html'
+  templateUrl: './gk-full-layout.component.html',
+  styleUrls: ['./fixed.scss']
 })
 export class GkFullLayoutComponent implements OnInit, OnDestroy, OnChanges {
   myScope = 'gk-full-layout';
@@ -54,7 +55,7 @@ export class GkFullLayoutComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges() {
   }
-  
+
   ngOnDestroy() {
     this.unsubscribeLocalState();
   }

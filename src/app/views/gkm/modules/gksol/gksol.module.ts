@@ -2,28 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import {
-	SharedModule,
-	MenubarModule,
-	DataTableModule,
-	ButtonModule,
-	MultiSelectModule,
-	ContextMenuModule,
-
-	DropdownModule,
-	PanelModule,
-	PickListModule,
-
-	ChartModule,
-	GrowlModule
-
-} from 'primeng/primeng';
-
-// import { DataTableModule, SharedModule } from 'primeng/primeng';
-// import { GrowlModule } from 'primeng/primeng';
-// import { ButtonModule } from 'primeng/primeng';
-// import { MultiSelectModule } from 'primeng/primeng';
-// import { ContextMenuModule } from 'primeng/primeng';
+import { SharedModule } from 'primeng/shared';
+import { MenubarModule } from 'primeng/menubar';
+import { DataTableModule } from 'primeng/datatable';
+import { ButtonModule } from 'primeng/button';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { DropdownModule } from 'primeng/dropdown';
+import { PanelModule } from 'primeng/panel';
+import { PickListModule } from 'primeng/picklist';
+import { ChartModule } from 'primeng/chart';
+import { GrowlModule } from 'primeng/growl';
 
 import { NgaModule } from '../../../../nga/nga.module';
 // import { HoangModule } from '../../../../nga/hoang.module';

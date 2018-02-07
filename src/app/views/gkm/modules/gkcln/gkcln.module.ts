@@ -3,27 +3,15 @@ import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import {
-	// SharedModule,
-	// MenubarModule,
-	// DataTableModule,
-	// ButtonModule,
-	// MultiSelectModule,
-	// ContextMenuModule,
-  //
-	// DropdownModule,
-	// PanelModule,
-	// PickListModule,
-
-	ChartModule,
-	GrowlModule
-
-} from 'primeng/primeng';
+import { ChartModule } from 'primeng/chart';
+import { GrowlModule } from 'primeng/growl';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { paginatedGkRequests, gkRequests, selectedGkRequest } from '../../../../store/_reducers/gkRequest.reducer';
 import { paginatedGkClients, gkClients, selectedGkClient } from '../../../../store/_reducers/gkClient.reducer';
+import { paginatedGkClientsDashboard, selectedGkClientDashboard } from '../../../../store/_reducers/gkClient.reducer';
+
 import { apiGkUsers } from '../../../../store/_reducers/gkUser.reducer';
 import { standardApprovalItems } from '../../../../store/_reducers/approvalItem.reducer';
 import { requestFiles } from '../../../../store/_reducers/requestFile.reducer';
@@ -64,19 +52,15 @@ import { GkClnRoutingModule } from './gkcln-routing.module';
 import { GkCln51Service } from './components/gkcln51/gkcln51.service';
 
 import { DynamicModule } from 'ng-dynamic-component';
+
+// For dynamic components only - remove once these isolated
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+
 import {
-	DbGrid3,
-	DbGrid4,
-	DbGrid5,
-	DbGrid6,
-	DbGrid7,
-	DbGrid8,
-	DbGrid9,
-	DbGrid12,
-	GkClnDbOverviewAll,
-	GkClnDbOverviewActive,
-	GkClnDbOverviewInactive,
-	GkClnDbOverviewMarked,
 	GkClnDbChartDoughnut,
 	GkClnDbChartPie,
 	GkClnDbChartRadar,
@@ -84,25 +68,72 @@ import {
 	GkClnDbChartLine,
 } from './components/gkclnDashboard/gkclnDashboard.component';
 
+import { HNewsModule } from '../../../../nga/components/hNews';
+import { HDashboardBlankModule } from '../../../../nga/components/hDashboardBlank/hDashboardBlank.module';
+import { HDashboardKPIActiveModule } from '../../../../nga/components/hDashboardKPIActive/hDashboardKPIActive.module';
+import { HDashboardKPIInactiveModule } from '../../../../nga/components/hDashboardKPIInactive/hDashboardKPIInactive.module';
+import { HDashboardKPIMarkedModule } from '../../../../nga/components/hDashboardKPIMarked/hDashboardKPIMarked.module';
+import { HDashboardKPIUnmarkedModule } from '../../../../nga/components/hDashboardKPIUnmarked/hDashboardKPIUnmarked.module';
+import { HDashboardChartDoughnutModule } from '../../../../nga/components/hDashboardChartDoughnut/hDashboardChartDoughnut.module';
+import { HDashboardChartPieModule } from '../../../../nga/components/hDashboardChartPie/hDashboardChartPie.module';
+import { HDashboardChartRadarModule } from '../../../../nga/components/hDashboardChartRadar/hDashboardChartRadar.module';
+import { HDashboardChartPolarAreaModule } from '../../../../nga/components/hDashboardChartPolarArea/hDashboardChartPolarArea.module';
+import { HDashboardChartLineModule } from '../../../../nga/components/hDashboardChartLine/hDashboardChartLine.module';
+const DB_MODULES = [
+	HNewsModule,
+	HDashboardBlankModule,
+	HDashboardKPIActiveModule,
+	HDashboardKPIInactiveModule,
+	HDashboardKPIMarkedModule,
+	HDashboardKPIUnmarkedModule,
+
+	HDashboardChartDoughnutModule,
+	HDashboardChartPieModule,
+	HDashboardChartRadarModule,
+	HDashboardChartPolarAreaModule,
+	HDashboardChartLineModule
+];
+
+import { HNewsComponent } from '../../../../nga/components/hNews/hNews.component';
+import { HDashboardBlankComponent } from '../../../../nga/components/hDashboardBlank/hDashboardBlank.component';
+import { HDashboardKPIActiveComponent } from '../../../../nga/components/hDashboardKPIActive//hDashboardKPIActive.component';
+import { HDashboardKPIInactiveComponent } from '../../../../nga/components/hDashboardKPIInactive/hDashboardKPIInactive.component';
+import { HDashboardKPIMarkedComponent } from '../../../../nga/components/hDashboardKPIMarked/hDashboardKPIMarked.component';
+import { HDashboardKPIUnmarkedComponent } from '../../../../nga/components/hDashboardKPIUnmarked/hDashboardKPIUnmarked.component';
+import { HDashboardChartDoughnutComponent } from '../../../../nga/components/hDashboardChartDoughnut/hDashboardChartDoughnut.component';
+import { HDashboardChartPieComponent } from '../../../../nga/components/hDashboardChartPie/hDashboardChartPie.component';
+import { HDashboardChartRadarComponent } from '../../../../nga/components/hDashboardChartRadar/hDashboardChartRadar.component';
+import { HDashboardChartPolarAreaComponent } from '../../../../nga/components/hDashboardChartPolarArea/hDashboardChartPolarArea.component';
+import { HDashboardChartLineComponent } from '../../../../nga/components/hDashboardChartLine/hDashboardChartLine.component';
 const DB_COMPONENTS = [
-  DbGrid3,
-	DbGrid4,
-	DbGrid5,
-	DbGrid6,
-	DbGrid7,
-	DbGrid8,
-	DbGrid9,
-	DbGrid12,
-	GkClnDbOverviewAll,
-	GkClnDbOverviewActive,
-	GkClnDbOverviewInactive,
-	GkClnDbOverviewMarked,
+	GkClnDbChartDoughnut,
+	GkClnDbChartPie,
+	GkClnDbChartRadar,
+	GkClnDbChartPolarArea,
+	GkClnDbChartLine
+];
+
+const DB_COMPONENTS1 = [
+	HNewsComponent,
+	HDashboardBlankComponent,
+	HDashboardKPIActiveComponent,
+	HDashboardKPIInactiveComponent,
+	HDashboardKPIMarkedComponent,
+	HDashboardKPIUnmarkedComponent,
+
+	HDashboardChartDoughnutComponent,
+	HDashboardChartPieComponent,
+	HDashboardChartRadarComponent,
+	HDashboardChartPolarAreaComponent,
+	HDashboardChartLineComponent,
+
 	GkClnDbChartDoughnut,
 	GkClnDbChartPie,
 	GkClnDbChartRadar,
 	GkClnDbChartPolarArea,
 	GkClnDbChartLine,
 ];
+
 
 @NgModule({
   imports: [
@@ -134,6 +165,9 @@ const DB_COMPONENTS = [
 		  gkClients: gkClients,
 		  selectedGkClient: selectedGkClient,
 
+			paginatedGkClientsDashboard: paginatedGkClientsDashboard,
+			selectedGkClientDashboard: selectedGkClientDashboard,
+
 			standardApprovalItems: standardApprovalItems,
 
 			requestFiles: requestFiles
@@ -164,7 +198,14 @@ const DB_COMPONENTS = [
     // GkClnFormModule,
 		GkClnRoutingModule,
 
-    DynamicModule.withComponents(DB_COMPONENTS),
+		// For dynamic components only - remove once these isolated
+		ToolbarModule,
+    ButtonModule,
+    TooltipModule,
+    DropdownModule,
+
+		DB_MODULES,
+    DynamicModule.withComponents(DB_COMPONENTS1),
   ],
   declarations: [
     GkClnComponent,

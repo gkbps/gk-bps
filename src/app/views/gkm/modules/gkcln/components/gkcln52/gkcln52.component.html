@@ -4,7 +4,17 @@
 
       <div class="ui-g form-group">
         <div class="ui-g-12">
-          This is request form for new client
+
+          <h3>Template</h3>
+          <div>
+              <textarea rows="5" [(ngModel)]="template"></textarea>
+          </div>
+          <button (click)="compileTemplate()">Compile</button>
+
+          <h3>Output</h3>
+          <div #container></div>
+
+          <div id="container1"></div>
         </div>
       </div>
 

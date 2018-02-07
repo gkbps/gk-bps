@@ -4,9 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { HIndividualNav } from './hIndividualNav.component';
 
-import {
-  MenubarModule
-} from 'primeng/primeng';
+import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   declarations: [

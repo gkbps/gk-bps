@@ -12,6 +12,8 @@ import {
 } from '../../../../../../nga/services';
 import { BaseComponent } from '../../../../../base';
 
+import { DynamicContentComponent } from './dynamic.component';
+
 @Component({
   templateUrl: 'gkcln53.component.html'
 })
@@ -27,6 +29,11 @@ export class GkCln53Component extends BaseComponent implements OnInit, OnDestroy
 
   // Derive class properties
   tcode = 'gkcln53';
+
+  context: any = {
+    grid: 'ui-g-6',
+    text: 'test'
+  }
 
   constructor(
     // Base class services

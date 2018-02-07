@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef, Renderer } 
 import { Http, Response } from '@angular/http';
 // import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Message } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api';
 // import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 // import 'rxjs/add/operator/do';

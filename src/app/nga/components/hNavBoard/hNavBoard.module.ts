@@ -7,15 +7,9 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HNavBoard } from './hNavBoard.component';
 
-import {
-  ToolbarModule,
-  ButtonModule,
-  TooltipModule,
-  // PanelModule,
-  // DropdownModule,
-  // InputTextModule,
-
-} from 'primeng/primeng';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -31,9 +25,6 @@ import {
     ToolbarModule,
     ButtonModule,
     TooltipModule,
-    // PanelModule,
-    // DropdownModule,
-    // InputTextModule,
   ],
   exports: [
     HNavBoard

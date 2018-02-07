@@ -4,6 +4,8 @@ import { GkClient } from './_models/gkClient.model';
 import { ApprovalItem } from './_models/approvalItem.model';
 import { RequestFile } from './_models/requestFile.model';
 
+import { Dashboard } from './_models/dashboard.model';
+
 export interface AppStore {
   apiGkUsers: GkUser[];
 
@@ -16,6 +18,9 @@ export interface AppStore {
   apiGkClients: GkClient[];
   gkClients: GkClient[];
   selectedGkClient: GkClient;
+
+  paginatedGkClientsDashboard: Dashboard[];
+  selectedGkClientDashboard: Dashboard;
 
   standardApprovalItems: ApprovalItem[];
 

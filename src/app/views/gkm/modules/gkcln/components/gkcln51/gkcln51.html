@@ -1,60 +1,73 @@
-<div class="ui-g">
+<div class="ui-g ui-fluid">
   <div class="ui-g-12">
-    <p-dropdown [options]="dbPages" [(ngModel)]="selectedDbPage" placeholder="Select a page" (onChange)="changePage()"></p-dropdown>
-    <button pButton type="button" (click)="toggleCustomize()" icon="ui-icon-settings-input-composite"></button>
-    <!-- <p>Selected Page: {{selectedDbPage ? selectedDbPage : 'none'}}</p> -->
-  </div>
-</div>
+    <div class="card">
+      <div class="ui-g">
 
-<div *ngIf="customizeDb" class="ui-g ui-fluid">
-  <div class="ui-g-12">
-    <p-panel header="{{title|translate}}" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
-        <div class="ui-g">
+        <div class="ui-g-12">
+          <p-panel header="{{title|translate}}" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+              <div class="ui-g">
 
-          <div class="ui-g-12 ui-md-8">
-            <p-pickList
-              [source]="availableDbItems"
-              [target]="selectedDbItems"
-              sourceHeader="Available"
-              targetHeader="Selected"
-              [responsive]="true"
-              filterBy="brand"
-              dragdrop="true"
-              filterBy="brand"
-              sourceFilterPlaceholder="       Search by component"
-              targetFilterPlaceholder="       Search by component"
-              [sourceStyle]="{'height':'300px'}"
-              [targetStyle]="{'height':'300px'}"
-              (onTargetSelect)="selectItems($event)">
-                <ng-template let-car pTemplate="item">
-                    <div class="ui-helper-clearfix">
-                        <!-- <img src="assets/showcase/images/demo/car/{{car.img}}.png" style="display:inline-block;margin:2px 0 2px 2px" width="48"> -->
-                        <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{car.label}}</div>
+                <div class="ui-g-12 ui-md-8">
+                  <p-pickList
+                    [source]="availableDashboardItems"
+                    [target]="selectedDashboardItems"
+                    sourceHeader="Available"
+                    targetHeader="Selected"
+                    [responsive]="true"
+                    filterBy="brand"
+                    dragdrop="true"
+                    filterBy="brand"
+                    sourceFilterPlaceholder="       Search by component"
+                    targetFilterPlaceholder="       Search by component"
+                    [sourceStyle]="{'height':'300px'}"
+                    [targetStyle]="{'height':'300px'}"
+                    (onTargetSelect)="selectDashboardItems($event)">
+                      <ng-template let-dashboard pTemplate="item">
+                          <div class="ui-helper-clearfix">
+                              <!-- <img src="assets/showcase/images/demo/car/{{car.img}}.png" style="display:inline-block;margin:2px 0 2px 2px" width="48"> -->
+                              <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{dashboard.label}}</div>
+                          </div>
+                      </ng-template>
+                  </p-pickList>
+                </div>
+
+                <div class="ui-g-12 ui-md-4">
+                  <div class ="ui-g">
+                    <div class="card card-w-title">
+                      <h3>Setting</h3>
+
+                      <div class="ui-g">
+
+                        <u>Adapt layout for selected item(s)</u>
+                        <div class="ui-g-12">
+                          <p-dropdown [options]="stdLayoutList" [(ngModel)]="selectedDashboardGrid" placeholder="Select a layout" (onChange)="adaptDashboardGrid()"></p-dropdown>
+                        </div>
+                        <button style="float:right; width: auto;" pButton type="button" icon="ui-icon-add" label="{{'add_blank'|translate}}" class="ui-button-primary" (click)="addBlankItem()"></button>
+
+                        <div class="ui-g-12">
+                          <u>Illustration</u>
+                        </div>
+                        <div class="ui-g-12">
+                          <ng-container *ngFor = "let item of selectedDashboardItems; let i=index">
+                            <div class="{{item.grid}}" style="border: 1px solid #000000; ">
+                              {{item.grid}}
+                            </div>
+                          </ng-container>
+                        </div>
+                        <button style="float:right; width: auto;" pButton type="button" icon="ui-icon-check" label="{{'save'|translate}}" class="ui-button-primary" (click)="saveDashboard()"></button>
+
+                      </div>
                     </div>
-                </ng-template>
-            </p-pickList>
-          </div>
 
-          <div class="ui-g-12 ui-md-4">
-            <div class ="ui-g">
-              Adapt layout for selected item(s)
-              <div class="ui-g-12">
-                <p-dropdown [options]="stdLayoutList" [(ngModel)]="selectedLayout" placeholder="Select a layout" (onChange)="adaptLayout()"></p-dropdown>
-              </div>
-              Illustration
-              <div class="ui-g-12">
-                <ng-container *ngFor = "let item of selectedDbItems; let i=index">
-                  <div class="{{item.grid}}" style="border: 1px solid #000000; ">
-                    {{item.grid}}
                   </div>
-                </ng-container>
+                </div>
               </div>
-              <button style="float:right; width: auto;" pButton type="button" icon="ui-icon-check" label="{{'save'|translate}}" class="ui-button-primary" (click)="savePageLayout()"></button>
-            </div>
-          </div>
+
+          </p-panel>
         </div>
 
-    </p-panel>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -63,7 +76,7 @@
     <div class="card">
 
       <div class ="ui-g">
-        <ng-container *ngFor = "let item of selectedDbItems; let i=index">
+        <ng-container *ngFor = "let item of selectedDashboardItems; let i=index">
           <div class="{{item.grid}}">
             <ndc-dynamic
               [ndcDynamicComponent]="DB_COMPONENTS[item.component]"

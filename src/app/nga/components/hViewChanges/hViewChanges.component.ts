@@ -4,8 +4,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
-import { Header, Footer } from 'primeng/primeng';
-import { Message } from 'primeng/primeng';
+import { Header } from 'primeng/shared';
+import { Footer } from 'primeng/shared';
+import { Message } from 'primeng/components/common/api';
 
 // Internal
 import { AppConfig } from '../../../app.config';

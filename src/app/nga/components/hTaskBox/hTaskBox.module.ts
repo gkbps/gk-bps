@@ -7,16 +7,6 @@ import { CommonModule } from '@angular/common';
 
 import { HTaskBoxComponent } from './hTaskBox.component';
 
-import {
-  // ToolbarModule,
-  // ButtonModule,
-  // TooltipModule,
-  // PanelModule,
-  // DropdownModule,
-  // InputTextModule,
-
-} from 'primeng/primeng';
-
 @NgModule({
   declarations: [
     HTaskBoxComponent
@@ -28,12 +18,6 @@ import {
 
     // TranslateModule,
 
-    // ToolbarModule,
-    // ButtonModule,
-    // TooltipModule,
-    // PanelModule,
-    // DropdownModule,
-    // InputTextModule,
   ],
   exports: [
     HTaskBoxComponent

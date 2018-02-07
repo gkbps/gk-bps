@@ -12,13 +12,15 @@ import { HNavBoardModule } from '../../../../../../nga/components/hNavBoard';
 import { GkCln51Component } from './gkcln51.component';
 import { GkCln51RoutingModule } from './gkcln51-routing.module';
 
-import {
-  // SharedModule,
-  DropdownModule,
-  ButtonModule,
-  PanelModule,
-  PickListModule,
-} from 'primeng/primeng';
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
+import { PanelModule } from 'primeng/panel';
+import { PickListModule } from 'primeng/picklist';
+
+import { ToolbarModule } from 'primeng/toolbar';
+import { TooltipModule } from 'primeng/tooltip';
+import { InputTextModule } from 'primeng/inputtext';
+// import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,10 @@ import {
     ButtonModule,
     PanelModule,
     PickListModule,
+    ToolbarModule,
+    TooltipModule,
+    InputTextModule,
+    // ChartModule,
 
     HNavBoardModule,
     GkCln51RoutingModule

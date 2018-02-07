@@ -6,11 +6,7 @@ import { CommonModule } from '@angular/common';
 
 import { HUserCardComponent } from './hUserCard.component';
 
-import {
-  // PanelModule,
-  // InputTextModule,
-  ButtonModule,
-} from 'primeng/primeng';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -22,8 +18,6 @@ import {
 
     // TranslateModule,
 
-    // PanelModule,
-    // InputTextModule,
     ButtonModule,
   ],
   exports: [

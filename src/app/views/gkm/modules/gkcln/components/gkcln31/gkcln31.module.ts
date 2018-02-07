@@ -5,9 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import {
-  PanelModule
-} from 'primeng/primeng';
+import { PanelModule } from 'primeng/panel';
 
 import { HRequestHeaderModule } from '../../../../../../nga/components/hRequestHeader';
 import { HRequestDocumentsModule } from '../../../../../../nga/components/hRequestDocuments';
@@ -29,7 +27,7 @@ import { GkCln31RoutingModule } from './gkcln31-routing.module';
     TranslateModule,
 
     PanelModule,
-    
+
     HRequestHeaderModule,
     HRequestDocumentsModule,
     HRequestApprovalFlowModule,

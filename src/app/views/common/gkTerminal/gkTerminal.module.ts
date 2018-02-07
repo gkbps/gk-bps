@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { TerminalModule } from 'primeng/primeng';
+import { TerminalModule } from 'primeng/terminal';
 import { TerminalService } from 'primeng/components/terminal/terminalservice';
 
 // Internal

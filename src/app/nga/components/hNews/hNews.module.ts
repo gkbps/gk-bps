@@ -6,9 +6,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HNewsComponent } from './hNews.component';
 
-import {
-  PanelModule,
-} from 'primeng/primeng';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,9 @@ import {
 
     TranslateModule,
 
+    ToolbarModule,
+    ButtonModule,
+    TooltipModule,
     PanelModule,
   ],
   exports: [

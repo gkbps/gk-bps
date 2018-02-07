@@ -2,9 +2,9 @@ import { Component, OnInit,  OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
 
-import { MenuItem } from 'primeng/primeng';
-import { SelectItem } from 'primeng/primeng';
-import { Message } from 'primeng/primeng';
+import { MenuItem } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
+import { Message } from 'primeng/components/common/api';
 
 import { Subscription } from 'rxjs/Subscription';
 import { EventService } from './event.service';
@@ -37,7 +37,7 @@ export class MineComponent extends BaseComponent implements OnInit, OnDestroy {
 
   // Override Base class properties
   pageTitle = 'home';
-  sidebarMenuJSONFile = 'mine.menu.json';
+  sidebarMenuJSONFile = 'home.menu.json';
   globalConfig = {
     language: false,
     trackHistory: true

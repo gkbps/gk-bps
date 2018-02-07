@@ -10,23 +10,12 @@ import { HNavBoardModule } from '../../../../../../nga/components/hNavBoard';
 import { GkCln6xComponent } from './gkcln6x.component';
 import { GkCln6xRoutingModule } from './gkcln6x-routing.module';
 
-import {
-  // SharedModule,
-  MenubarModule,
-  DataTableModule,
-  ButtonModule,
-  MultiSelectModule,
-  InputTextModule,
-  ContextMenuModule,
-  // PaginatorModule,
-  // ToolbarModule,
-  // ButtonModule,
-  // TooltipModule,
-  // PanelModule,
-  // DropdownModule,
-  // InputTextModule,
-
-} from 'primeng/primeng';
+import { MenubarModule } from 'primeng/menubar';
+import { DataTableModule } from 'primeng/datatable';
+import { ButtonModule } from 'primeng/button';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputTextModule } from 'primeng/inputtext';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
 @NgModule({
   declarations: [

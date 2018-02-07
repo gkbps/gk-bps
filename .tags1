@@ -1,0 +1,110 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^<p-toolbar>$/;"	function	line:1
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^  <div class="ui-toolbar-group-left">$/;"	function	line:2
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <button pButton type="button" icon="ui-icon-navigation" (click)="openFavExpandSection()" class="ui-button-warning" pTooltip="{{langList.execute}}" tooltipPosition="top"><\/button>$/;"	function	line:3
+i	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <i class="material-icons" >more_vert<\/i>$/;"	function	line:4
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <button pButton type="button" icon="ui-icon-create-new-folder" (click)="showRenameSectionDialog(false, null)" pTooltip="{{langList.newSection}}" tooltipPosition="top"><\/button>$/;"	function	line:6
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <button pButton type="button" icon="ui-icon-favorite-border" (click)="showRenameItemDialog(false, null)" pTooltip="{{langList.newItem}}" tooltipPosition="top"><\/button>$/;"	function	line:7
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <button pButton type="button" icon="ui-icon-create" (click)="renameSectionOrItem(selectedNode)" pTooltip="{{langList.rename}}" tooltipPosition="top"><\/button>$/;"	function	line:8
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <button pButton type="button" icon="ui-icon-delete" (click)="confirmDelete()" pTooltip="{{langList.delete}}" tooltipPosition="top"><\/button>$/;"	function	line:9
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <button pButton type="button" icon="ui-icon-open-with" (click)="moveInTree()" pTooltip="{{langList.move}}" tooltipPosition="top"><\/button>$/;"	function	line:10
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^  <div class="ui-toolbar-group-right">$/;"	function	line:13
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <button pButton type="button" icon="ui-icon-vertical-align-bottom" (click)="sortTreeAsc()" pTooltip="{{langList.sortAZ}}" tooltipPosition="top"><\/button>$/;"	function	line:14
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <button pButton type="button" icon="ui-icon-vertical-align-top" (click)="sortTreeDesc()" pTooltip="{{langList.sortZA}}" tooltipPosition="top"><\/button>$/;"	function	line:15
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <button pButton type="button" icon="ui-icon-expand-more" (click)="expandAll()" pTooltip="{{langList.expandAll}}" tooltipPosition="top"><\/button>$/;"	function	line:16
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <button pButton type="button" icon="ui-icon-expand-less" (click)="collapseAll()" pTooltip="{{langList.collapseAll}}" tooltipPosition="top"><\/button>$/;"	function	line:17
+i	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <i class="material-icons">more_vert<\/i>$/;"	function	line:18
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <button pButton type="button" icon="ui-icon-flag" (click)="flagDocument()" class="ui-button-danger" pTooltip="{{langList.flag}}" tooltipPosition="top"><\/button>$/;"	function	line:19
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^<div style="overflow-y: scroll; height:500px;">$/;"	function	line:23
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <p-header>{{'myFavourites'|translate}}<\/p-header>$/;"	function	line:32
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <p-column field="name" header="{{'description'|translate}}" [style]="{'border-bottom': '1px solid #c9bbbb'}">$/;"	function	line:34
+ng	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <ng-template let-node="rowData" pTemplate="body">$/;"	function	line:35
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^            <span *ngIf="node.data.type =='section'"><b>{{node.data.label}}<\/b><\/span>$/;"	function	line:36
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^            <span *ngIf="node.data.type =='tcode'">{{node.data.label}}<\/span>$/;"	function	line:37
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <p-column field="icon" header="{{'icon'|translate}}" [style]="{'width':'10%', 'text-align': 'center', 'border-left': '1px solid #c9bbbb', 'border-bottom': '1px solid #c9bbbb'}">$/;"	function	line:41
+ng	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <ng-template let-node="rowData" pTemplate="body">$/;"	function	line:42
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^            <span><i class="material-icons">{{node.data.icon}}<\/i><\/span>$/;"	function	line:43
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <p-column field="desc" header="{{'description'|translate}}" [style]="{'width':'25%', 'text-align': 'center', 'border-left': '1px solid #c9bbbb', 'border-bottom': '1px solid #c9bbbb'}">$/;"	function	line:47
+ng	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <ng-template let-node="rowData" pTemplate="body">$/;"	function	line:48
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^              <span>{{node.data.desc}}<\/span>$/;"	function	line:49
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <p-column field="url" header="{{'url'|translate}}" [style]="{'width':'15%', 'text-align': 'center', 'border-left': '1px solid #c9bbbb', 'border-bottom': '1px solid #c9bbbb'}">$/;"	function	line:53
+ng	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <ng-template let-node="rowData" pTemplate="body">$/;"	function	line:54
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^              <span>{{node.data.url}}<\/span>$/;"	function	line:55
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <p-column field="flag" header="{{'flag'|translate}}" [style]="{'width':'10%', 'text-align': 'center', 'border-left': '1px solid #c9bbbb', 'border-bottom': '1px solid #c9bbbb'}">$/;"	function	line:59
+ng	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <ng-template let-node="rowData" pTemplate="body">$/;"	function	line:60
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^              <span *ngIf="(node.data.type =='tcode')&&(node.data.flag)" class="{{node.data.flag}}"><i style="color: red" class="material-icons" >flag<\/i><\/span>$/;"	function	line:61
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^  <p-contextMenu #cm [model]="items"><\/p-contextMenu>$/;"	function	line:66
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^<p-dialog header="{{'moveTo'|translate}}" [(visible)]="displayMoveDialog" modal="modal" width="600" [responsive]="true">$/;"	function	line:71
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^  <div style="overflow-y: scroll; height:500px; padding-top: 10px;">$/;"	function	line:72
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^        <p-header><span><b>{{'myFavourites'|translate}}<\/b><\/span><\/p-header>$/;"	function	line:77
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^        <p-column>$/;"	function	line:78
+ng	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^            <ng-template pTemplate="header" style="margin-top:10px;">$/;"	function	line:80
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^              <span><b>{{'myFavourites'|translate}}<\/b><\/span>$/;"	function	line:81
+ng	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^            <ng-template let-col let-node="rowData" pTemplate="body">$/;"	function	line:84
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^                <span *ngIf="node.data.type =='section'"><b>{{node.data.label}}<\/b><\/span>$/;"	function	line:85
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^                <span *ngIf="node.data.type =='tcode'">{{node.data.label}}<\/span>$/;"	function	line:86
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <p>Move to: {{targetNode ? targetNode.data.label : 'none'}}<\/p>$/;"	function	line:90
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^  <p-footer>$/;"	function	line:92
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <button type="button" pButton icon="fa-check" (click)="moveNode()" [disabled]="!targetNode" label="{{'yes'|translate}}"><\/button>$/;"	function	line:93
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <button type="button" pButton icon="fa-close" (click)="cancelDialog()" label="{{'no'|translate}}"><\/button>$/;"	function	line:94
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^<p-dialog header="{{dialogTitle}}" [(visible)]="displaySectionDialog" modal="modal" width="300" [responsive]="true">$/;"	function	line:99
+form	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^  <form [formGroup]="sectionForm">$/;"	function	line:100
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <div class="my-form">$/;"	function	line:101
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <div class="ui-g">$/;"	function	line:102
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^        <div class="ui-g-12">$/;"	function	line:104
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <span class="md-inputfield fixed-form">$/;"	function	line:105
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^            <span class="fixed-label">{{'icon'|translate}}<\/span>$/;"	function	line:106
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <p-dropdown formControlName="sectionIcon" [style]="{'width': '100%'}" [options]="iconList" [style]="{'width':'150px'}" filter="true">$/;"	function	line:109
+ng	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^            <ng-template let-item pTemplate="selectedItem">$/;"	function	line:110
+i	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^                <i class="fa ui-icon-{{item.label}}" style="width:16px;vertical-align:middle"><\/i>$/;"	function	line:112
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^                <span style="vertical-align:middle; float:right;">{{item.label}}<\/span>$/;"	function	line:113
+ng	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^            <ng-template let-icon pTemplate="item">$/;"	function	line:115
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^                <div class="ui-helper-clearfix" style="position: relative;height: 25px;">$/;"	function	line:116
+i	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^                    <i class="fa ui-icon-{{icon.label}}" style="width:24px;position:absolute;top:1px;left:5px"><\/i>$/;"	function	line:118
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^                    <div style="font-size:14px;float:right;margin-top:4px">{{icon.label}}<\/div>$/;"	function	line:119
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^        <div class="ui-g-12">$/;"	function	line:125
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <span class="md-inputfield fixed-form">$/;"	function	line:126
+input	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^            <input id="sectionLabel" type="text" style="width: 100%" pInputText formControlName="sectionLabel" class="ui-inputtext ui-corner-all ui-state-default ui-widget">$/;"	function	line:127
+label	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^            <label for="sectionLabel">{{'label'|translate}} <span *ngIf="!sectionForm.controls['sectionLabel'].valid && sectionForm.controls['sectionLabel'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})<\/span><\/label>$/;"	function	line:128
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^        <div class="ui-helper-clearfix" style="margin-bottom: 250px;"><\/div>$/;"	function	line:132
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^  <p-footer>$/;"	function	line:137
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <button type="button" pButton icon="fa-check" [disabled]="!sectionForm.valid" (click)="saveSection()" label="{{'yes'|translate}}"><\/button>$/;"	function	line:138
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <button type="button" pButton icon="fa-close" (click)="cancelDialog()" label="{{'no'|translate}}"><\/button>$/;"	function	line:139
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^<p-dialog header="{{dialogTitle}}" [(visible)]="displayDocumentDialog" modal="modal" width="600" [responsive]="true">$/;"	function	line:144
+form	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^  <form [formGroup]="documentForm">$/;"	function	line:145
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <div class="ui-g">$/;"	function	line:147
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <div class="ui-g-6">$/;"	function	line:149
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^        <span class="md-inputfield fixed-form">$/;"	function	line:150
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <span class="fixed-label">{{'icon'|translate}}<\/span>$/;"	function	line:151
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^        <p-dropdown formControlName="documentIcon" [style]="{'width': '100%'}" [options]="iconList" [style]="{'width':'150px'}" filter="true">$/;"	function	line:154
+ng	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <ng-template let-item pTemplate="selectedItem">$/;"	function	line:155
+i	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^              <i class="fa ui-icon-{{item.label}}" style="width:16px;vertical-align:middle"><\/i>$/;"	function	line:157
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^              <span style="vertical-align:middle; float:right;">{{item.label}}<\/span>$/;"	function	line:158
+ng	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <ng-template let-icon pTemplate="item">$/;"	function	line:160
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^              <div class="ui-helper-clearfix" style="position: relative;height: 25px;">$/;"	function	line:161
+i	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^                  <i class="fa ui-icon-{{icon.label}}" style="width:24px;position:absolute;top:1px;left:5px"><\/i>$/;"	function	line:163
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^                  <div style="font-size:14px;float:right;margin-top:4px">{{icon.label}}<\/div>$/;"	function	line:164
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <div class="ui-g-12">$/;"	function	line:170
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^        <span class="md-inputfield fixed-form">$/;"	function	line:171
+input	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <input id="documentUrl" type="text" style="width: 100%" pInputText formControlName="documentUrl">$/;"	function	line:172
+label	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <label for="documentUrl">{{'url'|translate}} <span *ngIf="!documentForm.controls['documentUrl'].valid && documentForm.controls['documentUrl'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})<\/span><\/label>$/;"	function	line:173
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <div class="ui-g-12">$/;"	function	line:177
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^        <span class="md-inputfield fixed-form">$/;"	function	line:178
+input	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <input id="documentLabel" type="text" style="width: 100%" pInputText formControlName="documentLabel">$/;"	function	line:179
+label	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <label for="label">{{'label'|translate}} <span *ngIf="!documentForm.controls['documentLabel'].valid && documentForm.controls['documentLabel'].dirty">({{'required'|translate}}, {{'minChar'|translate: param}})<\/span><\/label>$/;"	function	line:180
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <div class="ui-g-12">$/;"	function	line:184
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^        <span class="md-inputfield fixed-form">$/;"	function	line:185
+input	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <input id="documentDesc" type="text" style="width: 100%" pInputText formControlName="documentDesc">$/;"	function	line:186
+label	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^          <label for="documentDesc">{{'description'|translate}}<\/label>$/;"	function	line:187
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^    <div class="ui-helper-clearfix" style="margin-bottom: 100px;"><\/div>$/;"	function	line:192
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^  <p-footer>$/;"	function	line:195
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <button type="button" pButton icon="fa-check" [disabled]="!documentForm.valid" (click)="saveDocument()" label="{{'yes'|translate}}"><\/button>$/;"	function	line:196
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^      <button type="button" pButton icon="fa-close" (click)="cancelDialog()" label="{{'no'|translate}}"><\/button>$/;"	function	line:197
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^<p-confirmDialog><\/p-confirmDialog>$/;"	function	line:202
+br	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^<br \/>$/;"	function	line:204
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/common/fav/fav.html	/^<p>Selected Node: {{selectedNode ? selectedNode.data.label : 'none'}}<\/p>$/;"	function	line:206

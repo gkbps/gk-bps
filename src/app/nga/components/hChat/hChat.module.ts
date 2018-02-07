@@ -4,16 +4,14 @@ import { FormsModule } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import {
-  DataListModule,
-  InputTextModule,
-  ButtonModule,
-  PanelModule,
-  TabViewModule,
-  ConfirmDialogModule
-} from 'primeng/primeng';
+import { DataListModule } from 'primeng/datalist';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { PanelModule } from 'primeng/panel';
+import { TabViewModule } from 'primeng/tabview';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
-import { ConfirmationService } from 'primeng/primeng';
+import { ConfirmationService } from 'primeng/api';
 
 import { HChatComponent } from './hChat.component';
 

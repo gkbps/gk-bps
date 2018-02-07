@@ -6,13 +6,11 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HTaskListComponent } from './hTaskList.component';
 
-import {
-  PanelModule,
-  ButtonModule,
-  MenuModule,
-  CheckboxModule,
-  InputTextModule,
-} from 'primeng/primeng';
+import { PanelModule } from 'primeng/panel';
+import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [

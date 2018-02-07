@@ -1,115 +1,118 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+// import { ToolbarModule } from 'primeng/toolbar';
+// import { ButtonModule } from 'primeng/button';
+// import { TooltipModule } from 'primeng/tooltip';
+// import { InputTextModule } from 'primeng/inputtext';
+// import { DropdownModule } from 'primeng/dropdown';
+
+Component({
+  selector: 'generic-html',
+  template: `<ng-content></ng-content>`
+})
+export class GenericHTML { }
+
 /*
  * BLANK DASHBOARD COMPONENTS
  */
 @Component({
   selector: 'db-grid-3',
-  template: ``
+  template: `
+  <div class="{{selectedLayout}}">
+    <div class="card">
+      <div class="ui-g">
+
+        <div class="ui-g-12">
+          <p-toolbar>
+            <div class="ui-toolbar-group-left">
+              {{title}}
+            </div>
+
+            <div class="ui-toolbar-group-right">
+              <button pButton type="button" icon="ui-icon-photo-camera" (click)="changeEditStatus()" pTooltip="{{'inProgress'|translate}}" tooltipPosition="top"></button>
+              <button pButton type="button" icon="ui-icon-settings-input-component" (click)="changeEditStatus()" pTooltip="{{'inProgress'|translate}}" tooltipPosition="top"></button>
+              <button pButton type="button" icon="ui-icon-delete" (click)="gotoTcode('tray13')" pTooltip="{{'completed'|translate}}" tooltipPosition="top"></button>
+            </div>
+          </p-toolbar>
+        </div>
+
+        <div *ngIf="edit" class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <input pInputText type="text" name="type" [(ngModel)]="title"/>
+            <label>{{'type'|translate}}</label>
+          </span>
+          <p-dropdown
+            [options]="stdLayoutList"
+            [(ngModel)]="selectedLayout"
+            placeholder="Select a layout"
+            (onChange)="selectLayout()">
+          </p-dropdown>
+        </div>
+
+        <div *ngIf="!edit" class="ui-g-12">
+          Dynamic sample 1 ({{context?.text}})
+        </div>
+
+      </div>
+    </div>
+  </div>
+  `
 })
 export class DbGrid3 {
   @Input() hello: string;
   @Input() something: Function;
   @Output() onSomething = new EventEmitter<string>();
+
+  title = 'Dashboard Component';
+  edit = true;
+  stdLayoutList = [
+    {
+      label: '3 / 12',
+      value: 'ui-g-3'
+    },
+    {
+      label: '4 / 12',
+      value: 'ui-g-4'
+    },
+    {
+      label: '5 / 12',
+      value: 'ui-g-5'
+    },
+    {
+      label: '6 / 12',
+      value: 'ui-g-6'
+    },
+    {
+      label: '7 / 12',
+      value: 'ui-g-7'
+    },
+    {
+      label: '8 / 12',
+      value: 'ui-g-8'
+    },
+    {
+      label: '9 / 12',
+      value: 'ui-g-9'
+    },
+    {
+      label: '12 / 12',
+      value: 'ui-g-12'
+    },
+  ];
+
+  selectedLayout = 'ui-g-6';
+
+  constructor() {
+  }
+
+  changeEditStatus() {
+    this.edit = !this.edit;
+  }
+
+  selectLayout() {
+    console.log(this.selectedLayout);
+  }
 }
-
-@Component({
-  selector: 'db-grid-4',
-  template: ``
-})
-export class DbGrid4 { }
-
-@Component({
-  selector: 'db-grid-5',
-  template: ``
-})
-export class DbGrid5 { }
-
-@Component({
-  selector: 'db-grid-6',
-  template: ``
-})
-export class DbGrid6 { }
-
-@Component({
-  selector: 'db-grid-7',
-  template: ``
-})
-export class DbGrid7 { }
-
-@Component({
-  selector: 'db-grid-8',
-  template: ``
-})
-export class DbGrid8 { }
-
-@Component({
-  selector: 'db-grid-9',
-  template: ``
-})
-export class DbGrid9 { }
-
-@Component({
-  selector: 'db-grid-12',
-  template: ``
-})
-export class DbGrid12 { }
-
-/*
- * DASHBOARD COMPONENTS - OVEVIEW
- */
-
-@Component({
-  selector: 'gk-cln-db-overview-all',
-  template: `
-    <h-overview-box-header
-      [style]="'overview-box-1'"
-      [icon]="'view_module'"
-      [title]="'All'"
-      [figure]="'152'">
-    </h-overview-box-header>
-  `
-})
-export class GkClnDbOverviewAll { }
-
-@Component({
-  selector: 'gk-cln-db-overview-active',
-  template: `
-	<h-overview-box-header
-	  [style]="'overview-box-2'"
-  	  [icon]="'layers'"
-	  [title]="'Active'"
-	  [figure]="'532'">
-	</h-overview-box-header>
-  `
-})
-export class GkClnDbOverviewActive { }
-
-@Component({
-  selector: 'gk-cln-db-overview-inactive',
-  template: `
-	<h-overview-box-header
-	  [style]="'overview-box-3'"
-	  [icon]="'layers_clear'"
-	  [title]="'Inactive'"
-	  [figure]="'28'">
-	</h-overview-box-header>
-  `
-})
-export class GkClnDbOverviewInactive { }
-
-@Component({
-  selector: 'gk-cln-db-overview-marked',
-  template: `
-    <h-overview-box-header
-	  [style]="'overview-box-4'"
-	  [icon]="'visibility_off'"
-	  [title]="'Mark for deletion'"
-	  [figure]="'256'">
-	</h-overview-box-header>
-  `
-})
-export class GkClnDbOverviewMarked { }
 
 /*
  * DASHBOARD COMPONENTS - CHART
@@ -254,7 +257,7 @@ export class GkClnDbChartPolarArea {
   }
 }
 
-import { Message } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api';
 @Component({
 	selector: 'gk-cln-db-chart-line',
 	template: `

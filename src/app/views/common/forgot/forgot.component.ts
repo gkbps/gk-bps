@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EmailValidator, EqualPasswordsValidator } from '../../../nga/validators';
-// import { UserService } from '../../../services';
+
 import { UserService } from '../../../nga/common/user.service';
 
 import {

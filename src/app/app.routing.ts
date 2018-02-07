@@ -43,6 +43,7 @@ export const routes: Routes = [
 
       { path: 'help', loadChildren: './views/help/help.module#HelpModule' },
       { path: 'home', loadChildren: './views/home/home.module#HomeModule' },
+      { path: 'about', loadChildren: './views/common/about/about.module#AboutModule' },
       { path: 'main', loadChildren: './views/main/main.module#MainModule' },
     ]
   },

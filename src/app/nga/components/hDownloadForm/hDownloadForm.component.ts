@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef } from '@angular/core';
 import { Http, Response, RequestOptions, URLSearchParams, ResponseContentType } from '@angular/http';
 // import { Router } from '@angular/router';
-import { Message } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 
-import { Header, Footer } from 'primeng/primeng';
+import { Header } from 'primeng/shared';
+import { Footer } from 'primeng/shared';
 
 import { AppConfig } from '../../../app.config';
 import { TranslateService } from '@ngx-translate/core';

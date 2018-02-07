@@ -2,14 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import {
-  SharedModule,
-  GrowlModule,
-  MessagesModule,
-  PanelModule,
-  ChartModule,
-  DataTableModule,
-} from 'primeng/primeng';
+import { SharedModule } from 'primeng/shared';
+import { GrowlModule } from 'primeng/growl';
+import { MessagesModule } from 'primeng/messages';
+import { PanelModule } from 'primeng/panel';
+import { ChartModule } from 'primeng/chart';
+import { DataTableModule } from 'primeng/datatable';
 
 // Internal
 import { NgaModule } from '../../../nga/nga.module';
@@ -29,8 +27,6 @@ import { HUserCardModule } from '../../../nga/components/hUserCard';
 
 import { SettingComponent } from './setting.component';
 import { SettingRoutingModule } from './setting-routing.module';
-
-// import { ChartModule } from 'primeng/primeng';
 
 
 @NgModule({
