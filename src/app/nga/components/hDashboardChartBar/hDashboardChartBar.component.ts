@@ -3,11 +3,11 @@ import { UIChart } from 'primeng/chart';
 import { Message } from 'primeng/components/common/api';
 
 @Component({
-  selector: 'h-dashboard-chart-line',
-  templateUrl: './hDashboardChartLine.html',
-  styleUrls: ['./hDashboardChartLine.scss']
+  selector: 'h-dashboard-chart-bar',
+  templateUrl: './hDashboardChartBar.html',
+  styleUrls: ['./hDashboardChartBar.scss']
 })
-export class HDashboardChartLineComponent implements OnInit, OnChanges {
+export class HDashboardChartBarComponent implements OnInit, OnChanges {
   @ViewChild('chart') chart: UIChart;
 
   @Input() editMode: any;
@@ -15,8 +15,14 @@ export class HDashboardChartLineComponent implements OnInit, OnChanges {
   @Input() options: any;
 
   inEdit = false;
+  stacked: boolean;
 
   msgs: Message[];
+
+  typeList = [
+    { label: 'Vertical Bar', value: 'bar' },
+    { label: 'Horizontal Bar', value: 'horizontalBar' }
+  ];
 
   positionList = [
     { label: 'Top', value: 'top' },
@@ -29,7 +35,7 @@ export class HDashboardChartLineComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.editMode);
+    this.stacked = this.options.scales.yAxes[0].stacked;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -42,6 +48,14 @@ export class HDashboardChartLineComponent implements OnInit, OnChanges {
 
   changeInEdit() {
     this.inEdit = !this.inEdit;
+  }
+
+  updateStacked() {
+    // [(ngModel)]="options.scales.yAxes[0].stacked"
+    // this.stacked = !this.stacked;
+    console.log(this.stacked);
+    this.options.scales.xAxes[0].stacked = this.stacked;
+    this.options.scales.yAxes[0].stacked = this.stacked;
   }
 
   selectData(event) {

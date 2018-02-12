@@ -1,0 +1,50 @@
+<div *ngIf="editMode" class="ui-g-12">
+  <div class="ui-toolbar-group-right">
+      <button *ngIf="!inEdit" pButton type="button" icon="ui-icon-edit" (click)="changeInEdit()" pTooltip="{{'edit'|translate}}" tooltipPosition="top"></button>
+      <button *ngIf="inEdit" pButton type="button" icon="ui-icon-search" (click)="changeInEdit()" pTooltip="{{'view'|translate}}" tooltipPosition="top"></button>
+  </div>
+</div>
+
+<div *ngIf="inEdit">
+  <div class="ui-g-12">
+    <span class="md-inputfield fixed-form">
+      <input type="text" pInputText name="title" [(ngModel)]="data.title">
+      <label>{{'title'|translate}} * <small *ngIf="!data.title" class="text-warning">{{'required'|translate}}</small></label>
+    </span>
+  </div>
+
+  <div class="ui-g-12">
+    <span class="md-inputfield fixed-form">
+      <span class="fixed-label">{{'style'|translate}}</span>
+    </span>
+    <p-dropdown [(ngModel)]="options.style" [style]="{'width': '100%'}" [options]="styleList" [style]="{'width':'150px'}">
+    </p-dropdown>
+  </div>
+
+  <div class="ui-g-12">
+    <span class="md-inputfield fixed-form">
+      <span class="fixed-label">{{'icon'|translate}}</span>
+    </span>
+    <p-dropdown [(ngModel)]="options.icon" [style]="{'width': '100%'}" [options]="iconList" [style]="{'width':'150px'}" filter="true">
+      <ng-template let-item pTemplate="selectedItem">
+          <i class="fa ui-icon-{{item.label}}" style="width:16px;vertical-align:middle"></i>
+          <span style="vertical-align:middle; float:right;">{{item.label}}</span>
+      </ng-template>
+      <ng-template let-icon pTemplate="item">
+          <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+              <i class="fa ui-icon-{{icon.label}}" style="width:24px;position:absolute;top:1px;left:5px"></i>
+              <div style="font-size:14px;float:right;margin-top:4px">{{icon.label}}</div>
+          </div>
+      </ng-template>
+    </p-dropdown>
+  </div>
+
+</div>
+<div class="ui-g-12" *ngIf="!inEdit">
+  <h-overview-box-header
+    [style]="options.style"
+    [icon]="options.icon"
+    [title]="data.title"
+    [figure]="data.figure">
+  </h-overview-box-header>
+</div>

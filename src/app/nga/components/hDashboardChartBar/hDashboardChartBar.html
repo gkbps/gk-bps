@@ -10,6 +10,18 @@
   <div class="card">
     <div class="ui-g">
       <div class="ui-g-12">
+        <span class="md-inputfield fixed-form">
+          <span class="fixed-label">{{'type'|translate}}</span>
+        </span>
+        <p-dropdown [(ngModel)]="data.type" [style]="{'width': '100%'}" [options]="typeList" [style]="{'width':'150px'}">
+        </p-dropdown>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ui-g">
+      <div class="ui-g-12">
         <p-checkbox [(ngModel)]="options.title.display" label="TITLE" binary="true"></p-checkbox>
       </div>
       <div class="ui-g-12">
@@ -49,7 +61,7 @@
   <div class="card">
     <div class="ui-g">
       <div class="ui-g-12">
-        <p-checkbox [(ngModel)]="options.scales.yAxes[0].stacked" label="STACKED" binary="true"></p-checkbox>
+        <p-checkbox [(ngModel)]="stacked" label="STACKED" binary="true" (onChange)="updateStacked()"></p-checkbox>
       </div>
     </div>
   </div>
@@ -59,7 +71,7 @@
 <div class="ui-g-12" *ngIf="!inEdit">
   <p-growl [value]='msgs'></p-growl>
   <p-chart
-    type="line"
+    [type]="data.type"
     [data]="data"
     [options]="options"
     (onDataSelect)="selectData($event)">

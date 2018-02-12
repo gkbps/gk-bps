@@ -1,4 +1,10 @@
 {
+	"summary_reports": "Summary Reports",
+	"detail_reports": "Detail Reports",
+	"style": "Style",
+	"layout": "Layout",
+	"layout_adaption": "Layout adaption",
+	"blue_print": "Blue print",
 	"add_blank":"Add blank",
 	"export_csv": "Export CSV",
 	"application": "Application",

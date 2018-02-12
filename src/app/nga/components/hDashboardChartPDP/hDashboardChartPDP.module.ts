@@ -4,20 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { HDashboardChartLineComponent } from './hDashboardChartLine.component';
-
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
-import { GrowlModule } from 'primeng/growl';
 import { ChartModule } from 'primeng/chart';
+
+import { HDashboardChartPDPComponent } from './hDashboardChartPDP.component';
 
 @NgModule({
   declarations: [
-    HDashboardChartLineComponent
+    HDashboardChartPDPComponent
   ],
   imports: [
     CommonModule,
@@ -31,12 +30,11 @@ import { ChartModule } from 'primeng/chart';
     InputTextModule,
     DropdownModule,
     CheckboxModule,
-    GrowlModule,
     ChartModule
   ],
   exports: [
-    HDashboardChartLineComponent
+    HDashboardChartPDPComponent
   ],
 })
-export class HDashboardChartLineModule {
+export class HDashboardChartPDPModule {
 }

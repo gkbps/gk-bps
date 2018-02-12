@@ -1,13 +1,12 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { UIChart } from 'primeng/chart';
-import { Message } from 'primeng/components/common/api';
 
 @Component({
-  selector: 'h-dashboard-chart-line',
-  templateUrl: './hDashboardChartLine.html',
-  styleUrls: ['./hDashboardChartLine.scss']
+  selector: 'h-dashboard-chart-pdp',
+  templateUrl: './hDashboardChartPDP.html',
+  styleUrls: ['./hDashboardChartPDP.scss']
 })
-export class HDashboardChartLineComponent implements OnInit, OnChanges {
+export class HDashboardChartPDPComponent implements OnInit, OnChanges {
   @ViewChild('chart') chart: UIChart;
 
   @Input() editMode: any;
@@ -16,7 +15,11 @@ export class HDashboardChartLineComponent implements OnInit, OnChanges {
 
   inEdit = false;
 
-  msgs: Message[];
+  typeList = [
+    { label: 'Pie', value: 'pie' },
+    { label: 'Doughnut', value: 'doughnut' },
+    { label: 'Polar Area', value: 'polarArea' },
+  ];
 
   positionList = [
     { label: 'Top', value: 'top' },
@@ -29,7 +32,6 @@ export class HDashboardChartLineComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.editMode);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -42,10 +44,5 @@ export class HDashboardChartLineComponent implements OnInit, OnChanges {
 
   changeInEdit() {
     this.inEdit = !this.inEdit;
-  }
-
-  selectData(event) {
-      this.msgs = [];
-      this.msgs.push({severity: 'info', summary: 'Data Selected', 'detail': this.data.datasets[event.element._datasetIndex].data[event.element._index]});
   }
 }

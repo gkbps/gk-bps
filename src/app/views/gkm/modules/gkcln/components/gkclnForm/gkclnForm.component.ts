@@ -59,6 +59,45 @@ export class GkClnForm implements OnInit, OnDestroy {
   msgs: Message[] = [];
   debugMode = false;
 
+  industryList = [
+    { label:'Select industry', value:null },
+    { label:'Pharma', value:'Pharma' },
+    { label:'Bank', value:'Bank' },
+    { label:'Insurance', value:'Insurance' },
+    { label:'FMCG', value:'FMCG' },
+    { label:'Financial Services', value:'Financial Services' },
+    { label:'Software', value:'Software' },
+    { label:'Consulting', value:'Consulting' },
+    { label:'IT', value:'IT' },
+    { label:'Auto', value:'Auto' },
+    { label:'Auditing', value:'Auditing' },
+    { label:'Travel Agency', value:'Travel Agency' },
+    { label:'Government', value:'Government' },
+    { label:'Others', value:'Others' },
+    { label:'News Agency', value:'News Agency' },
+    { label:'Business & Information', value: 'Business & Information'},
+    { label:'Construction/Utilities/Contracting', value: 'Construction/Utilities/Contracting'},
+    { label:'Education', value: 'Education'},
+    { label:'Finance & Insurance', value: 'Finance & Insurance'},
+    { label:'Food & Hospitality', value: 'Food & Hospitality'},
+    { label:'Gaming', value: 'Gaming'},
+    { label:'Health Services', value: 'Health Services'},
+    { label:'Motor Vehicle', value: 'Motor Vehicle'},
+    { label:'Natural Resources/Environmental', value: 'Natural Resources/Environmental'},
+    { label:'Other', value: 'Other'},
+    { label:'Personal Services', value: 'Personal Services'},
+    { label:'Real Estate & Housing', value: 'Real Estate & Housing'},
+    { label:'Safety/Security & Legal', value: 'Safety/Security & Legal'},
+    { label:'Transportation', value: 'Transportation'}
+  ];
+
+  serviceList = [
+    { label:'Category 1', value: 'Cat 1'},
+    { label:'Category 2', value: 'Cat 2'},
+    { label:'Category 3', value: 'Cat 3'},
+    { label:'Category 4', value: 'Cat 4'},
+  ];
+
   status1List = [
     { label:'Select status', value:null },
     { label:'Active', value:'Active' },
@@ -126,9 +165,11 @@ export class GkClnForm implements OnInit, OnDestroy {
   initBlankModel() {
     this.client =  {
       name: '',
+      clientDb: '',
+      industry: '',
+      service: '',
       addresses: [],
       contacts: [],
-      clientDb: '',
       solutions: [],
       remarks: [],
       status1: 'Active',
@@ -249,6 +290,8 @@ export class GkClnForm implements OnInit, OnDestroy {
           Validators.minLength(5),
         ],
       ],
+      industry: [this.client.industry],
+      service: [this.client.service],
       addresses: this._fb.array([]),
       contacts: this._fb.array([]),
       clientDb: [this.client.clientDb,
@@ -384,7 +427,6 @@ export class GkClnForm implements OnInit, OnDestroy {
           Validators.minLength(1),
         ]
       ],
-
       phone: ['',
         [
           Validators.required,
@@ -417,7 +459,6 @@ export class GkClnForm implements OnInit, OnDestroy {
           Validators.minLength(1),
         ]
       ],
-
       phone: [contactData.phone,
         [
           Validators.required,

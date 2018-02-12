@@ -38,6 +38,7 @@ export class HttpClientService extends HttpClient {
 
   get(url: string, options?: any | {}): Observable<any> {
     this.showLoader();
+    // console.log(this.getFullUrl(url));
     return super.get(this.getFullUrl(url), this.attachHeader(options))
       .catch(this.onCatch)
       .do((res: Response) => {

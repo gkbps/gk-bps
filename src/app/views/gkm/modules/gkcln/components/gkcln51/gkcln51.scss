@@ -1,5 +1,9 @@
-.fa {
-  visibility: hidden;
-  width: 100%;
-  left: 1px !important;
+// .fa {
+//   visibility: hidden;
+//   width: 100%;
+//   left: 1px !important;
+// }
+// .ui-picklist 
+.ui-picklist-filter-container .fa {
+    display: none !important;
 }

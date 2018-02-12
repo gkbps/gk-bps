@@ -5,7 +5,7 @@ export class ArrayService {
 
   constructor() {
   }
-
+  
   /*****************************************************************************
    * ARRAY
    * checkElementInArray

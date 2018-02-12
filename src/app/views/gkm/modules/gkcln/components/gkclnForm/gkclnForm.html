@@ -67,7 +67,7 @@
                   <div class="clearfix"></div>
                   <!-- Only for Request Debug -->
 
-                  <div class="ui-g-12 ui-md-8">
+                  <div class="ui-g-12">
                     <span class="md-inputfield fixed-form">
                       <input type="text" pInputText  name="name" formControlName="name" [disableControl]="!formEditable">
                       <label *ngIf="!isEditableRequest">{{'name'|translate}} * <small *ngIf="!myForm.controls.name.valid && myForm.controls.name.dirty" class="text-warning">{{'minChar'|translate:"{value: 5}" }}</small></label>
@@ -82,6 +82,23 @@
                       <label *ngIf="isEditableRequest">{{'db'|translate}} * <small *ngIf="!myForm.controls.clientDb.valid" class="text-warning">{{'alphaNum'|translate}}. {{'minChar'|translate:"{value: 3}"}}</small></label>
                     </span>
                   </div>
+
+                  <div class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield fixed-form">
+                      <span class="fixed-label">{{'industry'|translate}} * <small *ngIf="!myForm.controls.industry.valid && myForm.controls.industry.dirty" class="text-warning">{{'required'|translate}}</small></span>
+                    </span>
+                    <p-dropdown [options]="industryList" name="industry" formControlName="industry" [style]="{'width': '100%'}"></p-dropdown>
+                     <!-- [disableControl]="!formEditable" -->
+                  </div>
+
+                  <div class="ui-g-12 ui-md-4">
+                    <span class="md-inputfield fixed-form">
+                      <span class="fixed-label">{{'service'|translate}} * <small *ngIf="!myForm.controls.industry.valid && myForm.controls.industry.dirty" class="text-warning">{{'required'|translate}}</small></span>
+                    </span>
+                    <p-dropdown [options]="serviceList" name="service" formControlName="service" [style]="{'width': '100%'}"></p-dropdown>
+                     <!-- [disableControl]="!formEditable" -->
+                  </div>
+
                 </div>
               </div>
             </p-panel>

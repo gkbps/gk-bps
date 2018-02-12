@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { HDashboardChartLineComponent } from './hDashboardChartLine.component';
+import { HDashboardChartBarComponent } from './hDashboardChartBar.component';
 
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
@@ -17,7 +17,7 @@ import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
-    HDashboardChartLineComponent
+    HDashboardChartBarComponent
   ],
   imports: [
     CommonModule,
@@ -35,8 +35,8 @@ import { ChartModule } from 'primeng/chart';
     ChartModule
   ],
   exports: [
-    HDashboardChartLineComponent
+    HDashboardChartBarComponent
   ],
 })
-export class HDashboardChartLineModule {
+export class HDashboardChartBarModule {
 }

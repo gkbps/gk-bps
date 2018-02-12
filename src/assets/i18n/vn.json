@@ -1,4 +1,10 @@
 {
+	"summary_reports": "Báo cáo tổng hợp",
+	"detail_reports": "Báo cáo chi tiết",
+	"style": "Phong cách",
+	"layout": "Bố cục",
+	"layout_adaption": "Áp dụng bố cục",
+	"blue_print": "Bản mẫu",
 	"add_blank":"Khoảng trắng",
 	"export_csv": "Xuất tệp CSV",
 	"application": "Ứng dụng",

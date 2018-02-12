@@ -1,0 +1,1669 @@
+{ 
+    "_id" : ObjectId("5984859800807d033901d481"), 
+    "name" : "Gia Khanh Shared Business Services", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 17, Lot G4, Road 53, Tan Quy Dong Settlement,", 
+            "line2" : "Tan Phong Ward", 
+            "line3" : "District 7", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Operation Office", 
+            "line1" : "No. 19, Lot G4, Road 53, Tan Quy Dong Settlement, ", 
+            "line2" : "Tan Phong Ward", 
+            "line3" : "District 7", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Hoàng Thanh Đông", 
+            "phone" : "0906693000", 
+            "email" : "ht.dong@gkc.com"
+        }
+    ], 
+    "clientDb" : "gksbs", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "__v" : NumberInt(4), 
+    "created_at" : ISODate("2018-01-28T05:15:18.156+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:24:13.055+0000"), 
+    "industry" : "Consulting"
+}
+{ 
+    "_id" : ObjectId("59848ca600807d033901d482"), 
+    "name" : "Sanofi Synthelabor Vietnam", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "84123456789", 
+            "email" : "ht.dong@icloud.com"
+        }
+    ], 
+    "clientDb" : "ssv", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(1), 
+    "created_at" : ISODate("2017-12-17T05:04:20.834+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:23:54.653+0000"), 
+    "industry" : "Pharmaceutical"
+}
+{ 
+    "_id" : ObjectId("59c279687c1d5103fc8f63e6"), 
+    "name" : "Sanofi Aventis Vietnam", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0000000", 
+            "email" : "aventis@aventis.com"
+        }
+    ], 
+    "clientDb" : "sav", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Marked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(1), 
+    "created_at" : ISODate("2017-12-21T16:13:20.366+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:24:24.355+0000"), 
+    "industry" : "Pharmaceutical"
+}
+{ 
+    "_id" : ObjectId("59c2797b7c1d5103fc8f63e7"), 
+    "name" : "Sanofi Vietnam", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "htdong@aaa"
+        }
+    ], 
+    "clientDb" : "svn", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(2), 
+    "created_at" : ISODate("2018-01-26T14:30:09.737+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:40:53.567+0000"), 
+    "industry" : "Pharmaceutical"
+}
+{ 
+    "_id" : ObjectId("59c3d861e223d202ae9558ee"), 
+    "name" : "Prudential Vietnam", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "htdong@aaa"
+        }
+    ], 
+    "clientDb" : "pvn", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Active", 
+    "status2" : "Marked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(2), 
+    "created_at" : ISODate("2017-12-21T16:26:41.349+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:25:13.572+0000"), 
+    "industry" : "Insurance"
+}
+{ 
+    "_id" : ObjectId("59c3d86ee223d202ae9558ef"), 
+    "name" : "Prudential Finance Vietnam", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456789", 
+            "email" : "ht.dong@icloud.com"
+        }
+    ], 
+    "clientDb" : "pvfc", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Marked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(2), 
+    "created_at" : ISODate("2018-01-28T05:23:20.340+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:25:26.790+0000"), 
+    "industry" : "Bank"
+}
+{ 
+    "_id" : ObjectId("59c3d87de223d202ae9558f0"), 
+    "name" : "GK Consulting", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Hoang Thanh Dong", 
+            "phone" : "84906693000", 
+            "email" : "ht.dong@icloud.com"
+        }
+    ], 
+    "clientDb" : "gkc", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Active", 
+    "status2" : "Marked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(5), 
+    "created_at" : ISODate("2017-12-17T05:04:52.940+0000"), 
+    "updated_at" : ISODate("2018-03-10T14:42:03.667+0000"), 
+    "industry" : "Financial Services"
+}
+{ 
+    "_id" : ObjectId("59c3d88ae223d202ae9558f1"), 
+    "name" : "GK Finance", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "gkf", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(2), 
+    "created_at" : ISODate("2018-02-10T14:25:55.708+0000"), 
+    "industry" : "Financial Services", 
+    "updated_at" : ISODate("2018-02-10T14:38:37.422+0000")
+}
+{ 
+    "_id" : ObjectId("59c3d8b2e223d202ae9558f2"), 
+    "name" : "GK Audit", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Hoang Gia Khanh", 
+            "phone" : "84906693000", 
+            "email" : "ht.dong@icloud.com"
+        }
+    ], 
+    "clientDb" : "gkaudit", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Active", 
+    "status2" : "Marked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(4), 
+    "created_at" : ISODate("2017-12-17T05:05:14.314+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:40:47.712+0000"), 
+    "industry" : "Audit"
+}
+{ 
+    "_id" : ObjectId("59c3d8d7e223d202ae9558f4"), 
+    "name" : "Microsoft", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "000000", 
+            "email" : "contact@microsoft.com"
+        }
+    ], 
+    "clientDb" : "microsoft", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(1), 
+    "created_at" : ISODate("2017-12-23T05:12:31.909+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:38:44.565+0000"), 
+    "industry" : "IT"
+}
+{ 
+    "_id" : ObjectId("59c3d8e1e223d202ae9558f5"), 
+    "name" : "Google", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "google", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "created_at" : ISODate("2018-02-10T14:26:46.510+0000"), 
+    "industry" : "IT", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:26:46.510+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d8f0e223d202ae9558f6"), 
+    "name" : "Facebook", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "facebook", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Marked", 
+    "created_at" : ISODate("2018-02-10T14:29:16.336+0000"), 
+    "industry" : "Software", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:38:58.542+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d907e223d202ae9558f7"), 
+    "name" : "Telsa Innovation", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456789", 
+            "email" : "ht.dong@yahoo.com"
+        }
+    ], 
+    "clientDb" : "telsa", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(1), 
+    "created_at" : ISODate("2018-02-10T14:31:13.552+0000"), 
+    "industry" : "Auto", 
+    "updated_at" : ISODate("2018-02-10T14:31:13.552+0000")
+}
+{ 
+    "_id" : ObjectId("59c3d911e223d202ae9558f8"), 
+    "name" : "Uber Co", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "uber", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "created_at" : ISODate("2018-02-10T14:31:42.431+0000"), 
+    "industry" : "Auto", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:31:42.431+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d920e223d202ae9558f9"), 
+    "name" : "Bloomberg", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "bloomberg", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Marked", 
+    "created_at" : ISODate("2018-02-10T14:32:57.390+0000"), 
+    "industry" : "News Agency", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:39:36.762+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d93ae223d202ae9558fa"), 
+    "name" : "Grab Co", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "grab", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "created_at" : ISODate("2018-02-10T14:33:22.538+0000"), 
+    "industry" : "Auto", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:33:22.538+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d946e223d202ae9558fb"), 
+    "name" : "BMW Company", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "bwm", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Marked", 
+    "created_at" : ISODate("2018-02-10T14:33:48.305+0000"), 
+    "industry" : "Auto", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:41:03.535+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d952e223d202ae9558fc"), 
+    "name" : "Audi Company", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "audi", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Marked", 
+    "created_at" : ISODate("2018-02-10T14:34:14.152+0000"), 
+    "industry" : "Auto", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:39:08.494+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d960e223d202ae9558fd"), 
+    "name" : "Pricewaterhouse Cooper", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "pwc", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "created_at" : ISODate("2018-03-10T14:34:33.330+0000"), 
+    "industry" : "Financial Services", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:34:33.330+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d96ce223d202ae9558fe"), 
+    "name" : "Deloitte", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "deloitte", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "created_at" : ISODate("2018-02-10T14:34:59.620+0000"), 
+    "industry" : "Audit", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:34:59.620+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d976e223d202ae9558ff"), 
+    "name" : "KPMG Co", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "kpmg", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Unmarked", 
+    "created_at" : ISODate("2018-02-10T14:35:22.915+0000"), 
+    "industry" : "Audit", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:41:26.805+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d982e223d202ae955900"), 
+    "name" : "E&Y Consulting", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456789", 
+            "email" : "alpha@a.com"
+        }
+    ], 
+    "clientDb" : "eny", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Active", 
+    "status2" : "Marked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(1), 
+    "created_at" : ISODate("2018-02-10T14:35:43.576+0000"), 
+    "industry" : "Audit", 
+    "updated_at" : ISODate("2018-02-10T14:39:14.732+0000")
+}
+{ 
+    "_id" : ObjectId("59c3d991e223d202ae955901"), 
+    "name" : "Unilever", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "unilever", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Unmarked", 
+    "created_at" : ISODate("2018-02-10T14:36:01.138+0000"), 
+    "industry" : "FMCG", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:41:34.602+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d99ee223d202ae955902"), 
+    "name" : "Procter & Gamble", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "0123456", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "clientDb" : "png", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Inactive", 
+    "status2" : "Unmarked", 
+    "created_at" : ISODate("2018-02-10T14:36:21.437+0000"), 
+    "industry" : "FMCG", 
+    "solutions" : [
+
+    ], 
+    "updated_at" : ISODate("2018-02-10T14:40:01.971+0000"), 
+    "__v" : NumberInt(1)
+}
+{ 
+    "_id" : ObjectId("59c3d9a8e223d202ae955903"), 
+    "name" : "GSK Pharma", 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "No. 10, Ham Nghi Street", 
+            "line2" : "Ben Nghe Ward", 
+            "line3" : "District 1", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Plant", 
+            "line1" : "4, Nguyen Khoai Street", 
+            "line2" : "Van Don Port", 
+            "line3" : "District 4", 
+            "line4" : "Ho Chi Minh City", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Mr. Aventis", 
+            "phone" : "012345", 
+            "email" : "ceo@contact.com"
+        }
+    ], 
+    "clientDb" : "gsk", 
+    "remarks" : [
+        ""
+    ], 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "__v" : NumberInt(1), 
+    "created_at" : ISODate("2018-02-10T14:47:02.181+0000"), 
+    "industry" : "Pharmaceutical", 
+    "updated_at" : ISODate("2018-02-10T14:47:02.181+0000")
+}
+{ 
+    "_id" : ObjectId("59d0693c5f69c40433b98863"), 
+    "name" : "Honda", 
+    "clientDb" : "honda", 
+    "status1" : "Active", 
+    "status2" : "Marked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+        {
+            "title" : "Mr", 
+            "name" : "CEO", 
+            "phone" : "0123456789", 
+            "email" : "ceo@honda.com"
+        }, 
+        {
+            "title" : "Ms", 
+            "name" : "CFO", 
+            "phone" : "0123456789", 
+            "email" : "cfo@honda.com"
+        }
+    ], 
+    "addresses" : [
+        {
+            "line5" : "Line 5", 
+            "line4" : "Line 4", 
+            "line3" : "Line 3", 
+            "line2" : "Line 2", 
+            "line1" : "Line 1", 
+            "type" : "Office"
+        }, 
+        {
+            "line5" : "Line 5", 
+            "line4" : "Line 4", 
+            "line3" : "Line 3", 
+            "line2" : "Line 2", 
+            "line1" : "Line 1", 
+            "type" : "Factory"
+        }
+    ], 
+    "__v" : NumberInt(2), 
+    "created_at" : ISODate("2018-02-10T14:36:36.500+0000"), 
+    "industry" : "Auto", 
+    "updated_at" : ISODate("2018-02-10T14:39:22.872+0000")
+}
+{ 
+    "_id" : ObjectId("59d069d4b2aa6209ca4e07c5"), 
+    "name" : "Toyoya", 
+    "clientDb" : "ToYoTa", 
+    "status1" : "Inactive", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+        {
+            "title" : "Mr", 
+            "name" : "Toyota CEO", 
+            "phone" : "0123456789", 
+            "email" : "ceo@toyota.com"
+        }
+    ], 
+    "addresses" : [
+        {
+            "type" : "Office", 
+            "line1" : "Line 1", 
+            "line2" : "Line 2", 
+            "line3" : "Line 3", 
+            "line4" : "Line 4", 
+            "line5" : "Line 5"
+        }
+    ], 
+    "__v" : NumberInt(2), 
+    "created_at" : ISODate("2018-02-10T14:36:48.178+0000"), 
+    "industry" : "Auto", 
+    "updated_at" : ISODate("2018-02-10T14:36:48.178+0000")
+}
+{ 
+    "_id" : ObjectId("59d06a34df39530a2b21637d"), 
+    "name" : "Ford Motor", 
+    "clientDb" : "Ford", 
+    "status1" : "Active", 
+    "status2" : "Marked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0), 
+    "created_at" : ISODate("2018-02-10T14:36:59.660+0000"), 
+    "industry" : "Auto", 
+    "updated_at" : ISODate("2018-02-10T14:40:32.509+0000")
+}
+{ 
+    "_id" : ObjectId("59d0f5ae3795be0a5d2ea1aa"), 
+    "name" : "4Square", 
+    "clientDb" : "4square", 
+    "status1" : "Inactive", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+        {
+            "title" : "Mr", 
+            "name" : "4Square", 
+            "phone" : "0123456789", 
+            "email" : "contact@4square.com"
+        }, 
+        {
+            "title" : "Ms", 
+            "name" : "Round", 
+            "phone" : "9876543210", 
+            "email" : "contact@round.com"
+        }
+    ], 
+    "addresses" : [
+        {
+            "type" : "Office", 
+            "line1" : "Line 1", 
+            "line2" : "Line 2", 
+            "line3" : "Line 3", 
+            "line4" : "Line 4", 
+            "line5" : "Line 5"
+        }
+    ], 
+    "__v" : NumberInt(1), 
+    "created_at" : ISODate("2018-02-10T14:37:11.661+0000"), 
+    "industry" : "Travel Agency", 
+    "updated_at" : ISODate("2018-02-10T14:40:38.983+0000")
+}
+{ 
+    "_id" : ObjectId("5a35e01ea6a50b04868c82ac"), 
+    "name" : "NASA USA Airspace", 
+    "clientDb" : "NASA", 
+    "status1" : "Active", 
+    "status2" : "Marked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+        {
+            "title" : "CEO", 
+            "name" : "Hoang Thanh Dong", 
+            "phone" : "0906693000", 
+            "email" : "ht.dong@yahoo.com.vn"
+        }
+    ], 
+    "addresses" : [
+        {
+            "type" : "Head Office", 
+            "line1" : "17 G4 Road 53 Tan Quy Dong", 
+            "line2" : "Tan Phong", 
+            "line3" : "District 7", 
+            "line4" : "HCM", 
+            "line5" : "Vietnam"
+        }, 
+        {
+            "type" : "Branch", 
+            "line1" : "19 G4 Road 53 Tan Quy Dong", 
+            "line2" : "Tan Phong", 
+            "line3" : "District 7", 
+            "line4" : "HCM", 
+            "line5" : "Vietnam"
+        }
+    ], 
+    "__v" : NumberInt(1), 
+    "created_at" : ISODate("2017-12-17T08:01:27.430+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:37:23.358+0000"), 
+    "industry" : "Government"
+}
+{ 
+    "_id" : ObjectId("5a407bbe7c708004831d0e78"), 
+    "created_at" : ISODate("2017-12-25T04:17:02.977+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:41:41.897+0000"), 
+    "name" : "Tee 881988", 
+    "clientDb" : "tee8", 
+    "status1" : "Inactive", 
+    "status2" : "Marked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+        {
+            "title" : "Ms", 
+            "name" : "Vy 1", 
+            "phone" : "01234", 
+            "email" : "vy@tee8"
+        }
+    ], 
+    "addresses" : [
+        {
+            "type" : "Office 1", 
+            "line1" : "San Francis Long 1", 
+            "line2" : "", 
+            "line3" : "", 
+            "line4" : "", 
+            "line5" : ""
+        }
+    ], 
+    "__v" : NumberInt(1), 
+    "industry" : "Others"
+}
+{ 
+    "_id" : ObjectId("5a7f05708b39e307f71b1117"), 
+    "created_at" : ISODate("2018-02-10T14:45:04.482+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:45:04.482+0000"), 
+    "name" : "Petro Vietnam", 
+    "clientDb" : "petro", 
+    "industry" : "Others", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f058b8b39e307f71b1119"), 
+    "created_at" : ISODate("2018-02-10T14:45:31.215+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:45:31.215+0000"), 
+    "name" : "VNPT Company", 
+    "clientDb" : "vnpt", 
+    "industry" : "Government", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f05a18b39e307f71b111b"), 
+    "created_at" : ISODate("2018-02-10T14:45:53.270+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:45:53.270+0000"), 
+    "name" : "PTG Travel", 
+    "clientDb" : "ptg", 
+    "industry" : "Travel Agency", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f06018b39e307f71b111e"), 
+    "created_at" : ISODate("2018-02-10T14:47:29.752+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:47:29.752+0000"), 
+    "name" : "FPT Software", 
+    "clientDb" : "fpt", 
+    "industry" : "Software", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f06248b39e307f71b1120"), 
+    "created_at" : ISODate("2018-02-10T14:48:04.165+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:48:04.165+0000"), 
+    "name" : "Fox News", 
+    "clientDb" : "fox", 
+    "industry" : "News Agency", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f063e8b39e307f71b1122"), 
+    "created_at" : ISODate("2018-02-10T14:48:30.506+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:48:30.506+0000"), 
+    "name" : "Washington Post", 
+    "clientDb" : "wst", 
+    "industry" : "News Agency", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f06558b39e307f71b1124"), 
+    "created_at" : ISODate("2018-02-10T14:48:53.963+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:48:53.963+0000"), 
+    "name" : "Vietcombank", 
+    "clientDb" : "vcb", 
+    "industry" : "Bank", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f06648b39e307f71b1126"), 
+    "created_at" : ISODate("2018-02-10T14:49:08.192+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:49:08.192+0000"), 
+    "name" : "VietInBank", 
+    "clientDb" : "vietinbank", 
+    "industry" : "Bank", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f06708b39e307f71b1128"), 
+    "created_at" : ISODate("2018-02-10T14:49:20.642+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:49:20.642+0000"), 
+    "name" : "Incombank", 
+    "clientDb" : "incombank", 
+    "industry" : "Bank", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f06788b39e307f71b112a"), 
+    "created_at" : ISODate("2018-02-10T14:49:28.814+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:49:28.814+0000"), 
+    "name" : "HD Bank", 
+    "clientDb" : "hdb", 
+    "industry" : "Bank", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f068c8b39e307f71b112c"), 
+    "created_at" : ISODate("2018-02-10T14:49:48.658+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:49:48.658+0000"), 
+    "name" : "ACE Life", 
+    "clientDb" : "ace", 
+    "industry" : "Insurance", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f06998b39e307f71b112e"), 
+    "created_at" : ISODate("2018-02-10T14:50:01.722+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:50:01.722+0000"), 
+    "name" : "AIA Insurance", 
+    "clientDb" : "aia", 
+    "industry" : "Insurance", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f06a38b39e307f71b1130"), 
+    "created_at" : ISODate("2018-02-10T14:50:11.571+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:50:11.571+0000"), 
+    "name" : "Chubb", 
+    "clientDb" : "chubb", 
+    "industry" : "Insurance", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f06b18b39e307f71b1132"), 
+    "created_at" : ISODate("2018-02-10T14:50:25.769+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:50:25.769+0000"), 
+    "name" : "Bao Viet Insurance", 
+    "clientDb" : "baoviet", 
+    "industry" : "Insurance", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f06bf8b39e307f71b1134"), 
+    "created_at" : ISODate("2018-02-10T14:50:39.815+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:50:39.815+0000"), 
+    "name" : "Manulife", 
+    "clientDb" : "manulife", 
+    "industry" : "Insurance", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5a7f06da8b39e307f71b1136"), 
+    "created_at" : ISODate("2018-02-10T14:51:06.118+0000"), 
+    "updated_at" : ISODate("2018-02-10T14:51:06.118+0000"), 
+    "name" : "Accenture", 
+    "clientDb" : "accenture", 
+    "industry" : "Consulting", 
+    "status1" : "Active", 
+    "status2" : "Unmarked", 
+    "solutions" : [
+
+    ], 
+    "remarks" : [
+
+    ], 
+    "contacts" : [
+
+    ], 
+    "addresses" : [
+
+    ], 
+    "__v" : NumberInt(0)
+}

@@ -13,57 +13,39 @@ import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../../../../../global.state';
 import {
   SecurityService,
-  TcodeService,
+  // TcodeService,
   NavigationService,
-  LocalStorageService,
-  ArrayService
+  // LocalStorageService,
+  // ArrayService,
+  HelperService,
+  DashboardService
  } from '../../../../../../nga/services';
 
- import {
+// For handling data services for dashboard
+// import { GkCln51Service } from './gkcln51.service';
 
-  GkClnDbChartDoughnut,
-  GkClnDbChartPie,
-  GkClnDbChartRadar,
-  GkClnDbChartPolarArea,
-  GkClnDbChartLine
-} from '../gkclnDashboard/gkclnDashboard.component';
-
-import { GkCln51Service } from './gkcln51.service';
-
-import { HNewsComponent } from '../../../../../../nga/components/hNews/hNews.component';
+// Standard dashboard items are used
 import { HDashboardBlankComponent } from '../../../../../../nga/components/hDashboardBlank/hDashboardBlank.component';
-import { HDashboardKPIActiveComponent } from '../../../../../../nga/components/hDashboardKPIActive/hDashboardKPIActive.component';
-import { HDashboardKPIInactiveComponent } from '../../../../../../nga/components/hDashboardKPIInactive/hDashboardKPIInactive.component';
-import { HDashboardKPIMarkedComponent } from '../../../../../../nga/components/hDashboardKPIMarked/hDashboardKPIMarked.component';
-import { HDashboardKPIUnmarkedComponent } from '../../../../../../nga/components/hDashboardKPIUnmarked/hDashboardKPIUnmarked.component';
-
-import { HDashboardChartDoughnutComponent } from '../../../../../../nga/components/hDashboardChartDoughnut/hDashboardChartDoughnut.component';
-import { HDashboardChartPieComponent } from '../../../../../../nga/components/hDashboardChartPie/hDashboardChartPie.component';
-import { HDashboardChartRadarComponent } from '../../../../../../nga/components/hDashboardChartRadar/hDashboardChartRadar.component';
-import { HDashboardChartPolarAreaComponent } from '../../../../../../nga/components/hDashboardChartPolarArea/hDashboardChartPolarArea.component';
+import { HDashboardKPIComponent } from '../../../../../../nga/components/hDashboardKPI/hDashboardKPI.component';
+import { HDashboardChartPDPComponent } from '../../../../../../nga/components/hDashboardChartPDP/hDashboardChartPDP.component';
 import { HDashboardChartLineComponent } from '../../../../../../nga/components/hDashboardChartLine/hDashboardChartLine.component';
+import { HDashboardChartBarComponent } from '../../../../../../nga/components/hDashboardChartBar/hDashboardChartBar.component';
+// import { HDashboardChartRadarComponent } from '../../../../../../nga/components/hDashboardChartRadar/hDashboardChartRadar.component';
+import { HDashboardChartFunnelComponent } from '../../../../../../nga/components/hDashboardChartFunnel/hDashboardChartFunnel.component';
 
 export interface DashboardbItem {
-     img: string;
-     label: string;
-     grid: string;
-     component: Function;
+  img: string;
+  label: string;
+  grid: string;
+  component: Function;
+  inputs: any,
+  outputs: any
 }
 
 @Component({
   selector: 'gkcln-51',
   templateUrl: './gkcln51.html',
   styleUrls: ['./gkcln51.scss'],
-  // entryComponents: [
-  //   DbGrid3,
-  // 	DbGrid4,
-  // 	DbGrid5,
-  // 	DbGrid6,
-  // 	DbGrid7,
-  // 	DbGrid8,
-  // 	DbGrid9,
-  // 	DbGrid12,
-  // ]
 })
 
 export class GkCln51Component implements OnInit, OnDestroy {
@@ -71,45 +53,37 @@ export class GkCln51Component implements OnInit, OnDestroy {
   myScope = 'gkcln-51';
 
   DB_COMPONENTS = {
-    'HNewsComponent': HNewsComponent,
     'HDashboardBlankComponent': HDashboardBlankComponent,
-    'HDashboardKPIActiveComponent': HDashboardKPIActiveComponent,
-    'HDashboardKPIInactiveComponent': HDashboardKPIInactiveComponent,
-    'HDashboardKPIMarkedComponent': HDashboardKPIMarkedComponent,
-    'HDashboardKPIUnmarkedComponent': HDashboardKPIUnmarkedComponent,
-
-    'HDashboardChartDoughnutComponent':HDashboardChartDoughnutComponent,
-    'HDashboardChartPieComponent': HDashboardChartPieComponent,
-    'HDashboardChartRadarComponent': HDashboardChartRadarComponent,
-    'HDashboardChartPolarAreaComponent': HDashboardChartPolarAreaComponent,
+    'HDashboardKPIComponent': HDashboardKPIComponent,
+    'HDashboardChartPDPComponent':HDashboardChartPDPComponent,
     'HDashboardChartLineComponent': HDashboardChartLineComponent,
-
-    'GkClnDbChartDoughnut': GkClnDbChartDoughnut,
-    'GkClnDbChartPie': GkClnDbChartPie,
-    'GkClnDbChartRadar': GkClnDbChartRadar,
-    'GkClnDbChartPolarArea': GkClnDbChartPolarArea,
-    'GkClnDbChartLine': GkClnDbChartLine
+    'HDashboardChartBarComponent': HDashboardChartBarComponent,
+    // 'HDashboardChartRadarComponent': HDashboardChartRadarComponent,
+    'HDashboardChartFunnelComponent': HDashboardChartFunnelComponent
   };
 
   title = 'Dashboard';
   prefix = '/gkcln';
   userRights: Array<any>;
 
-  // Standard layout
-  stdLayoutList = [];
-  selectedDashboardGrid: any;
+  // Mode
+  editMode = true;
+  illustrationMode = false;
 
-  // Dashboard Page Items
-  dbItems: any[];
+  // Grid
+  stdGridList = [];   // Allowed list of grid to adapt the component
+  selectedGrid: any;  // Selected grid that adapt the component layout
 
+  // Picklist
   availableDashboardItems: any[];
   selectedDashboardItems: any[];
 
+  // Blank dashboard item
   blankId = 0;
   blankDashboardItem = {
-    'id': 0,
-    'img': 'ee8a89d8',
+    'id': 0,  // TODO: In edit mode this id must be the sequence of total blank items in dashboard
     'label': 'Blank',
+    'icon': 'border_clear',
     'grid': 'ui-g-3',
     'component': 'HDashboardBlankComponent',
     'blank': true
@@ -117,21 +91,18 @@ export class GkCln51Component implements OnInit, OnDestroy {
 
   adaptedDashboardItems: any[];
 
-  inputs: any;
-  outputs: any;
-
-  varComponents: any[];
-
   constructor(
     private router: Router,
     private globalState: GlobalState,
-    private localStorage: LocalStorageService,
+    // private localStorage: LocalStorageService,
     private translate: TranslateService,
     private navigationService: NavigationService,
     private securityService: SecurityService,
-    private tcodeService: TcodeService,
-    private gkCln51Service: GkCln51Service,
-    private arrayService: ArrayService
+    // private tcodeService: TcodeService,
+    // private gkCln51Service: GkCln51Service,
+    // private arrayService: ArrayService,
+    private helperService: HelperService,
+    private dashboardService: DashboardService
   ) {
     this.subscribeGlobalState();
   }
@@ -142,139 +113,412 @@ export class GkCln51Component implements OnInit, OnDestroy {
     const currentUser: any = this.securityService.getCurrentUser();
     this.userRights = this.securityService.getMana();
 
-    this.initDashboardPages();
+    this.stdGridList = this.dashboardService.getGridList();
+    this.selectedGrid = this.stdGridList[0];
     this.selectedDashboardItems = [];
 
     this.initDashboardItems();
-
-    this.inputs = {
-      hello: 'world',
-      something: () => 'can be really complex'
-    };
-
-    this.outputs = {
-      onSomething: (type) => alert(type)
-    };
-
   }
 
   initDashboardItems() {
     // this.availableDashboardItems = this.gkCln51Service.getDbList()
+    const src_status = this.dashboardService.getDataByStatus();
+    const ds_active_inactive = this.dashboardService.genDataByActiveInactive(src_status);
+    const ds_marked_unmarked = this.dashboardService.genDataByMarkedUnmarked(src_status);
+    const ds_composite = this.dashboardService.genDataByComposite(src_status);
+
+    const src_cat_abs = this.dashboardService.getDataByCat();
+    const src_cat_rel = this.dashboardService.convertRelativeDataByCat(src_cat_abs)
+    const transformed_cat = this.dashboardService.genDataByCatForPDP(src_cat_abs);
+
+    // console.log(transformed_cat);
+    // console.log(this.dashboardService.convertRelativeDataByCat(src_cat_abs));
+    const ds_cat_abs_line = this.dashboardService.genDataByCatForLineAndBar(src_cat_abs);
+    const ds_cat_rel_line = this.dashboardService.genDataByCatForLineAndBar(src_cat_rel);
+    const ds_cat_bar_abs = this.dashboardService.genDataByCatForLineAndBar(src_cat_abs, 'bar');
+    const ds_cat_bar_rel = this.dashboardService.genDataByCatForLineAndBar(src_cat_rel, 'bar');
+    const labelsByMonths = this.dashboardService.genLabelsOnMonths(src_cat_abs[0].data.length);
+
+    const chartList = [
+      { label: 'KPI', value: 'kpi' },
+      { label: 'PDP Chart', value: 'pdp' },
+      { label: 'Line Chart', value: 'line' },
+      { label: 'Bar Chart', value: 'bar' },
+      { label: 'Radar Chart', value: 'radar' },
+      { label: 'Heat Map', value: 'heat' },
+      { label: 'Gauge Chart', value: 'gauge' },
+      { label: 'Funnel Chart', value: 'Funnel' },
+      { label: 'Tree Map', value: 'tree' },
+      { label: 'Buble Chart', value: 'bubble' },
+      { label: 'Scatter Plot', value: 'scatter' },
+      { label: 'Histogram', value: 'histogram' },
+      { label: 'Pareto Chart', value: 'pareto' },
+      { label: 'Waterfall Chart', value: 'waterfall' },
+    ];
+
     this.availableDashboardItems = [
+      /*************************************************************************
+       * KPI
+       *************************************************************************/
       {
-        'img': 'ee8a89d8',
-        'label': 'HNews',
+        'id': 'kpi_active',
+        'label': 'Active (KPI)',
+        'icon': 'dashboard',
+        'grid': 'ui-g-3',
+        'component': 'HDashboardKPIComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: { title: 'Active', figure: src_status.active },
+          options: { style: 'overview-box-2', icon: 'layers' },
+          something: () =>'can really complex'
+        },
+        'outputs': { onSomething: (type) => alert(type) }
+      },
+      {
+        'id': 'kpi_inactive',
+        'label': 'Inactive (KPI)',
+        'icon': 'dashboard',
+        'grid': 'ui-g-3',
+        'component': 'HDashboardKPIComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: { title: 'Inactive', figure: src_status.inactive },
+          options: { style: 'overview-box-1', icon: 'view_module' }
+        }
+      },
+      {
+        'id': 'kpi_marked',
+        'label': 'Marked (KPI)',
+        'icon': 'dashboard',
+        'grid': 'ui-g-3',
+        'component': 'HDashboardKPIComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: { title: 'Marked', figure: src_status.marked },
+          options: { style: 'overview-box-4', icon: 'visibility_off' }
+        }
+      },
+      {
+        'id': 'kpi_unmarked',
+        'label': 'Unmarked (KPI)',
+        'icon': 'dashboard',
+        'grid': 'ui-g-3',
+        'component': 'HDashboardKPIComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: { title: 'Unmarked', figure: src_status.unmarked },
+          options: { style: 'overview-box-3', icon: 'layers_clear' }
+        }
+      },
+
+      /*************************************************************************
+       * CHART - PDP
+       *************************************************************************/
+      {
+        'id': 'pdp_active_inactive',
+        'label': 'Active /Inactive (PDP)',
+        'icon': 'pie_chart_outlined',
+        'grid': 'ui-g-3',
+        'component': 'HDashboardChartPDPComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'pie',
+            labels: ['Active', 'Inactive'],
+            datasets: ds_active_inactive
+          },
+          options: this.dashboardService.genStandardOptionsForPDP('Active vs. Inactive')
+        }
+      },
+      {
+        'id': 'pdp_marked_unmarked',
+        'label': 'Marked /Unmarked (PDP)',
+        'icon': 'pie_chart_outlined',
+        'grid': 'ui-g-3',
+        'component': 'HDashboardChartPDPComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'doughnut',
+            labels: ['Marked', 'Unmarked'],
+            datasets: ds_marked_unmarked
+          },
+          options: this.dashboardService.genStandardOptionsForPDP('Marked vs. Unmarked')
+        }
+      },
+      {
+        'id': 'pdp_all_status',
+        'label': 'Status Composition 1 (PDP)',
+        'icon': 'pie_chart_outlined',
+        'grid': 'ui-g-3',
+        'component': 'HDashboardChartPDPComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'doughnut',
+            labels: ['Active', 'Inactive', 'Marked', 'Unmarked'],
+            datasets: ds_composite
+          },
+          options: this.dashboardService.genStandardOptionsForPDP('Status Composition 1')
+        }
+      },
+      {
+        'id': 'pdp_mixed',
+        'label': 'Status Composition 2 (PDP)',
+        'icon': 'pie_chart_outlined',
+        'grid': 'ui-g-3',
+        'component': 'HDashboardChartPDPComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'polarArea',
+            labels: ['Active', 'Inactive', 'Marked', 'Unmarked'],
+            datasets: ds_composite
+          },
+          options: this.dashboardService.genStandardOptionsForPDP('Status Composition 2')
+        }
+      },
+
+
+      // Composition by categories
+      {
+        'id': 'pdp_cat1',
+        'label': 'Categories 1 (PDP)',
+        'icon': 'pie_chart_outlined',
+        'grid': 'ui-g-4',
+        'component': 'HDashboardChartPDPComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'pie',
+            labels: transformed_cat.labels,
+            datasets: transformed_cat.datasets
+          },
+          options: this.dashboardService.genStandardOptionsForPDP('Categories Composition 1')
+        }
+      },
+      {
+        'id': 'pdp_cat2',
+        'label': 'Catogories 2 (PDP)',
+        'icon': 'pie_chart_outlined',
+        'grid': 'ui-g-4',
+        'component': 'HDashboardChartPDPComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'doughnut',
+            labels: transformed_cat.labels,
+            datasets: transformed_cat.datasets
+          },
+          options: this.dashboardService.genStandardOptionsForPDP('Categories Composition 2')
+        }
+      },
+      {
+        'id': 'pdp_cat3',
+        'label': 'Categories 3 (PDP)',
+        'icon': 'pie_chart_outlined',
+        'grid': 'ui-g-4',
+        'component': 'HDashboardChartPDPComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'polarArea',
+            labels: transformed_cat.labels,
+            datasets: transformed_cat.datasets
+          },
+          options: this.dashboardService.genStandardOptionsForPDP('Categories Composition 3')
+        }
+      },
+      /*************************************************************************
+       * CHART - LINE | BAR
+       *************************************************************************/
+
+      {
+        'id': 'tml_cat',
+        'label': 'Line Movement',
+        'icon': 'show_chart',
+        'grid': 'ui-g-6',
+        'component': 'HDashboardChartLineComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'line',
+            labels: labelsByMonths,
+            datasets: ds_cat_abs_line
+          },
+          options: this.dashboardService.genStandardOptionsForLineAndBar('Line Movement')
+        }
+      },
+      {
+        'id': 'tmls_cat_abs',
+        'label': 'Line Stacked Movement (Abs)',
+        'icon': 'show_chart',
+        'grid': 'ui-g-6',
+        'component': 'HDashboardChartLineComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'line',
+            labels: labelsByMonths,
+            datasets: ds_cat_abs_line
+          },
+          options: this.dashboardService.genStandardOptionsForLineAndBar('Line Stacked Movement (Abs)', 'lineStack')
+        }
+      },
+      {
+        'id': 'tmls_cat_rel',
+        'label': 'Line Stacked Movement (%)',
+        'icon': 'show_chart',
+        'grid': 'ui-g-6',
+        'component': 'HDashboardChartLineComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'line',
+            labels: labelsByMonths,
+            datasets: ds_cat_rel_line
+          },
+          options: this.dashboardService.genStandardOptionsForLineAndBar('Line Stacked Movement (%)', 'lineStack')
+        }
+      },
+      {
+        'id': 'tmvb_cat',
+        'label': '(Vertical) Bar Movement',
+        'icon': 'insert_chart',
+        'grid': 'ui-g-6',
+        'component': 'HDashboardChartBarComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'bar',
+            labels: labelsByMonths,
+            datasets: ds_cat_bar_abs
+          },
+          options: this.dashboardService.genStandardOptionsForLineAndBar('(Vertical) Bar Movement')
+        }
+      },
+      {
+        'id': 'tmhb_cat',
+        'label': '(Horizontal) Bar Movement',
+        'icon': 'insert_chart',
+        'grid': 'ui-g-6',
+        'component': 'HDashboardChartBarComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'horizontalBar',
+            labels: labelsByMonths,
+            datasets: ds_cat_bar_abs
+          },
+          options: this.dashboardService.genStandardOptionsForLineAndBar('(Horizontal) Bar Movement')
+        }
+      },
+      {
+        'id': 'tmvbs_cat',
+        'label': '(Abs, Vertical) Bar Stacked Movement',
+        'icon': 'insert_chart',
+        'grid': 'ui-g-6',
+        'component': 'HDashboardChartBarComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'bar',
+            labels: labelsByMonths,
+            datasets: ds_cat_bar_abs
+          },
+          options: this.dashboardService.genStandardOptionsForLineAndBar('(Abs, Vertical) Bar Stacked Movement', 'barStack')
+        }
+      },
+      {
+        'id': 'tmhbs_cat',
+        'label': '(Abs, Horizontal) Bar Stacked Movement',
+        'icon': 'insert_chart',
+        'grid': 'ui-g-6',
+        'component': 'HDashboardChartBarComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'horizontalBar',
+            labels: labelsByMonths,
+            datasets: ds_cat_bar_abs
+          },
+          options: this.dashboardService.genStandardOptionsForLineAndBar('(Abs, Horizontal) Bar Stacked Movement', 'barStack')
+        }
+      },
+      {
+        'id': 'tmvbs_cat_rel',
+        'label': '(%, Vertical) Bar Stacked Movement',
+        'icon': 'insert_chart',
+        'grid': 'ui-g-6',
+        'component': 'HDashboardChartBarComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'bar',
+            labels: labelsByMonths,
+            datasets: ds_cat_bar_rel
+          },
+          options: this.dashboardService.genStandardOptionsForLineAndBar('(%, Vertical) Bar Stacked Movement', 'barStack')
+        }
+      },
+      {
+        'id': 'tmhbs_cat_rel',
+        'label': '(%, Horizontal) Bar Stacked Movement',
+        'icon': 'insert_chart',
+        'grid': 'ui-g-6',
+        'component': 'HDashboardChartBarComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'horizontalBar',
+            labels: labelsByMonths,
+            datasets: ds_cat_bar_rel
+          },
+          options: this.dashboardService.genStandardOptionsForLineAndBar('(%, Horizontal) Bar Stacked Movement', 'barStack')
+        }
+      },
+
+      {
+        'id': 'tm_cat_complex',
+        'label': '(Mixed) Line Bar Movement',
+        'icon': 'multiline_chart',
         'grid': 'ui-g-12',
-        'component': 'HNewsComponent',
-        'blank': true
+        'component': 'HDashboardChartBarComponent',
+        'inputs': {
+          editMode: this.editMode,
+          data: {
+            type: 'bar',
+            labels: labelsByMonths,
+            datasets: [
+              {
+                type: 'line',
+                label: 'Total',
+                // borderColor:
+                borderWidth: 2,
+                fill: false,
+                data: this.dashboardService.sumArraysByColumn(src_cat_abs)
+              },
+              ...this.dashboardService.genDataByCatForMixed(src_cat_abs)
+            ]
+          },
+          options: this.dashboardService.genStandardOptionsForLineAndBar('(Mixed) Line Bar Movement')
+        }
       },
-      {
-        'img': 'ee8a89d8',
-        'label': 'Active KPI',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardKPIActiveComponent',
-        'blank': true
-      },
-      {
-        'img': 'ee8a89d8',
-        'label': 'Inactive KPI',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardKPIInactiveComponent',
-        'blank': true
-      },
-      {
-        'img': 'ee8a89d8',
-        'label': 'Marked KPI',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardKPIMarkedComponent',
-        'blank': true
-      },
-      {
-        'img': 'ee8a89d8',
-        'label': 'Unmarked KPI',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardKPIUnmarkedComponent',
-        'blank': true
-      },
+      // {
+      //   'id': 'radar_cat',
+      //   'label': 'Chart - Radar',
+      //   'grid': 'ui-g-6',
+      //   'component': 'HDashboardChartRadarComponent'
+      // },
 
-      {
-        'img': '39980f34',
-        'label': 'New Doughnut',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardChartDoughnutComponent'
-      },
-      {
-        'img': '39980f34',
-        'label': 'New Pie',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardChartPieComponent'
-      },
-      {
-        'img': '39980f34',
-        'label': 'New Radar',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardChartRadarComponent'
-      },
-      {
-        'img': '39980f34',
-        'label': 'New Polar Area',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardChartPolarAreaComponent'
-      },
-      {
-        'img': '39980f34',
-        'label': 'New Line',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardChartLineComponent'
-      }
     ];
-  }
-
-  initDashboardPages() {
-
-    this.stdLayoutList = [
-      {
-        label: '3 / 12',
-        value: 'ui-g-3'
-      },
-      {
-        label: '4 / 12',
-        value: 'ui-g-4'
-      },
-      {
-        label: '5 / 12',
-        value: 'ui-g-5'
-      },
-      {
-        label: '6 / 12',
-        value: 'ui-g-6'
-      },
-      {
-        label: '7 / 12',
-        value: 'ui-g-7'
-      },
-      {
-        label: '8 / 12',
-        value: 'ui-g-8'
-      },
-      {
-        label: '9 / 12',
-        value: 'ui-g-9'
-      },
-      {
-        label: '12 / 12',
-        value: 'ui-g-12'
-      },
-    ];
-    this.selectedDashboardGrid = this.stdLayoutList[0];
   }
 
   selectDashboardItems($event) {
-    // console.log(this.selectedLayout);
-    // console.log($event);
-    this.adaptedDashboardItems = JSON.parse(JSON.stringify($event.items));
+    // console.log($event.items);
+    this.adaptedDashboardItems = this.helperService.cloneObject($event.items);
     if ($event.items.length === 1) {
-      this.selectedDashboardGrid = $event.items[0]['grid'];
+      this.selectedGrid = $event.items[0]['grid'];
     }
   }
 
@@ -282,16 +526,24 @@ export class GkCln51Component implements OnInit, OnDestroy {
     if (this.adaptedDashboardItems) {
       for (let i = 0; i < this.adaptedDashboardItems.length; i++) {
         for (let j = 0; j < this.selectedDashboardItems.length; j++) {
-          if (JSON.stringify(this.adaptedDashboardItems[i]) === JSON.stringify(this.selectedDashboardItems[j])) {
-            if (this.selectedDashboardGrid) {
-                this.adaptedDashboardItems[i]['grid'] = this.selectedDashboardGrid;
-                this.selectedDashboardItems[j]['grid'] = this.selectedDashboardGrid;
+          if ((this.adaptedDashboardItems[i].id) === (this.selectedDashboardItems[j].id)) {
+            // console.log(this.adaptedDashboardItems[i].id, this.selectedDashboardItems[j].id);
+            // console.log(this.selectedGrid);
+            if (this.selectedGrid) {
+              this.adaptedDashboardItems[i]['grid'] = this.selectedGrid;
+              this.selectedDashboardItems[j]['grid'] = this.selectedGrid;
+              // console.log(this.adaptedDashboardItems[i]['grid']);
+              // console.log(this.selectedDashboardItems[j]['grid']);
             }
             break;
           }
         }
       }
     }
+  }
+
+  toggleIllustration() {
+    this.illustrationMode = !this.illustrationMode;
   }
 
   saveDashboard() {

@@ -7,19 +7,19 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { DynamicModule } from 'ng-dynamic-component';
 
-import { HNavBoardModule } from '../../../../../../nga/components/hNavBoard';
+// import { HNavBoardModule } from '../../../../../../nga/components/hNavBoard';
 
 import { GkCln51Component } from './gkcln51.component';
 import { GkCln51RoutingModule } from './gkcln51-routing.module';
 
-import { DropdownModule } from 'primeng/dropdown';
-import { ButtonModule } from 'primeng/button';
 import { PanelModule } from 'primeng/panel';
 import { PickListModule } from 'primeng/picklist';
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
 
-import { ToolbarModule } from 'primeng/toolbar';
-import { TooltipModule } from 'primeng/tooltip';
-import { InputTextModule } from 'primeng/inputtext';
+// import { ToolbarModule } from 'primeng/toolbar';
+// import { TooltipModule } from 'primeng/tooltip';
+// import { InputTextModule } from 'primeng/inputtext';
 // import { ChartModule } from 'primeng/chart';
 
 @NgModule({
@@ -36,16 +36,16 @@ import { InputTextModule } from 'primeng/inputtext';
     DynamicModule,
 
     // SharedModule,
-    DropdownModule,
-    ButtonModule,
     PanelModule,
     PickListModule,
-    ToolbarModule,
-    TooltipModule,
-    InputTextModule,
+    DropdownModule,
+    ButtonModule,
+    // ToolbarModule,
+    // TooltipModule,
+    // InputTextModule,
     // ChartModule,
 
-    HNavBoardModule,
+    // HNavBoardModule,
     GkCln51RoutingModule
   ],
   exports: [
