@@ -51,11 +51,14 @@
       [taskList]="taskList">
     </gk-task-list> -->
 
-    <!-- <h-task-list
+    <h-task-list
       header="{{'tasks'|translate}}"
       [menuItems]="items"
-      [taskList]="taskList">
-    </h-task-list> -->
+      [taskList]="taskList"
+      [todos]="todos | async"
+      [gkClients] = "gkClients | async">
+    </h-task-list>    
+
   </div>
 
 </div>

@@ -34,6 +34,8 @@
     "@angular/upgrade": "^5.2.2",
     "@biesbjerg/ngx-translate-extract": "^2.3.2",
     "@ngrx/core": "^1.2.0",
+    "@ngrx/effects": "^5.1.0",
+    "@ngrx/entity": "^5.1.0",
     "@ngrx/store": "^4.1.1",
     "@ngrx/store-devtools": "^4.1.1",
     "@ngx-translate/core": "^8.0.0",

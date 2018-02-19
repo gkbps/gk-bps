@@ -16,14 +16,14 @@ import { ColorService } from './color.service';
  */
 
 @Injectable()
-export class DashboardService {
+export class DashboardHelperService {
 
   constructor(
     private colorService: ColorService
   ) {
   }
 
-  getDataSource_Status() {        
+  getDataSource_Status() {
   }
 
   getDataSource_Category() {

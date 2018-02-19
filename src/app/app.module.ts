@@ -16,18 +16,23 @@ import { environment } from '../environments/environment';
  * IMPORT 3RD PARTY MODULES
  *******************************************************************************/
 // Scrollbar
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
+// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+// import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+//   suppressScrollX: true
+// };
 
 // Scroll to
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 // Loading Bar
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+
+// NGRX STORE
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 // PrimeNg
 /**
@@ -37,6 +42,7 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
  * Overlay panel: Show HELP overlay panel (gk-breadcrumbs)
  * Dropdown: Show list of working years and legal entities (gk-working)
  */
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { GrowlModule } from 'primeng/growl';
 import { MessagesModule } from 'primeng/messages';
@@ -124,11 +130,17 @@ const APP_DIRECTIVES = [
     ReactiveFormsModule,
 
     // Scrollbar
-    PerfectScrollbarModule,
-    SlimLoadingBarModule.forRoot(),
+    // PerfectScrollbarModule,
+    // SlimLoadingBarModule.forRoot(),
     ScrollToModule.forRoot(),
 
+    // Ngrx Store
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument(),
+
     // PrimeNg
+    ScrollPanelModule,
     ProgressBarModule,
     GrowlModule,
     MessagesModule,
@@ -143,10 +155,10 @@ const APP_DIRECTIVES = [
     ConfirmationService,
     AppConfig,
     GlobalState,
-    {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    },
+    // {
+    //   provide: PERFECT_SCROLLBAR_CONFIG,
+    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    // },
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
@@ -154,6 +166,7 @@ const APP_DIRECTIVES = [
   ],
   exports: [
     SlimLoadingBarModule,
+    ScrollPanelModule,
     ProgressBarModule,
     ...APP_DIRECTIVES,
   ]

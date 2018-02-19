@@ -1,25 +1,27 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit,  OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { SelectItem } from 'primeng/api';
+
+import { Store } from '@ngrx/store';
 
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../../../global.state';
 import {
   LocalStorageService,
   NavigationService,
-  MenuService,
-
-  SecurityService,
-  TcodeService,
+  MenuService
 } from '../../../../nga/services';
-import { GkRequestService } from '../../../../store/_services/gkRequest.service';
-import { TrayBaseComponent } from '../../../base';
+import { TrayBaseComponent } from '../../../base/tray/tray.component';
 
 @Component({
-  templateUrl: '../../../base/trayBase/trayBase.component.html'
+  templateUrl: '../../../base/tray/tray.component.html',
+  // styleUrls:['./inprogress.scss']
 })
 export class InProgressComponent extends TrayBaseComponent implements OnInit, OnDestroy {
 
   // Override Base class properties
-  // Derive class properties
+  trayType = 'draft';
 
   constructor(
     // Base class services
@@ -28,30 +30,20 @@ export class InProgressComponent extends TrayBaseComponent implements OnInit, On
     public localStorageService: LocalStorageService,
     public navigationService: NavigationService,
     public menuService: MenuService,
-
-    // Derive class services
-    public securityService: SecurityService,
-    public tcodeService: TcodeService,
-    public gkRequestService: GkRequestService,
+    public store: Store<any>
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService, securityService, tcodeService, gkRequestService);
-
-    // Derive class constructor
+    super(translateService, globalState, localStorageService, navigationService, menuService, store);
   }
 
   ngOnInit() {
     // Base class initialization
-    this.trayType = 'inprogress';
     super.ngOnInit();
-
-    // Derive class initialization
   }
 
   ngOnDestroy() {
     // Base class destroy
     super.ngOnDestroy();
-
-    // Derive class destroy here
   }
+
 }

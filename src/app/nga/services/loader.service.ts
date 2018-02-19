@@ -28,7 +28,9 @@ export class LoaderService {
 
   hide() {
     // this.loaderSubject.next(<LoaderState>{show: false});
-    this.loaderSubject.next({show: false});
+    setTimeout(() => {
+      this.loaderSubject.next({show: false});
+    }, 2000);
   }
 
 }

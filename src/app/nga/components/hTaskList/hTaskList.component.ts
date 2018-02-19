@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 import {
@@ -12,12 +12,15 @@ import {
 @Component({
   selector: 'h-task-list',
   templateUrl: './hTaskList.html',
-  styleUrls: ['hTaskList.scss']
+  styleUrls: ['hTaskList.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HTaskListComponent implements OnInit {
   @Input() header = 'Hellow';
   @Input() menuItems: MenuItem[];
   @Input() taskList: any;
+  @Input() todos;
+  @Input() gkClients;
 
   constructor(
   ) {
@@ -25,6 +28,7 @@ export class HTaskListComponent implements OnInit {
   }
 
   ngOnInit () {
+    console.log(this.gkClients);
     console.log(this.menuItems);
   }
 

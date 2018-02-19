@@ -1,11 +1,29 @@
-<perfect-scrollbar>
+<!-- <perfect-scrollbar>
   <div class="nano">
     <div class="nano-content sidebar-scroll-content" tabindex="0">
       <div class="layout-menu-container">
         <!-- Menu Item -->
-        <ul gkSidebarMenu [menu]="menu" class="layout-menu" root="true" visible="true"></ul>
+        <!-- <ul
+          gkSidebarMenu
+          [menu]="menu"
+          class="layout-menu"
+          root="true"
+          visible="true">
+        </ul>
         <!-- ./Menu Item -->
+        <!-- <div class="ui-helper-clearfix" style="margin-bottm: 30px;"></div>
       </div>
     </div>
   </div>
-</perfect-scrollbar>
+</perfect-scrollbar> -->
+
+<p-scrollPanel [style]="{ height: '100%' }">
+  <ul
+    gkSidebarMenu
+    [menu]="menu"
+    class="layout-menu"
+    root="true"
+    visible="true">
+  </ul>
+  <div class="ui-helper-clearfix" style="margin-bottm: 30px;"></div>
+</p-scrollPanel>

@@ -30,6 +30,19 @@ export const routes: Routes = [
     path: '', component: GkFullLayoutComponent, canActivateChild: [AuthGuard],
     data: { title: '' },
     children: [
+      { path: 'inbox', loadChildren: './views/common/inbox/inbox.module#InboxModule' },
+      { path: 'ibx', loadChildren: './views/common/inbox/inbox.module#InboxModule' },
+      { path: 'outbox', loadChildren: './views/common/outbox/outbox.module#OutboxModule' },
+      { path: 'obx', loadChildren: './views/common/outbox/outbox.module#OutboxModule' },
+      { path: 'draft', loadChildren: './views/common/draft/draft.module#DraftModule' },
+      { path: 'drf', loadChildren: './views/common/draft/draft.module#DraftModule' },
+      { path: 'inprogress', loadChildren: './views/common/inprogress/inprogress.module#InProgressModule' },
+      { path: 'progress', loadChildren: './views/common/inprogress/inprogress.module#InProgressModule' },
+      { path: 'ipg', loadChildren: './views/common/inprogress/inprogress.module#InProgressModule' },
+      { path: 'completed', loadChildren: './views/common/completed/completed.module#CompletedModule' },
+      { path: 'clt', loadChildren: './views/common/completed/completed.module#CompletedModule' },
+      { path: 'tray', loadChildren: './views/common/tray/tray.module#TrayModule' },
+
       { path: 'chat', loadChildren: './views/common/chat/chat.module#ChatModule' },
       { path: 'dict', loadChildren: './views/common/dict/dict.module#DictModule' },
       { path: 'fav', loadChildren: './views/common/fav/fav.module#FavModule' },
@@ -39,7 +52,6 @@ export const routes: Routes = [
       { path: 'policy', loadChildren: './views/common/policy/policy.module#PolicyModule' },
       { path: 'profile', loadChildren: './views/common/profile/profile.module#ProfileModule' },
       { path: 'setting', loadChildren: './views/common/setting/setting.module#SettingModule' },
-      { path: 'tray', loadChildren: './views/common/tray/tray.module#TrayModule' },
 
       { path: 'help', loadChildren: './views/help/help.module#HelpModule' },
       { path: 'home', loadChildren: './views/home/home.module#HomeModule' },

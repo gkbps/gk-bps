@@ -18,7 +18,7 @@ import {
   // LocalStorageService,
   // ArrayService,
   HelperService,
-  DashboardService
+  DashboardHelperService
  } from '../../../../../../nga/services';
 
 // For handling data services for dashboard
@@ -102,7 +102,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
     // private gkCln51Service: GkCln51Service,
     // private arrayService: ArrayService,
     private helperService: HelperService,
-    private dashboardService: DashboardService
+    private dashboardHelperService: DashboardHelperService
   ) {
     this.subscribeGlobalState();
   }
@@ -113,7 +113,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
     const currentUser: any = this.securityService.getCurrentUser();
     this.userRights = this.securityService.getMana();
 
-    this.stdGridList = this.dashboardService.getGridList();
+    this.stdGridList = this.dashboardHelperService.getGridList();
     this.selectedGrid = this.stdGridList[0];
     this.selectedDashboardItems = [];
 
@@ -122,22 +122,22 @@ export class GkCln51Component implements OnInit, OnDestroy {
 
   initDashboardItems() {
     // this.availableDashboardItems = this.gkCln51Service.getDbList()
-    const src_status = this.dashboardService.getDataByStatus();
-    const ds_active_inactive = this.dashboardService.genDataByActiveInactive(src_status);
-    const ds_marked_unmarked = this.dashboardService.genDataByMarkedUnmarked(src_status);
-    const ds_composite = this.dashboardService.genDataByComposite(src_status);
+    const src_status = this.dashboardHelperService.getDataByStatus();
+    const ds_active_inactive = this.dashboardHelperService.genDataByActiveInactive(src_status);
+    const ds_marked_unmarked = this.dashboardHelperService.genDataByMarkedUnmarked(src_status);
+    const ds_composite = this.dashboardHelperService.genDataByComposite(src_status);
 
-    const src_cat_abs = this.dashboardService.getDataByCat();
-    const src_cat_rel = this.dashboardService.convertRelativeDataByCat(src_cat_abs)
-    const transformed_cat = this.dashboardService.genDataByCatForPDP(src_cat_abs);
+    const src_cat_abs = this.dashboardHelperService.getDataByCat();
+    const src_cat_rel = this.dashboardHelperService.convertRelativeDataByCat(src_cat_abs)
+    const transformed_cat = this.dashboardHelperService.genDataByCatForPDP(src_cat_abs);
 
     // console.log(transformed_cat);
-    // console.log(this.dashboardService.convertRelativeDataByCat(src_cat_abs));
-    const ds_cat_abs_line = this.dashboardService.genDataByCatForLineAndBar(src_cat_abs);
-    const ds_cat_rel_line = this.dashboardService.genDataByCatForLineAndBar(src_cat_rel);
-    const ds_cat_bar_abs = this.dashboardService.genDataByCatForLineAndBar(src_cat_abs, 'bar');
-    const ds_cat_bar_rel = this.dashboardService.genDataByCatForLineAndBar(src_cat_rel, 'bar');
-    const labelsByMonths = this.dashboardService.genLabelsOnMonths(src_cat_abs[0].data.length);
+    // console.log(this.dashboardHelperService.convertRelativeDataByCat(src_cat_abs));
+    const ds_cat_abs_line = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_abs);
+    const ds_cat_rel_line = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_rel);
+    const ds_cat_bar_abs = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_abs, 'bar');
+    const ds_cat_bar_rel = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_rel, 'bar');
+    const labelsByMonths = this.dashboardHelperService.genLabelsOnMonths(src_cat_abs[0].data.length);
 
     const chartList = [
       { label: 'KPI', value: 'kpi' },
@@ -227,7 +227,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: ['Active', 'Inactive'],
             datasets: ds_active_inactive
           },
-          options: this.dashboardService.genStandardOptionsForPDP('Active vs. Inactive')
+          options: this.dashboardHelperService.genStandardOptionsForPDP('Active vs. Inactive')
         }
       },
       {
@@ -243,7 +243,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: ['Marked', 'Unmarked'],
             datasets: ds_marked_unmarked
           },
-          options: this.dashboardService.genStandardOptionsForPDP('Marked vs. Unmarked')
+          options: this.dashboardHelperService.genStandardOptionsForPDP('Marked vs. Unmarked')
         }
       },
       {
@@ -259,7 +259,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: ['Active', 'Inactive', 'Marked', 'Unmarked'],
             datasets: ds_composite
           },
-          options: this.dashboardService.genStandardOptionsForPDP('Status Composition 1')
+          options: this.dashboardHelperService.genStandardOptionsForPDP('Status Composition 1')
         }
       },
       {
@@ -275,7 +275,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: ['Active', 'Inactive', 'Marked', 'Unmarked'],
             datasets: ds_composite
           },
-          options: this.dashboardService.genStandardOptionsForPDP('Status Composition 2')
+          options: this.dashboardHelperService.genStandardOptionsForPDP('Status Composition 2')
         }
       },
 
@@ -294,7 +294,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: transformed_cat.labels,
             datasets: transformed_cat.datasets
           },
-          options: this.dashboardService.genStandardOptionsForPDP('Categories Composition 1')
+          options: this.dashboardHelperService.genStandardOptionsForPDP('Categories Composition 1')
         }
       },
       {
@@ -310,7 +310,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: transformed_cat.labels,
             datasets: transformed_cat.datasets
           },
-          options: this.dashboardService.genStandardOptionsForPDP('Categories Composition 2')
+          options: this.dashboardHelperService.genStandardOptionsForPDP('Categories Composition 2')
         }
       },
       {
@@ -326,7 +326,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: transformed_cat.labels,
             datasets: transformed_cat.datasets
           },
-          options: this.dashboardService.genStandardOptionsForPDP('Categories Composition 3')
+          options: this.dashboardHelperService.genStandardOptionsForPDP('Categories Composition 3')
         }
       },
       /*************************************************************************
@@ -346,7 +346,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: labelsByMonths,
             datasets: ds_cat_abs_line
           },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('Line Movement')
+          options: this.dashboardHelperService.genStandardOptionsForLineAndBar('Line Movement')
         }
       },
       {
@@ -362,7 +362,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: labelsByMonths,
             datasets: ds_cat_abs_line
           },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('Line Stacked Movement (Abs)', 'lineStack')
+          options: this.dashboardHelperService.genStandardOptionsForLineAndBar('Line Stacked Movement (Abs)', 'lineStack')
         }
       },
       {
@@ -378,7 +378,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: labelsByMonths,
             datasets: ds_cat_rel_line
           },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('Line Stacked Movement (%)', 'lineStack')
+          options: this.dashboardHelperService.genStandardOptionsForLineAndBar('Line Stacked Movement (%)', 'lineStack')
         }
       },
       {
@@ -394,7 +394,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: labelsByMonths,
             datasets: ds_cat_bar_abs
           },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(Vertical) Bar Movement')
+          options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(Vertical) Bar Movement')
         }
       },
       {
@@ -410,7 +410,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: labelsByMonths,
             datasets: ds_cat_bar_abs
           },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(Horizontal) Bar Movement')
+          options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(Horizontal) Bar Movement')
         }
       },
       {
@@ -426,7 +426,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: labelsByMonths,
             datasets: ds_cat_bar_abs
           },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(Abs, Vertical) Bar Stacked Movement', 'barStack')
+          options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(Abs, Vertical) Bar Stacked Movement', 'barStack')
         }
       },
       {
@@ -442,7 +442,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: labelsByMonths,
             datasets: ds_cat_bar_abs
           },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(Abs, Horizontal) Bar Stacked Movement', 'barStack')
+          options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(Abs, Horizontal) Bar Stacked Movement', 'barStack')
         }
       },
       {
@@ -458,7 +458,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: labelsByMonths,
             datasets: ds_cat_bar_rel
           },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(%, Vertical) Bar Stacked Movement', 'barStack')
+          options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(%, Vertical) Bar Stacked Movement', 'barStack')
         }
       },
       {
@@ -474,7 +474,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
             labels: labelsByMonths,
             datasets: ds_cat_bar_rel
           },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(%, Horizontal) Bar Stacked Movement', 'barStack')
+          options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(%, Horizontal) Bar Stacked Movement', 'barStack')
         }
       },
 
@@ -496,12 +496,12 @@ export class GkCln51Component implements OnInit, OnDestroy {
                 // borderColor:
                 borderWidth: 2,
                 fill: false,
-                data: this.dashboardService.sumArraysByColumn(src_cat_abs)
+                data: this.dashboardHelperService.sumArraysByColumn(src_cat_abs)
               },
-              ...this.dashboardService.genDataByCatForMixed(src_cat_abs)
+              ...this.dashboardHelperService.genDataByCatForMixed(src_cat_abs)
             ]
           },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(Mixed) Line Bar Movement')
+          options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(Mixed) Line Bar Movement')
         }
       },
       // {

@@ -9,9 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 
-import { paginatedGkRequests, gkRequests, selectedGkRequest } from '../../../../store/_reducers/gkRequest.reducer';
+import { paginatedGkRequests, selectedGkRequest } from '../../../../store/_reducers/gkRequest.reducer';
+// gkRequests,
 import { paginatedGkClients, gkClients, selectedGkClient } from '../../../../store/_reducers/gkClient.reducer';
 import { paginatedGkClientsDashboard, selectedGkClientDashboard } from '../../../../store/_reducers/gkClient.reducer';
+import { paginatedDashboardPages, selectedDashboardPage, dashboardItems, selectedDashboardItem } from '../../../../store/_reducers/dashboard.reducer';
 
 import { apiGkUsers } from '../../../../store/_reducers/gkUser.reducer';
 import { standardApprovalItems } from '../../../../store/_reducers/approvalItem.reducer';
@@ -24,7 +26,7 @@ import { GkRequestService } from '../../../../store/_services/gkRequest.service'
 import { ApprovalItemService } from '../../../../store/_services/approvalItem.service';
 import { DatasourceService } from '../../../../store/_services/datasource.service';
 import { RequestFileService } from '../../../../store/_services/requestFile.service';
-
+import { DashboardService } from '../../../../store/_services/dashboard.service';
 // Internal
 import { NgaModule } from '../../../../nga/nga.module';
 
@@ -78,9 +80,16 @@ const DB_COMPONENTS = [
     FormsModule,
 
 		StoreModule.forRoot({
+
+      // Dashboard
+			paginatedDashboardPages: paginatedDashboardPages,
+			selectedDashboardPage: selectedDashboardPage,
+			dashboardItems: dashboardItems,
+			selectedDashboardItem: selectedDashboardItem,
+
       // Requests
 			paginatedGkRequests: paginatedGkRequests,
-		  gkRequests: gkRequests,
+		  // gkRequests: gkRequests,
 		  selectedGkRequest: selectedGkRequest,
 
       // GkClients
@@ -124,7 +133,8 @@ const DB_COMPONENTS = [
 	GkClientService,
 	ApprovalItemService,
 	DatasourceService,
-	RequestFileService
+	RequestFileService,
+	DashboardService
   ],
 })
 export class GkClnModule { }

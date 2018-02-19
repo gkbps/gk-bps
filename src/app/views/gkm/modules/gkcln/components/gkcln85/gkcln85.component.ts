@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -14,7 +15,8 @@ import {
   TcodeService,
 } from '../../../../../../nga/services';
 import { HelperService } from '../../../../../../nga/services/helpers.service';
-import { DashboardService } from '../../../../../../nga/services/dashboard.service';
+import { DashboardHelperService } from '../../../../../../nga/services/dashboard.service';
+import { IconsService } from '../../../../../../nga/common/icons.service';
 
 // Standard dashboard items are used
 import { HDashboardBlankComponent } from '../../../../../../nga/components/hDashboardBlank/hDashboardBlank.component';
@@ -23,8 +25,14 @@ import { HDashboardChartPDPComponent } from '../../../../../../nga/components/hD
 import { HDashboardChartLineComponent } from '../../../../../../nga/components/hDashboardChartLine/hDashboardChartLine.component';
 import { HDashboardChartBarComponent } from '../../../../../../nga/components/hDashboardChartBar/hDashboardChartBar.component';
 
+// Datasource
 import { Datasource } from '../../../../../../store/_models/datasource.model';
 import { DatasourceService } from '../../../../../../store/_services/datasource.service';
+
+// Dashboard
+import { DashboardPage } from '../../../../../../store/_models/dashboard.model';
+import { DashboardItem } from '../../../../../../store/_models/dashboard.model';
+import { DashboardService } from '../../../../../../store/_services/dashboard.service';
 
 import { BaseComponent } from '../../../../../base';
 
@@ -44,9 +52,12 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
   // Derive class properties
   tcode = 'gkcln85';
 
+  dbItem: any;
+  myForm: FormGroup;
 
-  dashboardItems: any;
+  dashboardItemsList: any;
   selectedItem= [];
+
 
   // Mode
   editMode = true;
@@ -54,6 +65,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
   // Dialog
   dialogTitle = "Dashboard Item";
   displayDialog = false;
+  displayForm = false;
 
   chartType: any;
   dashboardIcon = '';
@@ -73,6 +85,8 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
     { label: 'Line', value: 'HDashboardChartLineComponent' },
     { label: 'Bar', value: 'HDashboardChartBarComponent' },
   ];
+  stdGridList = [];   // Allowed list of grid to adapt the component
+  iconList = [];
 
   // DATA SOURCES
   DATASOURCES = {
@@ -127,7 +141,13 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
 
   // Redux based variables
   datasource: Observable<Array<Datasource>>;
-  private subscription: Subscription;
+  private datasourceSubscription: Subscription;
+
+  // dashboardPage: Observable<Array<DashboardPage>>;
+  // private dashboardPageSubscription: Subscription;
+
+  dashboardItems: Observable<Array<DashboardItem>>;
+  private dashboardItemSubscription: Subscription;
 
   constructor(
     // Base class services
@@ -138,15 +158,22 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
     public menuService: MenuService,
 
     // Derive class services
+    private _fb: FormBuilder,
     private helperService: HelperService,
-    private dashboardService: DashboardService,
+    private dashboardHelperService: DashboardHelperService,
     private datasourceService: DatasourceService,
+    private dashboardService: DashboardService,
+    private iconsService: IconsService
   ) {
     // Base class constructor: Re-injection for inheritance
     super(translateService, globalState, localStorageService, navigationService, menuService);
 
     // Derive class constructor
     this.datasource = datasourceService.datasource;
+    this.dashboardItems = dashboardService.dashboardItems;
+
+    this.stdGridList = this.dashboardHelperService.getGridList();
+    this.iconList = iconsService.getIconsMenu();
 
     // IMPORTANT: Must pass these in string type to avoid server receiving issues
     const dimensions = ['alpha', 'service', 'status1', 'status2'];
@@ -160,7 +187,16 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
       measures: measures
     }
     // ['status1', 'status2'];
-    this.datasourceService.getDatasourceByModule('gkClients', params);
+    this.datasourceService.getDatasourceByModuleInStore('gkClients', params);
+
+    this.dashboardService.getDashboardItems('gkcln', params)
+      .subscribe(responseBodyData => {
+        console.log(responseBodyData);
+        this.dashboardItemsList = responseBodyData['body'].data;
+      }, error => {
+        console.log(error);
+      });
+
   }
 
   ngOnInit() {
@@ -173,17 +209,56 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
     this.globalState.notifyMyDataChanged('help', '', 'tcd.11.create');
 
     this.subscribeLocalState();
-    this.initList();
-    this.initData();
+    // this.initList();
+    // this.initData();
+
+    this.initBlankModel();
+    this.buildForm();
+  }
+
+  initBlankModel() {
+    this.dbItem =  {
+      module: 'gkcln',
+      label: 'New dashboard item',
+      icon: 'dashboard',
+      grid: 'ui-g-6',
+      component: '',
+      params: {
+        dimensions: [],
+        measures: []
+      }
+    };
+  }
+
+  buildForm(){
+    this.myForm = this._fb.group({
+      _id: [{
+        value: this.dbItem._id,
+        disabled: false
+      }],
+      module: [ this.dbItem.module, [ Validators.required ]],
+      label: [ this.dbItem.label,
+        [
+          Validators.required,
+          Validators.minLength(5),
+        ],
+      ],
+      icon: [ this.dbItem.icon ],
+      grid: [ this.dbItem.grid, [ Validators.required ]],
+      component: [ this.dbItem.component, [ Validators.required ]],
+      params: this._fb.group({
+        dimensions: [ this.dbItem.params.dimensions ],
+        measures: [ this.dbItem.params.measures ],
+      })
+    });
   }
 
   initData() {
 
-
-    const src_status = this.dashboardService.getDataByStatus();
-    const src_cat_abs = this.dashboardService.getDataByCat();
-    const src_cat_rel = this.dashboardService.convertRelativeDataByCat(src_cat_abs);
-    const transformed_cat = this.dashboardService.genDataByCatForPDP(src_cat_abs);
+    const src_status = this.dashboardHelperService.getDataByStatus();
+    const src_cat_abs = this.dashboardHelperService.getDataByCat();
+    const src_cat_rel = this.dashboardHelperService.convertRelativeDataByCat(src_cat_abs);
+    const transformed_cat = this.dashboardHelperService.genDataByCatForPDP(src_cat_abs);
 
     // KPI
     this.DATASOURCES.active = src_status.active;
@@ -192,403 +267,49 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
     this.DATASOURCES.unmarked = src_status.unmarked;
 
     // PDP
-    this.DATASOURCES.status1 = this.dashboardService.genDataByActiveInactive(src_status);
-    this.DATASOURCES.status2 = this.dashboardService.genDataByMarkedUnmarked(src_status);
-    this.DATASOURCES.status1_status2 = this.dashboardService.genDataByComposite(src_status);
+    this.DATASOURCES.status1 = this.dashboardHelperService.genDataByActiveInactive(src_status);
+    this.DATASOURCES.status2 = this.dashboardHelperService.genDataByMarkedUnmarked(src_status);
+    this.DATASOURCES.status1_status2 = this.dashboardHelperService.genDataByComposite(src_status);
 
     this.DATASOURCES.cat_abs_pdp = transformed_cat.datasets;
     this.DATASOURCES.cat_rel_pdp = transformed_cat.datasets;
 
     // LINE
-    this.DATASOURCES.cat_abs_line = this.dashboardService.genDataByCatForLineAndBar(src_cat_abs);
-    this.DATASOURCES.cat_rel_line = this.dashboardService.genDataByCatForLineAndBar(src_cat_rel);
+    this.DATASOURCES.cat_abs_line = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_abs);
+    this.DATASOURCES.cat_rel_line = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_rel);
 
     // BAR
-    this.DATASOURCES.cat_abs_bar = this.dashboardService.genDataByCatForLineAndBar(src_cat_abs, 'bar');
-    this.DATASOURCES.cat_rel_bar = this.dashboardService.genDataByCatForLineAndBar(src_cat_rel, 'bar');
+    this.DATASOURCES.cat_abs_bar = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_abs, 'bar');
+    this.DATASOURCES.cat_rel_bar = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_rel, 'bar');
   }
 
   initList() {
     // this.availableDashboardItems = this.gkCln51Service.getDbList()
 
     // Status Dimension
-    const src_status = this.dashboardService.getDataByStatus();
+    const src_status = this.dashboardHelperService.getDataByStatus();
     const active = src_status.active;
     const inactive = src_status.inactive;
     const marked = src_status.marked;
     const unmarked = src_status.unmarked;
 
-    const status1 = this.dashboardService.genDataByActiveInactive(src_status);
-    const status2 = this.dashboardService.genDataByMarkedUnmarked(src_status);
-    const status1_status2 = this.dashboardService.genDataByComposite(src_status);
+    const status1 = this.dashboardHelperService.genDataByActiveInactive(src_status);
+    const status2 = this.dashboardHelperService.genDataByMarkedUnmarked(src_status);
+    const status1_status2 = this.dashboardHelperService.genDataByComposite(src_status);
 
-    const src_cat_abs = this.dashboardService.getDataByCat();
-    const src_cat_rel = this.dashboardService.convertRelativeDataByCat(src_cat_abs);
-    const transformed_cat = this.dashboardService.genDataByCatForPDP(src_cat_abs);
+    const src_cat_abs = this.dashboardHelperService.getDataByCat();
+    const src_cat_rel = this.dashboardHelperService.convertRelativeDataByCat(src_cat_abs);
+    const transformed_cat = this.dashboardHelperService.genDataByCatForPDP(src_cat_abs);
     const cat_abs_pdp = transformed_cat.datasets;
     // console.log(transformed_cat);
-    // console.log(this.dashboardService.convertRelativeDataByCat(src_cat_abs));
-    const cat_abs_line = this.dashboardService.genDataByCatForLineAndBar(src_cat_abs);
-    const cat_rel_line = this.dashboardService.genDataByCatForLineAndBar(src_cat_rel);
-    const cat_abs_bar = this.dashboardService.genDataByCatForLineAndBar(src_cat_abs, 'bar');
-    const cat_rel_bar = this.dashboardService.genDataByCatForLineAndBar(src_cat_rel, 'bar');
-    const labelsByMonths = this.dashboardService.genLabelsOnMonths(src_cat_abs[0].data.length);
-
-    this.dashboardItems = [
-      /*************************************************************************
-       * KPI
-       *************************************************************************/
-      {
-        'id': 'kpi_active',
-        'label': 'Active (KPI)',
-        'icon': 'dashboard',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardKPIComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: { title: 'Active', figure: src_status.active },
-          options: { style: 'overview-box-2', icon: 'layers' },
-          something: () =>'can really complex'
-        },
-        'outputs': { onSomething: (type) => alert(type) }
-      },
-      {
-        'id': 'kpi_inactive',
-        'label': 'Inactive (KPI)',
-        'icon': 'dashboard',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardKPIComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: { title: 'Inactive', figure: src_status.inactive },
-          options: { style: 'overview-box-1', icon: 'view_module' }
-        }
-      },
-      {
-        'id': 'kpi_marked',
-        'label': 'Marked (KPI)',
-        'icon': 'dashboard',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardKPIComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: { title: 'Marked', figure: src_status.marked },
-          options: { style: 'overview-box-4', icon: 'visibility_off' }
-        }
-      },
-      {
-        'id': 'kpi_unmarked',
-        'label': 'Unmarked (KPI)',
-        'icon': 'dashboard',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardKPIComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: { title: 'Unmarked', figure: src_status.unmarked },
-          options: { style: 'overview-box-3', icon: 'layers_clear' }
-        }
-      },
-
-      /*************************************************************************
-       * CHART - PDP
-       *************************************************************************/
-      {
-        'id': 'pdp_status1',
-        'label': 'Active /Inactive (PDP)',
-        'icon': 'pie_chart_outlined',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardChartPDPComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'pie',
-            labels: ['Active', 'Inactive'],
-            datasets: status1
-          },
-          options: this.dashboardService.genStandardOptionsForPDP('Active vs. Inactive')
-        }
-      },
-      {
-        'id': 'pdp_status2',
-        'label': 'Marked /Unmarked (PDP)',
-        'icon': 'pie_chart_outlined',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardChartPDPComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'doughnut',
-            labels: ['Marked', 'Unmarked'],
-            datasets: status2
-          },
-          options: this.dashboardService.genStandardOptionsForPDP('Marked vs. Unmarked')
-        }
-      },
-      {
-        'id': 'pdp_all_status',
-        'label': 'Status Composition 1 (PDP)',
-        'icon': 'pie_chart_outlined',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardChartPDPComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'doughnut',
-            labels: ['Active', 'Inactive', 'Marked', 'Unmarked'],
-            datasets: status1_status2
-          },
-          options: this.dashboardService.genStandardOptionsForPDP('Status Composition 1')
-        }
-      },
-      {
-        'id': 'pdp_mixed',
-        'label': 'Status Composition 2 (PDP)',
-        'icon': 'pie_chart_outlined',
-        'grid': 'ui-g-3',
-        'component': 'HDashboardChartPDPComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'polarArea',
-            labels: ['Active', 'Inactive', 'Marked', 'Unmarked'],
-            datasets: status1_status2
-          },
-          options: this.dashboardService.genStandardOptionsForPDP('Status Composition 2')
-        }
-      },
+    // console.log(this.dashboardHelperService.convertRelativeDataByCat(src_cat_abs));
+    const cat_abs_line = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_abs);
+    const cat_rel_line = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_rel);
+    const cat_abs_bar = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_abs, 'bar');
+    const cat_rel_bar = this.dashboardHelperService.genDataByCatForLineAndBar(src_cat_rel, 'bar');
+    const labelsByMonths = this.dashboardHelperService.genLabelsOnMonths(src_cat_abs[0].data.length);
 
 
-      // Composition by categories
-      {
-        'id': 'pdp_cat1',
-        'label': 'Categories 1 (PDP)',
-        'icon': 'pie_chart_outlined',
-        'grid': 'ui-g-4',
-        'component': 'HDashboardChartPDPComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'pie',
-            labels: transformed_cat.labels,
-            datasets: cat_abs_pdp
-          },
-          options: this.dashboardService.genStandardOptionsForPDP('Categories Composition 1')
-        }
-      },
-      {
-        'id': 'pdp_cat2',
-        'label': 'Catogories 2 (PDP)',
-        'icon': 'pie_chart_outlined',
-        'grid': 'ui-g-4',
-        'component': 'HDashboardChartPDPComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'doughnut',
-            labels: transformed_cat.labels,
-            datasets: cat_abs_pdp
-          },
-          options: this.dashboardService.genStandardOptionsForPDP('Categories Composition 2')
-        }
-      },
-      {
-        'id': 'pdp_cat3',
-        'label': 'Categories 3 (PDP)',
-        'icon': 'pie_chart_outlined',
-        'grid': 'ui-g-4',
-        'component': 'HDashboardChartPDPComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'polarArea',
-            labels: transformed_cat.labels,
-            datasets: cat_abs_pdp
-          },
-          options: this.dashboardService.genStandardOptionsForPDP('Categories Composition 3')
-        }
-      },
-      /*************************************************************************
-       * CHART - LINE | BAR
-       *************************************************************************/
-
-      {
-        'id': 'tml_cat',
-        'label': 'Line Movement',
-        'icon': 'show_chart',
-        'grid': 'ui-g-6',
-        'component': 'HDashboardChartLineComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'line',
-            labels: labelsByMonths,
-            datasets: cat_abs_line
-          },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('Line Movement')
-        }
-      },
-      {
-        'id': 'tmls_cat_abs',
-        'label': 'Line Stacked Movement (Abs)',
-        'icon': 'show_chart',
-        'grid': 'ui-g-6',
-        'component': 'HDashboardChartLineComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'line',
-            labels: labelsByMonths,
-            datasets: cat_abs_line
-          },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('Line Stacked Movement (Abs)', 'lineStack')
-        }
-      },
-      {
-        'id': 'tmls_cat_rel',
-        'label': 'Line Stacked Movement (%)',
-        'icon': 'show_chart',
-        'grid': 'ui-g-6',
-        'component': 'HDashboardChartLineComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'line',
-            labels: labelsByMonths,
-            datasets: cat_rel_line
-          },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('Line Stacked Movement (%)', 'lineStack')
-        }
-      },
-      {
-        'id': 'tmvb_cat',
-        'label': '(Vertical) Bar Movement',
-        'icon': 'insert_chart',
-        'grid': 'ui-g-6',
-        'component': 'HDashboardChartBarComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'bar',
-            labels: labelsByMonths,
-            datasets: cat_abs_bar
-          },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(Vertical) Bar Movement')
-        }
-      },
-      {
-        'id': 'tmhb_cat',
-        'label': '(Horizontal) Bar Movement',
-        'icon': 'insert_chart',
-        'grid': 'ui-g-6',
-        'component': 'HDashboardChartBarComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'horizontalBar',
-            labels: labelsByMonths,
-            datasets: cat_abs_bar
-          },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(Horizontal) Bar Movement')
-        }
-      },
-      {
-        'id': 'tmvbs_cat',
-        'label': '(Abs, Vertical) Bar Stacked Movement',
-        'icon': 'insert_chart',
-        'grid': 'ui-g-6',
-        'component': 'HDashboardChartBarComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'bar',
-            labels: labelsByMonths,
-            datasets: cat_abs_bar
-          },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(Abs, Vertical) Bar Stacked Movement', 'barStack')
-        }
-      },
-      {
-        'id': 'tmhbs_cat',
-        'label': '(Abs, Horizontal) Bar Stacked Movement',
-        'icon': 'insert_chart',
-        'grid': 'ui-g-6',
-        'component': 'HDashboardChartBarComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'horizontalBar',
-            labels: labelsByMonths,
-            datasets: cat_abs_bar
-          },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(Abs, Horizontal) Bar Stacked Movement', 'barStack')
-        }
-      },
-      {
-        'id': 'tmvbs_cat_rel',
-        'label': '(%, Vertical) Bar Stacked Movement',
-        'icon': 'insert_chart',
-        'grid': 'ui-g-6',
-        'component': 'HDashboardChartBarComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'bar',
-            labels: labelsByMonths,
-            datasets: cat_rel_bar
-          },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(%, Vertical) Bar Stacked Movement', 'barStack')
-        }
-      },
-      {
-        'id': 'tmhbs_cat_rel',
-        'label': '(%, Horizontal) Bar Stacked Movement',
-        'icon': 'insert_chart',
-        'grid': 'ui-g-6',
-        'component': 'HDashboardChartBarComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'horizontalBar',
-            labels: labelsByMonths,
-            datasets: cat_rel_bar
-          },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(%, Horizontal) Bar Stacked Movement', 'barStack')
-        }
-      },
-
-      {
-        'id': 'tm_cat_complex',
-        'label': '(Mixed) Line Bar Movement',
-        'icon': 'multiline_chart',
-        'grid': 'ui-g-12',
-        'component': 'HDashboardChartBarComponent',
-        'inputs': {
-          editMode: this.editMode,
-          data: {
-            type: 'bar',
-            labels: labelsByMonths,
-            datasets: [
-              {
-                type: 'line',
-                label: 'Total',
-                // borderColor:
-                borderWidth: 2,
-                fill: false,
-                data: this.dashboardService.sumArraysByColumn(src_cat_abs)
-              },
-              ...this.dashboardService.genDataByCatForMixed(src_cat_abs)
-            ]
-          },
-          options: this.dashboardService.genStandardOptionsForLineAndBar('(Mixed) Line Bar Movement')
-        }
-      },
-      // {
-      //   'id': 'radar_cat',
-      //   'label': 'Chart - Radar',
-      //   'grid': 'ui-g-6',
-      //   'component': 'HDashboardChartRadarComponent'
-      // },
-    ];
   }
 
   doAction(action){
@@ -596,6 +317,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
     switch (action) {
       case 'new':
         this.displayDialog = true;
+        this.displayForm = true;
         break;
 
       default:
@@ -605,6 +327,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
 
   cancelDialog() {
     this.displayDialog = false;
+    this.displayForm = false;
   }
 
   selectDashboardItem($event) {
@@ -627,7 +350,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
     });
 
     // Redux store + initial value
-    this.subscription = this.datasource
+    this.datasourceSubscription = this.datasource
     .subscribe(responseBody => {
       console.log(responseBody);
 
@@ -638,7 +361,324 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
 
   unsubscribeLocalState() {
     this.globalState.unsubscribeEvent('language', this.myScope);
-    this.subscription.unsubscribe();
+    this.datasourceSubscription.unsubscribe();
   }
 
 }
+
+
+// this.dashboardItemsList = [
+//   {
+//     'id': 'kpi_active',
+//     'module': 'gkcln',
+//     'label': 'Active (KPI)',
+//     'icon': 'dashboard',
+//     'grid': 'ui-g-3',
+//     'component': 'HDashboardKPIComponent',
+//     'params': {
+//       'dimensions': ['Status1'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: { title: 'Active', figure: src_status.active },
+//       options: { style: 'overview-box-2', icon: 'layers' },
+//       something: () =>'can really complex'
+//     },
+//     'outputs': { onSomething: (type) => alert(type) }
+//   },
+//
+//
+//   {
+//     'id': 'pdp_status1',
+//     'module': 'gkcln',
+//     'label': 'Active /Inactive (PDP)',
+//     'icon': 'pie_chart_outlined',
+//     'grid': 'ui-g-3',
+//     'component': 'HDashboardChartPDPComponent',
+//     'params': {
+//       'dimensions': ['Status1'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'pie',
+//         labels: ['Active', 'Inactive'],
+//         datasets: status1
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForPDP('Active vs. Inactive')
+//     }
+//   },
+//   {
+//     'id': 'pdp_status2',
+//     'module': 'gkcln',
+//     'label': 'Marked /Unmarked (PDP)',
+//     'icon': 'pie_chart_outlined',
+//     'grid': 'ui-g-3',
+//     'component': 'HDashboardChartPDPComponent',
+//     'params': {
+//       'dimensions': ['Status1'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'doughnut',
+//         labels: ['Marked', 'Unmarked'],
+//         datasets: status2
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForPDP('Marked vs. Unmarked')
+//     }
+//   },
+//
+//   {
+//     'id': 'pdp_mixed',
+//     'module': 'gkcln',
+//     'label': 'Status Composition 2 (PDP)',
+//     'icon': 'pie_chart_outlined',
+//     'grid': 'ui-g-3',
+//     'component': 'HDashboardChartPDPComponent',
+//     'params': {
+//       'dimensions': ['Status1', 'Status2'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'polarArea',
+//         labels: ['Active', 'Inactive', 'Marked', 'Unmarked'],
+//         datasets: status1_status2
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForPDP('Status Composition 2')
+//     }
+//   },
+//
+//   {
+//     'id': 'tml_cat',
+//     'module': 'gkcln',
+//     'label': 'Line Movement',
+//     'icon': 'show_chart',
+//     'grid': 'ui-g-6',
+//     'component': 'HDashboardChartLineComponent',
+//     'params': {
+//       'dimensions': ['Industry'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'line',
+//         labels: labelsByMonths,
+//         datasets: cat_abs_line
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForLineAndBar('Line Movement')
+//     }
+//   },
+//   {
+//     'id': 'tmls_cat_abs',
+//     'module': 'gkcln',
+//     'label': 'Line Stacked Movement (Abs)',
+//     'icon': 'show_chart',
+//     'grid': 'ui-g-6',
+//     'component': 'HDashboardChartLineComponent',
+//     'params': {
+//       'dimensions': ['Industry'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'line',
+//         labels: labelsByMonths,
+//         datasets: cat_abs_line
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForLineAndBar('Line Stacked Movement (Abs)', 'lineStack')
+//     }
+//   },
+//   {
+//     'id': 'tmls_cat_rel',
+//     'module': 'gkcln',
+//     'label': 'Line Stacked Movement (%)',
+//     'icon': 'show_chart',
+//     'grid': 'ui-g-6',
+//     'component': 'HDashboardChartLineComponent',
+//     'params': {
+//       'dimensions': ['Industry'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'line',
+//         labels: labelsByMonths,
+//         datasets: cat_rel_line
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForLineAndBar('Line Stacked Movement (%)', 'lineStack')
+//     }
+//   },
+//   {
+//     'id': 'tmvb_cat',
+//     'module': 'gkcln',
+//     'label': '(Vertical) Bar Movement',
+//     'icon': 'insert_chart',
+//     'grid': 'ui-g-6',
+//     'component': 'HDashboardChartBarComponent',
+//     'params': {
+//       'dimensions': ['Service'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'bar',
+//         labels: labelsByMonths,
+//         datasets: cat_abs_bar
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(Vertical) Bar Movement')
+//     }
+//   },
+//   {
+//     'id': 'tmhb_cat',
+//     'module': 'gkcln',
+//     'label': '(Horizontal) Bar Movement',
+//     'icon': 'insert_chart',
+//     'grid': 'ui-g-6',
+//     'component': 'HDashboardChartBarComponent',
+//     'params': {
+//       'dimensions': ['Service'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'horizontalBar',
+//         labels: labelsByMonths,
+//         datasets: cat_abs_bar
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(Horizontal) Bar Movement')
+//     }
+//   },
+//   {
+//     'id': 'tmvbs_cat',
+//     'module': 'gkcln',
+//     'label': '(Abs, Vertical) Bar Stacked Movement',
+//     'icon': 'insert_chart',
+//     'grid': 'ui-g-6',
+//     'component': 'HDashboardChartBarComponent',
+//     'params': {
+//       'dimensions': ['Service'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'bar',
+//         labels: labelsByMonths,
+//         datasets: cat_abs_bar
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(Abs, Vertical) Bar Stacked Movement', 'barStack')
+//     }
+//   },
+//   {
+//     'id': 'tmhbs_cat',
+//     'module': 'gkcln',
+//     'label': '(Abs, Horizontal) Bar Stacked Movement',
+//     'icon': 'insert_chart',
+//     'grid': 'ui-g-6',
+//     'component': 'HDashboardChartBarComponent',
+//     'params': {
+//       'dimensions': ['Service'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'horizontalBar',
+//         labels: labelsByMonths,
+//         datasets: cat_abs_bar
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(Abs, Horizontal) Bar Stacked Movement', 'barStack')
+//     }
+//   },
+//   {
+//     'id': 'tmvbs_cat_rel',
+//     'module': 'gkcln',
+//     'label': '(%, Vertical) Bar Stacked Movement',
+//     'icon': 'insert_chart',
+//     'grid': 'ui-g-6',
+//     'component': 'HDashboardChartBarComponent',
+//     'params': {
+//       'dimensions': ['Service'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'bar',
+//         labels: labelsByMonths,
+//         datasets: cat_rel_bar
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(%, Vertical) Bar Stacked Movement', 'barStack')
+//     }
+//   },
+//   {
+//     'id': 'tmhbs_cat_rel',
+//     'module': 'gkcln',
+//     'label': '(%, Horizontal) Bar Stacked Movement',
+//     'icon': 'insert_chart',
+//     'grid': 'ui-g-6',
+//     'component': 'HDashboardChartBarComponent',
+//     'params': {
+//       'dimensions': ['Service'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'horizontalBar',
+//         labels: labelsByMonths,
+//         datasets: cat_rel_bar
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(%, Horizontal) Bar Stacked Movement', 'barStack')
+//     }
+//   },
+//
+//   {
+//     'id': 'tm_cat_complex',
+//     'module': 'gkcln',
+//     'label': '(Mixed) Line Bar Movement',
+//     'icon': 'multiline_chart',
+//     'grid': 'ui-g-12',
+//     'component': 'HDashboardChartBarComponent',
+//     'params': {
+//       'dimensions': ['Service'],
+//       'measures': ['{"value": {"$sum": 1}}']
+//     },
+//     'inputs': {
+//       editMode: this.editMode,
+//       data: {
+//         type: 'bar',
+//         labels: labelsByMonths,
+//         datasets: [
+//           {
+//             type: 'line',
+//             label: 'Total',
+//             // borderColor:
+//             borderWidth: 2,
+//             fill: false,
+//             data: this.dashboardHelperService.sumArraysByColumn(src_cat_abs)
+//           },
+//           ...this.dashboardHelperService.genDataByCatForMixed(src_cat_abs)
+//         ]
+//       },
+//       options: this.dashboardHelperService.genStandardOptionsForLineAndBar('(Mixed) Line Bar Movement')
+//     }
+//   },
+//   // {
+//   //   'id': 'radar_cat',
+//   //   'label': 'Chart - Radar',
+//   //   'grid': 'ui-g-6',
+//   //   'component': 'HDashboardChartRadarComponent'
+//   // },
+// ];

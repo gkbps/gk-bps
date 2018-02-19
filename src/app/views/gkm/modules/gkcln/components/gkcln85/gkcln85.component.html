@@ -7,13 +7,6 @@
             {{title|translate}}
           </span>
         </div>
-
-        <!--
-          Add new dashboard item
-            Dialog
-          Rename dashboard item
-          Remove dashboard item
-        -->
         <div class="ui-toolbar-group-right">
             <button pButton type="button" icon="ui-icon-add" (click)="doAction('new')" pTooltip="{{'create'|translate}}" tooltipPosition="top"></button>
             <button pButton type="button" icon="ui-icon-edit" (click)="doAction('edit')" pTooltip="{{'edit'|translate}}" tooltipPosition="top"></button>
@@ -21,17 +14,80 @@
         </div>
       </p-toolbar>
 
-      <div class="ui-g form-group">
+      <div class="ui-helper-clearfix" style="margin-top: 20px;"></div>
+
+      <div *ngIf="displayForm" class="ui-g">
+        <div class="ui-g-12">
+
+          <form [formGroup]="myForm" novalidate>
+              <div class="ui-g-12">
+                <span class="md-inputfield fixed-form">
+                  <input pInputText id="module" name="module" type="text" style="width: 100%" formControlName="module">
+                  <label for="module">{{'module'|translate}} <span *ngIf="!myForm.controls.module.valid && myForm.controls.module.dirty">({{'required'|translate}})</span></label>
+                </span>
+              </div>
+
+              <div class="ui-g-12 ui-g-md-4">
+                <span class="md-inputfield fixed-form">
+                  <span class="fixed-label">{{'type'|translate}}</span>
+                </span>
+                <p-dropdown id="component" name="component" [options]="chartList" formControlName="component" placeholder="Select chart" [style]="{'width': '100%'}"></p-dropdown>
+              </div>
+
+              <div class="ui-g-12 ui-g-8">
+                <span class="md-inputfield fixed-form">
+                  <input pInputText id="label" name="label" type="text" style="width: 100%" formControlName="label">
+                  <label for="label">{{'label'|translate}} <span *ngIf="!myForm.controls.label.valid && myForm.controls.label.dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
+                </span>
+              </div>
+
+              <div class="ui-g-4">
+                <span class="md-inputfield fixed-form">
+                  <span class="fixed-label">{{'grid'|translate}}</span>
+                </span>
+                <p-dropdown id="grid" name="grid" [options]="stdGridList" formControlName="grid" placeholder="Select chart" [style]="{'width': '100%'}"></p-dropdown>
+              </div>
+
+              <div class="ui-g-4">
+                <span class="md-inputfield fixed-form">
+                  <span class="fixed-label">{{'icon'|translate}}</span>
+                </span>
+                <p-dropdown id="icon" name="icon" formControlName="icon" [style]="{'width': '100%'}" [options]="iconList" filter="true">
+                  <ng-template let-item pTemplate="selectedItem">
+                      <i class="fa ui-icon-{{item.label}}" style="width:16px;vertical-align:middle"></i>
+                      <span style="vertical-align:middle; float:right;">{{item.label}}</span>
+                  </ng-template>
+                  <ng-template let-icon pTemplate="item">
+                      <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                          <i class="fa ui-icon-{{icon.label}}" style="width:24px;position:absolute;top:1px;left:5px"></i>
+                          <div style="font-size:14px;float:right;margin-top:4px">{{icon.label}}</div>
+                      </div>
+                  </ng-template>
+                </p-dropdown>
+              </div>
+
+              <button type="button" pButton icon="fa-check"  (click)="saveDashboardItem()" label="{{'yes'|translate}}" [disabled]="!myForm.valid"></button>
+              <button type="button" pButton icon="fa-close" (click)="cancelDialog()" label="{{'no'|translate}}"></button>
+
+          </form>
+        </div>
+        <!-- <div class="card"> -->
+
+
+        <!-- </div> -->
+      </div>
+
+      <div *ngIf="!displayForm" class="ui-g form-group">
         <div class="ui-g-5">
           <p-orderList
-            [value]="dashboardItems"
+            [value]="dashboardItemsList"
             [listStyle]="{'height':'350px'}"
             [responsive]="true"
             header="Dashboard Items"
             filterBy="label"
             filterPlaceholder="Filter by name"
             dragdrop="true"
-            dragdropScope="dashboardItems"
+            dragdropScope="dashboardItemsList"
             (onSelectionChange)="selectDashboardItem($event)">
             <!-- filter="filter" -->
               <ng-template let-dashboard pTemplate="item">
@@ -74,53 +130,78 @@
 </div>
 
 <!-- DOCUMENT FORM -->
-<p-dialog header="{{dialogTitle}}" [(visible)]="displayDialog" modal="modal" width="600" [responsive]="true">
+<!-- <p-dialog header="{{dialogTitle}}" [(visible)]="displayDialog" modal="modal" width="800" [responsive]="true">
 
-    <!-- tab menu here -->
+    <form [formGroup]="myForm" novalidate>
     <div class="ui-g">
 
       <div class="ui-g-12">
         <span class="md-inputfield fixed-form">
-          <input id="dashboardLabel" type="text" style="width: 100%" pInputText [(ngModel)]="dashboardLabel">
-          <label for="dashboardLabel">{{'name'|translate}} <span *ngIf="!dashboardLabel">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
+          <input pInputText id="module" name="module" type="text" style="width: 100%" formControlName="module">
+          <label for="module">{{'module'|translate}} <span *ngIf="!myForm.controls.module.valid && myForm.controls.module.dirty">({{'required'|translate}})</span></label>
         </span>
       </div>
 
-      <!-- <div class="ui-g-12">
-        <span class="md-inputfield fixed-form">
-          <span class="fixed-label">{{'type'|translate}}</span>
-        </span>
-        <p-dropdown [(ngModel)]="chartType" [style]="{'width': '100%'}" [options]="chartList" [style]="{'width':'150px'}">
-        </p-dropdown>
-      </div> -->
+      <div class="ui-g-12">
 
-      <!-- <div class="ui-g-6">
-        <span class="md-inputfield fixed-form">
-          <span class="fixed-label">{{'icon'|translate}}</span>
-        </span>
-        <p-dropdown [(ngModel)]="dashboardIcon" [style]="{'width': '100%'}" [options]="iconList" [style]="{'width':'150px'}" filter="true">
-          <ng-template let-item pTemplate="selectedItem">
-              <i class="fa ui-icon-{{item.label}}" style="width:16px;vertical-align:middle"></i>
-              <span style="vertical-align:middle; float:right;">{{item.label}}</span>
-          </ng-template>
-          <ng-template let-icon pTemplate="item">
-              <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
-                  <i class="fa ui-icon-{{icon.label}}" style="width:24px;position:absolute;top:1px;left:5px"></i>
-                  <div style="font-size:14px;float:right;margin-top:4px">{{icon.label}}</div>
-              </div>
-          </ng-template>
-        </p-dropdown>
-      </div> -->
+        <div class="card">
+          <div class="ui-g">
+            <div class="ui-g-4">
+              <span class="md-inputfield fixed-form">
+                <span class="fixed-label">{{'type'|translate}}</span>
+              </span>
+              <p-dropdown id="component" name="component" [options]="chartList" formControlName="component" placeholder="Select chart" [style]="{'width': '100%'}"></p-dropdown>
+            </div>
+
+            <div class="ui-g-8">
+              <span class="md-inputfield fixed-form">
+                <input pInputText id="label" name="label" type="text" style="width: 100%" formControlName="label">
+                <label for="label">{{'label'|translate}} <span *ngIf="!myForm.controls.label.valid && myForm.controls.label.dirty">({{'required'|translate}}, {{'minChar'|translate: param}})</span></label>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ui-g">
+            <div class="ui-g-4">
+              <span class="md-inputfield fixed-form">
+                <span class="fixed-label">{{'grid'|translate}}</span>
+              </span>
+              <p-dropdown id="grid" name="grid" [options]="stdGridList" formControlName="grid" placeholder="Select chart" [style]="{'width': '100%'}"></p-dropdown>
+            </div>
+
+            <div class="ui-g-4">
+              <span class="md-inputfield fixed-form">
+                <span class="fixed-label">{{'icon'|translate}}</span>
+              </span>
+              <p-dropdown id="icon" name="icon" formControlName="icon" [style]="{'width': '100%'}" [options]="iconList" filter="true">
+                <ng-template let-item pTemplate="selectedItem">
+                    <i class="fa ui-icon-{{item.label}}" style="width:16px;vertical-align:middle"></i>
+                    <span style="vertical-align:middle; float:right;">{{item.label}}</span>
+                </ng-template>
+                <ng-template let-icon pTemplate="item">
+                    <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                        <i class="fa ui-icon-{{icon.label}}" style="width:24px;position:absolute;top:1px;left:5px"></i>
+                        <div style="font-size:14px;float:right;margin-top:4px">{{icon.label}}</div>
+                    </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+          </div>
+        </div>
+
+      </div>
 
     </div>
+    </form>
     <div class="ui-helper-clearfix" style="margin-bottom: 100px;"></div>
 
   <p-footer>
-      <button type="button" pButton icon="fa-check"  (click)="saveDashboardItem()" label="{{'yes'|translate}}"></button>
-      <!-- [disabled]="!documentForm.valid" -->
+      <button type="button" pButton icon="fa-check"  (click)="saveDashboardItem()" label="{{'yes'|translate}}" [disabled]="!myForm.valid"></button>
       <button type="button" pButton icon="fa-close" (click)="cancelDialog()" label="{{'no'|translate}}"></button>
   </p-footer>
-</p-dialog>
+</p-dialog> -->
 
 <!--  CONFIRM DIALOG -->
 <p-confirmDialog></p-confirmDialog>

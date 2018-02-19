@@ -1,0 +1,5 @@
+<h-data-table-by-tray
+  [trayType]="trayType"
+  [body] = "requests | async"
+  (onPageChange)="onPageChange($event)">
+</h-data-table-by-tray>

@@ -1,4 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Header } from 'primeng/shared';
 import { Footer } from 'primeng/shared';
@@ -6,8 +8,10 @@ import { MenuItem } from 'primeng/api';
 import { SelectItem } from 'primeng/api';
 import { LazyLoadEvent } from 'primeng/api';
 
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+/**/
+// import { Store } from '@ngrx/store';
+// import { getRequestsAction } from '../../../ngrx/request/requests.actions';
+/**/
 
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../../global.state';
@@ -19,9 +23,10 @@ import {
   SecurityService,
   TcodeService,
 } from '../../../nga/services';
+import { BaseComponent } from '../base.component';
+
 import { GkRequest } from '../../../store/_models/gkRequest.model';
 import { GkRequestService } from '../../../store/_services/gkRequest.service';
-import { BaseComponent } from '../base.component';
 
 @Component({
   selector: 'tray-base',
@@ -40,15 +45,19 @@ export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestro
   // Derive class properties
   trayType = '';  // Also myScope
 
-  userRights: string[];
+  cols: any[];                  // Header columns on the fly
+  columnOptions: SelectItem[];
+  selectedColumns: any[];
+  selectedItemsLabel = '{0} items selected';
+
+  requests1: Observable<any>;
+
+  // userRights: string[];
 
   requests: any[]; // List of requests for Datatable, type: simplified GkRequest[];
   selectedRequest: any; // Type: simplified GkRequest;
 
   loading: boolean;
-  cols: any[];                  // Header columns on the fly
-  columnOptions: SelectItem[];
-  selectedItemsLabel = '{0} items selected';
 
   first = 0;
   rows = 10;
@@ -70,6 +79,7 @@ export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestro
     public menuService: MenuService,
 
     // Derive class services
+    // private store: Store<any>,
     public securityService: SecurityService,
     public tcodeService: TcodeService,
     public gkRequestService: GkRequestService,
@@ -80,6 +90,9 @@ export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestro
     // Derive class constructor
     this.rows = this.localStorageService.getRows();
     this.paginatedGkRequests = gkRequestService.paginatedGkRequests;
+
+    // this.store.dispatch(getRequestsAction('', '{}', 0, 10));
+    // this.requests1 = store.select('requests');
   }
 
   ngOnInit() {
@@ -93,7 +106,7 @@ export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestro
     this.subscribeLocalState();
 
     // Performance: To avoid multiple read of Mana for menu item disable setting
-    this.userRights = this.securityService.getMana();
+    // this.userRights = this.securityService.getMana();
     this.initDataTableColumn();
     this.initMenuItems();
   }
@@ -144,6 +157,17 @@ export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestro
         // console.log(this.cols, this.columnOptions);
       });
   }
+
+  // doSomething(event) {
+  //   console.log(event);
+  //
+  //   this.store.dispatch(getRequestsAction(
+  //     event.filter,
+  //     event.sort,
+  //     event.first,
+  //     event.rows
+  //   ));
+  // }
 
   initMenuItems() {
     this.translateService.get(['view', 'print'])

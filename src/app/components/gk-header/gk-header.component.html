@@ -1,7 +1,7 @@
 <img alt="logo" class="mobile-logo" src="./assets/images/logo/logo-slim.png">
 
 <!--Sidebar toggle in mobile layout-->
-<a class="menu-btn">
+<a class="menu-btn" href="#">
   <i class="material-icons" gkLayoutSidebarToggleMobileMode></i>
 </a>
 
@@ -57,7 +57,7 @@
     <!-- ./PROFILE MENU -->
 
     <!-- WORKING BAR -->
-    <li id="setting-item" class="">
+    <li id="setting-item">
       <!-- gkNavSetting -->
       <a href="#" (click)="toggleWkBar(); false">
         <i *ngIf="currentWkBarStatus" class="topbar-icon material-icons">layers</i>
@@ -70,7 +70,7 @@
     <!-- WORKING BAR -->
 
     <!-- LANGUAGE -->
-    <li id="language-item" class="" gkNavLanguage>
+    <li id="language-item" gkNavLanguage>
       <a href="#">
         <i class="topbar-icon material-icons">language</i>
         <span class="topbar-badge animated rubberBand">{{lang}}</span>
@@ -196,6 +196,7 @@
     <!-- ./NOTIFICATION -->
 
     <!-- TRANSACTION CODE -->
+
     <li class="search-item">
       <form (keydown)="keyDownFunction($event)">
         <span class="md-inputfield">

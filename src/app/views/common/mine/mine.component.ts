@@ -1,6 +1,7 @@
 import { Component, OnInit,  OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { MenuItem } from 'primeng/api';
 import { SelectItem } from 'primeng/api';
@@ -8,6 +9,11 @@ import { Message } from 'primeng/components/common/api';
 
 import { Subscription } from 'rxjs/Subscription';
 import { EventService } from './event.service';
+
+/**/
+import { Store } from '@ngrx/store';
+import { getTodosAction } from '../../../ngrx/todo/todos.actions';
+/**/
 
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../../global.state';
@@ -19,6 +25,7 @@ import {
   StateManagementService,
 } from '../../../nga/services';
 import { BaseComponent } from '../../base';
+
 
 export class MyEvent {
     id: number;
@@ -60,6 +67,8 @@ export class MineComponent extends BaseComponent implements OnInit, OnDestroy {
   dialogVisible = false;
   idGen = 100;
 
+  todos: Observable<any>;
+
   constructor(
     // Base class services
     public translateService: TranslateService,
@@ -71,6 +80,7 @@ export class MineComponent extends BaseComponent implements OnInit, OnDestroy {
     // Derive class services
     private stateManagementService: StateManagementService,
     private eventService: EventService,
+    private store: Store<any>
   ) {
     // Base class constructor: Re-injection for inheritance
     super(translateService, globalState, localStorageService, navigationService, menuService);
@@ -78,6 +88,10 @@ export class MineComponent extends BaseComponent implements OnInit, OnDestroy {
     // Derive class constructor
     stateManagementService.initState();
     const currentLang = this.localStorageService.getLang();
+
+    // Dispatch an action that update store then observe new data
+    this.store.dispatch(getTodosAction());
+    this.todos = store.select('todos');
   }
 
   ngOnInit() {

@@ -1,51 +1,255 @@
-.e-title {
-  margin: 10px 0 0 10px;
-  .e-desc1 {
-    margin: 10px 0 0 10px;
-  }
 
 
+db.clients.aggregate(
+
+	// Pipeline
+	[
+		// Stage 1
+		{
+			$group: {
+				  _id: {
+				    status1: "$status1",
+				    status2: "$status2"
+				  },
+				  total: { "$sum": 1 }
+			}
+		},
+
+	]
+
+	// Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+
+);
+
+db.clients.aggregate(
+
+	// Pipeline
+	[
+		// Stage 1
+		{
+			$addFields: {
+			    "month": {$month: "$created_at"},
+			    "year": {$year: "$created_at"},
+			}
+		},
+
+		// Stage 2
+		{
+			$group: {
+				_id: {
+				  industry: "$industry",
+				  month: "$month",
+				  year: "$year",
+				},
+				value: {$sum: 1}
+			}
+		},
+
+	]
+
+	// Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+
+);
 
 
-<div class="card">
-  Content here
-</div>
+db.clients.aggregate(
 
-<div class="card card-w-title">
-  <h1>Card with title<h1>
-  Content here
-</div>
+	// Pipeline
+	[
+		// Stage 1
+		{
+			$group: {
+				_id: {
+				 name: "$industry",
+				 month: {$month: "$created_at"},
+				 year: {$year: "$created_at"},
+				 },
+				value: { "$sum": 1 }
+			}
+		},
 
-<span class="md-inputfield">
-  <input type="text" pInputText>
-  <label>Name</label>
-</span>
+	]
+
+	// Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+
+);
 
 
-<button type="button" pButton label="ui-icon-check" icon="ui-icon-check"></button>
-<div class="ui-g ui-fluid">
-  <div class="ui-g-12">
-    <div class="card card-w-title">
-      <h1>Multiple</h1>
+db.clients.aggregate(
+
+	// Pipeline
+	[
+		// Stage 1
+		{
+			$addFields: {
+			    "month": {$month: "$created_at"},
+			    "year": {$year: "$created_at"},
+			}
+		},
+
+		// Stage 2
+		{
+			$group: {
+				_id: {
+				  industry: "$industry",
+				  month: "$month",
+				  year: "$year",
+				},
+				value: {$sum: 1}
+			}
+		},
+
+		// Stage 3
+		{
+			$out: "abc"
+		},
+
+	]
+
+	// Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+
+);
 
 
-      <div class="ui-g form-group">
+db.clients.aggregate(
 
-        <div class="ui-g-12">
+	// Pipeline
+	[
+		// Stage 1
+		{
+			$addFields: {
+			    "month": {$month: "$created_at"},
+			    "year": {$year: "$created_at"},
+			}
+		},
 
-        </div>
+		// Stage 2
+		{
+			$group: {
+				_id: {
+				  industry: "$industry",
+				  month: "$month",
+				  year: "$year",
+				},
+				value: {$sum: 1},
+				data: {"$push": "$$ROOT"}
+			}
+		},
 
-      </div>
-    </div>
-  </div>
-</div>
+	]
 
-"../node_modules/primeng/resources/primeng.min.css",
-"nanoscroller": "^0.8.7",
-"ngx-bootstrap": "1.9.1",
-"streamsaver": "^1.0.1",
-"deep-diff": "^0.3.8",
-"file-saver": "^1.3.3",
-    "@types/file-saver": "0.0.1",
+	// Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
 
-     style="margin:10px auto;"
+);
+
+
+/*****
+  OPENING BALANCE
+ *****/
+ db.clients.aggregate(
+
+	// Pipeline
+	[
+		// Stage 1
+		{
+			$addFields: {
+			    "month": {$month: "$created_at"},
+			    "year": {$year: "$created_at"},
+			}
+		},
+
+		// Stage 2
+		{
+			$group: {
+				_id: {
+				  industry: "$industry",
+				  month: "$month",
+				  year: "$year",
+				},
+				value: {$sum: 1}
+			}
+		},
+
+		// Stage 3
+		{
+			$match: {
+				"_id.year": {$lte: 2017}
+			}
+		},
+
+		// Stage 4
+		{
+			$group: {
+				_id: {
+				  industry: "$_id.industry",
+				  },
+				sum: {$sum: "$value"}
+			}
+		},
+
+		// Stage 5
+		{
+			$addFields: {
+			    "_id.month": 0,
+			    "_id.year": 2018
+			}
+		},
+
+	]
+
+	// Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+
+);
+
+
+/*****
+ IN YEAR
+****/
+db.clients.aggregate(
+
+	// Pipeline
+	[
+		// Stage 1
+		{
+			$addFields: {
+			    "month": {$month: "$created_at"},
+			    "year": {$year: "$created_at"},
+			}
+		},
+
+		// Stage 2
+		{
+			$group: {
+				_id: {
+				  industry: "$industry",
+				  month: "$month",
+				  year: "$year",
+				},
+				value: {$sum: 1}
+			}
+		},
+
+		// Stage 3
+		{
+			$match: {
+				"_id.year": {$gt: 2017}
+			}
+		},
+
+		// Stage 4
+		{
+			$group: {
+				_id: {
+				  industry: "$_id.industry",
+				  month: "$_id.month",
+				  year: "$_id.year",
+				  },
+				sum: {$sum: "$value"}
+			}
+		},
+
+	]
+
+	// Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+
+);

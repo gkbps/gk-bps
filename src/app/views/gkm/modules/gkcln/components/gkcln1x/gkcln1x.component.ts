@@ -1,28 +1,20 @@
 import { Component, OnInit,  OnDestroy } from '@angular/core';
-
-import { Header } from 'primeng/shared';
-import { Footer } from 'primeng/shared';
-import { MenuItem } from 'primeng/api';
-import { SelectItem } from 'primeng/api';
-import { LazyLoadEvent } from 'primeng/api';
-
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+
+import { SelectItem } from 'primeng/api';
+
+/**/
+import { Store } from '@ngrx/store';
+import { getGkClientsAction } from '../../../../../../ngrx/gkClient/gkClients.actions';
+/**/
 
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../../../../../global.state';
 import {
   LocalStorageService,
   NavigationService,
-  MenuService,
-
-  SecurityService,
-  TcodeService,
+  MenuService
 } from '../../../../../../nga/services';
-
-import { GkClient } from '../../../../../../store/_models/gkClient.model';
-import { GkClientService } from '../../../../../../store/_services/gkClient.service';
-
 import { BaseComponent } from '../../../../../base';
 
 @Component({
@@ -40,28 +32,14 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
   };
 
   // Derive class properties
-  userRights: string[];
-
-  clients: any[];               // List of clients for Datatable, type: simplified GkClient[];
-  selectedClient: any;          // Type: simplified GkClient;
-
-  loading: boolean;
+  module = 'gkcln';
 
   cols: any[];                  // Header columns on the fly
   columnOptions: SelectItem[];
   selectedColumns: any[];
   selectedItemsLabel = '{0} items selected';
 
-  first = 0;
-  rows = 10;
-  totalRecords: number;
-  multiSortMeta: any;
-
-  items: MenuItem[];            // Items of menubar and context menu
-
-  // Redux based variables
-  paginatedGkClients: Observable<Array<GkClient>>;
-  private subscription: Subscription;
+  gkClients: Observable<any>;
 
   constructor(
     // Base class services
@@ -72,16 +50,14 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
     public menuService: MenuService,
 
     // Derive class services
-    private securityService: SecurityService,
-    private tcodeService: TcodeService,
-    private gkClientService: GkClientService,
+    private store: Store<any>
   ) {
     // Base class constructor: Re-injection for inheritance
     super(translateService, globalState, localStorageService, navigationService, menuService);
 
     // Derive class constructor
-    this.rows = this.localStorageService.getRows();
-    this.paginatedGkClients = gkClientService.paginatedGkClients;
+    this.store.dispatch(getGkClientsAction('', '{}', 0, 10));
+    this.gkClients = store.select('gkClients');
   }
 
   ngOnInit() {
@@ -94,10 +70,7 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
     this.globalState.notifyMyDataChanged('help', '', 'tcd.1x.masterList');
     this.subscribeLocalState();
 
-    // Performance: To avoid multiple read of Mana for menu item disable setting
-    this.userRights = this.securityService.getMana();
     this.initDataTableColumn();
-    this.initMenuItems();
   }
 
   initDataTableColumn() {
@@ -119,93 +92,19 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
         for (let i = 0; i < this.cols.length; i++) {
             this.columnOptions.push({ label: this.cols[i].header, value: this.cols[i] });
         }
-
         // console.log(this.cols, this.columnOptions);
       });
   }
 
-  initMenuItems() {
-    this.translateService.get(['create', 'view', 'edit', 'disable', 'enable', 'mark', 'unmark', 'delete', 'viewChange'])
-      .subscribe((res) => {
+  doSomething(event) {
+    console.log(event);
 
-        this.items = [
-          {
-            label: res.create, icon: 'ui-icon-add',
-            command: (event) => this.tcodeService.executeTCode('gkcln11'),
-            disabled: this.notInRights('gkcln11'),
-          },
-          {
-            label: res.view, icon: 'ui-icon-search',
-            command: (event) => this.executeTcode('gkcln12'),
-            disabled: this.notInRights('gkcln12'),
-          },
-          {
-            label: res.edit, icon: 'ui-icon-edit',
-            command: (event) => this.executeTcode('gkcln13'),
-            disabled: this.notInRights('gkcln13'),
-          },
-          // { separator: true },
-          {
-            label: res.disable, icon: 'ui-icon-bookmark',
-            command: (event) => this.executeTcode('gkcln14'),
-            disabled: this.notInRights('gkcln14'),
-          },
-          {
-            label: res.enable, icon: 'ui-icon-bookmark-border',
-            command: (event) => this.executeTcode('gkcln15'),
-            disabled: this.notInRights('gkcln15'),
-          },
-          // { separator: true },
-          {
-            label: res.mark, icon: 'ui-icon-visibility-off',
-            command: (event) => this.executeTcode('gkcln16'),
-            disabled: this.notInRights('gkcln16'),
-          },
-          {
-            label: res.unmark, icon: 'ui-icon-visibility',
-            command: (event) => this.executeTcode('gkcln17'),
-            disabled: this.notInRights('gkcln17'),
-          },
-          // { separator: true },
-          {
-            label: res.delete, icon: 'ui-icon-delete-forever',
-            command: (event) => this.executeTcode('gkcln18'),
-            disabled: this.notInRights('gkcln18'),
-          },
-          // { separator: true },
-          {
-            label: res.viewChange, icon: 'ui-icon-track-changes',
-            command: (event) => this.executeTcode('gkcln19'),
-            disabled: this.notInRights('gkcln19'),
-          },
-        ];
-
-      });
-  }
-
-  notInRights(tcode) {
-    return !this.tcodeService.checkTcodeInEncodeArray(tcode, this.userRights);
-  }
-
-  executeTcode(tcode) {
-    this.tcodeService.executeTCode(tcode, this.selectedClient ? this.selectedClient._id : null)
-  }
-
-  loadData(event: LazyLoadEvent) {
-    // Start datatable's loading indicator
-    this.loading = true;
-
-    const sort = {};
-    if (event.sortField) {
-      sort[event.sortField] = event.sortOrder;
-    }
-    // console.log(sort);
-
-    this.gkClientService.findMasterListPagination(event.globalFilter? event.globalFilter: '', JSON.stringify(sort), event.first, event.rows);
-    //this.first = event.first;
-    this.rows = event.rows;
-    console.log(this.first, this.rows);
-    this.localStorageService.setRows(event.rows);
+    this.store.dispatch(getGkClientsAction(
+      event.filter,
+      event.sort,
+      event.first,
+      event.rows
+    ));
   }
 
   ngOnDestroy() {
@@ -221,28 +120,10 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
       this.translateService.use(lang);
       this.initDataTableColumn();
-      this.initMenuItems();
     });
-
-    // Redux store + initial value
-    this.subscription = this.paginatedGkClients
-    .subscribe(responseBody => {
-      this.totalRecords = responseBody['total'];
-      this.clients = responseBody['data'];
-
-      // End datatable's loading indicator
-      this.loading = false;
-    }, error => {
-      console.log(error);
-    });
-
-    // Initial value of ngrx
-    this.loading = true;
-    // this.gkClientService.findMasterListPagination('', '{}', this.first, this.rows);
   }
 
   unsubscribeLocalState() {
     this.globalState.unsubscribeEvent('language', this.myScope);
-    this.subscription.unsubscribe();
   }
 }

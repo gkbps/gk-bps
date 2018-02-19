@@ -5,15 +5,16 @@ db.clients.aggregate(
 		// Stage 1
 		{
 			$addFields: {
-			    "year": {$year: "$created_at"},
-			    "month": {$month: "$created_at"}
+			    "month": {$month: "$created_at"},  
+			    "year": {$year: "$created_at"}
 			}
 		},
 
 		// Stage 2
 		{
 			$group: {
-			    _id: {      
+			    _id: {
+			      industry: "$industry",
 			      service: "$service",
 			      status1: "$status1",
 			      status2: "$status2",
@@ -32,6 +33,7 @@ db.clients.aggregate(
 		// Stage 3
 		{
 			$sort: {
+			    "_id.industry": 1,	
 			    "_id.service": 1,
 			    "_id.status1": 1,
 			    "_id.status2": 1,    
@@ -44,7 +46,9 @@ db.clients.aggregate(
 			$addFields: {
 			    "key": {
 			      $concat: [
-					  "$_id.service",	
+			          "$_id.industry",          
+			          "-",
+			          "$_id.service",    
 			          "-",
 			          "$_id.status1",
 			          "-",          
@@ -58,7 +62,7 @@ db.clients.aggregate(
 
 		// Stage 5
 		{
-			$out: "client_DASHBOARD_STATUS_SERVICE"
+			$out: "client_DASHBOARD_INDUSTRY_SERVICE_STATUS"
 		},
 
 	]

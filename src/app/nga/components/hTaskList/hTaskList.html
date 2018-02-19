@@ -24,3 +24,17 @@
     </ul>
   </p-panel>
 </div>
+
+<div>
+  <p *ngIf="todos.pending">
+    Loading...
+  </p>
+
+  <p *ngFor="let todo of todos.data">
+    {{todo.title}}
+  </p>
+
+  <p *ngIf="todos.error">
+    {{todos.error}}
+  </p>
+</div>

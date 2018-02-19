@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 export class TcodeService {
 
   // Tcodes belong this list shall not be under any module
+  // then tcode shall execute in vanilla mode
   baseTcodes = [
     'intro', 'login', 'lockscreen', 'register', 'forgot',
     'profile', 'policy', 'help', 'dict',
@@ -15,6 +16,11 @@ export class TcodeService {
     '401', '403', '404', '500', 'chat',
     'home', 'news', 'main',
     'mine', 'tray',
+    'inbox', 'ibx',
+    'outbox', 'obx',
+    'draft', 'drf',
+    'inprogress', 'progress', 'ipg',
+    'completed', 'clt',
     'gkm', 'gkcln', 'gksol', 'gktcd',
     'prime',
   ];

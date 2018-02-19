@@ -10,6 +10,13 @@ import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { TodosReducers } from '../../../ngrx/todo/todos.reducers';
+import { TodosEffects } from '../../../ngrx/todo/todos.effects';
+import { TodosServices } from '../../../ngrx/todo/todos.services';
+
 // Internal
 import { NgaModule } from '../../../nga/nga.module';
 // import { HoangModule } from '../../../nga/hoang.module';
@@ -34,6 +41,9 @@ import { EventService } from './event.service';
     CheckboxModule,
     ButtonModule,
 
+    StoreModule.forFeature('todos', TodosReducers),
+    EffectsModule.forRoot([TodosEffects]),
+
     NgaModule,
     // HoangModule,
     HTaskListModule,
@@ -43,6 +53,7 @@ import { EventService } from './event.service';
   declarations: [ MineComponent ],
   providers: [
     EventService,
+    TodosServices
   ],
 })
 export class MineModule { }

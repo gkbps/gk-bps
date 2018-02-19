@@ -22,10 +22,36 @@ export class DatasourceService {
 
   getDatasourceByModule(module: string, params) {
     // const params = {
-    //   filter: filter,
-    //   sort: sort,
-    //   first: first,
-    //   rows: rows
+    //   dimensions: ['industry', 'service', 'status1', 'status2'],
+    //   measures: [
+    //    '{"value": {"$sum": 1}}',
+    //    '{"count": {"$sum": 1}}'
+    //   ]
+    // };
+
+    const reqOptions = {
+      params: params
+    };
+
+    return this.httpClientService.get('/' + module + '/datasource', reqOptions)
+      .map((res) => {
+        return res.body || {};
+      })
+      .map((payload) => {
+        return { type: 'GET_DATASOURCE', payload };
+      })
+      .subscribe((action) => {
+        this.store.dispatch(action);
+      });
+  }
+
+  getDatasourceByModuleInStore(module: string, params) {
+    // const params = {
+    //   dimensions: ['industry', 'service', 'status1', 'status2'],
+    //   measures: [
+    //    '{"value": {"$sum": 1}}',
+    //    '{"count": {"$sum": 1}}'
+    //   ]
     // };
 
     const reqOptions = {

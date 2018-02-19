@@ -14,7 +14,7 @@ export class GkRequestService {
 
   // Redux based variables
   paginatedGkRequests: Observable<Array<GkRequest>>;
-  gkRequests: Observable<Array<GkRequest>>;
+  // gkRequests: Observable<Array<GkRequest>>;
   selectedGkRequest: Observable<GkRequest>;
 
   constructor(
@@ -22,7 +22,7 @@ export class GkRequestService {
     private store: Store<AppStore>
   ) {
     this.paginatedGkRequests = store.select( myStore => myStore.paginatedGkRequests );
-    this.gkRequests = store.select( myStore => myStore.gkRequests );
+    // this.gkRequests = store.select( myStore => myStore.gkRequests );
     this.selectedGkRequest = store.select( myStore => myStore.selectedGkRequest );
   }
 
