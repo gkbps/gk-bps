@@ -3,16 +3,16 @@
  *******************************************************************************/
 
 export enum GkClientsActionTypes {
-  GET_GKCLIENTS = '[GkClient] Get GkClients',
-  GET_GKCLIENTS_SUCCESS = '[GkClient] Get GkClients Success',
-  GET_GKCLIENTS_ERROR = '[GkClient] Get GkClients Error'
+  GET_MANY_GKCLIENTS = '[GkClient] Get Many GkClients',
+  GET_MANY_GKCLIENTS_SUCCESS = '[GkClient] Get Many GkClients Success',
+  GET_MANY_GKCLIENTS_ERROR = '[GkClient] Get Many GkClients Error'
 }
 
 // To get GkClients by pagination
 export function getGkClientsAction(filter, sort, first, rows) {
   // Return an action with type and payload
   return {
-    type: GkClientsActionTypes.GET_GKCLIENTS,    
+    type: GkClientsActionTypes.GET_MANY_GKCLIENTS,
     payload: {
       filter: filter,
       sort: sort,
@@ -32,6 +32,7 @@ export enum GkClientActionTypes {
   GET_GKCLIENT_ERROR = '[GkClient] Get GkClient Error',
 
   RESET_GKCLIENT ='[GkClient] Reset GkClient',
+  RESET_GKCLIENT_SUCCESS = '[GkClient] Reset GkClient Success',
 
   ADD_GKCLIENT = '[GkClient] Add GkClient',
   ADD_GKCLIENT_SUCCESS = '[GkClient] Add GkClient Success',

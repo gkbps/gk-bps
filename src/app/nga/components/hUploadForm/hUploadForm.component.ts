@@ -144,9 +144,13 @@ export class HUploadForm implements OnInit, OnDestroy {
     this.apiResultHandlingService.processAPIResult(result)
       .then((msg) => {
         console.log(msg);
-        this.msgs = [];
-        this.msgs.push(msg);
-        this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+        // const toastData = {
+        //   type: 'warning',
+        //   title: res.navigation,
+        //   msg: res.top_of_history,
+        //   showClose: true,
+        // };
+        // this.globalState.notifyMyDataChanged('toasty','', toastData);                
       });
   }
 

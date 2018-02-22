@@ -6,8 +6,13 @@ import { RouterModule } from '@angular/router';
 import { AppTranslationModule } from '../app.translation.module';
 
 // DIRECTIVES
-import { DisableControlDirective } from './directives';
+import {
+  DebounceClickDirective,
+  DisableControlDirective
+} from './directives';
+
 const NGA_DIRECTIVES = [
+  DebounceClickDirective,
   DisableControlDirective
 ];
 

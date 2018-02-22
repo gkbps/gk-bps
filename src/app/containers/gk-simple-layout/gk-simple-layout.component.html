@@ -1,7 +1,35 @@
 <div class="ui-g">
   <div class="ui-g-12">
-    <p-growl *ngIf="notificationMode && notificationType" [value]="msgs"></p-growl>
-    <p-messages *ngIf="notificationMode && (!notificationType)" [value]="msgs"></p-messages>
+
+    <!-- System wide alert -->
+    <div class="ui-messages ui-widget ui-corner-all ui-messages-fatal" style="margin: 0 0 1em 0; display: block">
+      <!--
+        ui-messages-warn
+        ui-messages-warn
+        ui-messages-error
+        ui-messages-fatal
+        ui-messages-success
+      -->
+        <span class="ui-messages-icon fa fa-fw fa-2x fa-check"></span>
+        <ul>
+            <li>
+              <span class="ui-messages-summary" style="font-size:16px">
+                This system is under development and going to be rolled out in 2018.
+              </span>
+            </li>
+        </ul>
+    </div>
+
+    <ng2-toasty [position]="toastyPosition"></ng2-toasty>
+
+    <p-sidebar *ngIf="!sbFullScreen" [(visible)]="sbVisibility" [position]="sbPosition" [styleClass]="sbSizeList[sbSize]" [baseZIndex]="999999">
+        <h1 style="font-weight:normal">{{sbTitle}}</h1>
+    </p-sidebar>
+
+    <p-sidebar *ngIf="sbFullScreen" [(visible)]="sbVisibility" [fullScreen]="true" [baseZIndex]="999999">
+        <h1 style="font-weight:normal">{{sbTitle}}</h1>
+    </p-sidebar>
+
   </div>
 </div>
 

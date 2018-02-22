@@ -102,10 +102,15 @@ export class HHistory implements OnInit, OnDestroy {
   handleAPIReturn(result) {
     this.apiResultHandlingService.processAPIResult(result)
       .then((msg) => {
-        this.msgs = [];
-        this.msgs.push(msg);
-        // this.globalState.notifyDataChanged('notificationMessage', this.msgs);
-        this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+        console.log(msg);
+
+        // const toastData = {
+        //   type: 'warning',
+        //   title: res.navigation,
+        //   msg: res.top_of_history,
+        //   showClose: true,
+        // };
+        // this.globalState.notifyMyDataChanged('toasty','', toastData);
       });
   }
 

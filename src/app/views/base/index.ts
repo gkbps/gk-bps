@@ -1,2 +1,2 @@
 export * from './base.component';
-export * from './trayBase';
+export * from './tray/tray.component';

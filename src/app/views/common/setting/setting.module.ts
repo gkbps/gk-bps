@@ -13,6 +13,7 @@ import { DataTableModule } from 'primeng/datatable';
 import { NgaModule } from '../../../nga/nga.module';
 // import { HoangModule } from '../../../nga/hoang.module';
 
+import { HToastySettingModule } from '../../../nga/components/hToastySetting';
 import { HChangeDashboardModule } from '../../../nga/components/hChangeDashboard';
 import { HContactFormModule } from '../../../nga/components/hContactForm';
 import { HImageBoxModule } from '../../../nga/components/hImageBox';
@@ -44,6 +45,7 @@ import { SettingRoutingModule } from './setting-routing.module';
     NgaModule,
     // HoangModule,
 
+    HToastySettingModule,
     HChangeDashboardModule,
     HContactFormModule,
     HImageBoxModule,

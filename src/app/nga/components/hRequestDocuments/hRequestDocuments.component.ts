@@ -319,9 +319,14 @@ export class HRequestDocuments implements OnInit, OnDestroy {
       this.unavailable();
       // this.translateService.get(['invalid_form', 'invalid_form_message'])
       //   .subscribe((res) => {
-      //     this.msgs = [];
-      //     this.msgs.push({severity: 'warn', summary: res.invalid_form, detail: res.invalid_form_message});
-      //     this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+      //       const toastData = {
+      //         type: 'warning',
+      //         title: res.invalid_form,
+      //         msg: res.invalid_form_message,
+      //         showClose: true,
+      //       };
+      //       this.globalState.notifyMyDataChanged('toasty','', toastData);
+      //
       //   });
     } else {
       this.translateService.get([
@@ -387,9 +392,13 @@ export class HRequestDocuments implements OnInit, OnDestroy {
   unavailable() {
     this.translateService.get(['unavailable', 'unavailable_msg'])
       .subscribe((res) => {
-        this.msgs = [];
-        this.msgs.push({severity: 'warn', summary: res.unavailable, detail: res.unavailable_msg});
-        this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+        const toastData = {
+          type: 'warning',
+          title: res.unavailable,
+          msg: res.unavailable_msg,
+          showClose: true,
+        };
+        this.globalState.notifyMyDataChanged('toasty','', toastData);
       });
   }
 }

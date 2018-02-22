@@ -489,12 +489,6 @@ export class GkClnForm implements OnInit, OnDestroy {
     }
   }
 
-  onTabChange(event) {
-      // this.msgs = [];
-      // this.msgs.push({severity: 'info', summary: 'Tab Expanded', detail: 'Index: ' + event.index});
-      // this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
-  }
-
   ngOnDestroy() {
     this.unsubscribeLocalState();
   }

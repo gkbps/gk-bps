@@ -53,9 +53,9 @@ export class LocalStorageService {
           'navType': 'circle',
           'navEffect': 'effect1',
           'isSmall': false,
-          'notificationMode': true,
-          'isGrowl': true,
-          'timeOut': 5000,
+          'toastyTheme': 'default',
+          'toastyTimeOut': 5000,
+          'toastyPosition': 'bottom-right',
           'debug': false,
           'home': ''
         },
@@ -264,16 +264,46 @@ export class LocalStorageService {
     return (env.pref.isGrowl);
   }
 
-  /* Notification Type */
-  setTimeOut(timeOut = 5000) {
+  /* Toasty TimeOut */
+  setToastyTimeOut(timeOut = 5000) {
     let env = this.getEnv();
-    env.pref.timeOut = timeOut;
-    this.setEnv(JSON.stringify(env));
+    if (env.pref.toastyTimeOut !== timeOut) {
+      env.pref.toastyTimeOut = timeOut;
+      this.setEnv(JSON.stringify(env));
+    }
   }
 
-  getTimeOut(): number {
+  getToastyTimeOut(): number {
     const env = this.getEnv();
-    return (env.pref.timeOut);
+    return (env.pref.toastyTimeOut);
+  }
+
+  /* Toasty Theme */
+  setToastyTheme(theme = 'default') {
+    let env = this.getEnv();
+    if (env.pref.toastyTheme !== theme) {
+      env.pref.toastyTheme = theme;
+      this.setEnv(JSON.stringify(env));
+    }
+  }
+
+  getToastyTheme(): string {
+    const env = this.getEnv();
+    return (env.pref.toastyTheme);
+  }
+
+  /* Toasty Position */
+  setToastyPosition(position = 'bottom-right') {
+    let env = this.getEnv();
+    if (env.pref.toastyPosition !== position) {
+      env.pref.toastyPosition = position;
+      this.setEnv(JSON.stringify(env));
+    }
+  }
+
+  getToastyPosition(): string {
+    const env = this.getEnv();
+    return (env.pref.toastyPosition);
   }
 
   /* Debug Mode */

@@ -41,6 +41,22 @@ export class GkClientsServices {
       });
   }
 
+  createBlankItem(){
+    const value = {
+      name: '',
+      clientDb: '',
+      industry: '',
+      service: '',
+      addresses: [],
+      contacts: [],
+      solutions: [],
+      remarks: [],
+      status1: 'Active',
+      status2: 'Unmarked'
+    }
+    return Observable.of(value);
+  }
+
   findById(_id: string) {
     return this.httpClientService.get(this.suffixUrl + _id)
       .map((res) => {
@@ -49,7 +65,7 @@ export class GkClientsServices {
   }
 
   createNew(gkrequest: any) {
-    return this.httpClientService.post(this.suffixUrl + 'createNew', gkrequest)
+    return this.httpClientService.post(this.suffixUrl, gkrequest)
       .map((res) => {
         return res.body.data || '';
       });
@@ -66,7 +82,7 @@ export class GkClientsServices {
     return this.httpClientService.patch(this.suffixUrl + 'enable/' + _id, {})
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
-      return res.body || {};
+      return res.body.data || {};
     });
   }
 
@@ -74,7 +90,7 @@ export class GkClientsServices {
     return this.httpClientService.patch(this.suffixUrl + 'disable/' + _id, {})
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
-      return res.body || {};
+      return res.body.data || {};
     });
   }
 
@@ -82,7 +98,7 @@ export class GkClientsServices {
     return this.httpClientService.patch(this.suffixUrl + 'mark/' + _id, {})
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
-      return res.body || {};
+      return res.body.data || {};
     });
   }
 
@@ -90,7 +106,7 @@ export class GkClientsServices {
     return this.httpClientService.patch(this.suffixUrl + 'unmark/' + _id, {})
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
-      return res.body || {};
+      return res.body.data || {};
     });
   }
 
@@ -98,7 +114,7 @@ export class GkClientsServices {
     return this.httpClientService.delete(this.suffixUrl + _id)
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
-      return res.body || {};
+      return res.body.data || {};
     });
   }
 

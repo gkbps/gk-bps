@@ -398,9 +398,13 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
 
       this.translateService.get(['invalid_form', 'invalid_form_message'])
         .subscribe((res) => {
-          this.msgs = [];
-          this.msgs.push({severity: 'warn', summary: res.invalid_form, detail: res.invalid_form_message});
-          this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+          const toastData = {
+            type: 'warning',
+            title: res.invalid_form,
+            msg: res.invalid_form_message,
+            showClose: true,
+          };
+          this.globalState.notifyMyDataChanged('toasty','', toastData);                    
         });
     } else {
       console.log(this.myForm.controls['status'].value);

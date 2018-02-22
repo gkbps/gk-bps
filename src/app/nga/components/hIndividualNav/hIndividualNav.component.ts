@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
@@ -21,6 +21,7 @@ export class HIndividualNav implements OnInit, OnDestroy {
   myScope = 'gk-individual-nav';
 
   @Input() prefix: string;
+  @Output() onClick: EventEmitter<any> = new EventEmitter();
 
   items: MenuItem[];
 
@@ -108,6 +109,7 @@ export class HIndividualNav implements OnInit, OnDestroy {
         workingId = params['id'] || '';
       }
 
+      this.onClick.emit({ action: action });
       this.tcodeService.executeTCode(tcode, workingId);
     });
   }

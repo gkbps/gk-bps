@@ -44,7 +44,7 @@ import { CompletedComponent } from './components/completed.component';
     TranslateModule,
 
     StoreModule.forFeature('requests', RequestsReducers),
-    EffectsModule.forRoot([RequestsEffects]),
+    EffectsModule.forFeature([RequestsEffects]),
 
     HNavBoardModule,
     HDataTableByTrayModule,

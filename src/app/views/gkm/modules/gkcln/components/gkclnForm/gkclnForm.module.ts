@@ -2,15 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppTranslationModule } from '../../../../../../app.translation.module';
-import { NgaModule } from '../../../../../../nga/nga.module';
-// import { HoangModule } from '../../../../../../nga/hoang.module';
-
-import { HIndividualNavModule } from '../../../../../../nga/components/hIndividualNav';
-import { HAddressModule } from '../../../../../../nga/components/hAddress';
-import { HContactModule } from '../../../../../../nga/components/hContact';
-
-import { GkClnForm } from './gkclnForm.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
@@ -19,12 +11,21 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { TabViewModule } from 'primeng/tabview';
 
+import { NgaModule } from '../../../../../../nga/nga.module';
+
+import { HIndividualNavModule } from '../../../../../../nga/components/hIndividualNav';
+import { HAddressModule } from '../../../../../../nga/components/hAddress';
+import { HContactModule } from '../../../../../../nga/components/hContact';
+
+import { GkClnForm } from './gkclnForm.component';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AppTranslationModule,
+
+    TranslateModule,
 
     ToolbarModule,
     ButtonModule,
@@ -34,7 +35,6 @@ import { TabViewModule } from 'primeng/tabview';
     TabViewModule,
 
     NgaModule,
-    // HoangModule,
 
     HIndividualNavModule,
     HAddressModule,

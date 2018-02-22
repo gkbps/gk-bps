@@ -7,9 +7,11 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HLeadFormModule } from '../../../../../../nga/components/hLeadForm';
 
-import { GkClnFormModule } from '../gkclnForm/gkclnForm.module';
+// import { GkClnFormModule } from '../gkclnForm/gkclnForm.module';
 import { GkCln16Component } from './gkcln16.component';
 import { GkCln16RoutingModule } from './gkcln16-routing.module';
+
+import { GkClnSharedModule } from '../gkclnShared/gkclnShared.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { GkCln16RoutingModule } from './gkcln16-routing.module';
 
     HLeadFormModule,
 
-    GkClnFormModule,
+    // GkClnFormModule,
+    GkClnSharedModule,
+
     GkCln16RoutingModule
   ],
   exports: [

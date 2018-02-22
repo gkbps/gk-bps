@@ -201,10 +201,13 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
 
   /****************************************************************************/
   selectItemRequired() {
-    console.log('select an item to execute');
-    this.msgs = [];
-    this.msgs.push({severity: 'warn', summary: this.notification, detail: this.messageText});
-    this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+    const toastData = {
+      type: 'warning',
+      title: this.notification,
+      msg: this.messageText,
+      showClose: true,
+    };
+    this.globalState.notifyMyDataChanged('toasty','', toastData);
   }
 
   showDialog(dialogType) {

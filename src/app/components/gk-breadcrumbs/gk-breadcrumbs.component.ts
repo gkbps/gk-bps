@@ -85,9 +85,13 @@ export class GkBreadcrumbsComponent implements OnInit, OnDestroy {
         'navigation', 'top_of_history'
       ])
         .subscribe((res) => {
-          this.msgs = [];
-          this.msgs.push({severity: 'info', summary: res.navigation, detail: res.top_of_history});
-          this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+          const toastData = {
+            type: 'warning',
+            title: res.navigation,
+            msg: res.top_of_history,
+            showClose: true,
+          };
+          this.globalState.notifyMyDataChanged('toasty','', toastData);
         });
     }
     return false;

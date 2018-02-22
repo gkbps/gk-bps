@@ -6,20 +6,20 @@ import { FormsModule } from '@angular/forms';
 /*******************************************************************************
  * NGRX STORE RELATED IMPORTATION
  *******************************************************************************/
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreModule } from '@ngrx/store';
+// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+// import { StoreModule } from '@ngrx/store';
 
-import { paginatedGkRequests, selectedGkRequest } from '../../../../store/_reducers/gkRequest.reducer';
-// gkRequests,
-import { paginatedGkClients, gkClients, selectedGkClient } from '../../../../store/_reducers/gkClient.reducer';
-import { paginatedGkClientsDashboard, selectedGkClientDashboard } from '../../../../store/_reducers/gkClient.reducer';
-import { paginatedDashboardPages, selectedDashboardPage, dashboardItems, selectedDashboardItem } from '../../../../store/_reducers/dashboard.reducer';
-
-import { apiGkUsers } from '../../../../store/_reducers/gkUser.reducer';
-import { standardApprovalItems } from '../../../../store/_reducers/approvalItem.reducer';
-import { datasource } from '../../../../store/_reducers/datasource.reducer';
-import { requestFiles } from '../../../../store/_reducers/requestFile.reducer';
-
+// import { paginatedGkRequests, selectedGkRequest } from '../../../../store/_reducers/gkRequest.reducer';
+// // gkRequests,
+// import { paginatedGkClients, gkClients, selectedGkClient } from '../../../../store/_reducers/gkClient.reducer';
+// import { paginatedGkClientsDashboard, selectedGkClientDashboard } from '../../../../store/_reducers/gkClient.reducer';
+// import { paginatedDashboardPages, selectedDashboardPage, dashboardItems, selectedDashboardItem } from '../../../../store/_reducers/dashboard.reducer';
+//
+// import { apiGkUsers } from '../../../../store/_reducers/gkUser.reducer';
+// import { standardApprovalItems } from '../../../../store/_reducers/approvalItem.reducer';
+// import { datasource } from '../../../../store/_reducers/datasource.reducer';
+// import { requestFiles } from '../../../../store/_reducers/requestFile.reducer';
+//
 import { GkUserService } from '../../../../store/_services/gkUser.service';
 import { GkClientService } from '../../../../store/_services/gkClient.service';
 import { GkRequestService } from '../../../../store/_services/gkRequest.service';
@@ -27,6 +27,7 @@ import { ApprovalItemService } from '../../../../store/_services/approvalItem.se
 import { DatasourceService } from '../../../../store/_services/datasource.service';
 import { RequestFileService } from '../../../../store/_services/requestFile.service';
 import { DashboardService } from '../../../../store/_services/dashboard.service';
+
 // Internal
 import { NgaModule } from '../../../../nga/nga.module';
 
@@ -79,39 +80,39 @@ const DB_COMPONENTS = [
     CommonModule,
     FormsModule,
 
-		StoreModule.forRoot({
-
-      // Dashboard
-			paginatedDashboardPages: paginatedDashboardPages,
-			selectedDashboardPage: selectedDashboardPage,
-			dashboardItems: dashboardItems,
-			selectedDashboardItem: selectedDashboardItem,
-
-      // Requests
-			paginatedGkRequests: paginatedGkRequests,
-		  // gkRequests: gkRequests,
-		  selectedGkRequest: selectedGkRequest,
-
-      // GkClients
-		  paginatedGkClients: paginatedGkClients,
-		  gkClients: gkClients,
-		  selectedGkClient: selectedGkClient,
-
-      // Dashboard
-			paginatedGkClientsDashboard: paginatedGkClientsDashboard,
-			selectedGkClientDashboard: selectedGkClientDashboard,
-
-			// Properties
-			standardApprovalItems: standardApprovalItems,
-			datasource: datasource,
-
-			requestFiles: requestFiles,
-
-			// User list for facilitating request
-			apiGkUsers: apiGkUsers,
-
-		}),
-		StoreDevtoolsModule.instrument(),
+		// StoreModule.forRoot({
+		//
+    //   // Dashboard
+		// 	paginatedDashboardPages: paginatedDashboardPages,
+		// 	selectedDashboardPage: selectedDashboardPage,
+		// 	dashboardItems: dashboardItems,
+		// 	selectedDashboardItem: selectedDashboardItem,
+		//
+    //   // Requests
+		// 	paginatedGkRequests: paginatedGkRequests,
+		//   // gkRequests: gkRequests,
+		//   selectedGkRequest: selectedGkRequest,
+		//
+    //   // GkClients
+		//   paginatedGkClients: paginatedGkClients,
+		//   gkClients: gkClients,
+		//   selectedGkClient: selectedGkClient,
+		//
+    //   // Dashboard
+		// 	paginatedGkClientsDashboard: paginatedGkClientsDashboard,
+		// 	selectedGkClientDashboard: selectedGkClientDashboard,
+		//
+		// 	// Properties
+		// 	standardApprovalItems: standardApprovalItems,
+		// 	datasource: datasource,
+		//
+		// 	requestFiles: requestFiles,
+		//
+		// 	// User list for facilitating request
+		// 	apiGkUsers: apiGkUsers,
+		//
+		// }),
+		// StoreDevtoolsModule.instrument(),
 
     NgaModule,
 

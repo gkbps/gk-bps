@@ -17,7 +17,7 @@ export class HContact implements OnInit, OnDestroy {
 
   myScope = 'h-contact';
 
-  @Input() formEditable = false;
+  @Input() isEditable = false;
   @Input() item: number;
   @Input('formGroup') public contactItem: FormGroup;
 
@@ -45,7 +45,7 @@ export class HContact implements OnInit, OnDestroy {
   }
 
   setControlStatus() {
-    if (this.formEditable) {
+    if (this.isEditable) {
       this.contactItem.controls.name.enable();
       this.contactItem.controls.title.enable();
       this.contactItem.controls.phone.enable();

@@ -27,7 +27,7 @@ import { InProgressRoutingModule } from './inprogress-routing.module';
     TranslateModule,
 
     StoreModule.forFeature('requests', RequestsReducers),
-    EffectsModule.forRoot([RequestsEffects]),
+    EffectsModule.forFeature([RequestsEffects]),
 
     HDataTableByTrayModule,
 

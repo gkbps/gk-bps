@@ -1,4 +1,12 @@
 {
+	"resource_is_created": "New resource is successfully created!",
+	"resource_is_deleted": "Resource is permanently deleted!",
+	"tcode_execution_error_msg": "Encounter error in executing transaction code. Please debug for details!",
+	"undefined_error": "Undefined error!",
+	"undefined_error_msg": "Undefined error catched!",
+	"timeout": "Time Out",
+	"test": "Test",
+	"industry": "Industry",
 	"summary_reports": "Summary Reports",
 	"detail_reports": "Detail Reports",
 	"style": "Style",

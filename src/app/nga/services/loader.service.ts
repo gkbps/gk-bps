@@ -30,7 +30,7 @@ export class LoaderService {
     // this.loaderSubject.next(<LoaderState>{show: false});
     setTimeout(() => {
       this.loaderSubject.next({show: false});
-    }, 2000);
+    }, 2500);
   }
 
 }

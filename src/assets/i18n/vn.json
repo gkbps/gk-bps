@@ -1,4 +1,12 @@
 {
+	"resource_is_created": "Tài nguyên mới được tạo thành công!",
+	"resource_is_deleted": "Tài nguyên đã được xoá vĩnh viễn!",
+	"tcode_execution_error_msg": "Lỗi phát sinh trong khi thực thi yêu cầu. Vui lòng gỡ lỗi để xem chi tiết!",
+	"undefined_error": "Lỗi không xác định!",
+	"undefined_error_msg": "Lỗi không xác định!",
+	"timeout": "Thời hạn",
+	"test": "Kiểm mẫu",
+	"industry": "Ngành nghề",
 	"summary_reports": "Báo cáo tổng hợp",
 	"detail_reports": "Báo cáo chi tiết",
 	"style": "Phong cách",

@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -28,7 +28,21 @@ export class TcodeService {
   constructor(
     private router: Router,
     private http: Http,
-  ) { }
+  ) {
+    // Override the route reuse strategy to refresh current url
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    }
+
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        // trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+        // if you need to scroll back to top, here is the right place
+        window.scrollTo(0,0);
+      }
+    });
+  }
 
   /*****************************************************************************
    * TO TRANSFORM A TCODE TO BE ACTIONABLE URL

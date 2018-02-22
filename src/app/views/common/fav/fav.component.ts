@@ -217,16 +217,24 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
      * Root node could not be moved
      */
     if (!this.selectedNode) {
-      this.msgs = [];
-      this.msgs.push({ severity: 'warn', summary: this.langList['move'], detail: this.langList['selectItemToExecute'] });
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+      const toastData = {
+        type: 'warning',
+        title: this.langList['move'],
+        msg: this.langList['selectItemToExecute'],
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
       return false;
     }
 
     if (!this.selectedNode.parent) {
-      this.msgs = [];
-      this.msgs.push({ severity: 'error', summary: this.langList['move'], detail: this.langList['rootCanNotBeMoved'] });
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+      const toastData = {
+        type: 'error',
+        title: this.langList['move'],
+        msg: this.langList['rootCanNotBeMoved'],
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
       return false;
     }
 
@@ -261,9 +269,14 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.msgs = [];
-    this.msgs.push({ severity: 'success', summary: this.langList['move'], detail: this.langList['actionCompleted'] });
-    this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+    const toastData = {
+      type: 'success',
+      title: this.langList['move'],
+      msg: this.langList['actionCompleted'],
+      showClose: true,
+    };
+    this.globalState.notifyMyDataChanged('toasty','', toastData);
+
     this.displayMoveDialog = false;
     this.saveFav2LocalStorage();
   }
@@ -306,15 +319,26 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
 
   flagDocument() {
     if (!this.selectedNode) {
-      this.msgs = [];
-      this.msgs.push({ severity: 'warn', summary: this.langList['flag'], detail: this.langList['selectItemToExecute'] });
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+      const toastData = {
+        type: 'warning',
+        title: this.langList['flag'],
+        msg: this.langList['selectItemToExecute'],
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
+
       return false;
     }
     this.selectedNode.data.flag = !this.selectedNode.data.flag;
-    this.msgs = [];
-    this.msgs.push({ severity: 'success', summary: this.langList['flag'], detail: this.langList['actionCompleted'] });
-    this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+
+    const toastData = {
+      type: 'success',
+      title: this.langList['flag'],
+      msg: this.langList['actionCompleted'],
+      showClose: true,
+    };
+    this.globalState.notifyMyDataChanged('toasty','', toastData);
+
     this.saveFav2LocalStorage();
   }
 
@@ -332,9 +356,14 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
   checkNodeThenProceed(cb) {
     console.log(this.selectedNode);
     if (!this.selectedNode) {
-      this.msgs = [];
-      this.msgs.push({ severity: 'warn', summary: this.langList['move'], detail: this.langList['selectItemToExecute'] });
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+      const toastData = {
+        type: 'warning',
+        title: this.langList['move'],
+        msg: this.langList['selectItemToExecute'],
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
+
       return false;
     } else {
       cb();
@@ -343,9 +372,14 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
 
   openFavExpandSection() {
     if (!this.selectedNode) {
-      this.msgs = [];
-      this.msgs.push({ severity: 'warn', summary: this.langList['expandAll'], detail: this.langList['selectItemToExecute'] });
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+      const toastData = {
+        type: 'warning',
+        title: this.langList['expandAll'],
+        msg: this.langList['selectItemToExecute'],
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
+
       return false;
     }
     if (this.selectedNode.data.type === 'tcode') {
@@ -356,9 +390,14 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
         }
     } else {
       this.selectedNode.expanded = true;
-      this.msgs = [];
-      this.msgs.push({ severity: 'success', summary: this.langList['expandAll'], detail: this.langList['actionCompleted'] });
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+
+      const toastData = {
+        type: 'success',
+        title: this.langList['expandAll'],
+        msg: this.langList['actionCompleted'],
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
     }
   }
 
@@ -376,9 +415,14 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     } else {
       console.log('Rename Section');
       if (!node) {
-        this.msgs = [];
-        this.msgs.push({ severity: 'warn', summary: this.langList['rename'], detail: this.langList['selectItemToExecute'] });
-        this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+        const toastData = {
+          type: 'warning',
+          title: this.langList['rename'],
+          msg: this.langList['selectItemToExecute'],
+          showClose: true,
+        };
+        this.globalState.notifyMyDataChanged('toasty','', toastData);
+
         return false;
       } else {
         console.log(node.data);
@@ -412,9 +456,14 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     } else {
       console.log('Rename Item');
       if (!node) {
-        this.msgs = [];
-        this.msgs.push({ severity: 'warn', summary: this.langList['rename'], detail: this.langList['selectItemToExecute'] });
-        this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+        const toastData = {
+          type: 'warning',
+          title: this.langList['rename'],
+          msg: this.langList['selectItemToExecute'],
+          showClose: true,
+        };
+        this.globalState.notifyMyDataChanged('toasty','', toastData);
+
         return false;
       } else {
         this.documentForm.reset();
@@ -437,9 +486,14 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
 
   renameSectionOrItem(node: TreeNode = null) {
     if (!node) {
-      this.msgs = [];
-      this.msgs.push({ severity: 'warn', summary: this.langList['rename'], detail: this.langList['selectItemToExecute'] });
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+      const toastData = {
+        type: 'warning',
+        title: this.langList['rename'],
+        msg: this.langList['selectItemToExecute'],
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
+            
       return false;
     } else {
       if (node.data.type === 'section') {
@@ -485,9 +539,14 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
 
     this.saveFav2LocalStorage();
 
-    this.msgs = [];
-    this.msgs.push({ severity: 'success', summary: this.langList['save'], detail: this.langList['actionCompleted'] });
-    this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+    const toastData = {
+      type: 'success',
+      title: this.langList['save'],
+      msg: this.langList['actionCompleted'],
+      showClose: true,
+    };
+    this.globalState.notifyMyDataChanged('toasty','', toastData);
+
     this.displaySectionDialog = false;
   }
 
@@ -532,9 +591,14 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
 
     this.saveFav2LocalStorage();
 
-    this.msgs = [];
-    this.msgs.push({ severity: 'success', summary: this.langList['save'], detail: this.langList['actionCompleted'] });
-    this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+    const toastData = {
+      type: 'success',
+      title: this.langList['save'],
+      msg: this.langList['actionCompleted'],
+      showClose: true,
+    };
+    this.globalState.notifyMyDataChanged('toasty','', toastData);
+
     this.displayDocumentDialog = false;
   }
 
@@ -548,14 +612,26 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     this.msgs = [];
 
     if (!this.selectedNode) {
-      this.msgs.push({ severity: 'warn', summary: this.langList['delete'], detail: this.langList['selectItemToExecute'] });
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+      const toastData = {
+        type: 'warning',
+        title: this.langList['delete'],
+        msg: this.langList['selectItemToExecute'],
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
+
       return false;
     }
 
     if (!this.selectedNode.parent) {
-      this.msgs = [{ severity: 'error', summary: this.langList['delete'], detail: this.langList['rootCanNotBeDeleted'] }];
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+      const toastData = {
+        type: 'error',
+        title: this.langList['delete'],
+        msg: this.langList['rootCanNotBeDeleted'],
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
+
       return false;
     }
 
@@ -575,8 +651,13 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
               this.deleteNode(this.selectedNode);
           },
           reject: () => {
-              this.msgs = [{ severity: 'info', summary: this.langList['cancel'], detail: this.langList['actionCancelled'] }];
-              this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+              const toastData = {
+                type: 'info',
+                title: this.langList['cancel'],
+                msg: this.langList['actionCancelled'],
+                showClose: true,
+              };
+              this.globalState.notifyMyDataChanged('toasty','', toastData);
           },
       });
     } else {
@@ -590,12 +671,15 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
           // rejectIcon: 'fa-close',
           accept: () => {
               this.deleteNode(this.selectedNode);
-
-
           },
           reject: () => {
-              this.msgs = [{ severity: 'info', summary: this.langList['cancel'], detail: this.langList['actionCancelled'] }];
-              this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+              const toastData = {
+                type: 'info',
+                title: this.langList['cancel'],
+                msg: this.langList['actionCancelled'],
+                showClose: true,
+              };
+              this.globalState.notifyMyDataChanged('toasty','', toastData);
           },
       });
     }
@@ -603,9 +687,14 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
 
   deleteNode(node: TreeNode) {
       node.parent.children = node.parent.children.filter( n => n.data !== node.data);
-      this.msgs = [];
-      this.msgs.push({ severity: 'success', summary: this.langList['delete'], detail: this.langList['actionCompleted'] });
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+
+      const toastData = {
+        type: 'success',
+        title: this.langList['delete'],
+        msg: this.langList['actionCompleted'],
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
 
       this.saveFav2LocalStorage();
   }

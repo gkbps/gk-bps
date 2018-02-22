@@ -27,7 +27,7 @@ import { InboxRoutingModule } from './inbox-routing.module';
     TranslateModule,
 
     StoreModule.forFeature('requests', RequestsReducers),
-    EffectsModule.forRoot([RequestsEffects]),
+    EffectsModule.forFeature([RequestsEffects]),
 
     HDataTableByTrayModule,
 

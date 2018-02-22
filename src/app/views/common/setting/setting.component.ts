@@ -62,8 +62,6 @@ export class SettingComponent extends BaseComponent implements OnInit, OnDestroy
   msgs: Message[] = [];
   favTopPosition: boolean;
   notificationMode: boolean;
-  notificationType: boolean;
-
   debugMode: boolean;
 
   constructor(
@@ -104,7 +102,6 @@ export class SettingComponent extends BaseComponent implements OnInit, OnDestroy
     // Reinstate user preference
     this.favTopPosition = this.localStorageService.getFavPosition();
     this.notificationMode = this.localStorageService.getNotificationMode();
-    this.notificationType = this.localStorageService.getNotificationType();
     this.debugMode = this.localStorageService.getDebugMode();
 
     // Init sample components
@@ -289,42 +286,6 @@ export class SettingComponent extends BaseComponent implements OnInit, OnDestroy
                         command: (event) => { this.globalState.notifyMyDataChanged('navEffect', '', 'effect20'); }}},
                     ]
                   },
-                ]
-              },
-              {
-                data: {label: 'alertType', icon: 'notifications'},
-                children: [
-                  {
-                    data:
-                    {
-                      label: 'notification_toggle', icon: 'notifications',
-                      command: (event) => {
-                        this.notificationMode = !this.notificationMode;
-                        this.globalState.notifyMyDataChanged('notificationMode', '', this.notificationMode);
-                      }
-                    }
-                  },
-                  { data: {label: 'growl', icon: 'chat',
-                      command: (event) => {
-                        this.globalState.notifyMyDataChanged('notificationType', '', true);
-                        this.notificationType = true;
-                        this.msgs = [];
-                        this.msgs.push({severity: 'info', summary: 'Notification Style!', detail: 'Testing, testing, testing...'});
-                      }
-                    }
-                  },
-                  { data: {label: 'message', icon: 'view_headline',
-                    command: (event) => {
-                        this.globalState.notifyMyDataChanged('notificationType', '', false);
-                        this.notificationType = false;
-                        this.msgs = [];
-                        this.msgs.push({severity: 'info', summary: 'Notification Style!', detail: 'Testing, testing, testing...'});
-                        setTimeout(() => {
-                          this.msgs = [];
-                        }, 5000);
-                      }
-                    }
-                  }
                 ]
               },
               {
@@ -641,25 +602,11 @@ export class SettingComponent extends BaseComponent implements OnInit, OnDestroy
     super.ngOnDestroy();
 
     // Derive class destroy here
-    this.globalState.unsubscribeEvent('notificationMode', this.myScope);
-    this.globalState.unsubscribeEvent('notificationType', this.myScope);
     this.globalState.unsubscribeEvent('debugMode', this.myScope);
   }
 
   /* LOCAL STATE */
   subscribeLocalState() {
-    this.globalState.subscribeEvent('notificationMode', this.myScope, (notificationMode) => {
-      console.log(notificationMode);
-      this.notificationMode = notificationMode;
-      this.localStorageService.setNotificationMode(notificationMode);
-    });
-
-    this.globalState.subscribeEvent('notificationType', this.myScope, (notificationType) => {
-      console.log(notificationType);
-      this.notificationType = notificationType;
-      this.localStorageService.setNotificationType(notificationType);
-    });
-
     this.globalState.subscribeEvent('debugMode', this.myScope, (debugMode) => {
       console.log(debugMode);
       this.debugMode = debugMode;

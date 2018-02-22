@@ -8,6 +8,7 @@ import { HContact } from './hContact.component';
 
 import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { InputTextModule } from 'primeng/inputtext';
 
     PanelModule,
     InputTextModule,
+    KeyFilterModule,
   ],
   exports: [
     HContact

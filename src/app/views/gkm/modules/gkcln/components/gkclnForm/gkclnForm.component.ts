@@ -113,7 +113,6 @@ export class GkClnForm implements OnInit, OnDestroy {
   // Redux based variables
   selectedGkClient: Observable<GkClient>;
   private subscription: Subscription;
-
   /****************************************************************************
    * INITIALIZATION
    * Constructor
@@ -157,6 +156,8 @@ export class GkClnForm implements OnInit, OnDestroy {
     // Set blank form (action 11) or form filled with returned data (other actions)
     this.parseTCodeAndExecuteAction();
     this.debugMode = this.localStorage.getDebugMode();
+
+
   }
 
   /**
@@ -606,9 +607,13 @@ export class GkClnForm implements OnInit, OnDestroy {
         //   case 'Error':
         //     console.log('Updating Request Main on failed save of requestBody');
         //
-        //     // this.msgs = [];
-        //     // this.msgs.push({severity: 'warning', summary: 'Validation Failed', detail: 'Form Validation Failed'});
-        //     // this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+        //     // const toastData = {
+        //     //   type: 'warning',
+        //     //   title: 'Validation Failed',
+        //     //   msg: 'Form Validation Failed',
+        //     //   showClose: true,
+        //     // };
+        //     // this.globalState.notifyMyDataChanged('toasty','', toastData);
         //
         //     // this.getRequestBodyChange.emit({
         //     //   status: 'Error',
@@ -623,9 +628,14 @@ export class GkClnForm implements OnInit, OnDestroy {
       })
     } else {
       console.log('Validation Failed');
-      this.msgs = [];
-      this.msgs.push({severity: 'warn', summary: 'Validation Failed', detail: 'Form Validation Failed'});
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+
+      const toastData = {
+        type: 'warning',
+        title: 'Validation Failed',
+        msg: 'Form Validation Failed',
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
     }
   }
 
@@ -638,9 +648,13 @@ export class GkClnForm implements OnInit, OnDestroy {
   }
 
   onTabChange(event) {
-      // this.msgs = [];
-      // this.msgs.push({severity: 'info', summary: 'Tab Expanded', detail: 'Index: ' + event.index});
-      // this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+    // const toastData = {
+    //   type: 'info',
+    //   title: 'Tab Expanded',
+    //   msg: 'Index: ' + event.index,
+    //   showClose: true,
+    // };
+    // this.globalState.notifyMyDataChanged('toasty','', toastData);      
   }
 
   ngOnDestroy() {

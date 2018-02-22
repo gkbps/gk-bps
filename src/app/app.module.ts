@@ -15,41 +15,36 @@ import { environment } from '../environments/environment';
 /*******************************************************************************
  * IMPORT 3RD PARTY MODULES
  *******************************************************************************/
-// Scrollbar
-// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-// import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-// import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-//   suppressScrollX: true
-// };
 
-// Scroll to
-import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+ // Scroll to
+ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
-// Loading Bar
-import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+ // Toaster
+ import { ToastyModule } from 'ngx-toasty';
+
+ // PrimeNg
+ /**
+  * Growl: (gk-containers)
+  * Messages: (gk-containers)
+  * Progress bar: Show indefinite loading when interacting with server (gk-containers)
+  * Overlay panel: Show HELP overlay panel (gk-breadcrumbs)
+  * Dropdown: Show list of working years and legal entities (gk-working)
+  * Sidebar:
+  */
+ import { ScrollPanelModule } from 'primeng/scrollpanel';
+ import { ProgressBarModule } from 'primeng/progressbar';
+ // import { GrowlModule } from 'primeng/growl';
+ import { MessagesModule } from 'primeng/messages';
+ import { OverlayPanelModule } from 'primeng/overlaypanel';
+ import { DropdownModule } from 'primeng/dropdown';
+ import { SidebarModule } from 'primeng/sidebar';
+
+ import { ConfirmationService } from 'primeng/api';
 
 // NGRX STORE
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-
-// PrimeNg
-/**
- * Growl: (gk-containers)
- * Messages: (gk-containers)
- * Progress bar: Show indefinite loading when interacting with server (gk-containers)
- * Overlay panel: Show HELP overlay panel (gk-breadcrumbs)
- * Dropdown: Show list of working years and legal entities (gk-working)
- */
-import { ScrollPanelModule } from 'primeng/scrollpanel';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { GrowlModule } from 'primeng/growl';
-import { MessagesModule } from 'primeng/messages';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
-import { DropdownModule } from 'primeng/dropdown';
-
-import { ConfirmationService } from 'primeng/api';
 
 // Translate
 import { TranslateService } from '@ngx-translate/core';
@@ -109,6 +104,8 @@ const APP_DIRECTIVES = [
   GK_SIDEBAR_TOGGLE_DIRECTIVES,
 ];
 
+// UTILITIES
+
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [
@@ -129,25 +126,27 @@ const APP_DIRECTIVES = [
     FormsModule,
     ReactiveFormsModule,
 
-    // Scrollbar
-    // PerfectScrollbarModule,
-    // SlimLoadingBarModule.forRoot(),
+    // PrimeNg
+    ScrollPanelModule,
+    ProgressBarModule,
+    // GrowlModule,
+    MessagesModule,
+    OverlayPanelModule,
+    DropdownModule,
+    SidebarModule,
+
     ScrollToModule.forRoot(),
+    ToastyModule.forRoot(),
+
+    NgaModule.forRoot(),
 
     // Ngrx Store
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument(),
-
-    // PrimeNg
-    ScrollPanelModule,
-    ProgressBarModule,
-    GrowlModule,
-    MessagesModule,
-    OverlayPanelModule,
-    DropdownModule,
-
-    NgaModule.forRoot(),
+    StoreDevtoolsModule.instrument({
+      // Restrict extension to log-only mode
+      logOnly: environment.production
+    }),
 
     AppRoutingModule,
   ],
@@ -155,19 +154,15 @@ const APP_DIRECTIVES = [
     ConfirmationService,
     AppConfig,
     GlobalState,
-    // {
-    //   provide: PERFECT_SCROLLBAR_CONFIG,
-    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    // },
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     }
   ],
   exports: [
-    SlimLoadingBarModule,
     ScrollPanelModule,
     ProgressBarModule,
+    ToastyModule,
     ...APP_DIRECTIVES,
   ]
 })

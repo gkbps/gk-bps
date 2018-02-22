@@ -77,3 +77,232 @@ div	/Users/donghoang/node/gk/gk-bps/src/app/nga/components/hDataTableByTray/hDat
 p	/Users/donghoang/node/gk/gk-bps/src/app/nga/components/hDataTableByTray/hDataTableByTray.html	/^          <p-contextMenu #cm [model]="items"><\/p-contextMenu>$/;"	function	line:119
 p	/Users/donghoang/node/gk/gk-bps/src/app/nga/components/hDataTableByTray/hDataTableByTray.html	/^          <p *ngIf="body.error">$/;"	function	line:121
 // .fixed-multiSelect	/Users/donghoang/node/gk/gk-bps/src/app/views/common/completed/completed.scss	/^\/\/ .fixed-multiSelect {$/;"	function	line:1
+name	/Users/donghoang/node/gk/gk-bps/package.json	/^  "name": "gk-bps",$/;"	function	line:2
+version	/Users/donghoang/node/gk/gk-bps/package.json	/^  "version": "0.0.0",$/;"	function	line:3
+license	/Users/donghoang/node/gk/gk-bps/package.json	/^  "license": "Unlicensed",$/;"	function	line:4
+main	/Users/donghoang/node/gk/gk-bps/package.json	/^  "main": "electron.js",$/;"	function	line:5
+scripts	/Users/donghoang/node/gk/gk-bps/package.json	/^  "scripts": {$/;"	function	line:6
+ng	/Users/donghoang/node/gk/gk-bps/package.json	/^    "ng": "ng",$/;"	function	line:7
+lint	/Users/donghoang/node/gk/gk-bps/package.json	/^    "lint": "ng lint",$/;"	function	line:8
+start	/Users/donghoang/node/gk/gk-bps/package.json	/^    "start": "ng serve",$/;"	function	line:9
+start-electron	/Users/donghoang/node/gk/gk-bps/package.json	/^    "start-electron": "npm run build-electron --base-href . && electron .",$/;"	function	line:10
+build	/Users/donghoang/node/gk/gk-bps/package.json	/^    "build": "ng build --env=prod",$/;"	function	line:11
+build-aot	/Users/donghoang/node/gk/gk-bps/package.json	/^    "build-aot": "ng build --aot --env=prod",$/;"	function	line:12
+build-electron	/Users/donghoang/node/gk/gk-bps/package.json	/^    "build-electron": "ng build --base-href .",$/;"	function	line:13
+test	/Users/donghoang/node/gk/gk-bps/package.json	/^    "test": "ng test",$/;"	function	line:14
+e2e	/Users/donghoang/node/gk/gk-bps/package.json	/^    "e2e": "ng e2e",$/;"	function	line:15
+build-app	/Users/donghoang/node/gk/gk-bps/package.json	/^    "build-app": "npm run build-electron && electron-packager-interactive",$/;"	function	line:16
+extract	/Users/donghoang/node/gk/gk-bps/package.json	/^    "extract": "ngx-translate-extract --input .\/src\/app --output .\/src\/assets\/i18n\/{en,vn,jp,kr,ch,fr}.json --sort --format namespaced-json",$/;"	function	line:17
+bundle-report	/Users/donghoang/node/gk/gk-bps/package.json	/^    "bundle-report": "webpack-bundle-analyzer dist\/stats.json",$/;"	function	line:18
+analyze	/Users/donghoang/node/gk/gk-bps/package.json	/^    "analyze": "ng build --prod --stats-json && webpack-bundle-analyzer dist\/stats.json"$/;"	function	line:19
+private	/Users/donghoang/node/gk/gk-bps/package.json	/^  "private": true,$/;"	function	line:21
+dependencies	/Users/donghoang/node/gk/gk-bps/package.json	/^  "dependencies": {$/;"	function	line:22
+@angular/animations	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/animations": "^5.2.2",$/;"	function	line:23
+@angular/common	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/common": "^5.2.2",$/;"	function	line:24
+@angular/compiler	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/compiler": "^5.2.2",$/;"	function	line:25
+@angular/core	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/core": "^5.2.2",$/;"	function	line:26
+@angular/forms	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/forms": "^5.2.2",$/;"	function	line:27
+@angular/http	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/http": "^5.2.2",$/;"	function	line:28
+@angular/platform-browser	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/platform-browser": "^5.2.2",$/;"	function	line:29
+@angular/platform-browser-dynamic	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/platform-browser-dynamic": "^5.2.2",$/;"	function	line:30
+@angular/platform-server	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/platform-server": "^5.2.2",$/;"	function	line:31
+@angular/router	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/router": "^5.2.2",$/;"	function	line:32
+@angular/service-worker	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/service-worker": "^5.2.2",$/;"	function	line:33
+@angular/upgrade	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/upgrade": "^5.2.2",$/;"	function	line:34
+@biesbjerg/ngx-translate-extract	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@biesbjerg\/ngx-translate-extract": "^2.3.2",$/;"	function	line:35
+@ngrx/core	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@ngrx\/core": "^1.2.0",$/;"	function	line:36
+@ngrx/effects	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@ngrx\/effects": "^5.1.0",$/;"	function	line:37
+@ngrx/entity	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@ngrx\/entity": "^5.1.0",$/;"	function	line:38
+@ngrx/store	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@ngrx\/store": "^5.1.0",$/;"	function	line:39
+@ngrx/store-devtools	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@ngrx\/store-devtools": "^5.1.0",$/;"	function	line:40
+@ngx-translate/core	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@ngx-translate\/core": "^8.0.0",$/;"	function	line:41
+@ngx-translate/http-loader	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@ngx-translate\/http-loader": "^2.0.1",$/;"	function	line:42
+@nicky-lenaers/ngx-scroll-to	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@nicky-lenaers\/ngx-scroll-to": "^0.6.0",$/;"	function	line:43
+@swimlane/ngx-charts	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@swimlane\/ngx-charts": "^7.0.1",$/;"	function	line:44
+@types/socket.io-client	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@types\/socket.io-client": "^1.4.32",$/;"	function	line:45
+chart.js	/Users/donghoang/node/gk/gk-bps/package.json	/^    "chart.js": "2.6.0",$/;"	function	line:46
+chartjs-funnel	/Users/donghoang/node/gk/gk-bps/package.json	/^    "chartjs-funnel": "^1.0.5",$/;"	function	line:47
+core-js	/Users/donghoang/node/gk/gk-bps/package.json	/^    "core-js": "2.5.0",$/;"	function	line:48
+dashjs	/Users/donghoang/node/gk/gk-bps/package.json	/^    "dashjs": "^2.6.5",$/;"	function	line:49
+electron-packager-dummy-wine	/Users/donghoang/node/gk/gk-bps/package.json	/^    "electron-packager-dummy-wine": "^1.0.2",$/;"	function	line:50
+fullcalendar	/Users/donghoang/node/gk/gk-bps/package.json	/^    "fullcalendar": "^3.8.1",$/;"	function	line:51
+jquery	/Users/donghoang/node/gk/gk-bps/package.json	/^    "jquery": "^3.3.1",$/;"	function	line:52
+lodash	/Users/donghoang/node/gk/gk-bps/package.json	/^    "lodash": "^4.17.4",$/;"	function	line:53
+moment	/Users/donghoang/node/gk/gk-bps/package.json	/^    "moment": "^2.20.1",$/;"	function	line:54
+ng-drag-drop	/Users/donghoang/node/gk/gk-bps/package.json	/^    "ng-drag-drop": "^4.0.0",$/;"	function	line:55
+ng-dynamic-component	/Users/donghoang/node/gk/gk-bps/package.json	/^    "ng-dynamic-component": "^2.0.3",$/;"	function	line:56
+ng2-charts	/Users/donghoang/node/gk/gk-bps/package.json	/^    "ng2-charts": "1.6.0",$/;"	function	line:57
+primeng	/Users/donghoang/node/gk/gk-bps/package.json	/^    "primeng": "^5.2.0",$/;"	function	line:58
+prismjs	/Users/donghoang/node/gk/gk-bps/package.json	/^    "prismjs": "^1.10.0",$/;"	function	line:59
+quill	/Users/donghoang/node/gk/gk-bps/package.json	/^    "quill": "^1.3.5",$/;"	function	line:60
+rxjs	/Users/donghoang/node/gk/gk-bps/package.json	/^    "rxjs": "^5.5.6",$/;"	function	line:61
+socket.io-client	/Users/donghoang/node/gk/gk-bps/package.json	/^    "socket.io-client": "^2.0.4",$/;"	function	line:62
+tinycolor2	/Users/donghoang/node/gk/gk-bps/package.json	/^    "tinycolor2": "^1.4.1",$/;"	function	line:63
+ts-helpers	/Users/donghoang/node/gk/gk-bps/package.json	/^    "ts-helpers": "1.1.2",$/;"	function	line:64
+underscore	/Users/donghoang/node/gk/gk-bps/package.json	/^    "underscore": "^1.8.3",$/;"	function	line:65
+videogular2	/Users/donghoang/node/gk/gk-bps/package.json	/^    "videogular2": "^6.0.1",$/;"	function	line:66
+webpack	/Users/donghoang/node/gk/gk-bps/package.json	/^    "webpack": "^3.10.0",$/;"	function	line:67
+zone.js	/Users/donghoang/node/gk/gk-bps/package.json	/^    "zone.js": "0.8.17"$/;"	function	line:68
+devDependencies	/Users/donghoang/node/gk/gk-bps/package.json	/^  "devDependencies": {$/;"	function	line:70
+@angular/cli	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/cli": "^1.6.6",$/;"	function	line:71
+@angular/compiler-cli	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/compiler-cli": "^5.2.2",$/;"	function	line:72
+@angular/language-service	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@angular\/language-service": "^5.2.2",$/;"	function	line:73
+@types/core-js	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@types\/core-js": "^0.9.46",$/;"	function	line:74
+@types/jasmine	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@types\/jasmine": "~2.5.53",$/;"	function	line:75
+@types/jasminewd2	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@types\/jasminewd2": "~2.0.2",$/;"	function	line:76
+@types/node	/Users/donghoang/node/gk/gk-bps/package.json	/^    "@types\/node": "^6.0.96",$/;"	function	line:77
+codelyzer	/Users/donghoang/node/gk/gk-bps/package.json	/^    "codelyzer": "^4.1.0",$/;"	function	line:78
+devtron	/Users/donghoang/node/gk/gk-bps/package.json	/^    "devtron": "^1.4.0",$/;"	function	line:79
+electron	/Users/donghoang/node/gk/gk-bps/package.json	/^    "electron": "1.7.9",$/;"	function	line:80
+electron-packager	/Users/donghoang/node/gk/gk-bps/package.json	/^    "electron-packager": "^10.1.2",$/;"	function	line:81
+jasmine-core	/Users/donghoang/node/gk/gk-bps/package.json	/^    "jasmine-core": "~2.6.2",$/;"	function	line:82
+jasmine-spec-reporter	/Users/donghoang/node/gk/gk-bps/package.json	/^    "jasmine-spec-reporter": "~4.1.0",$/;"	function	line:83
+karma	/Users/donghoang/node/gk/gk-bps/package.json	/^    "karma": "~1.7.0",$/;"	function	line:84
+karma-chrome-launcher	/Users/donghoang/node/gk/gk-bps/package.json	/^    "karma-chrome-launcher": "~2.1.1",$/;"	function	line:85
+karma-cli	/Users/donghoang/node/gk/gk-bps/package.json	/^    "karma-cli": "~1.0.1",$/;"	function	line:86
+karma-coverage-istanbul-reporter	/Users/donghoang/node/gk/gk-bps/package.json	/^    "karma-coverage-istanbul-reporter": "^1.4.1",$/;"	function	line:87
+karma-jasmine	/Users/donghoang/node/gk/gk-bps/package.json	/^    "karma-jasmine": "^1.1.1",$/;"	function	line:88
+karma-jasmine-html-reporter	/Users/donghoang/node/gk/gk-bps/package.json	/^    "karma-jasmine-html-reporter": "^0.2.2",$/;"	function	line:89
+protractor	/Users/donghoang/node/gk/gk-bps/package.json	/^    "protractor": "~5.1.2",$/;"	function	line:90
+sw-precache	/Users/donghoang/node/gk/gk-bps/package.json	/^    "sw-precache": "^5.2.1",$/;"	function	line:91
+ts-node	/Users/donghoang/node/gk/gk-bps/package.json	/^    "ts-node": "~3.2.0",$/;"	function	line:92
+tslint	/Users/donghoang/node/gk/gk-bps/package.json	/^    "tslint": "~5.7.0",$/;"	function	line:93
+typescript	/Users/donghoang/node/gk/gk-bps/package.json	/^    "typescript": "^2.6.2",$/;"	function	line:94
+webpack-bundle-analyzer	/Users/donghoang/node/gk/gk-bps/package.json	/^    "webpack-bundle-analyzer": "^2.9.2"$/;"	function	line:95
+div	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^<div id="layout-wrapper" class="layout-wrapper layout-wrapper-static">  <!-- static: layout-wrapper-static; overlay menu: -->$/;"	function	line:2
+div	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^  <div id="layout-sidebar" class="layout-sidebar" gkLayoutSidebarToggleWebMode>     <!-- mouseenter: layout-sidebar-active; mouseleave: -->$/;"	function	line:3
+gk	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^    <gk-logo><\/gk-logo>$/;"	function	line:4
+gk	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^    <gk-sidebar-wrapper><\/gk-sidebar-wrapper>$/;"	function	line:5
+div	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^  <div class="layout-main">$/;"	function	line:8
+div	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^    <div class="layout-topbar">$/;"	function	line:9
+gk	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^      <gk-header><\/gk-header>$/;"	function	line:10
+gk	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^    <gk-breadcrumbs><\/gk-breadcrumbs>$/;"	function	line:13
+gk	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^    <gk-working><\/gk-working>$/;"	function	line:15
+p	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^    <p-progressBar *ngIf="blocked" mode="indeterminate" [style]="{'height': '4px'}"><\/p-progressBar>$/;"	function	line:17
+div	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^    <div class="layout-content">$/;"	function	line:19
+div	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^      <div class="ui-g">$/;"	function	line:20
+div	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^        <div class="ui-g-12">$/;"	function	line:21
+p	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^          <p-growl *ngIf="notificationMode && notificationType" [value]="msgs"><\/p-growl>$/;"	function	line:22
+p	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^          <p-messages *ngIf="notificationMode && (!notificationType)" [value]="msgs"><\/p-messages>$/;"	function	line:23
+div	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^        <div class="ui-g-12">$/;"	function	line:26
+p	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^          <p-sidebar *ngIf="!sbFullScreen" [(visible)]="sbVisibility" [position]="sbPosition" [styleClass]="sbSizeList[sbSize]" [baseZIndex]="999999">$/;"	function	line:27
+h	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^              <h1 style="font-weight:normal">{{sbTitle}}<\/h1>$/;"	function	line:28
+button	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^              <button pButton type="button" (click)="visibleSidebar1 = false" label="Cancel" class="ui-button-secondary"><\/button> -->$/;"	function	line:30
+p	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^          <p-sidebar *ngIf="sbFullScreen" [(visible)]="sbVisibility" [fullScreen]="true" [baseZIndex]="999999">$/;"	function	line:33
+h	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^              <h1 style="font-weight:normal">{{sbTitle}}<\/h1>$/;"	function	line:34
+button	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^              <button pButton type="button" (click)="visibleSidebar5 = false" label="Cancel" class="ui-button-secondary"><\/button> -->$/;"	function	line:36
+router	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^      <router-outlet><\/router-outlet>$/;"	function	line:42
+div	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^    <div class="fixed-layout-footer">$/;"	function	line:45
+gk	/Users/donghoang/node/gk/gk-bps/src/app/containers/gk-full-layout/gk-full-layout.component.html	/^      <gk-footer><\/gk-footer>$/;"	function	line:46
+html	/Users/donghoang/node/gk/gk-bps/src/index.html	/^<html>$/;"	function	line:2
+head	/Users/donghoang/node/gk/gk-bps/src/index.html	/^<head>$/;"	function	line:3
+base	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <base href=".\/">$/;"	function	line:4
+meta	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <meta charset="utf-8">$/;"	function	line:5
+meta	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <meta http-equiv="X-UA-Compatible" content="IE=edge">$/;"	function	line:6
+meta	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- , shrink-to-fit=yes -->$/;"	function	line:7
+meta	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <meta name="theme-color" content="#317EFB"\/>$/;"	function	line:8
+meta	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <meta name="description" content="GK Business Process Services">$/;"	function	line:10
+meta	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <meta name="author" content="Gia Khanh">$/;"	function	line:11
+meta	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <meta name="keyword" content="GK, BPS, Gia Khanh, Golden Key, Business Process Services, GKBPS">$/;"	function	line:12
+link	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <link rel="shortcut icon" href="assets\/images\/favicon.png">$/;"	function	line:13
+title	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <title>GK|BPS<\/title>$/;"	function	line:15
+link	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <link href="https:\/\/fonts.googleapis.com\/icon?family=Material+Icons" rel="stylesheet">$/;"	function	line:18
+link	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <link href="assets\/fonts\/font-awesome.min.css" rel="stylesheet">$/;"	function	line:19
+link	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <link id="layout-css" rel="stylesheet" type="text\/css" href=".\/assets\/layout\/css\/layout-moody.css">$/;"	function	line:24
+link	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <link id="theme-css" rel="stylesheet" type="text\/css" href=".\/assets\/theme\/theme-bluegrey.css">$/;"	function	line:25
+link	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <link id="mycss1" rel="stylesheet" type="text\/css" href=".\/assets\/css\/none.css">$/;"	function	line:27
+link	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <link id="mycss2" rel="stylesheet" type="text\/css" href=".\/assets\/css\/none.css">$/;"	function	line:28
+link	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <link id="mycss3" rel="stylesheet" type="text\/css" href=".\/assets\/css\/none.css">$/;"	function	line:29
+body	/Users/donghoang/node/gk/gk-bps/src/index.html	/^<body>$/;"	function	line:32
+noscript	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <noscript>Please enable JavaScript to use system<\/noscript>$/;"	function	line:33
+app	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <app-root>$/;"	function	line:35
+div	/Users/donghoang/node/gk/gk-bps/src/index.html	/^    <div class="splash-screen">$/;"	function	line:36
+div	/Users/donghoang/node/gk/gk-bps/src/index.html	/^      <div class="splash-loader-container">$/;"	function	line:37
+svg	/Users/donghoang/node/gk/gk-bps/src/index.html	/^        <svg class="splash-loader" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http:\/\/www.w3.org\/2000\/svg">$/;"	function	line:38
+circle	/Users/donghoang/node/gk/gk-bps/src/index.html	/^          <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"><\/circle>$/;"	function	line:39
+script	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <script>$/;"	function	line:46
+script	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <script type="text\/javascript" src=".\/assets\/layout\/script\/jquery.js"><\/script>$/;"	function	line:52
+script	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <script type="text\/javascript" src=".\/assets\/layout\/script\/ripple.js"><\/script>$/;"	function	line:53
+script	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <script>$/;"	function	line:54
+script	/Users/donghoang/node/gk/gk-bps/src/index.html	/^  <script>$/;"	function	line:62
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^<div *ngIf="!isRequest" class="ui-g ui-fluid">$/;"	function	line:1
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^  <div class="ui-g-12">$/;"	function	line:2
+h	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^    <h-individual-nav [prefix]="prefix"><\/h-individual-nav>$/;"	function	line:3
+form	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^<form [formGroup]="myForm" novalidate>$/;"	function	line:7
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^  <div *ngIf="hasClient" class="ui-g ui-fluid">$/;"	function	line:9
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^    <div class="ui-g-12">$/;"	function	line:10
+h	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^        <h1 *ngIf="!isRequest">{{'gkcln'|translate}}<\/h1> -->$/;"	function	line:12
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^      <div *ngIf="!isRequest" class="ui-g">$/;"	function	line:14
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^        <div class="ui-g-12">$/;"	function	line:15
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^          <div class="ui-g-12">$/;"	function	line:16
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^            <p-toolbar>$/;"	function	line:17
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^              <div class="ui-toolbar-group-left">$/;"	function	line:18
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                <span>{{'id'|translate}}: <span class="badge bg-info">{{myForm.controls._id.value ? myForm.controls._id.value : 'New'}}<\/span><\/span>$/;"	function	line:19
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^              <div class="ui-toolbar-group-right">$/;"	function	line:22
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                <span>{{'status'|translate}}: <span class="badge" [ngClass]="{'bg-warning': (myForm.controls.status1.value=='Inactive'), 'bg-info': (myForm.controls.status1.value=='Active')}">{{myForm.controls.status1.value}}<\/span><\/span>$/;"	function	line:23
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                <span>. | {{'marked'|translate}}: <span class="badge" [ngClass]="{'bg-danger': (myForm.controls.status2.value=='Marked'), 'bg-info': (myForm.controls.status2.value=='Unmarked')}">{{myForm.controls.status2.value}}<\/span><\/span>$/;"	function	line:24
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^        <div class="ui-g-12">$/;"	function	line:30
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^          <div *ngIf="formEditable" class="ui-g-12">$/;"	function	line:31
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^            <div class="ui-helper-clearfix">$/;"	function	line:32
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^              <button style="float:right; width: auto;" pButton type="button" icon="ui-icon-check" label="{{'save'|translate}}" class="ui-button-primary" [disabled]="!myForm.valid" (click)="submitForm()"><\/button>$/;"	function	line:33
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^        <div class="ui-g form-group">$/;"	function	line:39
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^          <div class="ui-g-12">$/;"	function	line:41
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^            <p-panel header ="{{'general'|translate}}" [toggleable]="true" [collapsed]="false">$/;"	function	line:42
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^              <div class="ui-g">$/;"	function	line:43
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                <div class="ui-g-12">$/;"	function	line:44
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <div *ngIf="isRequest && debugMode" class="ui-g-12 ui-md-4">$/;"	function	line:47
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <span class="md-inputfield fixed-form">$/;"	function	line:48
+input	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <input type="text" pInputText  name="_id" formControlName="_id" [disableControl]="!formEditable">$/;"	function	line:49
+label	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <label>{{'id'|translate}} * <small *ngIf="!myForm.controls._id.valid && myForm.controls._id.dirty" class="text-warning">{{'required'|translate}}<\/small><\/label>$/;"	function	line:50
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <div *ngIf="isRequest && debugMode" class="ui-g-12 ui-md-4">$/;"	function	line:54
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <span class="md-inputfield fixed-form">$/;"	function	line:55
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <span class="fixed-label">{{'status'|translate}} * <small *ngIf="!myForm.controls.status1.valid && myForm.controls.status1.dirty" class="text-warning">{{'required'|translate}}<\/small><\/span>$/;"	function	line:56
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <p-dropdown [options]="status1List" name="status1" formControlName="status1" [style]="{'width': '100%'}" [disableControl]="!formEditable"><\/p-dropdown>$/;"	function	line:58
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <div *ngIf="isRequest && debugMode" class="ui-g-12 ui-md-4">$/;"	function	line:61
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <span class="md-inputfield fixed-form">$/;"	function	line:62
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <span class="fixed-label">{{'marked'|translate}} * <small *ngIf="!myForm.controls.status2.valid && myForm.controls.status2.dirty" class="text-warning">{{'required'|translate}}<\/small><\/span>$/;"	function	line:63
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <p-dropdown [options]="status2List" name="status2" formControlName="status2" [style]="{'width': '100%'}" [disableControl]="!formEditable"><\/p-dropdown>$/;"	function	line:65
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <div class="clearfix"><\/div>$/;"	function	line:67
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <div class="ui-g-12">$/;"	function	line:70
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <span class="md-inputfield fixed-form">$/;"	function	line:71
+input	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <input type="text" pInputText  name="name" formControlName="name" [disableControl]="!formEditable">$/;"	function	line:72
+label	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <label *ngIf="!isEditableRequest">{{'name'|translate}} * <small *ngIf="!myForm.controls.name.valid && myForm.controls.name.dirty" class="text-warning">{{'minChar'|translate:"{value: 5}" }}<\/small><\/label>$/;"	function	line:73
+label	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <label *ngIf="isEditableRequest">{{'name'|translate}} * <small *ngIf="!myForm.controls.name.valid" class="text-warning">{{'minChar'|translate:"{value: 5}" }}<\/small><\/label>$/;"	function	line:74
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <div class="ui-g-12 ui-md-4">$/;"	function	line:78
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <span class="md-inputfield fixed-form">$/;"	function	line:79
+input	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <input type="text" pInputText name="clientDb" formControlName="clientDb" [disableControl]="!formEditable">$/;"	function	line:80
+label	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <label *ngIf="!isEditableRequest">{{'db'|translate}} * <small *ngIf="!myForm.controls.clientDb.valid && myForm.controls.clientDb.dirty" class="text-warning">{{'alphaNum'|translate}}. {{'minChar'|translate:"{value: 3}"}}<\/small><\/label>$/;"	function	line:81
+label	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <label *ngIf="isEditableRequest">{{'db'|translate}} * <small *ngIf="!myForm.controls.clientDb.valid" class="text-warning">{{'alphaNum'|translate}}. {{'minChar'|translate:"{value: 3}"}}<\/small><\/label>$/;"	function	line:82
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <div class="ui-g-12 ui-md-4">$/;"	function	line:86
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <span class="md-inputfield fixed-form">$/;"	function	line:87
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <span class="fixed-label">{{'industry'|translate}} * <small *ngIf="!myForm.controls.industry.valid && myForm.controls.industry.dirty" class="text-warning">{{'required'|translate}}<\/small><\/span>$/;"	function	line:88
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <p-dropdown [options]="industryList" name="industry" formControlName="industry" [style]="{'width': '100%'}"><\/p-dropdown>$/;"	function	line:90
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <div class="ui-g-12 ui-md-4">$/;"	function	line:94
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <span class="md-inputfield fixed-form">$/;"	function	line:95
+span	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <span class="fixed-label">{{'service'|translate}} * <small *ngIf="!myForm.controls.industry.valid && myForm.controls.industry.dirty" class="text-warning">{{'required'|translate}}<\/small><\/span>$/;"	function	line:96
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <p-dropdown [options]="serviceList" name="service" formControlName="service" [style]="{'width': '100%'}"><\/p-dropdown>$/;"	function	line:98
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^          <div class="ui-g-12">$/;"	function	line:109
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^            <p-tabView (onChange)="onTabChange($event)">$/;"	function	line:110
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                <p-tabPanel header="{{'addresses'|translate}}" [selected]="true">$/;"	function	line:112
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <div class="ui-g">$/;"	function	line:113
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <div class="ui-g-12" [style]="{'margin-bottom':'30px'}" *ngFor="let address of myForm.controls.addresses.controls; let i=index">$/;"	function	line:114
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <p-footer *ngIf="formEditable">$/;"	function	line:123
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <div class="ui-helper-clearfix">$/;"	function	line:124
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <button style="float:left; width: auto;" pButton type="button" icon="fa-plus" label="{{'new'|translate}} {{'address'|translate}}" class="ui-button-success" (click)="newAddress()"><\/button>$/;"	function	line:125
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <button style="float:right; width: auto;" *ngIf="myForm.controls.addresses.controls.length && !isRequest" pButton type="button" icon="ui-icon-check" label="{{'save'|translate}}" class="ui-button-primary" [disabled]="!myForm.valid" (click)="submitForm()"><\/button>$/;"	function	line:126
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                <p-tabPanel header="{{'contacts'|translate}}">$/;"	function	line:133
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <div class="ui-g">$/;"	function	line:134
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <div class="ui-g-12" [style]="{'margin-bottom':'30px'}" *ngFor="let contact of myForm.controls.contacts.controls; let i=index">$/;"	function	line:135
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                  <p-footer *ngIf="formEditable">$/;"	function	line:144
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                    <div class="ui-helper-clearfix">$/;"	function	line:145
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <button style="float:left; width: auto;" pButton type="button" icon="fa-plus" label="{{'new'|translate}} {{'contact'|translate}}" class="ui-button-success" (click)="newContact()"><\/button>$/;"	function	line:146
+button	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                      <button style="float:right; width: auto;" *ngIf="myForm.controls.contacts.controls.length && !isRequest" pButton type="button" icon="ui-icon-check" label="{{'save'|translate}}" class="ui-button-primary" [disabled]="!myForm.valid" (click)="submitForm()"><\/button>$/;"	function	line:147
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^                <p-tabPanel header="Godfather IV" [disabled]="true">$/;"	function	line:157
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^<div *ngIf="hasClient && debugMode && !isRequest" class="ui-g ui-fluid">$/;"	function	line:170
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^  <div class="ui-g-12">$/;"	function	line:171
+p	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^    <p-panel header ="{{'debug'|translate}}" [toggleable]="true" [collapsed]="true">$/;"	function	line:172
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^      <div class="ui-g">$/;"	function	line:173
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^        <div class="ui-g-12">$/;"	function	line:174
+div	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^          <div class="ui-helper-clearfix" style="margin-top:10px">$/;"	function	line:175
+pre	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^            <pre>{{'formValid'|translate}}?: <br>{{myForm.valid | json}}<\/pre>$/;"	function	line:176
+pre	/Users/donghoang/node/gk/gk-bps/src/app/views/gkm/modules/gkcln/components/gkclnForm/gkclnForm.html	/^            <pre>{{'formValue'|translate}}: <br>{{myForm.value | json}}<\/pre>$/;"	function	line:177

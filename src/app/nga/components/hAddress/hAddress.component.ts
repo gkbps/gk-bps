@@ -18,7 +18,7 @@ export class HAddress implements OnInit, OnDestroy {
 
   myScope = 'h-Address';
 
-  @Input() formEditable = false;
+  @Input() isEditable = false;
   @Input() item: number;
   @Input('formGroup') public addressItem: FormGroup;
 
@@ -51,7 +51,7 @@ export class HAddress implements OnInit, OnDestroy {
   */
 
   setControlStatus() {
-    if (this.formEditable) {
+    if (this.isEditable) {
       this.addressItem.controls.type.enable();
       this.addressItem.controls.line1.enable();
       this.addressItem.controls.line2.enable();

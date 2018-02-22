@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { SelectItem } from 'primeng/api';
 
 /**/
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { getGkClientsAction } from '../../../../../../ngrx/gkClient/gkClients.actions';
 /**/
 
@@ -57,7 +57,7 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
 
     // Derive class constructor
     this.store.dispatch(getGkClientsAction('', '{}', 0, 10));
-    this.gkClients = store.select('gkClients');
+    this.gkClients = store.pipe(select('gkClients'));
   }
 
   ngOnInit() {

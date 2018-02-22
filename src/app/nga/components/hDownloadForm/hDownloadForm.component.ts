@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef } from '@angular/core';
 import { Http, Response, RequestOptions, URLSearchParams, ResponseContentType } from '@angular/http';
 // import { Router } from '@angular/router';
-import { Message } from 'primeng/components/common/api';
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/do';
@@ -40,8 +40,6 @@ export class HDownloadForm implements OnInit, OnDestroy {
 
   action = '';
   url: string;
-
-  msgs: Message[] = [];
 
   alertType: string;
 
@@ -113,9 +111,13 @@ export class HDownloadForm implements OnInit, OnDestroy {
     this.apiResultHandlingService.processAPIResult(result)
       .then((msg) => {
         console.log(msg);
-        this.msgs = [];
-        this.msgs.push(msg);
-        setTimeout(() => { this.msgs = []; }, 15000);
+        const toastData = {
+          type: msg['type'],
+          title: msg['title'],
+          msg: msg['msg'],
+          showClose: true,
+        };
+        this.globalState.notifyMyDataChanged('toasty','', toastData);
       });
   }
 

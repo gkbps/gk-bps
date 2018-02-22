@@ -36,7 +36,7 @@ export class HDataTableComponent implements OnInit, OnDestroy {
   @Input() selectedItemsLabel = '{0} items selected';
   @Input() columnOptions: SelectItem[];
 
-  @Input() body = [];
+  @Input() body: any;
   @Output() onPageChange: EventEmitter<any> = new EventEmitter();
 
   userRights: string[];
@@ -182,5 +182,4 @@ export class HDataTableComponent implements OnInit, OnDestroy {
     // IMPORTANT: Event emits to smart component for pagination
     this.onPageChange.emit(pagination);
   }
-
 }

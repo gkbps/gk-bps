@@ -3,7 +3,7 @@
     <div class="ui-helper-clearfix">
       <span class="ui-panel-title">{{'contact'|translate}} {{item + 1}}</span>
       <a class="ui-panel-titlebar-icon">
-        <span *ngIf="formEditable" class="fa fa-fw fa-close" (click)="removeContact()"></span>
+        <span *ngIf="isEditable" class="fa fa-fw fa-close" (click)="removeContact()"></span>
       </a>
     </div>
   </p-header>
@@ -32,7 +32,7 @@
 
     <div class="ui-g-12 ui-md-3">
       <span class="md-inputfield fixed-form">
-        <input type="text" pInputText name="email" formControlName="email">
+        <input type="text" pInputText name="email" pKeyFilter="email" formControlName="email">  
         <label>{{'email'|translate}} * <small *ngIf="!contactItem.controls.email.valid && contactItem.controls.email.dirty" class="text-warning">{{'invalidEmail'|translate}}</small></label>
       </span>
     </div>

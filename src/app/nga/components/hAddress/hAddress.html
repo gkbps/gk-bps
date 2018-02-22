@@ -3,7 +3,7 @@
     <div class="ui-helper-clearfix">
       <span class="ui-panel-title">{{'address'|translate}} {{item + 1}}</span>
       <a class="ui-panel-titlebar-icon">
-        <span *ngIf="formEditable" class="fa fa-fw fa-close" (click)="removeAddress()"></span>
+        <span *ngIf="isEditable" class="fa fa-fw fa-close" (click)="removeAddress()"></span>
       </a>
     </div>
   </p-header>

@@ -42,7 +42,7 @@ import { EventService } from './event.service';
     ButtonModule,
 
     StoreModule.forFeature('todos', TodosReducers),
-    EffectsModule.forRoot([TodosEffects]),
+    EffectsModule.forFeature([TodosEffects]),
 
     NgaModule,
     // HoangModule,

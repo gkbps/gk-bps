@@ -8,7 +8,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HLeadFormModule } from '../../../../../../nga/components/hLeadForm';
 import { HViewChangesModule } from '../../../../../../nga/components/hViewChanges';
 
-import { GkClnFormModule } from '../gkclnForm/gkclnForm.module';
 import { GkCln19Component } from './gkcln19.component';
 import { GkCln19RoutingModule } from './gkcln19-routing.module';
 
@@ -25,8 +24,7 @@ import { GkCln19RoutingModule } from './gkcln19-routing.module';
 
     HLeadFormModule,
     HViewChangesModule,
-    
-    GkClnFormModule,
+
     GkCln19RoutingModule
   ],
   exports: [

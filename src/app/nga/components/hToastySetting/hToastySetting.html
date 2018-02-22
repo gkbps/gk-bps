@@ -1,0 +1,27 @@
+<div class="contact-form">
+  <p-panel header="{{'toasty'|translate}}">
+    <div class="ui-g ui-fluid">
+
+      <div class="ui-g-12">
+        <p-dropdown [options]="toastyPositionList" [(ngModel)]="toastyPosition"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12">
+        <p-dropdown [options]="toastyThemeList" [(ngModel)]="toastyTheme"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12">
+        <span class="md-inputfield fixed-form">
+          <input id="toastyTimeOut" pinputtext pKeyFilter="int" [(ngModel)]="toastyTimeOut" type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" [ngClass]="{'ui-state-filled': (toastyTimeOut)}">
+          <label for="toastyTimeOut">{{'timeout'|translate}}</label>
+        </span>
+      </div>
+
+      <div class="ui-g-12">
+        <button style="float:right; width: auto;" pButton type="button" icon="ui-icon-check" label="{{'save'|translate}}" class="ui-button-primary" (click)="saveToasty()"></button>
+        <button style="float:left; width: auto;" pButton type="button" icon="ui-icon-check" label="{{'test'|translate}}" class="ui-button-primary" (click)="testToasty()"></button>
+      </div>
+
+    </div>
+  </p-panel>
+</div>

@@ -13,9 +13,6 @@ import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ButtonModule } from 'primeng/button';
 
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreModule } from '@ngrx/store';
-
 import { AppTranslationModule } from '../../../app.translation.module';
 import { NgaModule } from '../../../nga/nga.module';
 // import { HoangModule } from '../../../nga/hoang.module';

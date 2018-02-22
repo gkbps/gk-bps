@@ -300,16 +300,23 @@ export class HRequestApprovalFlow implements OnInit, OnDestroy {
   }
 
   notifyItemSelectionRequired() {
-    console.log('select an item to execute');
-    this.msgs = [];
-    this.msgs.push({severity: 'warn', summary: this.notification, detail: this.messageText});
-    this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+    const toastData = {
+      type: 'warning',
+      title: this.notification,
+      msg: this.messageText,
+      showClose: true,
+    };
+    this.globalState.notifyMyDataChanged('toasty','', toastData);
   }
 
   notifyCanNotRemoveMandatoryApprover() {
-    this.msgs = [];
-    this.msgs.push({severity: 'warn', summary: this.lblApprover, detail: this.lblRemoveMandatoryApprover});
-    this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+    const toastData = {
+      type: 'warning',
+      title: this.lblApprover,
+      msg: this.lblRemoveMandatoryApprover,
+      showClose: true,
+    };
+    this.globalState.notifyMyDataChanged('toasty','', toastData);            
   }
 
   removeApprover() {

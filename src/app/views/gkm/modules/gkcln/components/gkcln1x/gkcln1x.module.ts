@@ -29,7 +29,7 @@ import { HDataTableModule } from '../../../../../../nga/components/hDataTable';
     TranslateModule,
 
     StoreModule.forFeature('gkClients', GkClientsReducers),
-    EffectsModule.forRoot([GkClientsEffects]),
+    EffectsModule.forFeature([GkClientsEffects]),
 
     HDataTableModule,
 

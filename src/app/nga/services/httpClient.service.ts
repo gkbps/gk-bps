@@ -15,14 +15,13 @@ import {
 import { AppConfig } from '../../app.config';
 import { LoaderService } from './loader.service';
 import { APIResultHandlingService } from './apiResultHandling.service';
-import { Message } from 'primeng/components/common/api';
+
 import { GlobalState } from '../../global.state';
 
 @Injectable()
 export class HttpClientService extends HttpClient {
 
   apiUrl = '';
-  msgs: Message[] = [];
 
   constructor(
     handler: HttpHandler,
@@ -195,10 +194,14 @@ export class HttpClientService extends HttpClient {
     if (alert) {
       this.apiResultHandlingService.processAPIResult(res)
       .then((msg) => {
-        console.log(msg);
-        this.msgs = [];
-        this.msgs.push(msg);
-        this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+        // console.log(msg);
+        // const toastData = {
+        //   type: 'warning',
+        //   title: res.navigation,
+        //   msg: res.top_of_history,
+        //   showClose: true,
+        // };
+        // this.globalState.notifyMyDataChanged('toasty','', toastData);
       });
     }
   }
@@ -207,10 +210,14 @@ export class HttpClientService extends HttpClient {
     console.log(error);
     this.apiResultHandlingService.processAPIResult(error)
     .then((msg) => {
-      console.log(msg);
-      this.msgs = [];
-      this.msgs.push(msg);
-      this.globalState.notifyMyDataChanged('notificationMessage', '', this.msgs);
+      // console.log(msg);
+      const toastData = {
+        type: msg['type'],
+        title: msg['title'],
+        msg: msg['msg'],
+        showClose: true,
+      };
+      this.globalState.notifyMyDataChanged('toasty','', toastData);
     });
   }
 

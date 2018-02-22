@@ -3,13 +3,13 @@ import { GkClientsActionTypes, GkClientActionTypes } from './gkClients.actions';
 
 export function GkClientsReducers( state = initialState, { type, payload }) {
   switch (type) {
-    case GkClientsActionTypes.GET_GKCLIENTS:
+    case GkClientsActionTypes.GET_MANY_GKCLIENTS:
       return Object.assign({}, state, {pending: true, error: null});
 
-    case GkClientsActionTypes.GET_GKCLIENTS_SUCCESS:
+    case GkClientsActionTypes.GET_MANY_GKCLIENTS_SUCCESS:
       return Object.assign({}, state, {data: payload, pending: false});
 
-    case GkClientsActionTypes.GET_GKCLIENTS_ERROR:
+    case GkClientsActionTypes.GET_MANY_GKCLIENTS_ERROR:
       return Object.assign({}, state, {pending: false, error: 'Error'});
 
     default:
@@ -23,18 +23,31 @@ export function GkClientReducers( state = initialState, { type, payload }) {
     case GkClientActionTypes.RESET_GKCLIENT:
     case GkClientActionTypes.ADD_GKCLIENT:
     case GkClientActionTypes.SAVE_GKCLIENT:
+    case GkClientActionTypes.DISABLE_GKCLIENT:
+    case GkClientActionTypes.ENABLE_GKCLIENT:
+    case GkClientActionTypes.MARK_GKCLIENT:
+    case GkClientActionTypes.UNMARK_GKCLIENT:
     case GkClientActionTypes.DELETE_GKCLIENT:
       return Object.assign({}, state, {pending: true, error: null});
 
     case GkClientActionTypes.GET_GKCLIENT_SUCCESS:
+    case GkClientActionTypes.RESET_GKCLIENT_SUCCESS:
     case GkClientActionTypes.ADD_GKCLIENT_SUCCESS:
     case GkClientActionTypes.SAVE_GKCLIENT_SUCCESS:
+    case GkClientActionTypes.DISABLE_GKCLIENT_SUCCESS:
+    case GkClientActionTypes.ENABLE_GKCLIENT_SUCCESS:
+    case GkClientActionTypes.MARK_GKCLIENT_SUCCESS:
+    case GkClientActionTypes.UNMARK_GKCLIENT_SUCCESS:
     case GkClientActionTypes.DELETE_GKCLIENT_SUCCESS:
       return Object.assign({}, state, {data: payload, pending: false});
 
     case GkClientActionTypes.GET_GKCLIENT_ERROR:
     case GkClientActionTypes.ADD_GKCLIENT_ERROR:
     case GkClientActionTypes.SAVE_GKCLIENT_ERROR:
+    case GkClientActionTypes.DISABLE_GKCLIENT_ERROR:
+    case GkClientActionTypes.ENABLE_GKCLIENT_ERROR:
+    case GkClientActionTypes.MARK_GKCLIENT_ERROR:
+    case GkClientActionTypes.UNMARK_GKCLIENT_ERROR:
     case GkClientActionTypes.DELETE_GKCLIENT_ERROR:
       return Object.assign({}, state, {pending: false, error: 'Error'});
 

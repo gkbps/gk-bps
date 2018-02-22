@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { SelectItem } from 'primeng/api';
 
 /**/
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { getRequestsAction } from '../../../ngrx/request/requests.actions';
 /**/
 
@@ -52,7 +52,7 @@ export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestro
 
     // Derive class constructor
     // this.store.dispatch(getRequestsAction('', '{}', 0, 10, 'draft'));
-    this.requests = store.select('requests');
+    this.requests = store.pipe(select('requests'));
   }
 
   ngOnInit() {

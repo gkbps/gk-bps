@@ -15,7 +15,7 @@ export class APIResultHandlingService {
    * result = {status, url, _body {code, message, data ={anything}}
    */
   public processAPIResult(result) {
-    console.log(result);
+    // console.log(result);
 
     return new Promise(
       (resolve, reject) => {
@@ -29,54 +29,54 @@ export class APIResultHandlingService {
         this.translate.get([key1, key2, 'invalid_http_return'])
           .subscribe((res) => {
 
-            let severity = '';
+            let type = '';
             let trackError = false;
-            let summaryMsg = res[key1];
-            let detailMsg = res[key2];
+            let title = res[key1];
+            let msg = res[key2];
 
             switch (result.status) {
               case 200: // OK: GET, POST, PUT, PATCH, DELETE
               case 201: // CREATE: POST
-                severity = 'info';
+                type = 'info';
                 break;
 
               case 206: // UPLOAD: POST
-                severity = 'warn';
+                type = 'warning';
                 trackError = true;
                 break;
 
               case 304: // NOT MODIFIED: for Caching and for PATCH
-                severity = 'warn';
+                type = 'warn';
                 // Do not have result['_body']
                 break;
 
               case 400: // BAD REQUEST: Invalid syntax
-                severity = 'warn';
+                type = 'warning';
                 trackError = true;
                 break;
 
               case 401: // UNAUTHORIZED due to unauthenticated user
               case 403: // FORBIDDEN as authenticated user does not have proper right
-                severity = 'error';
+                type = 'error';
                 trackError = true;
                 break;
 
               case 404: // NOT FOUND
               case 412: // RE-CONDITION FAILED due to Validation
-                severity = 'warn';
+                type = 'warning';
                 trackError = true;
                 break;
 
               case 500: // INTERNAL SERVER ERROR
-                severity = 'error';
+                type = 'error';
                 trackError = true;
                 break;
 
               default: // NOT SUPPORT STATUS: Invalid Http Return
-                severity = 'error';
+                type = 'error';
                 trackError = true;
-                summaryMsg = res['invalid_http_return'];
-                detailMsg = res['invalid_http_return'];
+                title = res['invalid_http_return'];
+                msg = res['invalid_http_return'];
                 break;
             }
 
@@ -89,23 +89,24 @@ export class APIResultHandlingService {
               });
             }
 
-            // Return msg for Growl or Message`
             resolve({
-              severity: severity,
-              summary: summaryMsg,
-              detail: detailMsg,
+              type: type,
+              title: title,
+              msg: msg,
             });
 
           });
       }
     )
     .catch(error => {
-      // Return msg for Growl or Message`
-      return ({
-        severity: 'error',
-        summary: 'Undefied!',
-        detail: 'Undefined error catched!',
-      });
+      this.translate.get(['undefined_error', 'undefined_error_msg'])
+        .subscribe((res) => {
+          return ({
+            type: 'error',
+            title: res.undefined_error,
+            msg: res.undefined_error_msg,
+          });
+        });
     });
   }
 

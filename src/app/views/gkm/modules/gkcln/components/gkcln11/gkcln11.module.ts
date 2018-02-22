@@ -5,9 +5,11 @@ import { CommonModule } from '@angular/common';
 
 // import { TranslateModule } from '@ngx-translate/core';
 
-import { GkClnFormModule } from '../gkclnForm/gkclnForm.module';
+// import { GkClnFormModule } from '../gkclnForm/gkclnForm.module';
 import { GkCln11Component } from './gkcln11.component';
 import { GkCln11RoutingModule } from './gkcln11-routing.module';
+
+import { GkClnSharedModule } from '../gkclnShared/gkclnShared.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { GkCln11RoutingModule } from './gkcln11-routing.module';
 
     // TranslateModule,
 
-    GkClnFormModule,
+    // GkClnFormModule,
+    GkClnSharedModule,
+
     GkCln11RoutingModule
   ],
   exports: [
