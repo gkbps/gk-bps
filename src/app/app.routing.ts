@@ -53,6 +53,8 @@ export const routes: Routes = [
       { path: 'profile', loadChildren: './views/common/profile/profile.module#ProfileModule' },
       { path: 'setting', loadChildren: './views/common/setting/setting.module#SettingModule' },
 
+      { path: 'debug', loadChildren: './views/common/debug/debug.module#DebugModule' },
+
       { path: 'help', loadChildren: './views/help/help.module#HelpModule' },
       { path: 'home', loadChildren: './views/home/home.module#HomeModule' },
       { path: 'about', loadChildren: './views/common/about/about.module#AboutModule' },

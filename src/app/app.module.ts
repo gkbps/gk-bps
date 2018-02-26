@@ -1,6 +1,6 @@
-/*******************************************************************************
- * IMPORT ANGULAR MODULES
- *******************************************************************************/
+/**
+ * ANGULAR MODULES
+ */
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,46 +12,57 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
-/*******************************************************************************
- * IMPORT 3RD PARTY MODULES
- *******************************************************************************/
+/**
+ * 3RD PARTY - DATABASE
+ * Apollo GraphQL
+ * Ngrx Store
+ */
 
- // Scroll to
- import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+import { GraphQLModule } from './apollo/graphql.module';
 
- // Toaster
- import { ToastyModule } from 'ngx-toasty';
-
- // PrimeNg
- /**
-  * Growl: (gk-containers)
-  * Messages: (gk-containers)
-  * Progress bar: Show indefinite loading when interacting with server (gk-containers)
-  * Overlay panel: Show HELP overlay panel (gk-breadcrumbs)
-  * Dropdown: Show list of working years and legal entities (gk-working)
-  * Sidebar:
-  */
- import { ScrollPanelModule } from 'primeng/scrollpanel';
- import { ProgressBarModule } from 'primeng/progressbar';
- // import { GrowlModule } from 'primeng/growl';
- import { MessagesModule } from 'primeng/messages';
- import { OverlayPanelModule } from 'primeng/overlaypanel';
- import { DropdownModule } from 'primeng/dropdown';
- import { SidebarModule } from 'primeng/sidebar';
-
- import { ConfirmationService } from 'primeng/api';
-
-// NGRX STORE
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-// Translate
+/**
+ * 3RD PARTY - UI
+ * ScrollTo
+ * Toaster
+ * PrimeNg
+ * - ScrollPanel:     Menu scroll
+ * - Progress bar:    Indefinite progress to show data loading (gk-containers)
+ * - Overlay panel:   Context based HELP (gk-breadcrumbs)
+ * - Dropdown:        List of working years and legal entities (gk-working)
+ * - Sidebar:         Potential for other purposes
+ */
+
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+import { ToastyModule } from 'ngx-toasty';
+
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { DropdownModule } from 'primeng/dropdown';
+import { SidebarModule } from 'primeng/sidebar';
+
+import { ConfirmationService } from 'primeng/api';
+
+ /**
+  * 3RD PARTY - UTILITIES
+  * Translate
+  */
+
 import { TranslateService } from '@ngx-translate/core';
 
-/*******************************************************************************
- * IMPORT GK MODULES & COMPONENTS
- *******************************************************************************/
+/**
+ * GK MODULES & COMPONENTS
+ * App level component, base standard components, routing
+ * Global services
+ * App level UI
+ * - Containers
+ * - Components
+ * - Directives
+ */
 import { AppComponent } from './app.component';
 import { BaseComponent, TrayBaseComponent } from './views/base';
 import { AppRoutingModule } from './app.routing';
@@ -104,8 +115,6 @@ const APP_DIRECTIVES = [
   GK_SIDEBAR_TOGGLE_DIRECTIVES,
 ];
 
-// UTILITIES
-
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [
@@ -126,27 +135,30 @@ const APP_DIRECTIVES = [
     FormsModule,
     ReactiveFormsModule,
 
-    // PrimeNg
-    ScrollPanelModule,
-    ProgressBarModule,
-    // GrowlModule,
-    MessagesModule,
-    OverlayPanelModule,
-    DropdownModule,
-    SidebarModule,
-
-    ScrollToModule.forRoot(),
-    ToastyModule.forRoot(),
-
-    NgaModule.forRoot(),
+    // Apollo
+    GraphQLModule,
 
     // Ngrx Store
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
-      // Restrict extension to log-only mode
-      logOnly: environment.production
+      logOnly: environment.production // Restrict extension to log-only mode
     }),
+
+    ScrollToModule.forRoot(),
+    ToastyModule.forRoot(),
+
+    // PrimeNg
+    ScrollPanelModule,
+    ProgressBarModule,
+    // GrowlModule,
+    // MessagesModule,
+    OverlayPanelModule,
+    DropdownModule,
+    SidebarModule,
+
+    // GK
+    NgaModule.forRoot(),
 
     AppRoutingModule,
   ],

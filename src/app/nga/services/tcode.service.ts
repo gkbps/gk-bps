@@ -14,6 +14,7 @@ export class TcodeService {
     'profile', 'policy', 'help', 'dict',
     'fav', 'terminal', 'setting',
     '401', '403', '404', '500', 'chat',
+    'debug',
     'home', 'news', 'main',
     'mine', 'tray',
     'inbox', 'ibx',

@@ -1,4 +1,5 @@
 {
+	"master_list": "Danh sách chính",
 	"resource_is_created": "Tài nguyên mới được tạo thành công!",
 	"resource_is_deleted": "Tài nguyên đã được xoá vĩnh viễn!",
 	"tcode_execution_error_msg": "Lỗi phát sinh trong khi thực thi yêu cầu. Vui lòng gỡ lỗi để xem chi tiết!",
@@ -159,8 +160,8 @@
 	"date_time": "Ngày/Giờ",
 	"db": "Dữ liệu",
 	"debitNote": "Giấy báo nợ",
-	"debug": "BẪY LỖI",
-	"debug_toggle": "Bật/tắt bẫy lỗi",
+	"debug": "Gỡ lỗi",
+	"debug_toggle": "Bật/tắt gỡ lỗi",
 	"deep_orange_cyan": "Cam đậm - Xanh lam",
 	"deep_purple_orange": "Tím đậm - Cam",
 	"delete": "Xoá",

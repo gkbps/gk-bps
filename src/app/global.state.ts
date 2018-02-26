@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
+/**
+* @class GlobalState
+* A service manage state of key events at system wide level via event registry
+*
+* @example
+* - Langugage Translation
+* - Context based help
+*/
 @Injectable()
 export class GlobalState {
 
@@ -21,6 +29,12 @@ export class GlobalState {
   // ];
 
   // Final
+  /**
+  * @param {Subject<Object>} _myData could serve as Observer and Observable
+  * @param {Observable} _myDataStream subscribe to the stream of events
+  * @param {Array} _subscription store array of events and serves as event registry
+  * see {@link subscribeEvent}
+  */
   private _myData = new Subject<Object>();
   private _myDataStream$ = this._myData.asObservable();
   private _mySubscriptions: any[] = [];
@@ -34,116 +48,6 @@ export class GlobalState {
 
     // Final
     this._myDataStream$.subscribe((myData) => this._onMyEvent(myData));
-  }
-
-  /*
-   * Execute registered callbacks once event occurs and change state
-   */
-  // Initial
-  // _onEvent(data: any) {
-  //   let subscribers = this._subscriptions.get(data['event']) || [];
-  //   subscribers.forEach((callback) => {
-  //     callback.call(null, data['data']);
-  //   });
-  // }
-
-  // Transition
-  // _onEvent1(data1: any) {
-  //   let subscribers1 = this.getSubscriptionItemByEvent(data1['event']) || [];
-  //   console.log(subscribers1);
-
-  //   subscribers1.forEach((subscriptionItem) => {
-  //     subscriptionItem['data'].call(null, data1['data']);
-  //   });
-  // }
-
-  // Final
-  _onMyEvent(myData: any) {
-    let mySubscribers = this.getMySubscriptionItemByEvent(myData['event']) || [];
-    // console.log(mySubscribers);
-    // console.log(myData);
-
-    mySubscribers.forEach((subscriptionItem) => {
-      subscriptionItem['data'].call(null, myData['data']);
-    });
-  }
-
-  // Transition
-  // getSubscriptionItemByEvent(event) {
-  //   return this._subscriptions1.filter((element) => {
-  //     return (element['event'] === event);
-  //   });
-  // }
-
-  // getSubscriptionItemByEventAndScope(event, scope) {
-  //   return this._subscriptions1.filter((element) => {
-  //     return ((element['event'] === event) && (element['scope'] === scope));
-  //   });
-  // }
-
-  // getFirstSubscriptionItemByEventAndScope(event, scope) {
-  //   const result =  this._subscriptions1.filter((element) => {
-  //     return ((element['event'] === event) && (element['scope'] === scope));
-  //   });
-  //   return result[0] || {};
-  // }
-
-  // pushSubscriptionItem(subscriptionItem) {
-  //   this._subscriptions1.push(subscriptionItem);
-  // }
-
-  // Final
-  getMySubscriptionItemByEvent(event) {
-    return this._mySubscriptions.filter((element) => {
-      return (element['event'] === event);
-    });
-  }
-
-  getMySubscriptionItemByEventAndScope(event, scope) {
-    return this._mySubscriptions.filter((element) => {
-      return ((element['event'] === event) && (element['scope'] === scope));
-    });
-  }
-
-  pushMySubscriptionItem(subscriptionItem) {
-    this._mySubscriptions.push(subscriptionItem);
-    // console.log(this._mySubscriptions);
-  }
-
-  /*
-   * Notify new value for an event
-   */
-  // Initial
-  // notifyDataChanged(event, value) {
-  //   // console.log(event, value);
-  //   let current = this._data[event];
-  //   if (current !== value) {
-  //     this._data[event] = value;
-  //     this._data.next({
-  //       event: event,
-  //       data: this._data[event]
-  //     });
-  //   }
-  // }
-
-  // Transition
-  // notifyDataChanged1(event, scope, value) {
-  //   this._data1.next({
-  //     event: event,
-  //     tcode: scope,
-  //     data: value
-  //   });
-  // }
-
-  // Final
-  notifyMyDataChanged(event, scope, value) {
-    // console.log(event, scope, value);
-
-    this._myData.next({
-      event: event,
-      scope: scope,
-      data: value
-    });
   }
 
   /*
@@ -182,11 +86,174 @@ export class GlobalState {
   // }
 
   // Final
+  /**
+   * @function subscribeEvent
+   * A service to register (event) for a (scope) with a (callback) function
+   *
+   * @param {string} event        Name of event
+   * @param {string} scope        Name of module, component...
+   * @param {function} callback   Function to be excuted when event is triggered
+   *
+   * {@link pushMySubscriptionItem}
+   *
+   * @returns {void}
+   */
   subscribeEvent(event: string, scope: string, callback: Function) {
     this.pushMySubscriptionItem({
       event: event,
       scope: scope,
       data: callback
+    });
+  }
+
+  /**
+   * @function pushMySubscriptionItem
+   * A helper to push subscription item into event registry
+   *
+   * @param {object} subscriptionItem
+   *
+   * @returns {void}  mutate _mySubscriptions
+   */
+  pushMySubscriptionItem(subscriptionItem) {
+    this._mySubscriptions.push(subscriptionItem);
+    // console.log(this._mySubscriptions);
+  }
+
+  /*
+   * Execute registered callbacks once event occurs and change state
+   */
+  // Initial
+  // _onEvent(data: any) {
+  //   let subscribers = this._subscriptions.get(data['event']) || [];
+  //   subscribers.forEach((callback) => {
+  //     callback.call(null, data['data']);
+  //   });
+  // }
+
+  // Transition
+  // _onEvent1(data1: any) {
+  //   let subscribers1 = this.getSubscriptionItemByEvent(data1['event']) || [];
+  //   console.log(subscribers1);
+
+  //   subscribers1.forEach((subscriptionItem) => {
+  //     subscriptionItem['data'].call(null, data1['data']);
+  //   });
+  // }
+
+  // Final
+  /**
+  * @function _onMyEvent
+  * A function that take from registry relevant subscription items and do callbacks
+  *
+  * @param {any} myData is anything but contain the event to be triggered
+  * see {@link getMySubscriptionItemByEvent}
+  *
+  * @returns {void}
+  */
+  _onMyEvent(myData: any) {
+    let mySubscribers = this.getMySubscriptionItemByEvent(myData['event']) || [];
+    // console.log(mySubscribers);
+    // console.log(myData);
+
+    mySubscribers.forEach((subscriptionItem) => {
+      subscriptionItem['data'].call(null, myData['data']);
+    });
+  }
+
+  // Transition
+  // getSubscriptionItemByEvent(event) {
+  //   return this._subscriptions1.filter((element) => {
+  //     return (element['event'] === event);
+  //   });
+  // }
+
+  // getSubscriptionItemByEventAndScope(event, scope) {
+  //   return this._subscriptions1.filter((element) => {
+  //     return ((element['event'] === event) && (element['scope'] === scope));
+  //   });
+  // }
+
+  // getFirstSubscriptionItemByEventAndScope(event, scope) {
+  //   const result =  this._subscriptions1.filter((element) => {
+  //     return ((element['event'] === event) && (element['scope'] === scope));
+  //   });
+  //   return result[0] || {};
+  // }
+
+  // pushSubscriptionItem(subscriptionItem) {
+  //   this._subscriptions1.push(subscriptionItem);
+  // }
+
+  // Final
+  /**
+  * @function getMySubscriptionItemByEvent
+  * Filter from event registry all subsciptions that match event triggered
+  *
+  * @returns {array} The array of subsciptions that have event name matched
+  */
+  getMySubscriptionItemByEvent(event) {
+    return this._mySubscriptions.filter((element) => {
+      return (element['event'] === event);
+    });
+  }
+
+  // Final
+  /**
+  * @function getMySubscriptionItemByEventAndScope
+  * Filter from event registry all subsciptions that match event triggered in specific scope
+  *
+  * @returns {array} The array of subsciptions that have event and scope name matched
+  */
+  getMySubscriptionItemByEventAndScope(event, scope) {
+    return this._mySubscriptions.filter((element) => {
+      return ((element['event'] === event) && (element['scope'] === scope));
+    });
+  }
+
+
+
+  /*
+   * Notify new value for an event
+   */
+  // Initial
+  // notifyDataChanged(event, value) {
+  //   // console.log(event, value);
+  //   let current = this._data[event];
+  //   if (current !== value) {
+  //     this._data[event] = value;
+  //     this._data.next({
+  //       event: event,
+  //       data: this._data[event]
+  //     });
+  //   }
+  // }
+
+  // Transition
+  // notifyDataChanged1(event, scope, value) {
+  //   this._data1.next({
+  //     event: event,
+  //     tcode: scope,
+  //     data: value
+  //   });
+  // }
+
+  // Final
+  /**
+  * @function notifyMyDataChanged
+  * A service that allow to emit/ trigger event from module, component level
+  *
+  * @param {string} event   Name of event
+  * @param {string} scope   Name of scope
+  * @param {any} data       Data that pass to
+  *
+  * @returns {void}
+  */
+  notifyMyDataChanged(event, scope, data) {
+    // console.log(event, scope, value);
+    this._myData.next({
+      event: event,
+      scope: scope,
+      data: data
     });
   }
 
@@ -214,6 +281,15 @@ export class GlobalState {
   //   console.log(this._subscriptions1);
   // }
 
+  /**
+  * @function unsubscribeEvent
+  * A service that unscribe/remove subscription item from event registry
+  *
+  * @param {string} event   Name of event
+  * @param {string} scope   Name of scope
+  *
+  * @returns {void}
+  */
   unsubscribeEvent(event: string, scope: string) {
     for (let i = 0; i < this._mySubscriptions.length; i++) {
       if ((this._mySubscriptions[i]['event'] === event) && (this._mySubscriptions[i]['scope'] === scope)) {

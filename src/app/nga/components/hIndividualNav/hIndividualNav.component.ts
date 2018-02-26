@@ -21,7 +21,7 @@ export class HIndividualNav implements OnInit, OnDestroy {
   myScope = 'gk-individual-nav';
 
   @Input() prefix: string;
-  @Output() onClick: EventEmitter<any> = new EventEmitter();
+  @Output() onSelectAction: EventEmitter<any> = new EventEmitter();
 
   items: MenuItem[];
 
@@ -109,7 +109,7 @@ export class HIndividualNav implements OnInit, OnDestroy {
         workingId = params['id'] || '';
       }
 
-      this.onClick.emit({ action: action });
+      this.onSelectAction.emit({ action: action });
       this.tcodeService.executeTCode(tcode, workingId);
     });
   }

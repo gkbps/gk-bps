@@ -100,6 +100,7 @@ export class MineComponent extends BaseComponent implements OnInit, OnDestroy {
     this.subscribeGlobalState();
 
     // Derive class initialization
+    this.initSidebarMenu();
     this.subscribeLocalState();
     this.initScheduleLang(this.localStorageService.getLang());
 

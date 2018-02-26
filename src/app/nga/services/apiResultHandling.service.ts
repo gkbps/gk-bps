@@ -15,7 +15,7 @@ export class APIResultHandlingService {
    * result = {status, url, _body {code, message, data ={anything}}
    */
   public processAPIResult(result) {
-    // console.log(result);
+    console.log(result);
 
     return new Promise(
       (resolve, reject) => {
@@ -85,7 +85,7 @@ export class APIResultHandlingService {
               this.trackError({
                 url: result.url,
                 status: result.status,
-                detail: result['_body'],
+                detail: result['error'],
               });
             }
 

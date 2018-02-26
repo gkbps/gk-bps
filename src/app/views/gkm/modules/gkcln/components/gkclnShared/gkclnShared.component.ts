@@ -159,6 +159,11 @@ export class GkClnShared implements OnInit, OnDestroy {
           this.store.dispatch(addGkClientAction(event.data));
           break;
 
+        case '13':
+          console.log('Save master data!');
+          this.store.dispatch(saveGkClientAction(event.data));
+          break;
+
         case '31':
           console.log('Save detail of request!');
           break;

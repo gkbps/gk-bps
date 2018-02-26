@@ -123,7 +123,7 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
       console.log(this.source);
       // this.buildForm();
 
-      if ((this.action=='11') && (this.source.data._id)) {        
+      if ((this.action=='11') && (this.source.data._id)) {
         this.isNewCreationSuccess = true;
       }
       else if((this.action=='18') && (this.source.data._id)) {
@@ -359,6 +359,14 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
       };
       this.globalState.notifyMyDataChanged('toasty','', toastData);
     }
+  }
+
+  gotoTcode(tcode) {
+    this.tcodeService.executeTCode(tcode,'');
+  }
+
+  hasRight(tcode) {
+    return this.tcodeService.checkTcodeInMana(tcode);
   }
 
   ngOnDestroy() {

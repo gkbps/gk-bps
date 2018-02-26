@@ -1,4 +1,5 @@
 {
+	"master_list": "Master List",
 	"resource_is_created": "New resource is successfully created!",
 	"resource_is_deleted": "Resource is permanently deleted!",
 	"tcode_execution_error_msg": "Encounter error in executing transaction code. Please debug for details!",
@@ -160,7 +161,7 @@
 	"date_time": "Date/Time",
 	"db": "Database",
 	"debitNote": "Debit Note",
-	"debug": "DEBUG",
+	"debug": "Debug",
 	"debug_toggle": "Toggle Debug",
 	"deep_orange_cyan": "Deep Orange - Cyan",
 	"deep_purple_orange": "Deep Purple - Orange",

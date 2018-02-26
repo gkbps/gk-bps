@@ -1,9 +1,13 @@
-<gkclient-form
-  [prefix]="prefix"
-  [action]="action"
-  [isRequest]="isRequest"
-  [isEditable]="isEditable"
-  [source]="gkClient|async"
-  (onSaveAction)="handleEvent($event)">
-  <!-- (onInFormAction)="handleInFormAction($event)" -->
-</gkclient-form>
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <gkclient-form
+      [prefix]="prefix"
+      [action]="action"
+      [isRequest]="isRequest"
+      [isEditable]="isEditable"
+      [source]="gkClient|async"
+      (onSaveAction)="handleEvent($event)">
+      <!-- (onInFormAction)="handleInFormAction($event)" -->
+    </gkclient-form>
+  </div>
+</div>
