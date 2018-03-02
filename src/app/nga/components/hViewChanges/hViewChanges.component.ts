@@ -106,7 +106,8 @@ export class HViewChanges implements OnInit, OnDestroy {
       const reqOptions = this.securityService.jwt().merge({params: pagination});
       // console.log(reqOptions);
 
-      const url = this.config.apiUrl + '/' + this.module + '/viewChange/' + this.id;
+      const url = this.config.apiUrl + '/' + this.module + '/' + this.id + '/changes';
+      // const url = this.config.apiUrl + '/' + this.module + '/viewChange/' + this.id;
       // console.log(url);
 
       return this.http.get(url, reqOptions)

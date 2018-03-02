@@ -1,14 +1,17 @@
-/*******************************************************************************
+/**
  * REQUESTS
- *******************************************************************************/
+ */
 
 export enum RequestsActionTypes {
-  GET_REQUESTS = '[Request] Get Requests',
-  GET_REQUESTS_SUCCESS = '[Request] Get Requests Success',
-  GET_REQUESTS_ERROR = '[Request] Get Requests Error'
+  GET_REQUESTS = '[Request] Get Many Requests',
+  GET_REQUESTS_SUCCESS = '[Request] Get Many Requests Success',
+  GET_REQUESTS_ERROR = '[Request] Get Many Requests Error'
 }
 
-// To get Requests by pagination
+/**
+* @function getRequestsAction
+* get Requests by pagination
+*/
 export function getRequestsAction(filter, sort, first, rows, tray) {
   // Return an action with type and payload
   return {
@@ -23,9 +26,9 @@ export function getRequestsAction(filter, sort, first, rows, tray) {
   }
 }
 
-/*******************************************************************************
+/**
  * REQUEST
- *******************************************************************************/
+ */
 
 export enum RequestActionTypes {
   GET_REQUEST = '[Request] Get Request',
@@ -33,6 +36,8 @@ export enum RequestActionTypes {
   GET_REQUEST_ERROR = '[Request] Get Request Error',
 
   RESET_REQUEST ='[Request] Reset Request',
+  RESET_REQUEST_SUCCESS = '[Request] Reset Request Success',
+  RESET_REQUEST_ERROR = '[Request] Reset Request Error',
 
   ADD_REQUEST = '[Request] Add Request',
   ADD_REQUEST_SUCCESS = '[Request] Add Request Success',
@@ -42,25 +47,41 @@ export enum RequestActionTypes {
   SAVE_REQUEST_SUCCESS = '[Request] Save Request Success',
   SAVE_REQUEST_ERROR = '[Request] Save Request Error',
 
-  ENABLE_REQUEST = '[Request] Enable Request',
-  ENABLE_REQUEST_SUCCESS = '[Request] Enable Request Success',
-  ENABLE_REQUEST_ERROR = '[Request] Enable Request Error',
+  SUBMIT_REQUEST = '[Request] Submit Request',
+  SUBMIT_REQUEST_SUCCESS = '[Request] Submit Request Success',
+  SUBMIT_REQUEST_ERROR = '[Request] Submit Request Error',
 
-  DISABLE_REQUEST = '[Request] Disable Request',
-  DISABLE_REQUEST_SUCCESS = '[Request] Disable Request Success',
-  DISABLE_REQUEST_ERROR = '[Request] Disable Request Error',
+  WITHDRAW_REQUEST = '[Request] Withdraw Request',
+  WITHDRAW_REQUEST_SUCCESS = '[Request] Withdraw Request Success',
+  WITHDRAW_REQUEST_ERROR = '[Request] Withdraw Request Error',
 
-  MARK_REQUEST = '[Request] Mark Request',
-  MARK_REQUEST_SUCCESS = '[Request] Mark Request Success',
-  MARK_REQUEST_ERROR = '[Request] Mark Request Error',
+  CANCEL_REQUEST = '[Request] Cancel Request',
+  CANCEL_REQUEST_SUCCESS = '[Request] Cancel Request Success',
+  CANCEL_REQUEST_ERROR = '[Request] Cancel Request Error',
 
-  UNMARK_REQUEST = '[Request] Unmark Request',
-  UNMARK_REQUEST_SUCCESS = '[Request] Unmark Request Success',
-  UNMARK_REQUEST_ERROR = '[Request] Unmark Request Error',
+  RETURN_REQUEST = '[Request] Return Request',
+  RETURN_REQUEST_SUCCESS = '[Request] Return Request Success',
+  RETURN_REQUEST_ERROR = '[Request] Return Request Error',
 
-  DELETE_REQUEST = '[Request] Delete Request',
-  DELETE_REQUEST_SUCCESS = '[Request] Delete Request Success',
-  DELETE_REQUEST_ERROR = '[Request] Delete Request Error',
+  APPROVE_REQUEST = '[Request] Approve Request',
+  APPROVE_REQUEST_SUCCESS = '[Request] Approve Request Success',
+  APPROVE_REQUEST_ERROR = '[Request] Approve Request Error',
+
+  REJECT_REQUEST = '[Request] Reject Request',
+  REJECT_REQUEST_SUCCESS = '[Request] Reject Request Success',
+  REJECT_REQUEST_ERROR = '[Request] Reject Request Error',
+
+  ABORT_REQUEST = '[Request] Abort Request',
+  ABORT_REQUEST_SUCCESS = '[Request] Abort Request Success',
+  ABORT_REQUEST_ERROR = '[Request] Abort Request Error',
+
+  POST_REQUEST = '[Request] Post Request',
+  POST_REQUEST_SUCCESS = '[Request] Post Request Success',
+  POST_REQUEST_ERROR = '[Request] Post Request Error',
+
+  REVERT_REQUEST = '[Request] Revert Request',
+  REVERT_REQUEST_SUCCESS = '[Request] Revert Request Success',
+  REVERT_REQUEST_ERROR = '[Request] Revert Request Error'
 }
 
 export function getRequestAction(id) {
@@ -70,10 +91,10 @@ export function getRequestAction(id) {
   }
 }
 
-export function resetRequestAction() {
+export function resetRequestAction(tcode) {
   return {
     type: RequestActionTypes.RESET_REQUEST,
-    payload: {}
+    payload: { tcode: tcode }
   }
 }
 
@@ -91,37 +112,69 @@ export function saveRequestAction(Request) {
   }
 }
 
-export function enableRequestAction(id) {
+export function submitRequestAction(Request) {
   return {
-    type: RequestActionTypes.ENABLE_REQUEST,
+    type: RequestActionTypes.SUBMIT_REQUEST,
+    payload: { data: Request }
+  }
+}
+
+export function withdrawRequestAction(id) {
+  return {
+    type: RequestActionTypes.WITHDRAW_REQUEST,
     payload: { id: id }
   }
 }
 
-export function disableRequestAction(id) {
+export function cancelRequestAction(id) {
   return {
-    type: RequestActionTypes.DISABLE_REQUEST,
+    type: RequestActionTypes.CANCEL_REQUEST,
     payload: { id: id }
   }
 }
 
-export function markRequestAction(id) {
+export function returnRequestAction(id) {
   return {
-    type: RequestActionTypes.MARK_REQUEST,
+    type: RequestActionTypes.RETURN_REQUEST,
     payload: { id: id }
   }
 }
 
-export function unmarkRequestAction(id) {
+export function approveRequestAction(id, approverId, step) {
   return {
-    type: RequestActionTypes.UNMARK_REQUEST,
+    type: RequestActionTypes.APPROVE_REQUEST,
+    payload: {
+      id: id,
+      approverId: approverId,
+      step: step
+    }
+  }
+}
+
+export function rejectRequestAction(id) {
+  return {
+    type: RequestActionTypes.REJECT_REQUEST,
     payload: { id: id }
   }
 }
 
-export function deleteRequestAction(id) {
+export function abortRequestAction(id) {
   return {
-    type: RequestActionTypes.DELETE_REQUEST,
+    type: RequestActionTypes.ABORT_REQUEST,
+    payload: { id: id }
+  }
+}
+
+export function postRequestAction(id) {
+  return {
+    type: RequestActionTypes.POST_REQUEST,
+    payload: { id: id }
+  }
+}
+
+export function revertRequestAction(id) {
+  return {
+    type: RequestActionTypes.REVERT_REQUEST,
     payload: { id: id }
   }
 }

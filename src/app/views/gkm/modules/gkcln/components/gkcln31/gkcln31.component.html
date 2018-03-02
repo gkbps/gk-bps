@@ -4,18 +4,24 @@
       <h1>{{'gkcln'|translate}}</h1>
 
       <div class="ui-g form-group">
-
         <!-- HEADER -->
         <div class="ui-g-12">
+          <request-header
+            [tcode]="tcode"
+            [source]="request|async"
+            (onSelectAction)="onSelectAction($event)">
+          </request-header>
+        </div>
+        <!-- <div class="ui-g-12">
           <h-request-header
             [tcode]="tcode"
             (getAction)="getAction($event)">
           </h-request-header>
-        </div>
+        </div> -->
         <!-- ./HEADER -->
 
         <!-- BODY -->
-        <div *ngIf="id" class="ui-g-12">
+        <!-- <div *ngIf="id" class="ui-g-12">
           <p-panel [toggleable]="true" [collapsed]="false">
             <p-header>
               <span class="ui-panel-title"><i class="fa ui-icon-subject"></i> {{'req_body'|translate}}</span>
@@ -33,26 +39,26 @@
               </div>
             </div>
           </p-panel>
-        </div>
+        </div> -->
         <!-- ./BODY -->
 
         <!-- DOCUMENTS -->
-        <div *ngIf="id" class="ui-g-12">
+        <!-- <div *ngIf="id" class="ui-g-12">
           <h-request-documents
             [tcode]="tcode">
           </h-request-documents>
-        </div>
+        </div> -->
         <!-- ./DOCUMENTS -->
 
         <!-- APPROVAL -->
-        <div *ngIf="id" class="ui-g-12">
+        <!-- <div *ngIf="id" class="ui-g-12">
           <h-request-approval-flow>
           </h-request-approval-flow>
-        </div>
+        </div> -->
         <!-- ./APPROVAL -->
 
         <!-- AJE -->
-        <div *ngIf="id" class="ui-g-12">
+        <!-- <div *ngIf="id" class="ui-g-12">
           <p-panel [toggleable]="true" [collapsed]="true">
             <p-header>
               <span class="ui-panel-title"><i class="fa ui-icon-ac-unit"></i> {{'req_aje'|translate}}</span>
@@ -63,11 +69,11 @@
               </div>
             </div>
           </p-panel>
-        </div>
+        </div> -->
         <!-- ./AJE -->
 
         <!-- COMMENTS -->
-        <div *ngIf="id" class="ui-g-12">
+        <!-- <div *ngIf="id" class="ui-g-12">
           <p-panel [toggleable]="true" [collapsed]="true">
             <p-header>
               <span class="ui-panel-title"><i class="fa ui-icon-question-answer"></i> {{'req_comment'|translate}}</span>
@@ -78,11 +84,11 @@
               </div>
             </div>
           </p-panel>
-        </div>
+        </div> -->
         <!-- ./COMMENTS -->
 
         <!-- HISTORY -->
-        <div *ngIf="id" class="ui-g-12">
+        <!-- <div *ngIf="id" class="ui-g-12">
           <p-panel [toggleable]="true" [collapsed]="true">
             <p-header>
               <span class="ui-panel-title"><i class="fa ui-icon-history"></i> {{'req_history'|translate}}</span>
@@ -93,7 +99,7 @@
               </div>
             </div>
           </p-panel>
-        </div>
+        </div> -->
         <!-- ./HISTORY -->
 
 
@@ -103,9 +109,8 @@
   </div>
 </div>
 
-<br />
+<!-- <br />
 <p-panel header ="{{'debug'|translate}}" [toggleable]="true" [collapsed]="true">
-  <!-- *ngIf="debugMode"  -->
   <div class="ui-g">
     <div class="ui-g-12">
       <div class="ui-helper-clearfix" style="margin-top:10px">
@@ -123,4 +128,4 @@
       </div>
     </div>
   </div>
-</p-panel>
+</p-panel> -->

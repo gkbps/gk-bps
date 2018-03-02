@@ -32,7 +32,7 @@ export class GkClientsEffects {
         ofType(GkClientsActionTypes.GET_MANY_GKCLIENTS),
         switchMap(action => {
           console.log(action);
-          return this.gkClientsServices.findMasterListPagination(
+          return this.gkClientsServices.action1x(
             action['payload']['filter'],
             action['payload']['sort'],
             action['payload']['first'],
@@ -58,7 +58,7 @@ export class GkClientsEffects {
       ofType(GkClientActionTypes.GET_GKCLIENT),
       switchMap(action => {
         console.log(action);
-        return this.gkClientsServices.findById(action['payload']['id'])
+        return this.gkClientsServices.action12(action['payload']['id'])
           .pipe(
             // If successful, dispatch success action with result
             map(gkClient => {
@@ -84,7 +84,7 @@ export class GkClientsEffects {
               return ({ type: GkClientActionTypes.RESET_GKCLIENT_SUCCESS, payload: gkClient });
             }),
             // If request fails, dispatch failed action
-            catchError((err, caught) => Observable.of({type: GkClientActionTypes.GET_GKCLIENT_ERROR}))
+            catchError((err, caught) => Observable.of({type: GkClientActionTypes.RESET_GKCLIENT_ERROR}))
           )
       })
     );
@@ -94,7 +94,7 @@ export class GkClientsEffects {
       ofType(GkClientActionTypes.ADD_GKCLIENT),
       switchMap(action => {
         console.log(action);
-        return this.gkClientsServices.createNew(action['payload']['data'])
+        return this.gkClientsServices.action11(action['payload']['data'])
           .pipe(
             // If successful, dispatch success action with result
             map(gkClient => {
@@ -112,7 +112,7 @@ export class GkClientsEffects {
       ofType(GkClientActionTypes.SAVE_GKCLIENT),
       switchMap(action => {
         console.log(action);
-        return this.gkClientsServices.update(action['payload']['data'])
+        return this.gkClientsServices.action13(action['payload']['data'])
           .pipe(
             map(gkClient => {
               // console.log(gkClient);
@@ -128,7 +128,7 @@ export class GkClientsEffects {
       ofType(GkClientActionTypes.DISABLE_GKCLIENT),
       concatMap(action => {
         // console.log(action);
-        return this.gkClientsServices.disable(action['payload']['id'])
+        return this.gkClientsServices.action14(action['payload']['id'])
           .pipe(
             map(gkClient => {
               console.log(gkClient);
@@ -144,7 +144,7 @@ export class GkClientsEffects {
       ofType(GkClientActionTypes.ENABLE_GKCLIENT),
       concatMap(action => {
         // console.log(action);
-        return this.gkClientsServices.enable(action['payload']['id'])
+        return this.gkClientsServices.action15(action['payload']['id'])
           .pipe(
             map(gkClient => {
               console.log(gkClient);
@@ -160,7 +160,7 @@ export class GkClientsEffects {
       ofType(GkClientActionTypes.MARK_GKCLIENT),
       concatMap(action => {
         // console.log(action);
-        return this.gkClientsServices.mark(action['payload']['id'])
+        return this.gkClientsServices.action16(action['payload']['id'])
           .pipe(
             map(gkClient => {
               console.log(gkClient);
@@ -176,7 +176,7 @@ export class GkClientsEffects {
       ofType(GkClientActionTypes.UNMARK_GKCLIENT),
       concatMap(action => {
         // console.log(action);
-        return this.gkClientsServices.unmark(action['payload']['id'])
+        return this.gkClientsServices.action17(action['payload']['id'])
           .pipe(
             map(gkClient => {
               console.log(gkClient);
@@ -192,7 +192,7 @@ export class GkClientsEffects {
       ofType(GkClientActionTypes.DELETE_GKCLIENT),
       switchMap(action => {
         console.log(action);
-        return this.gkClientsServices.delete(action['payload']['id'])
+        return this.gkClientsServices.action18(action['payload']['id'])
           .pipe(
             map(gkClient => {
               console.log(gkClient);

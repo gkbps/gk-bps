@@ -1,0 +1,184 @@
+<form [formGroup]="myForm" novalidate>
+
+  <!-- ID & STATUS BAR -->
+  <p-toolbar>
+    <div class="ui-toolbar-group-left">
+      <span>{{'id'|translate}}: <span class="badge bg-info">{{myForm.controls._id.value ? myForm.controls._id.value : 'New'}}</span></span>
+    </div>
+
+    <div class="ui-toolbar-group-right">
+      <span>{{'status'|translate}}: <span class="badge"
+        [ngClass]="{
+          'bg-default': (getStatusDefault(myForm.controls.status.value)),
+          'bg-warning': (getStatusWarning(myForm.controls.status.value)),
+          'bg-info': (getStatusInfo(myForm.controls.status.value)),
+          'bg-danger': (getStatusDanger(myForm.controls.status.value)),
+          'bg-success': (getStatusSuccess(myForm.controls.status.value))
+        }">{{myForm.controls.status.value}}</span>
+        </span>
+    </div>
+  </p-toolbar>
+
+  <!-- REQUEST ACTION MENU BY STATUS -->
+  <p-menubar [model]="items"></p-menubar>
+  <div class="ui-helper-clearfix" style="margin-top:30px"></div>
+
+  <!-- REQUEST HEADER INFORMATION -->
+  <p-panel [toggleable]="true" [collapsed]="false">
+
+    <p-header>
+      <span class="ui-panel-title"><i class="fa ui-icon-public"></i> {{'req_header'|translate}}</span>
+    </p-header>
+
+     <div class="ui-g">
+      <div class="ui-g-12">
+        <!--
+          Visible
+            desc
+            remark
+            requestor     [API]
+            approval_type [API]
+            step
+            pic
+
+          Invisible (Visible for debug only)
+            tcode
+            owner
+            planned
+            approved
+            next
+        -->
+        <div class="ui-g-12 ui-md-3">
+          <span class="md-inputfield fixed-form">
+            <input type="text" pInputText  name="tcode" formControlName="tcode" [disableControl]="!formEditable">
+            <label>{{'tcode'|translate}} * <small *ngIf="!myForm.controls.tcode.valid && myForm.controls.tcode.dirty" class="text-warning">{{'required'|translate}}</small></label>
+          </span>
+        </div>
+        <div class="ui-helper-clearfix"></div>
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <input type="text" pInputText  name="desc" formControlName="desc" [disableControl]="!formEditable">
+            <label>{{'description'|translate}} * <small *ngIf="!myForm.controls.desc.valid && myForm.controls.desc.dirty" class="text-warning">{{'required'|translate}}</small></label>
+          </span>
+        </div>
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <span class="fixed-label">{{'remark'|translate}}</span>
+            <textarea
+              autoresize="autoResize"
+              pInputTextarea
+              class="ui-inputtext ui-corner-all ui-state-default ui-widget"
+              rows="3"
+              cols="30"
+              name="remark"
+              formControlName="remark"
+              [disableControl]="!formEditable">
+            </textarea>
+          </span>
+        </div>
+
+        <div class="ui-g-12 ui-md-3">
+          <span class="md-inputfield fixed-form">
+            <p-autoComplete
+              name="requestor"
+              formControlName="requestor"
+              [suggestions]="filteredUsersSingle"
+              (completeMethod)="filterUserSingle($event)"
+              [delay]="500"
+              field="fullname"
+              [size]="30"
+              [minLength]="1"
+              [dropdown]="false"
+              [disableControl]="!formEditable">
+                <ng-template let-user pTemplate="item">
+                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                        <div style="float:left; margin:10px 10px 0 0">{{user.username}}</div>
+                        <div style="float:right; margin:10px 0 0 10px">{{user.fullname}}</div>
+                    </div>
+                </ng-template>
+            </p-autoComplete>
+            <label>{{'requestor'|translate}} * <small *ngIf="!myForm.controls.requestor.valid && myForm.controls.requestor.dirty" class="text-warning">{{'required'|translate}}</small></label>
+          </span>
+        </div>
+        <div class="ui-helper-clearfix"></div>
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <span class="fixed-label">{{'owner'|translate}}</span>
+            <p-chips name="owner" formControlName="owner" [disableControl]="!formEditable"></p-chips>
+          </span>
+        </div>
+
+        <div class="ui-g-12 ui-md-3">
+          <span class="md-inputfield fixed-form">
+            <span class="fixed-label">{{'approval_process'|translate}} * <small *ngIf="!myForm.controls.approval_type.valid && myForm.controls.approval_type.dirty" class="text-warning">{{'required'|translate}}</small></span>
+          </span>
+          <p-dropdown [options]="approvalTypeList" [style]="{'width': '100%'}" name="approval_type" formControlName="approval_type" placeholder="{{'select_an_item'|translate}}" optionLabel="desc"></p-dropdown>
+        </div>
+
+        <div class="ui-g-12 ui-md-3">
+          <span class="md-inputfield fixed-form">
+            <input type="text" pInputText  name="step" formControlName="step" [disableControl]="!formEditable">
+            <label>{{'step'|translate}}</label>
+          </span>
+        </div>
+
+        <div class="ui-g-12 ui-md-3">
+          <span class="md-inputfield fixed-form">
+            <p-autoComplete
+              name="pic"
+              formControlName="pic"
+              [suggestions]="filteredUsersSingle"
+              (completeMethod)="filterUserSingle($event)"
+              [delay]="500"
+              field="fullname"
+              [size]="30"
+              [minLength]="1"
+              [dropdown]="false"
+              [disableControl]="!formEditable">
+                <ng-template let-user pTemplate="item">
+                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                        <div style="float:left; margin:10px 10px 0 0">{{user.username}}</div>
+                        <div style="float:right; margin:10px 0 0 10px">{{user.fullname}}</div>
+                    </div>
+                </ng-template>
+            </p-autoComplete>
+            <label>{{'pic'|translate}}</label>
+          </span>
+        </div>
+
+        <div class="ui-g-12 ui-md-3">
+          <span class="md-inputfield fixed-form">
+            <input type="text" pInputText  name="planned" formControlName="planned" [disableControl]="!formEditable">
+            <label>{{'planned'|translate}}</label>
+          </span>
+        </div>
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <span class="fixed-label">{{'approved'|translate}}</span>
+            <p-chips name="approved" formControlName="approved" [disableControl]="!formEditable"></p-chips>
+          </span>
+        </div>
+
+        <div class="ui-g-12">
+          <span class="md-inputfield fixed-form">
+            <span class="fixed-label">{{'next_approvers'|translate}}</span>
+            <p-chips name="next" formControlName="next" [disableControl]="!formEditable"></p-chips>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </p-panel>
+
+</form>
+
+<p-confirmDialog #cd>
+  <p-footer>
+        <button type="button" pButton icon="fa-close" label="{{lblCancel}}" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="fa-check" label="{{lblConfirm}}" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>

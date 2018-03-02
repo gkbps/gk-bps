@@ -12,7 +12,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { switchMap, map, concatMap } from 'rxjs/operators';
+import { switchMap, map, concatMap, catchError } from 'rxjs/operators';
 
 import { RequestsActionTypes, RequestActionTypes } from './requests.actions';
 import { RequestsServices } from './requests.services';
@@ -58,114 +58,215 @@ export class RequestsEffects {
   @Effect() getRequest$ = this.actions$
     .pipe(
       ofType(RequestActionTypes.GET_REQUEST),
-      concatMap(action => {
-        // console.log(action);
+      switchMap(action => {
+        console.log(action);
         return this.requestsServices.findById(action['payload']['id'])
-      }),
-      map(request => {
-        console.log(request);
-        return { type: RequestActionTypes.GET_REQUEST_SUCCESS, payload: request };
+          .pipe(
+            map(request => {
+              console.log(request);
+              return { type: RequestActionTypes.GET_REQUEST_SUCCESS, payload: request };
+            }),
+            catchError((err, caught) => Observable.of({type: RequestActionTypes.GET_REQUEST_ERROR}))
+          );
       })
-    )
-    .catch(() => Observable.of({type: RequestActionTypes.GET_REQUEST_ERROR}));
+    );
+
+  @Effect() resetRequest$ = this.actions$
+    .pipe(
+      ofType(RequestActionTypes.RESET_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.requestsServices.resetRequest(
+          action['payload']['tcode'],
+        )
+          .pipe(
+            map(request => {
+              console.log(request);
+              return { type: RequestActionTypes.RESET_REQUEST_SUCCESS, payload: request };
+            }),
+            catchError((err, caught) => Observable.of({type: RequestActionTypes.RESET_REQUEST_ERROR}))
+          );
+      })
+    );
 
   @Effect() addRequest$ = this.actions$
     .pipe(
       ofType(RequestActionTypes.ADD_REQUEST),
-      concatMap(action => {
-        // console.log(action);
+      switchMap(action => {
+        console.log(action);
         return this.requestsServices.createNew(action['payload']['data'])
-      }),
-      map(request =>{
-        // console.log(request);
-        return { type: RequestActionTypes.ADD_REQUEST_SUCCESS, payload: request };
+          .pipe(
+            map(request =>{
+              console.log(request);
+              return { type: RequestActionTypes.ADD_REQUEST_SUCCESS, payload: request };
+            }),
+            catchError((err, caught) => Observable.of({type: RequestActionTypes.ADD_REQUEST_ERROR}))
+          )
       })
-    )
-    .catch(() => Observable.of({type: RequestActionTypes.ADD_REQUEST_ERROR}));
+    );
 
   @Effect() saveRequest$ = this.actions$
   .pipe(
     ofType(RequestActionTypes.SAVE_REQUEST),
-    concatMap(action => {
-      // console.log(action);
-      return this.requestsServices.update(action['payload']['data'])
-    }),
-    map(request =>{
-      console.log(request);
-      return { type: RequestActionTypes.SAVE_REQUEST_SUCCESS, payload: request };
+    switchMap(action => {
+      console.log(action);
+      return this.requestsServices.updateRequest(action['payload']['data'])
+        .pipe(
+          map(request =>{
+            console.log(request);
+            return { type: RequestActionTypes.SAVE_REQUEST_SUCCESS, payload: request };
+          }),
+          catchError((err, caught) => Observable.of({type: RequestActionTypes.SAVE_REQUEST_ERROR}))
+        )
     })
-  )
-  .catch(() => Observable.of({type: RequestActionTypes.SAVE_REQUEST_ERROR}));
+  );
 
+  @Effect() submitRequest$ = this.actions$
+  .pipe(
+    ofType(RequestActionTypes.SUBMIT_REQUEST),
+    switchMap(action => {
+      console.log(action);
+      return this.requestsServices.submitRequest(action['payload']['data'])
+        .pipe(
+          map(request =>{
+            console.log(request);
+            return { type: RequestActionTypes.SUBMIT_REQUEST_SUCCESS, payload: request };
+          }),
+          catchError((err, caught) => Observable.of({type: RequestActionTypes.SUBMIT_REQUEST_ERROR}))
+        )
+    })
+  );
 
-  @Effect() enableRequest$ = this.actions$
+  @Effect() returnRequest$ = this.actions$
     .pipe(
-      ofType(RequestActionTypes.ENABLE_REQUEST),
-      concatMap(action => {
-        // console.log(action);
-        return this.requestsServices.enable(action['payload']['id'])
-      }),
-      map(request =>{
-        console.log(request);
-        return { type: RequestActionTypes.ENABLE_REQUEST_SUCCESS, payload: request };
+      ofType(RequestActionTypes.RETURN_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.requestsServices.returnRequest(action['payload']['id'])
+          .pipe(
+            map(request =>{
+              console.log(request);
+              return { type: RequestActionTypes.RETURN_REQUEST_SUCCESS, payload: request };
+            }),
+            catchError((err, caught) => Observable.of({type: RequestActionTypes.RETURN_REQUEST_ERROR}))
+          )
       })
-    )
-    .catch(() => Observable.of({type: RequestActionTypes.ENABLE_REQUEST_ERROR}));
+    );
 
-  @Effect() disableRequest$ = this.actions$
+  @Effect() approveRequest$ = this.actions$
     .pipe(
-      ofType(RequestActionTypes.DISABLE_REQUEST),
-      concatMap(action => {
-        // console.log(action);
-        return this.requestsServices.disable(action['payload']['id']);
-      }),
-      map(request =>{
-        // console.log(request);
-        return { type: RequestActionTypes.DISABLE_REQUEST_SUCCESS, payload: request };
+      ofType(RequestActionTypes.APPROVE_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.requestsServices.approveRequest(
+          action['payload']['id'],
+          action['payload']['approverId'],
+          action['payload']['step'],
+        )
+        .pipe(
+          map(request =>{
+            console.log(request);
+            return { type: RequestActionTypes.APPROVE_REQUEST_SUCCESS, payload: request };
+          }),
+          catchError((err, caught) => Observable.of({type: RequestActionTypes.APPROVE_REQUEST_ERROR}))
+        )
       })
-    )
-    .catch(() => Observable.of({type: RequestActionTypes.DISABLE_REQUEST_ERROR}));
+    );
 
-  @Effect() markRequest$ = this.actions$
+  @Effect() withdrawRequest$ = this.actions$
     .pipe(
-      ofType(RequestActionTypes.MARK_REQUEST),
-      concatMap(action => {
-        // console.log(action);
-        return this.requestsServices.mark(action['payload']['id'])
-      }),
-      map(request =>{
-        // console.log(request);
-        return { type: RequestActionTypes.MARK_REQUEST_SUCCESS, payload: request };
+      ofType(RequestActionTypes.WITHDRAW_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.requestsServices.withdrawRequest(action['payload']['id'])
+          .pipe(
+            map(request =>{
+              console.log(request);
+              return { type: RequestActionTypes.WITHDRAW_REQUEST_SUCCESS, payload: request };
+            }),
+            catchError((err, caught) => Observable.of({type: RequestActionTypes.WITHDRAW_REQUEST_ERROR}))
+          )
       })
-    )
-    .catch(() => Observable.of({type: RequestActionTypes.MARK_REQUEST_ERROR}));
+    );
 
-  @Effect() unmarkRequest$ = this.actions$
+  @Effect() cancelRequest$ = this.actions$
     .pipe(
-      ofType(RequestActionTypes.UNMARK_REQUEST),
-      concatMap(action => {
-        // console.log(action);
-        return this.requestsServices.unmark(action['payload']['id']);
-      }),
-      map(request =>{
-        // console.log(request);
-        return { type: RequestActionTypes.UNMARK_REQUEST_SUCCESS, payload: request };
+      ofType(RequestActionTypes.CANCEL_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.requestsServices.cancelRequest(action['payload']['id'])
+          .pipe(
+            map(request =>{
+              console.log(request);
+              return { type: RequestActionTypes.CANCEL_REQUEST_SUCCESS, payload: request };
+            }),
+            catchError((err, caught) => Observable.of({type: RequestActionTypes.CANCEL_REQUEST_ERROR}))
+          )
       })
-    )
-    .catch(() => Observable.of({type: RequestActionTypes.UNMARK_REQUEST_ERROR}));
+    );
 
-  @Effect() deleteRequest$ = this.actions$
+  @Effect() rejectRequest$ = this.actions$
     .pipe(
-      ofType(RequestActionTypes.DELETE_REQUEST),
-      concatMap(action => {
-        // console.log(action);
-        return this.requestsServices.delete(action['payload']['id']);
-      }),
-      map(request =>{
-        // console.log(request);
-        return { type: RequestActionTypes.DELETE_REQUEST_SUCCESS, payload: request };
+      ofType(RequestActionTypes.REJECT_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.requestsServices.rejectRequest(action['payload']['id'])
+          .pipe(
+            map(request =>{
+              console.log(request);
+              return { type: RequestActionTypes.REJECT_REQUEST_SUCCESS, payload: request };
+            }),
+            catchError((err, caught) => Observable.of({type: RequestActionTypes.REJECT_REQUEST_ERROR}))
+          )
       })
-    )
-    .catch(() => Observable.of({type: RequestActionTypes.DELETE_REQUEST_ERROR}));
+    );
+
+  @Effect() abortRequest$ = this.actions$
+    .pipe(
+      ofType(RequestActionTypes.ABORT_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.requestsServices.abortRequest(action['payload']['id'])
+          .pipe(
+            map(request =>{
+              console.log(request);
+              return { type: RequestActionTypes.ABORT_REQUEST_SUCCESS, payload: request };
+            }),
+            catchError((err, caught) => Observable.of({type: RequestActionTypes.ABORT_REQUEST_ERROR}))
+          )
+      })
+    );
+
+  @Effect() postRequest$ = this.actions$
+    .pipe(
+      ofType(RequestActionTypes.POST_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.requestsServices.postRequest(action['payload']['id'])
+          .pipe(
+            map(request =>{
+              console.log(request);
+              return { type: RequestActionTypes.POST_REQUEST_SUCCESS, payload: request };
+            }),
+            catchError((err, caught) => Observable.of({type: RequestActionTypes.POST_REQUEST_ERROR}))
+          )
+      })
+    );
+
+  @Effect() revertRequest$ = this.actions$
+    .pipe(
+      ofType(RequestActionTypes.REVERT_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.requestsServices.revertRequest(action['payload']['id'])
+          .pipe(
+            map(request =>{
+              console.log(request);
+              return { type: RequestActionTypes.REVERT_REQUEST_SUCCESS, payload: request };
+            }),
+            catchError((err, caught) => Observable.of({type: RequestActionTypes.REVERT_REQUEST_ERROR}))
+          )
+      })
+    );
 
 }

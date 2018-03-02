@@ -14,11 +14,11 @@ export class GkClientsServices {
   ) {
   }
 
-  /* ------------------------------------------------------------------------
-   * MASTER DATA
-   * ------------------------------------------------------------------------ */
-
-  findMasterListPagination(filter: string, sort: string, first: number, rows: number): Observable<any[]> {
+  /**
+  * Individual - CRUD
+  */
+  
+  action1x(filter: string, sort: string, first: number, rows: number): Observable<any[]> {
     const pagination = {
       filter: filter,
       sort: sort,
@@ -30,7 +30,7 @@ export class GkClientsServices {
       params: pagination
     };
 
-    return this.httpClientService.get(this.suffixUrl + '/masterListPagination', reqOptions)
+    return this.httpClientService.get(this.suffixUrl, reqOptions)
       .map((res) => {
         /* res {
          *  data: GkClient[],
@@ -57,60 +57,60 @@ export class GkClientsServices {
     return Observable.of(value);
   }
 
-  findById(_id: string) {
+  action11(gkrequest: any) {
+    return this.httpClientService.post(this.suffixUrl + 'entry', gkrequest)
+      .map((res) => {
+        return res.body.data || '';
+      });
+  }
+
+  action12(_id: string) {
     return this.httpClientService.get(this.suffixUrl + _id)
       .map((res) => {
         return res.body.data || {};
       });
   }
 
-  createNew(gkrequest: any) {
-    return this.httpClientService.post(this.suffixUrl, gkrequest)
-      .map((res) => {
-        return res.body.data || '';
-      });
-  }
-
-  update(gkrequest: any) {
+  action13(gkrequest: any) {
     return this.httpClientService.put(this.suffixUrl + gkrequest._id, gkrequest)
     .map((res) => {
       return res.body.data || {};
     });
   }
 
-  enable(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + 'enable/' + _id, {})
+  action14(_id: string) {
+    return this.httpClientService.patch(this.suffixUrl + _id + '/disable' , {})
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
       return res.body.data || {};
     });
   }
 
-  disable(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + 'disable/' + _id, {})
+  action15(_id: string) {
+    return this.httpClientService.patch(this.suffixUrl + _id + '/enable' , {})
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
       return res.body.data || {};
     });
   }
 
-  mark(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + 'mark/' + _id, {})
+  action16(_id: string) {
+    return this.httpClientService.patch(this.suffixUrl + _id + '/mark' , {})
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
       return res.body.data || {};
     });
   }
 
-  unmark(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + 'unmark/' + _id, {})
+  action17(_id: string) {
+    return this.httpClientService.patch(this.suffixUrl + _id + '/unmark' , {})
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
       return res.body.data || {};
     });
   }
 
-  delete(_id: string) {
+  action18(_id: string) {
     return this.httpClientService.delete(this.suffixUrl + _id)
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
@@ -118,9 +118,9 @@ export class GkClientsServices {
     });
   }
 
-  /* ------------------------------------------------------------------------
-   * REQUEST
-   * ------------------------------------------------------------------------ */
+  /**
+  * Request
+  */
 
   submit(gkrequest: any) {
     return this.httpClientService.put(this.suffixUrl + 'submit/' + gkrequest._id, gkrequest)

@@ -33,6 +33,7 @@ export enum GkClientActionTypes {
 
   RESET_GKCLIENT ='[GkClient] Reset GkClient',
   RESET_GKCLIENT_SUCCESS = '[GkClient] Reset GkClient Success',
+  RESET_GKCLIENT_ERROR = '[GkClient] Reset GkClient Error',
 
   ADD_GKCLIENT = '[GkClient] Add GkClient',
   ADD_GKCLIENT_SUCCESS = '[GkClient] Add GkClient Success',

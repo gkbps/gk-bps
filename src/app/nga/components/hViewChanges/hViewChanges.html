@@ -6,6 +6,7 @@
     </div>
 
     <div class="ui-datatable-tablewrapper">
+      <p-paginator rows="{{rows}}" totalRecords="{{totalRecords}}" [(first)]="first" [rowsPerPageOptions]="[5,10,20]" (onPageChange)="paginate($event)"></p-paginator>
       <table>
 
         <thead class="ui-datatable-thead">
@@ -62,7 +63,7 @@
         </tbody>
 
       </table>
-      <p-paginator rows="{{rows}}" totalRecords="{{totalRecords}}" [rowsPerPageOptions]="[5,10,20]" (onPageChange)="paginate($event)"></p-paginator>
+      <p-paginator rows="{{rows}}" totalRecords="{{totalRecords}}" [(first)]="first" [rowsPerPageOptions]="[5,10,20]" (onPageChange)="paginate($event)"></p-paginator>
     </div>
 
   </div>
