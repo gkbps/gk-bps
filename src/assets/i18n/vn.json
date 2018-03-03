@@ -1,4 +1,9 @@
 {
+	"create_journal": "Đính Nhật ký",
+	"post_journal": "Chuyển Nhật ký",
+	"revert_journal": "Huỷ Nhật ký",
+	"move_approval": "Chuyển Phê duyệt",
+	"move_status": "Chuyển Tình trạng",
 	"master_list": "Danh sách chính",
 	"resource_is_created": "Tài nguyên mới được tạo thành công!",
 	"resource_is_deleted": "Tài nguyên đã được xoá vĩnh viễn!",

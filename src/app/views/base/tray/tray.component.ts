@@ -33,6 +33,7 @@ export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestro
 
   // Derive class properties
   trayType = ''; // Also myScope
+  prefix = '';
 
   requests: Observable<any>;
 
@@ -74,7 +75,8 @@ export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestro
       event.sort,
       event.first,
       event.rows,
-      this.trayType
+      this.trayType,
+      this.prefix
     ));
   }
 

@@ -29,6 +29,7 @@ export class HDataTableByTrayComponent implements OnInit, OnDestroy {
   myScope = 'HDataTableByTrayComponent';
 
   @Input() trayType = '';
+  @Input() prefix = '';
 
   // Header columns on the fly
   cols: any[];
@@ -99,7 +100,7 @@ export class HDataTableByTrayComponent implements OnInit, OnDestroy {
             this.cols = [
               { field: '_id', header: res.id, width: '20%' },
               { field: 'desc', header: res.description, width: '40%'  },
-              { field: 'requestor.fullname', header: res.requestor, width: '15%' },
+              { field: 'pic.fullname', header: res.pic, width: '15%' },
               { field: 'status', header: res.status, width: '10%'},
               { field: 'updated_at', header: res.last_update, width: '15%'  },
             ];
@@ -123,6 +124,17 @@ export class HDataTableByTrayComponent implements OnInit, OnDestroy {
               { field: 'updated_at', header: res.last_update, width: '15%'  },
             ];
             break;
+          case 'module':
+            this.cols = [
+              { field: '_id', header: res.id, width: '20%' },
+              { field: 'desc', header: res.description, width: '40%'  },
+              { field: 'requestor.fullname', header: res.requestor, width: '15%' },
+              { field: 'status', header: res.status, width: '10%'},
+              { field: 'updated_at', header: res.last_update, width: '15%'  },
+            ];
+            break;
+          default:
+              break;
         }
 
         this.selectedColumns = JSON.parse(JSON.stringify(this.cols));
@@ -138,24 +150,110 @@ export class HDataTableByTrayComponent implements OnInit, OnDestroy {
   }
 
   initMenuItems() {
-    this.translateService.get(['view', 'print'])
-      .subscribe((res) => {
-        this.items = [
-          {
-            label: res.view, icon: 'ui-icon-search',
-            command: (event) => {
-              console.log(this.selectedRequest);
-              if (this.selectedRequest) {
-                this.tcodeService.executeTCode(this.selectedRequest.tcode, this.selectedRequest._id);
-              } else {
-                alert('Select an item to proceed!');
-              }
+    if (this.trayType!=='module') {
+      this.translateService.get(['view', 'print'])
+        .subscribe((res) => {
+          this.items = [
+            {
+              label: res.view, icon: 'ui-icon-search',
+              command: (event) => {
+                console.log(this.selectedRequest);
+                if (this.selectedRequest) {
+                  this.tcodeService.executeTCode(this.selectedRequest.tcode, this.selectedRequest._id);
+                } else {
+                  alert('Select an item to proceed!');
+                }
 
+              },
+              disabled: false,
             },
-            disabled: false,
-          },
-        ];
-    });
+          ];
+      });
+    } else {
+      this.translateService.get(['view', 'print', 'create_journal', 'post_journal', 'revert_journal', 'move_approval', 'move_status'])
+        .subscribe((res) => {
+          this.items = [
+            {
+              label: res.view, icon: 'ui-icon-search',
+              command: (event) => {
+                console.log(this.selectedRequest);
+                if (this.selectedRequest) {
+                  const tcode = this.prefix + '32';
+                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                } else {
+                  alert('Select an item to proceed!');
+                }
+              },
+              disabled: false,
+            },
+            {
+              label: res.create_journal, icon: 'ui-icon-create',
+              command: (event) => {
+                console.log(this.selectedRequest);
+                if (this.selectedRequest) {
+                  const tcode = this.prefix + '41';
+                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                } else {
+                  alert('Select an item to proceed!');
+                }
+              },
+              disabled: false,
+            },
+            {
+              label: res.post_journal, icon: 'ui-icon-subdirectory-arrow-right',
+              command: (event) => {
+                console.log(this.selectedRequest);
+                if (this.selectedRequest) {
+                  const tcode = this.prefix + '42';
+                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                } else {
+                  alert('Select an item to proceed!');
+                }
+              },
+              disabled: false,
+            },
+            {
+              label: res.revert_journal, icon: 'ui-icon-subdirectory-arrow-left',
+              command: (event) => {
+                console.log(this.selectedRequest);
+                if (this.selectedRequest) {
+                  const tcode = this.prefix + '43';
+                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                } else {
+                  alert('Select an item to proceed!');
+                }
+              },
+              disabled: false,
+            },
+            {
+              label: res.move_approval, icon: 'ui-icon-group',
+              command: (event) => {
+                console.log(this.selectedRequest);
+                if (this.selectedRequest) {
+                  const tcode = this.prefix + '45';
+                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                } else {
+                  alert('Select an item to proceed!');
+                }
+              },
+              disabled: false,
+            },
+            {
+              label: res.move_status, icon: 'ui-icon-hdr-strong',
+              command: (event) => {
+                console.log(this.selectedRequest);
+                if (this.selectedRequest) {
+                  const tcode = this.prefix + '46';
+                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                } else {
+                  alert('Select an item to proceed!');
+                }
+              },
+              disabled: false,
+            },
+          ];
+      });
+    }
   }
 
   viewRequest() {

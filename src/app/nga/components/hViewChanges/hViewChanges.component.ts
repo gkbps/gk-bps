@@ -2,14 +2,13 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { HttpClientService } from '../../services/'
 
 import { Header } from 'primeng/shared';
 import { Footer } from 'primeng/shared';
 import { Message } from 'primeng/components/common/api';
 
 // Internal
-import { AppConfig } from '../../../app.config';
 import { GlobalState } from '../../../global.state';
 import {
   SecurityService,
@@ -40,15 +39,14 @@ export class HViewChanges implements OnInit, OnDestroy {
     private router: Router,
     private translateService: TranslateService,
     private activatedRoute: ActivatedRoute,
+    private httpClientService: HttpClientService,
 
     private globalState: GlobalState,
     private localStorageService: LocalStorageService,
     private navigationService: NavigationService,
-    private http: Http,
-    private config: AppConfig,
     private securityService: SecurityService,
     private apiResultHandlingService: APIResultHandlingService,
-    private helpService: HelpService
+    private helpService: HelpService,
   ) {
     this.subscribeLocalState();
   }
@@ -56,7 +54,6 @@ export class HViewChanges implements OnInit, OnDestroy {
   ngOnInit () {
     this.translateService.use(this.localStorageService.getLang());
     this.initViewChange();
-    // this.globalState.notifyDataChanged('help', 'tcd.19.viewChange');
     this.globalState.notifyMyDataChanged('help', '', 'tcd.19.viewChange');
   }
 
@@ -80,7 +77,22 @@ export class HViewChanges implements OnInit, OnDestroy {
   }
 
   updateData(first, rows) {
-    this.viewChangeById(first, rows)
+    const pagination = {
+      first: first,
+      rows: rows
+    };
+
+    const reqOptions = {
+      params: pagination
+    };
+
+    const url = '/' + this.module + '/' + this.id + '/changes';
+
+    this.httpClientService.get(url, reqOptions)
+    .map((res) => {
+      console.log(res);
+      return res.body;
+    })
     .subscribe(
       result => {
         console.log(result);
@@ -91,41 +103,9 @@ export class HViewChanges implements OnInit, OnDestroy {
         console.log('First:', this.first, 'Row:', this.rows, 'Total:', this.totalRecords);
       },
       error => {
-        this.handleAPIReturn(error);
+        console.log(error);
       }
     );
-
-  }
-
-  viewChangeById(first: number, rows: number) {
-      const pagination = {
-        first: first,
-        rows: rows
-      };
-
-      const reqOptions = this.securityService.jwt().merge({params: pagination});
-      // console.log(reqOptions);
-
-      const url = this.config.apiUrl + '/' + this.module + '/' + this.id + '/changes';
-      // const url = this.config.apiUrl + '/' + this.module + '/viewChange/' + this.id;
-      // console.log(url);
-
-      return this.http.get(url, reqOptions)
-      .map((response: Response) => response.json());
-  }
-
-  handleAPIReturn(result) {
-    this.apiResultHandlingService.processAPIResult(result)
-      .then((msg) => {
-        console.log(msg);
-        // const toastData = {
-        //   type: 'warning',
-        //   title: res.navigation,
-        //   msg: res.top_of_history,
-        //   showClose: true,
-        // };
-        // this.globalState.notifyMyDataChanged('toasty','', toastData);
-      });
   }
 
   ngOnDestroy() {

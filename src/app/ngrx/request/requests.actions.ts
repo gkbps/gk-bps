@@ -12,7 +12,7 @@ export enum RequestsActionTypes {
 * @function getRequestsAction
 * get Requests by pagination
 */
-export function getRequestsAction(filter, sort, first, rows, tray) {
+export function getRequestsAction(filter, sort, first, rows, tray, prefix = '') {
   // Return an action with type and payload
   return {
     type: RequestsActionTypes.GET_REQUESTS,
@@ -21,7 +21,8 @@ export function getRequestsAction(filter, sort, first, rows, tray) {
       sort: sort,
       first: first,
       rows: rows,
-      tray: tray
+      tray: tray,
+      prefix: prefix
     }
   }
 }
@@ -81,7 +82,27 @@ export enum RequestActionTypes {
 
   REVERT_REQUEST = '[Request] Revert Request',
   REVERT_REQUEST_SUCCESS = '[Request] Revert Request Success',
-  REVERT_REQUEST_ERROR = '[Request] Revert Request Error'
+  REVERT_REQUEST_ERROR = '[Request] Revert Request Error',
+
+  CREATE_REQUEST_JOURNAL = '[Request] Post Request Journal',
+  CREATE_REQUEST_JOURNAL_SUCCESS = '[Request] Post Request Journal Success',
+  CREATE_REQUEST_JOURNAL_ERROR = '[Request] Post Request Journal Error',
+
+  POST_REQUEST_JOURNAL = '[Request] Post Request Journal',
+  POST_REQUEST_JOURNAL_SUCCESS = '[Request] Post Request Journal Success',
+  POST_REQUEST_JOURNAL_ERROR = '[Request] Post Request Journal Error',
+
+  REVERT_REQUEST_JOURNAL = '[Request] Revert Request Journal',
+  REVERT_REQUEST_JOURNAL_SUCCESS = '[Request] Revert Request Journal Success',
+  REVERT_REQUEST_JOURNAL_ERROR = '[Request] Revert Request Journal Error',
+
+  MOVE_REQUEST_APPROVAL = '[Request] Move Request Approval',
+  MOVE_REQUEST_APPROVAL_SUCCESS = '[Request] Move Request Approval Success',
+  MOVE_REQUEST_APPROVAL_ERROR = '[Request] Move Request Approval Error',
+
+  MOVE_REQUEST_STATUS = '[Request] Move Request Status',
+  MOVE_REQUEST_STATUS_SUCCESS = '[Request] Move Request Status Success',
+  MOVE_REQUEST_STATUS_ERROR = '[Request] Move Request Status Error',
 }
 
 export function getRequestAction(id) {
@@ -176,5 +197,49 @@ export function revertRequestAction(id) {
   return {
     type: RequestActionTypes.REVERT_REQUEST,
     payload: { id: id }
+  }
+}
+
+export function createRequestJournalAction(id, journal) {
+  return {
+    type: RequestActionTypes.POST_REQUEST_JOURNAL,
+    payload: {
+      id: id,
+      journal: journal
+    }
+  }
+}
+
+export function postRequestJournalAction(id) {
+  return {
+    type: RequestActionTypes.POST_REQUEST_JOURNAL,
+    payload: { id: id }
+  }
+}
+
+export function revertRequestJournalAction(id) {
+  return {
+    type: RequestActionTypes.REVERT_REQUEST_JOURNAL,
+    payload: { id: id }
+  }
+}
+
+export function moveRequestApprovalAction(id, approval) {
+  return {
+    type: RequestActionTypes.MOVE_REQUEST_APPROVAL,
+    payload: {
+      id: id,
+      approval: approval
+    }
+  }
+}
+
+export function moveRequestStatusAction(id, status) {
+  return {
+    type: RequestActionTypes.REVERT_REQUEST_JOURNAL,
+    payload: {
+      id: id,
+      status: status
+    }
   }
 }

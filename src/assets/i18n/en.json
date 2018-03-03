@@ -1,4 +1,9 @@
 {
+	"create_journal": "Attach Journal",
+	"post_journal": "Post Journal",
+	"revert_journal": "Revert Journal",
+	"move_approval": "Move Approval",
+	"move_status": "Move Status",
 	"master_list": "Master List",
 	"resource_is_created": "New resource is successfully created!",
 	"resource_is_deleted": "Resource is permanently deleted!",

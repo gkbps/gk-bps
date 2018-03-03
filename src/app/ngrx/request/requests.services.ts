@@ -12,37 +12,16 @@ export class RequestsServices {
   constructor(
     private httpClientService: HttpClientService,
     private securityService: SecurityService,
-  ) {
-  }
+  ) { }
 
-  /* ------------------------------------------------------------------------
-   * MASTER DATA
-   * ------------------------------------------------------------------------ */
-
-  findMasterListPagination(filter: string, sort: string, first: number, rows: number, tray: string): Observable<any[]> {
-    const pagination = {
-      filter: filter,
-      sort: sort,
-      first: first,
-      rows: rows,
-      tray: tray
-    };
-
-    const reqOptions = {
-      params: pagination
-    };
-
-    return this.httpClientService.get(this.suffixUrl + '/masterListPagination', reqOptions)
-      .map((res) => {
-        /* res {
-         *  data: Request[],
-         *  total: number
-         * }
-         */
-        return res.body || {};
-      });
-  }
-
+  /**
+  * @function resetRequest
+  * Create a blank request
+  *
+  * @param {string} tcode
+  *
+  * @return {Observable} gkRequest
+  */
   resetRequest(tcode: string) {
     const user = this.securityService.getCurrentUser();
 
@@ -77,40 +56,71 @@ export class RequestsServices {
     return Observable.of(value);
   }
 
-  findById(_id: string) {
+  action11(gkrequest: any) {
+    return this.httpClientService.post(this.suffixUrl + 'entry', gkrequest)
+      .map((res) => {
+        return res.body.data || '';
+      });
+  }
+
+  action12(_id: string) {
     return this.httpClientService.get(this.suffixUrl + _id)
       .map((res) => {
         return res.body.data || {};
       });
   }
 
-  createNew(gkrequest: any) {
-    return this.httpClientService.post(this.suffixUrl + 'createNew', gkrequest)
-      .map((res) => {
-        return res.body.data || '';
-      });
-  }
-
-  updateRequest(gkrequest: any) {
+  action13(gkrequest: any) {
     return this.httpClientService.put(this.suffixUrl + gkrequest._id, gkrequest)
     .map((res) => {
       return res.body.data || {};
     });
   }
 
-  /* ------------------------------------------------------------------------
-   * REQUEST
-   * ------------------------------------------------------------------------ */
+  action1x(filter: string, sort: string, first: number, rows: number, tray: string, prefix: string): Observable<any[]> {
+    const pagination = {
+      filter: filter,
+      sort: sort,
+      first: first,
+      rows: rows,
+      tray: tray,
+      prefix: prefix
+    };
+
+    const reqOptions = {
+      params: pagination
+    };
+
+    return this.httpClientService.get(this.suffixUrl, reqOptions)
+      .map((res) => {
+        /* res {
+         *  data: Request[],
+         *  total: number
+         * }
+         */
+        return res.body || {};
+      });
+  }
+
+  /**
+  * REQUEST OPERATIONS
+  * @function submitRequest
+  * @function withdrawRequest
+  * @function cancelRequest
+  * @function returnRequest
+  * @function rejectRequest
+  * @function approveRequest
+  */
 
   submitRequest(gkrequest: any) {
-    return this.httpClientService.put(this.suffixUrl + 'submit/' + gkrequest._id, gkrequest)
+    return this.httpClientService.put(this.suffixUrl + gkrequest._id + '/submit', gkrequest)
     .map((res) => {
       return res.body.data || {};
     });
   }
 
   withdrawRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + 'withdraw/' + _id, {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/withdraw' , {})
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -118,7 +128,7 @@ export class RequestsServices {
   }
 
   cancelRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + 'cancel/' + _id, {})
+    return this.httpClientService.patch(this.suffixUrl  + _id + '/cancel', {})
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -126,15 +136,7 @@ export class RequestsServices {
   }
 
   returnRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + 'returnRequest/' + _id, {})
-      .map((res) => {
-        // IMPORTANT: Need to return res with full data for getting status and make alert
-        return res.body.data || {};
-      });
-  }
-
-  approveRequest(_id: string, approverId = '', step = '') {
-    return this.httpClientService.patch(this.suffixUrl + 'approve/' + _id, {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/return' , {})
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -142,7 +144,15 @@ export class RequestsServices {
   }
 
   rejectRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + 'reject/' + _id, {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/reject' , {})
+      .map((res) => {
+        // IMPORTANT: Need to return res with full data for getting status and make alert
+        return res.body.data || {};
+      });
+  }
+
+  approveRequest(_id: string, approverId = '', step = '') {
+    return this.httpClientService.patch(this.suffixUrl + _id + '/approve' , {})
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -150,16 +160,25 @@ export class RequestsServices {
   }
 
   abortRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + 'abort/' + _id, {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/abort' , {})
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
       });
   }
 
+  /**
+  * REQUEST MANAGEMENT/ ACCOUNTING
+  * @function postRequest
+  @ @function revertRequest
+  * @function createJournal
+  * @function postJournal
+  * @function revertJournal
+  */
+
   postRequest(_id: string) {
     // : Observable<any>
-    return this.httpClientService.patch(this.suffixUrl + 'post/' + _id, {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/post' , {})
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -167,18 +186,70 @@ export class RequestsServices {
   }
 
   revertRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + 'revert/' + _id, {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/revert' , {})
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
       });
   }
 
-  generateApprovalFlow(_id) {
-    return this.httpClientService.put(this.suffixUrl + 'generateApprovalFlow/' + _id, {})
+  createRequestJournal(_id: string, journal) {
+    // : Observable<any>
+    return this.httpClientService.post(this.suffixUrl + _id + '/journal/create' , journal)
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
       });
   }
+
+  postRequestJournal(_id: string) {
+    // : Observable<any>
+    return this.httpClientService.patch(this.suffixUrl + _id + '/journal/post' , {})
+      .map((res) => {
+        // IMPORTANT: Need to return res with full data for getting status and make alert
+        return res.body.data || {};
+      });
+  }
+
+  revertRequestJournal(_id: string) {
+    return this.httpClientService.patch(this.suffixUrl + _id + '/journal/revert' , {})
+      .map((res) => {
+        // IMPORTANT: Need to return res with full data for getting status and make alert
+        return res.body.data || {};
+      });
+  }
+
+  /**
+  * REQUEST ADMINISTRATION
+  * @function moveRequestApproval
+  @ @function moveRequestStatus
+  */
+
+  moveRequestApproval(_id, approval) {
+    return this.httpClientService.post(this.suffixUrl + _id + '/approval' , approval)
+      .map((res) => {
+        // IMPORTANT: Need to return res with full data for getting status and make alert
+        return res.body.data || {};
+      });
+  }
+
+  moveRequestStatus(_id, status) {
+    return this.httpClientService.post(this.suffixUrl + _id + '/approval' , status)
+      .map((res) => {
+        // IMPORTANT: Need to return res with full data for getting status and make alert
+        return res.body.data || {};
+      });
+  }
+
+  /**
+  * REQUEST APPROVAL FLOW
+  */
+  generateApprovalFlow(_id) {
+    return this.httpClientService.put(this.suffixUrl + _id + '/approval/generateApprovalFlow', {})
+      .map((res) => {
+        // IMPORTANT: Need to return res with full data for getting status and make alert
+        return res.body.data || {};
+      });
+  }
+
 }

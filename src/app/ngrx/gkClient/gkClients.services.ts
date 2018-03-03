@@ -11,13 +11,28 @@ export class GkClientsServices {
 
   constructor(
     private httpClientService: HttpClientService,
-  ) {
-  }
+  ) {}
 
   /**
   * Individual - CRUD
   */
-  
+
+  createBlankItem(){
+    const value = {
+      name: '',
+      clientDb: '',
+      industry: '',
+      service: '',
+      addresses: [],
+      contacts: [],
+      solutions: [],
+      remarks: [],
+      status1: 'Active',
+      status2: 'Unmarked'
+    }
+    return Observable.of(value);
+  }
+
   action1x(filter: string, sort: string, first: number, rows: number): Observable<any[]> {
     const pagination = {
       filter: filter,
@@ -39,22 +54,6 @@ export class GkClientsServices {
          */
         return res.body || {};
       });
-  }
-
-  createBlankItem(){
-    const value = {
-      name: '',
-      clientDb: '',
-      industry: '',
-      service: '',
-      addresses: [],
-      contacts: [],
-      solutions: [],
-      remarks: [],
-      status1: 'Active',
-      status2: 'Unmarked'
-    }
-    return Observable.of(value);
   }
 
   action11(gkrequest: any) {

@@ -81,6 +81,13 @@ export class GkCln30Component extends BaseComponent implements OnInit, OnDestroy
     this.title = 'processes';
     this.navItems = [
       {
+        'url': this.prefix + '/' + this.prefix + '3x',
+        'img': this.orgImagePath + 'circle/3x.svg',
+        'squareImg': this.orgImagePath + 'square/3x.svg',
+        'tcode': this.prefix + '3x',
+        'title': 'request'
+      },
+      {
         'url': this.prefix + '/' + this.prefix + '31',
         'img': this.orgImagePath + 'circle/31.svg',
         'squareImg': this.orgImagePath + 'square/31.svg',
