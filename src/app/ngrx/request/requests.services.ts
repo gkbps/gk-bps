@@ -59,7 +59,10 @@ export class RequestsServices {
   action11(gkrequest: any) {
     return this.httpClientService.post(this.suffixUrl + 'entry', gkrequest)
       .map((res) => {
-        return res.body.data || '';
+        // res only return id of new document
+        gkrequest['_id'] = res.body.data;
+        gkrequest['status'] = 'Draft';
+        return gkrequest || '';
       });
   }
 

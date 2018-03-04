@@ -27,7 +27,8 @@ import { HAddressModule } from '../../../../../../nga/components/hAddress';
 import { HContactModule } from '../../../../../../nga/components/hContact';
 
 import { GkClnShared } from './gkclnShared.component';
-import { GkClnForm } from './components/gkclnForm/gkclnForm.component';
+// import { GkClnForm } from './components/gkclnForm/gkclnForm.component';
+import { GkClnFormModule } from '../gkclnForm/gkclnForm.module';
 
 @NgModule({
   imports: [
@@ -53,11 +54,12 @@ import { GkClnForm } from './components/gkclnForm/gkclnForm.component';
 
     HIndividualNavModule,
     HAddressModule,
-    HContactModule
+    HContactModule,
+
+    GkClnFormModule
   ],
   declarations: [
     GkClnShared,
-    GkClnForm
   ],
   providers: [
     // ConfirmationService
@@ -65,7 +67,6 @@ import { GkClnForm } from './components/gkclnForm/gkclnForm.component';
   ],
   exports: [
     GkClnShared,
-    GkClnForm
   ],
 })
 export class GkClnSharedModule {

@@ -1,5 +1,9 @@
 import { initialState } from '../initial.state';
-import { GkClientsActionTypes, GkClientActionTypes } from './gkClients.actions';
+import {
+  GkClientsActionTypes,
+  GkClientActionTypes,
+  GkClientRequestActionTypes
+} from './gkClients.actions';
 
 export function GkClientsReducers( state = initialState, { type, payload }) {
   switch (type) {
@@ -49,6 +53,31 @@ export function GkClientReducers( state = initialState, { type, payload }) {
     case GkClientActionTypes.MARK_GKCLIENT_ERROR:
     case GkClientActionTypes.UNMARK_GKCLIENT_ERROR:
     case GkClientActionTypes.DELETE_GKCLIENT_ERROR:
+      return Object.assign({}, state, {pending: false, error: 'Error'});
+
+    default:
+      return state;
+  }
+}
+
+export function GkClientRequestReducers( state = initialState, { type, payload }) {
+  switch (type) {
+    case GkClientRequestActionTypes.GET_GKCLIENT_REQUEST:
+    case GkClientRequestActionTypes.SAVE_GKCLIENT_REQUEST:
+    case GkClientRequestActionTypes.POST_GKCLIENT_REQUEST:
+    case GkClientRequestActionTypes.REVERT_GKCLIENT_REQUEST:
+      return Object.assign({}, state, {pending: true, error: null});
+
+    case GkClientRequestActionTypes.GET_GKCLIENT_REQUEST_SUCCESS:
+    case GkClientRequestActionTypes.SAVE_GKCLIENT_REQUEST_SUCCESS:
+    case GkClientRequestActionTypes.POST_GKCLIENT_REQUEST_SUCCESS:
+    case GkClientRequestActionTypes.REVERT_GKCLIENT_REQUEST_SUCCESS:
+      return Object.assign({}, state, {data: payload, pending: false});
+
+    case GkClientRequestActionTypes.GET_GKCLIENT_REQUEST_ERROR:
+    case GkClientRequestActionTypes.SAVE_GKCLIENT_REQUEST_ERROR:
+    case GkClientRequestActionTypes.POST_GKCLIENT_REQUEST_ERROR:
+    case GkClientRequestActionTypes.REVERT_GKCLIENT_REQUEST_ERROR:
       return Object.assign({}, state, {pending: false, error: 'Error'});
 
     default:

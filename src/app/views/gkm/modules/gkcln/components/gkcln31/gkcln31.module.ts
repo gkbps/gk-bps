@@ -12,7 +12,12 @@ import { RequestReducers } from '../../../../../../ngrx/request/requests.reducer
 import { RequestsEffects } from '../../../../../../ngrx/request/requests.effects';
 import { RequestsServices } from '../../../../../../ngrx/request/requests.services';
 
+import { ApprovalItemsReducers } from '../../../../../../ngrx/approvalItem/approvalItems.reducers';
+import { ApprovalItemsEffects } from '../../../../../../ngrx/approvalItem/approvalItems.effects';
+import { ApprovalItemsServices } from '../../../../../../ngrx/approvalItem/approvalItems.services';
+
 import { GkClientReducers } from '../../../../../../ngrx/gkClient/gkClients.reducers';
+import { GkClientRequestReducers } from '../../../../../../ngrx/gkClient/gkClients.reducers';
 import { GkClientsEffects } from '../../../../../../ngrx/gkClient/gkClients.effects';
 import { GkClientsServices } from '../../../../../../ngrx/gkClient/gkClients.services';
 
@@ -22,8 +27,8 @@ import { RequestHeaderModule } from '../../../../../../nga/components/requestHea
 // import { HRequestDocumentsModule } from '../../../../../../nga/components/hRequestDocuments';
 // import { HRequestApprovalFlowModule } from '../../../../../../nga/components/hRequestApprovalFlow';
 
-// import { GkClnFormModule } from '../gkclnForm/gkclnForm.module';
-import { GkClnSharedModule } from '../gkclnShared/gkclnShared.module';
+import { GkClnFormModule } from '../gkclnForm/gkclnForm.module';
+// import { GkClnSharedModule } from '../gkclnShared/gkclnShared.module';
 
 import { GkCln31Component } from './gkcln31.component';
 import { GkCln31RoutingModule } from './gkcln31-routing.module';
@@ -40,9 +45,12 @@ import { GkCln31RoutingModule } from './gkcln31-routing.module';
     TranslateModule,
 
     StoreModule.forFeature('request', RequestReducers),
+    StoreModule.forFeature('approvalItems', ApprovalItemsReducers),
     StoreModule.forFeature('gkClient', GkClientReducers),
+    StoreModule.forFeature('gkClientRequest', GkClientRequestReducers),
     EffectsModule.forFeature([
       RequestsEffects,
+      ApprovalItemsEffects,
       GkClientsEffects
     ]),
 
@@ -52,14 +60,15 @@ import { GkCln31RoutingModule } from './gkcln31-routing.module';
     // HRequestDocumentsModule,
     // HRequestApprovalFlowModule,
 
-    // GkClnFormModule,
-    GkClnSharedModule,
+    GkClnFormModule,
+    // GkClnSharedModule,
     GkCln31RoutingModule
   ],
   exports: [
   ],
   providers: [
     RequestsServices,
+    ApprovalItemsServices,
     GkClientsServices
   ]
 })

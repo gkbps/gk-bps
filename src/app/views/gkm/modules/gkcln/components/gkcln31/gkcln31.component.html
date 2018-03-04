@@ -12,22 +12,30 @@
             (onSelectAction)="onSelectAction($event)">
           </request-header>
         </div>
-        <!-- <div class="ui-g-12">
-          <h-request-header
-            [tcode]="tcode"
-            (getAction)="getAction($event)">
-          </h-request-header>
-        </div> -->
         <!-- ./HEADER -->
 
         <!-- BODY -->
-        <!-- <div *ngIf="id" class="ui-g-12">
+        <div *ngIf="id" class="ui-g-12">
           <p-panel [toggleable]="true" [collapsed]="false">
             <p-header>
               <span class="ui-panel-title"><i class="fa ui-icon-subject"></i> {{'req_body'|translate}}</span>
             </p-header>
 
-            <div class="ui-g">
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-12">
+                <gkclient-form
+                  #myRequestBody
+                  [prefix]="prefix"
+                  [action]="action"
+                  [isRequest]="isRequest"
+                  [isEditable]="isEditable"
+                  [source]="requestBody|async"
+                  (onSaveAction)="saveRequestBody($event)">
+                </gkclient-form>
+              </div>
+            </div>
+
+            <!-- <div class="ui-g">
               <div class="ui-g-12">
                 <gkclient-form
                   #myRequestBody
@@ -37,9 +45,9 @@
                   [tcode]="tcode">
                 </gkclient-form>
               </div>
-            </div>
+            </div> -->
           </p-panel>
-        </div> -->
+        </div>
         <!-- ./BODY -->
 
         <!-- DOCUMENTS -->
@@ -58,7 +66,7 @@
         <!-- ./APPROVAL -->
 
         <!-- AJE -->
-        <!-- <div *ngIf="id" class="ui-g-12">
+        <div *ngIf="id" class="ui-g-12">
           <p-panel [toggleable]="true" [collapsed]="true">
             <p-header>
               <span class="ui-panel-title"><i class="fa ui-icon-ac-unit"></i> {{'req_aje'|translate}}</span>
@@ -69,11 +77,11 @@
               </div>
             </div>
           </p-panel>
-        </div> -->
+        </div>
         <!-- ./AJE -->
 
         <!-- COMMENTS -->
-        <!-- <div *ngIf="id" class="ui-g-12">
+        <div *ngIf="id" class="ui-g-12">
           <p-panel [toggleable]="true" [collapsed]="true">
             <p-header>
               <span class="ui-panel-title"><i class="fa ui-icon-question-answer"></i> {{'req_comment'|translate}}</span>
@@ -84,11 +92,11 @@
               </div>
             </div>
           </p-panel>
-        </div> -->
+        </div>
         <!-- ./COMMENTS -->
 
         <!-- HISTORY -->
-        <!-- <div *ngIf="id" class="ui-g-12">
+        <div *ngIf="id" class="ui-g-12">
           <p-panel [toggleable]="true" [collapsed]="true">
             <p-header>
               <span class="ui-panel-title"><i class="fa ui-icon-history"></i> {{'req_history'|translate}}</span>
@@ -99,9 +107,8 @@
               </div>
             </div>
           </p-panel>
-        </div> -->
+        </div>
         <!-- ./HISTORY -->
-
 
       </div>
 
@@ -114,12 +121,12 @@
   <div class="ui-g">
     <div class="ui-g-12">
       <div class="ui-helper-clearfix" style="margin-top:10px">
-        <pre>{{'requestHeader'|translate}}: <br>{{requestHeader | json}}</pre>
+        <pre>{{'requestHeader'|translate}}: <br>{{request.data | json}}</pre>
       </div>
     </div>
     <div class="ui-g-12">
       <div class="ui-helper-clearfix" style="margin-top:10px">
-        <pre>{{'requestBody'|translate}}: <br>{{requestBody | json}}</pre>
+        <pre>{{'requestBody'|translate}}: <br>{{requestBody.data | json}}</pre>
       </div>
     </div>
     <div class="ui-g-12">

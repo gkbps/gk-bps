@@ -1,6 +1,6 @@
-/*******************************************************************************
- * GKCLIENTS
- *******************************************************************************/
+/**
+* GKCLIENTS
+*/
 
 export enum GkClientsActionTypes {
   GET_MANY_GKCLIENTS = '[GkClient] Get Many GkClients',
@@ -22,9 +22,9 @@ export function getGkClientsAction(filter, sort, first, rows) {
   }
 }
 
-/*******************************************************************************
- * GKCLIENT
- *******************************************************************************/
+/**
+* GKCLIENT
+*/
 
 export enum GkClientActionTypes {
   GET_GKCLIENT = '[GkClient] Get GkClient',
@@ -123,6 +123,56 @@ export function unmarkGkClientAction(id) {
 export function deleteGkClientAction(id) {
   return {
     type: GkClientActionTypes.DELETE_GKCLIENT,
+    payload: { id: id }
+  }
+}
+
+/**
+* GKCLIENTREQUEST
+*/
+
+export enum GkClientRequestActionTypes {
+  GET_GKCLIENT_REQUEST = '[GkClientRequest] Get GkClient Request',
+  GET_GKCLIENT_REQUEST_SUCCESS = '[GkClientRequest] Get GkClient Request Success',
+  GET_GKCLIENT_REQUEST_ERROR = '[GkClientRequest] Get GkClient Request Error',
+
+  SAVE_GKCLIENT_REQUEST = '[GkClientRequest] Save GkClient Request',
+  SAVE_GKCLIENT_REQUEST_SUCCESS = '[GkClientRequest] Save GkClient Request Success',
+  SAVE_GKCLIENT_REQUEST_ERROR = '[GkClientRequest] Save GkClient Request Error',
+
+  POST_GKCLIENT_REQUEST = '[GkClientRequest] Post GkClient Request',
+  POST_GKCLIENT_REQUEST_SUCCESS = '[GkClientRequest] Post GkClient Request Success',
+  POST_GKCLIENT_REQUEST_ERROR = '[GkClientRequest] Post GkClient Request Error',
+
+  REVERT_GKCLIENT_REQUEST = '[GkClientRequest] Revert GkClient Request',
+  REVERT_GKCLIENT_REQUEST_SUCCESS = '[GkClientRequest] Revert GkClient Request Success',
+  REVERT_GKCLIENT_REQUEST_ERROR = '[GkClientRequest] Revert GkClient Request Error',
+}
+
+export function getGkClientRequestAction(id) {
+  return {
+    type: GkClientRequestActionTypes.GET_GKCLIENT_REQUEST,
+    payload: { id: id }
+  }
+}
+
+export function saveGkClientRequestAction(gkClientRequest) {
+  return {
+    type: GkClientRequestActionTypes.SAVE_GKCLIENT_REQUEST,
+    payload: { data: gkClientRequest }
+  }
+}
+
+export function postGkClientRequestAction(id) {
+  return {
+    type: GkClientRequestActionTypes.POST_GKCLIENT_REQUEST,
+    payload: { id: id }
+  }
+}
+
+export function revertGkClientRequestAction(id) {
+  return {
+    type: GkClientRequestActionTypes.REVERT_GKCLIENT_REQUEST,
     payload: { id: id }
   }
 }

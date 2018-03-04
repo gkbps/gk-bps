@@ -121,6 +121,35 @@ export class GkClientsServices {
   * Request
   */
 
+  getModuleRequest(_id) {
+    return this.httpClientService.get(this.suffixUrl + 'requests/' + _id)
+      .map((res) => {
+        return res.body.data || {};
+      });
+  }
+
+  saveModuleRequest(request) {
+    return this.httpClientService.put(this.suffixUrl + 'requests/' + request._id, request)
+      .map((res) => {
+        return res.body.data || {};
+      });
+  }
+
+  postModuleRequest(_id) {
+    return this.httpClientService.patch(this.suffixUrl + 'requests/' + _id + '/post', {})
+      .map((res) => {
+        return res.body.data || {};
+      });
+  }
+
+  revertModuleRequest(_id) {
+    return this.httpClientService.patch(this.suffixUrl + 'requests/' + _id + '/revert', {})
+      .map((res) => {
+        return res.body.data || {};
+      });
+  }
+
+
   submit(gkrequest: any) {
     return this.httpClientService.put(this.suffixUrl + 'submit/' + gkrequest._id, gkrequest)
     .map((res) => {

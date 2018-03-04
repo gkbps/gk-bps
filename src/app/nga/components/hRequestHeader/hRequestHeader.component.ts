@@ -265,10 +265,8 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
               this.tcodeService.executeTCode(this.tcode);
             }
           });
-          this.items.push({ separator: true });
           this.items.push({ label: res.copy, icon: 'ui-icon-content-copy', command: (event) => this.confirmAction('copy') });
           this.items.push({ label: res.print, icon: 'ui-icon-print', command: (event) => this.confirmAction('print') });
-          this.items.push({ separator: true });
         }
 
         switch (this.status) {
@@ -350,6 +348,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
             break;
         }
       });
+      console.log(this.items);
   }
 
   confirmAction(action: string) {
@@ -404,7 +403,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
             msg: res.invalid_form_message,
             showClose: true,
           };
-          this.globalState.notifyMyDataChanged('toasty','', toastData);                    
+          this.globalState.notifyMyDataChanged('toasty','', toastData);
         });
     } else {
       console.log(this.myForm.controls['status'].value);

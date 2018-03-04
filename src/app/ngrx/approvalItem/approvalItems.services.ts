@@ -5,7 +5,7 @@ import { HttpClientService } from '../../nga/services/';
 import { ApprovalItem } from './approvalItem.model';
 
 @Injectable()
-export class ApprovalItemService {
+export class ApprovalItemsServices {
 
   suffixApprovalItemsUrl = '/requestApproval/items/';
 
@@ -14,8 +14,7 @@ export class ApprovalItemService {
 
   constructor(
     private httpClientService: HttpClientService,
-  ) {
-  }
+  ) {}
 
   findStandardApprovalItems() {
     return this.httpClientService.get(this.suffixApprovalItemsUrl)

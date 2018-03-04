@@ -1,3 +1,5 @@
+Put all API into ngrx store as well and under the name apiUser
+
 Nguyen tac
 
 Request = requestHeader + requestBody + requestFooter
@@ -22,3 +24,5 @@ Gkcln33: Yêu cầu sửa 1 client hiện hữu
 Branches
 Gkcln33: Chọn 1 client id để lấy dữ liệu sửa đổi
 Gkcln33/:id: Xử lý trên request sửa 1 client hiện hữu (DRAFT -> POSTED)
+
+    "webpack": "^3.10.0",

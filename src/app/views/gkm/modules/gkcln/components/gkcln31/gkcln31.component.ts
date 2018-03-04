@@ -17,6 +17,7 @@ import {
   approveRequestAction,
   rejectRequestAction,
   abortRequestAction,
+  // EXCLUDED AS BELOW ARE ONLY USED IN 41, 42, 43, 44, 45
   // postRequestAction,
   // revertRequestAction,
   // createRequestJournalAction,
@@ -26,6 +27,13 @@ import {
   // moveRequestStatusAction
 } from '../../../../../../ngrx/request/requests.actions';
 /**/
+
+import {
+  getGkClientRequestAction,
+  saveGkClientRequestAction,
+  postGkClientRequestAction,
+  revertGkClientRequestAction
+} from '../../../../../../ngrx/gkClient/gkClients.actions';
 
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../../../../../global.state';
@@ -40,11 +48,8 @@ import {
 import { BaseComponent } from '../../../../../base';
 
 import { RequestHeader } from '../../../../../../nga/components/requestHeader/requestHeader.component';
-// import { GkClnForm } from '../gkclnForm/gkclnForm.component';
-// import { GkRequest } from '../../../../../../store/_models/gkRequest.model';
 
-// import { GkRequestService } from '../../../../../../store/_services/gkRequest.service';
-// import { GkClientService } from '../../../../../../store/_services/gkClient.service';
+import { GkClnForm } from '../gkclnForm/gkclnForm.component';
 
 @Component({
   templateUrl: 'gkcln31.component.html'
@@ -61,22 +66,24 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
 
   // Derive class properties
   @ViewChild(RequestHeader) myRequestHeader;
-  // @ViewChild(GkClnForm) myRequestBody;
+  @ViewChild(GkClnForm) myRequestBody;
 
   tcode = 'gkcln31'; // For new Item
+  prefix = 'gkcln';
+  action = '31';
+  isRequest = true;
+  isEditable: boolean;
 
   id = '';
   request: any;
-  // requestHeader: any;
-  // requestBody: any;
-  // requestFooter: any;
-    // Documents: Upload Ajax handle case by case
-    // Approval: Store with header to reduce read at server and client. Check Approval valid at frontend and backend
-  // requestComment: any;
-  // requestHistory: any;
+  requestBody: any;
+  requestFooter: any;
+  // Documents: Upload Ajax handle case by case
+  // Approval: Store with header to reduce read at server and client. Check Approval valid at frontend and backend
+  requestComment: any;
+  requestHistory: any;
 
-  user: any;
-  isEditableRequest = false;
+  // user: any;
 
   constructor(
     // Base class services
@@ -104,8 +111,21 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
     // Derive class initialization
     this.initSidebarMenu();
 
+    // Store
     this.request = this.store.pipe(select('request'));
-    console.log(this.request);
+    this.requestBody = this.store.pipe(select('gkClientRequest'));
+
+    // Get status of request to define the isEditable
+    this.request.subscribe(res => {
+      console.log(res);
+      if (!res.pending && ! res.error) {
+        if (['New', 'Draft'].includes(res.data.status)) {
+          this.isEditable = true;
+        } else {
+          this.isEditable = false;
+        }
+      }
+    });
 
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params['id']) {
@@ -115,6 +135,7 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
         this.globalState.notifyMyDataChanged('help', '', 'tcd.11.create');
 
         this.store.dispatch(getRequestAction(this.id));
+        this.store.dispatch(getGkClientRequestAction(this.id));
       } else {
 
         // Help on request in New status
@@ -128,33 +149,75 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
     // this.subscribeLocalState();
     //
     // Get user and preference
-    this.user = this.securityService.getCurrentUser();
+    // this.user = this.securityService.getCurrentUser();
   }
   /****************************************************************************/
 
   // Get Action from requestHeader Component to instruct the process
   onSelectAction(event) {
-    console.log(event.action);
+    console.log(event);
 
     switch (event.action) {
       case 'save':
-        console.log('Save body to DB with validation!');
-        // if (this.myRequestBody) {
-        //   this.myRequestBody.saveRequest('save');
-        // }
+        console.log('save.01-Save requestHeader to request!');
+        if (event.valid) {
+          if (event.data.status==='New') {
+            this.store.dispatch(addRequestAction(event.data));
+          } else {
+            this.store.dispatch(saveRequestAction(event.data));
+
+            console.log('save.02.-Save requestBody to module request!');
+            this.myRequestBody.saveRequest();
+          }
+        }
         break;
 
       case 'submit':
-        console.log('Save body to DB with validation!');
-        // if success then back to change status of request to "IN PROGRESS"
-        // if (this.myRequestBody) {
-        //   this.myRequestBody.saveRequest('submit');
-        // }
+        console.log('save.01-Submit requestHeader to request!');
+        this.store.dispatch(submitRequestAction(event.data));
+
+        console.log('save.02.-Save requestBody to module request!');
+        this.myRequestBody.saveRequest();
         break;
 
+      case 'withdraw':
+        console.log('withdraw.00-Withdraw requestHeader to request!');
+        this.store.dispatch(withdrawRequestAction(this.id));
+        break;
+
+      case 'cancel':
+        console.log('cancel.00-Cancel requestHeader to request!');
+        // this.store.dispatch(cancelRequestAction(this.id));
+        break;
+
+      case 'return':
+        console.log('return.00-Return requestHeader to request!');
+        // this.store.dispatch(returnRequestAction(this.id));
+        break;
+
+      case 'approve':
+        console.log('approve.00-Approve requestHeader to request!');
+        // this.store.dispatch(approveRequestAction(this.id));
+        break;
+
+      case 'reject':
+        console.log('reject.00-Reject requestHeader to request!');
+        // this.store.dispatch(rejectRequestAction(this.id));
+        break;
+
+      case 'abort':
+        console.log('abort.00-Abort requestHeader to request!');
+        // this.store.dispatch(abortRequestAction(this.id));
+        break;
+
+      // case 'journal':
+      //   console.log('post.00-Post data to master data/ transaction data');
+      //   // this.store.dispatch(postRequestAction(this.id));
+      //   break;
+
       case 'post':
-        console.log('Post data to master data/ transaction data');
-        // if success then back to change status of request to "POSTED"
+        console.log('post.00-Post data to master data/ transaction data');
+        // this.store.dispatch(postRequestAction(this.id));
         break;
 
       case 'revert':
@@ -173,41 +236,12 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
       default:
         break;
     }
-
-    // this.requestHeader = {
-    //   valid: event.valid,
-    //   value: event.value
-    // }
-
-    // if (this.id) {
-    //   this.myRequestBody.updateParentOnRequestBody();
-    // }
   }
 
-  // getRequestBodyChange(event) {
-  //   console.log(event);
-  //   this.requestBody = event;
-  //
-  //   if (event.status === 'OK') {
-  //     // Inform requestHeader safely to save or submit the request
-  //     switch (event.action) {
-  //       case 'save':
-  //         if (this.myRequestHeader) {
-  //           this.myRequestHeader.saveRequestHeader();
-  //         }
-  //         break;
-  //
-  //       case 'submit':
-  //         if (this.myRequestHeader) {
-  //           this.myRequestHeader.submitRequestHeader();
-  //         }
-  //         break;
-  //
-  //       default:
-  //         break;
-  //     }
-  //   }
-  // }
+  saveRequestBody(event) {
+    console.log(event);
+    this.store.dispatch(saveGkClientRequestAction(event.data));
+  }
 
   /****************************************************************************/
   ngOnDestroy() {
@@ -224,6 +258,9 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
 
   unsubscribeLocalState() {
     // this.subscription.unsubscribe();
+    // this.request.unsubscribe();
   }
+
+
 
 }

@@ -21,7 +21,7 @@ import { TrayBaseComponent } from '../../base/tray/tray.component';
 export class InProgressComponent extends TrayBaseComponent implements OnInit, OnDestroy {
 
   // Override Base class properties
-  trayType = 'draft';
+  trayType = 'inprogress';
 
   constructor(
     // Base class services

@@ -9,7 +9,6 @@ import { ButtonModule } from 'primeng/button';
 import { PanelModule } from 'primeng/panel';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
-import { KeyFilterModule } from 'primeng/keyfilter';
 import { TabViewModule } from 'primeng/tabview';
 
 import { NgaModule } from '../../../../../../nga/nga.module';
@@ -33,7 +32,6 @@ import { GkClnForm } from './gkclnForm.component';
     PanelModule,
     DropdownModule,
     InputTextModule,
-    KeyFilterModule,
     TabViewModule,
 
     NgaModule,
@@ -43,12 +41,13 @@ import { GkClnForm } from './gkclnForm.component';
     HContactModule
   ],
   declarations: [
-    GkClnForm
+    GkClnForm,
   ],
   providers: [
+    // ConfirmationService
   ],
   exports: [
-    GkClnForm
+    GkClnForm,
   ],
 })
 export class GkClnFormModule {

@@ -1,20 +1,24 @@
 import { Component, OnInit, Input, Output, OnDestroy, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+// import { ActivatedRoute, Params } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // FormArray,
 import { AbstractControl, FormControl } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import { SelectItem } from 'primeng/api';
+// import { SelectItem } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
+
+import { Store, select } from '@ngrx/store';
+// import { getApprovalItemsAction } from '../../../ngrx/approvalItem/approvalItems.actions'
+import { getRequestApprovalAction } from '../../../ngrx/requestApproval/requestApproval.actions'
 
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../../global.state';
 import {
   SecurityService,
   TcodeService,
-  NavigationService,
-  ObjectService,
-  APIResultHandlingService,
+  // NavigationService,
+  // ObjectService,
+  // APIResultHandlingService,
   LocalStorageService,
 } from '../../../nga/services';
 
@@ -44,25 +48,28 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
   lblConfirm = 'Confirm';
   lblCancel = 'Cancel';
 
-  approvalTypeList: any;
-  // filteredUsersSingle: any[];
+  approvalTypeList = [];
+  requestApproval: any;
+
   filteredUsersSingle: any;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
+    // private activatedRoute: ActivatedRoute,
 
     private globalState: GlobalState,
     private securityService: SecurityService,
-    private navigationService: NavigationService,
+    // private navigationService: NavigationService,
     private tcodeService: TcodeService,
-    private objectService: ObjectService,
-    private apiResultHandlingService: APIResultHandlingService,
+    // private objectService: ObjectService,
+    // private apiResultHandlingService: APIResultHandlingService,
     private _fb: FormBuilder,
 
     private localStorage: LocalStorageService,
     private translateService: TranslateService,
     private confirmationService: ConfirmationService,
-    private userService: UserService
+    private userService: UserService,
+
+    private store: Store<any>
   ) {
     // Local subscription to global state
     this.translateService.use(this.localStorage.getLang());
@@ -70,36 +77,49 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
     // Get user and preference, call it here to get early reponse
     this.user = this.securityService.getCurrentUser();
     this.debug = this.localStorage.getDebugMode();
-
-    // this.filteredUsersSingle = this.userService.getMockUsers();
   }
 
   ngOnInit() {
     // Local subscription to global state
     this.subscribeLocalState(); // IMPORTANT: Can only get Input tcode from and after OnInit
+
+    this.requestApproval = this.store.pipe(select('requestApproval'));
+    this.requestApproval.subscribe(res => {
+      // console.log(res);
+      if (!res.pending && !res.error) {
+        this.approvalTypeList = Object.assign([], res.data);
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    // IMPORTANT: Form is initialize only after source has data
     if (changes['source']) {
-        console.log(this.source);
-        this.initForm();
+        // console.log(this.source);
+        this.initialize();
     }
+
+    if (changes['tcode'] && this.tcode) {
+      // Get requestApproval
+      this.store.dispatch(getRequestApprovalAction(this.tcode));
+    }
+
     if (changes['myForm.valid']) {
         console.log('Oh yeah')
     }
   }
 
-  initForm() {
+  initialize() {
     this.formEditable = false;
 
-    console.log(this.source.data.status);
+    // console.log(this.source.data.status);
     switch (this.source.data.status) {
       case 'New':
         if (this.source.data.owner.includes(this.user.username)){
           this.formEditable = true;
         }
-        console.log(this.source.data.owner, this.user.username)
-        console.log(this.source.data.owner.includes(this.user.username));
+        // console.log(this.source.data.owner, this.user.username)
+        // console.log(this.source.data.owner.includes(this.user.username));
         break;
 
       case 'Draft':
@@ -146,13 +166,13 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
         break;
     }
 
-    console.log(this.formEditable);
+    // console.log(this.formEditable);
 
     // Build Form
-    this.buildForm();
+    this.initForm();
   }
 
-  private buildForm() {
+  initForm() {
     this.myForm = this._fb.group({
       _id: [ this.source.data._id ],
       tcode: [ this.source.data.tcode, [ Validators.required ]],
@@ -183,10 +203,8 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
               this.tcodeService.executeTCode(this.tcode);
             }
           });
-          this.items.push({ separator: true });
           this.items.push({ label: res.copy, icon: 'ui-icon-content-copy', command: (event) => this.confirmAction('copy') });
           this.items.push({ label: res.print, icon: 'ui-icon-print', command: (event) => this.confirmAction('print') });
-          this.items.push({ separator: true });
         }
 
         switch (this.source.data.status) {
@@ -270,12 +288,101 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
       });
   }
 
+  ngOnDestroy() {
+    this.unsubscribeLocalState();
+  }
+
+  /* LOCAL STATE */
+  subscribeLocalState() {
+    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
+      console.log(lang);
+      this.translateService.use(lang);
+      this.initNav();
+    });
+  }
+
+  unsubscribeLocalState() {
+    this.globalState.unsubscribeEvent('language', this.myScope);
+    // this.requestApproval.unsubscribe();
+  }
+
+  /**
+  * FORM CONTROL RELATED OPERATION
+  */
+
+  /**
+  * STATUS LABEL COLOR
+  * @function getStatusDefault
+  * @function getStatusWarning
+  * @function getStatusInfo
+  * @function getStatusDanger
+  * @function getStatusSuccess
+  */
+
+  getStatusDefault(value) { return ['New', 'Draft', 'P. Submit'].includes(value); }
+
+  getStatusWarning(value) { return ['P. Withdraw', 'P. Cancel', 'P. Abort'].includes(value); }
+
+  getStatusInfo(value) { return ['In progress'].includes(value); }
+
+  getStatusDanger(value) { return ['Cancelled', 'Rejected', 'Aborted'].includes(value); }
+
+  getStatusSuccess(value) { return ['Approved', 'Posted'].includes(value); }
+
+  /**
+  * AUTO COMPLETE - USER
+  * @function filterUserSingle
+  * @function filterUser
+  */
+  filterUserSingle(event) {
+    let query = event.query;
+    console.log(query);
+    if (query.length >1) {
+      this.userService.findAPIListPagination(query, '{}', 0, 20)
+        .subscribe(data => {
+          console.log(data);
+          this.filteredUsersSingle = data;
+        });
+    }
+  }
+
+  // filterUser(query, users: any[]):any[] {
+  //   //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+  //   let filtered : any[] = [];
+  //   for(let i = 0; i < users.length; i++) {
+  //     let user = users[i];
+  //     if (user.fullname.toLowerCase().includes(query.toLowerCase()))  {
+  //         filtered.push(user);
+  //     }
+  //   }
+  //   console.log(filtered);
+  //   return filtered;
+  // }
+
+  /**
+  * FORM VALIDITY
+  */
+
+  markAllDirty(control: AbstractControl) {
+    if(control.hasOwnProperty('controls')) {
+      control.markAsDirty({onlySelf: true}) // mark group
+      let ctrl = <any>control;
+      for (let inner in ctrl.controls) {
+          this.markAllDirty(ctrl.controls[inner] as AbstractControl);
+      }
+    }
+    else {
+      (<FormControl>(control)).markAsDirty({onlySelf: true});
+    }
+  }
+
+  /**
+  * FORM ACTION
+  */
+
   confirmAction(action: string) {
     this.translateService.get([
-      'confirmation',
-      'wouldYouConfirm',
-      'cancel',
-      'confirm'
+      'confirmation', 'wouldYouConfirm', 'cancel', 'confirm'
     ])
     .subscribe((res) => {
       this.lblConfirm = res.confirm;
@@ -295,19 +402,6 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
     });
   }
 
-  markAllDirty(control: AbstractControl) {
-      if(control.hasOwnProperty('controls')) {
-          control.markAsDirty({onlySelf: true}) // mark group
-          let ctrl = <any>control;
-          for (let inner in ctrl.controls) {
-              this.markAllDirty(ctrl.controls[inner] as AbstractControl);
-          }
-      }
-      else {
-          (<FormControl>(control)).markAsDirty({onlySelf: true});
-      }
-  }
-
   executeAction(action: string): void {
     if (!this.myForm.valid) {
       this.markAllDirty(this.myForm);
@@ -323,185 +417,15 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
           this.globalState.notifyMyDataChanged('toasty','', toastData);
         });
     } else {
-      console.log(this.myForm.controls['status'].value);
-
-      switch (action) {
-        case 'save':
-          if (this.myForm.controls['status'].value==='New'){
-            this.saveRequestHeader();
-          }
-          // Else prioritize save requestBody first
-          break;
-
-        case 'submit':
-          // Prioritize save requestBody first
-          break;
-
-        case 'withdraw':
-          // IN PROGRESS -> P. WITHDRAW
-          // IN PROGRESS -> DRAFT
-          // if (this.id) {
-          //   this.gkRequestService.withdraw(this.myForm.value._id);
-          // }
-          break;
-
-        case 'cancel':
-          // IN PROGRESS -> P. CANCEL
-          // IN PROGRESS -> CANCELLED
-          // if (this.id) {
-            // this.gkRequestService.cancel(this.myForm.value._id);
-          // }
-          break;
-
-        case 'return':
-          // P. SUBMIT -> DRAFT
-          // IN PROGRESS -> DRAFT
-          // P. WITHDRAW -> IN PROGRESS
-          // P. CANCEL -> IN PROGRESS
-          // P. ABORT -> APPROVED
-          // if (this.id) {
-            // this.gkRequestService.returnRequest(this.myForm.value._id);
-          // }
-          break;
-
-        case 'reject':
-          // IN PROGRESS -> REJECTED
-          // if (this.id) {
-            // this.gkRequestService.reject(this.myForm.value._id);
-          // }
-          break;
-
-        case 'approve':
-          // P. SUBMIT -> IN PROGRESS
-          // IN PROGRESS -> APPROVED
-          // P. WITHDRAW -> DRAFT
-          // P. CANCEL -> CANCELLED
-          // P. ABORT -> ABORTED
-          // if (this.id) {
-            // this.gkRequestService.approve(this.myForm.value._id);
-          // }
-          break;
-
-        case 'abort':
-          // APPROVED -> P. ABORT
-          // this.gkRequestService.abort(this.myForm.value._id);
-          break;
-
-        case 'post':
-          // APPROVED -> POSTED
-
-          break;
-
-        case 'revert':
-          // POSTED -> APPROVED
-          break;
-
-        case 'copy':
-          break;
-
-        case 'print':
-          break;
-
-        default:
-          break;
-      }
+      // console.log(this.myForm.controls['status'].value);
+      // console.log(action);
 
       this.onSelectAction.emit({
         action: action,
         valid: this.myForm.valid,
-        value: this.myForm.value
+        data: this.myForm.value
       });
-
     }
-  }
-
-  saveRequestHeader() {
-    // NEW -> DRAFT
-    // if (!this.id) {
-      // this.gkRequestService.createNew(this.myForm.value);
-    // }
-    // DRAFT -> DRAFT
-    // else {
-      // console.log(this.myForm.value);
-      // this.gkRequestService.update(this.myForm.value);
-    // }
-  }
-
-  submitRequestHeader() {
-    // DRAFT -> P. SUBMIT
-    // DRAFT -> IN PROGRESS
-    // if (this.id) {
-      // this.gkRequestService.submit(this.myForm.value);
-    // }
-  }
-  /****************************************************************************/
-  ngOnDestroy() {
-    this.unsubscribeLocalState();
-  }
-
-  /* LOCAL STATE */
-  subscribeLocalState() {
-    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
-      this.translateService.use(lang);
-      this.initNav();
-    });
-  }
-
-  unsubscribeLocalState() {
-    this.globalState.unsubscribeEvent('language', this.myScope);
-  }
-
-  /*****************************************************************************
-   * FORM CONTROL RELATED OPERATION
-   *
-   ****************************************************************************/
-
-  getStatusDefault(value) {
-    return ['New', 'Draft', 'P. Submit'].includes(value);
-  }
-
-  getStatusWarning(value) {
-    return ['P. Withdraw', 'P. Cancel', 'P. Abort'].includes(value);
-  }
-
-  getStatusInfo(value) {
-    return ['In progress'].includes(value);
-  }
-
-  getStatusDanger(value) {
-    return ['Cancelled', 'Rejected', 'Aborted'].includes(value);
-  }
-
-  getStatusSuccess(value) {
-    return ['Approved', 'Posted'].includes(value);
-  }
-
-  filterUserSingle(event) {
-    let query = event.query;
-    console.log(query);
-    if (query.length >1) {
-      // this.filteredUsersSingle = this.userService.findAPIListPagination(query, '{}', 0, 20);
-      this.userService.findAPIListPagination(query, '{}', 0, 20)
-        .subscribe(data => {
-          console.log(data);
-          this.filteredUsersSingle = data;
-        });
-      // this.gkUserService.findAPIListPagination(query, '{}', 0, 20);
-    }
-  }
-
-  filterUser(query, users: any[]):any[] {
-    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-    let filtered : any[] = [];
-    for(let i = 0; i < users.length; i++) {
-      let user = users[i];
-      if (user.fullname.toLowerCase().includes(query.toLowerCase()))  {
-          filtered.push(user);
-      }
-    }
-    console.log(filtered);
-    return filtered;
   }
 
 }

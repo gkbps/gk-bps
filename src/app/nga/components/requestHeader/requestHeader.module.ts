@@ -2,6 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+// import { ApprovalItemsReducers } from '../../../ngrx/approvalItem/approvalItems.reducers';
+// import { ApprovalItemsEffects } from '../../../ngrx/approvalItem/approvalItems.effects';
+// import { ApprovalItemsServices } from '../../../ngrx/approvalItem/approvalItems.services';
+
+import { RequestApprovalReducers } from '../../../ngrx/requestApproval/requestApproval.reducers';
+import { RequestApprovalEffects } from '../../../ngrx/requestApproval/requestApproval.effects';
+import { RequestApprovalServices } from '../../../ngrx/requestApproval/requestApproval.services';
+
 import { ToolbarModule } from 'primeng/toolbar';
 import { MenubarModule } from 'primeng/menubar';
 import { PanelModule } from 'primeng/panel';
@@ -25,6 +36,11 @@ import { UserService } from '../../../ngrx/user/user.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+
+    StoreModule.forFeature('requestApproval', RequestApprovalReducers),
+    EffectsModule.forFeature([
+      RequestApprovalEffects,
+    ]),
 
     ToolbarModule,
     MenubarModule,
@@ -52,7 +68,8 @@ import { UserService } from '../../../ngrx/user/user.service';
     RequestHeader,
   ],
   providers: [
-    UserService
+    UserService,
+    RequestApprovalServices,
   ],
   exports: [
     RequestHeader,

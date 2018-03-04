@@ -1,4 +1,4 @@
-/***
+/**
  * EFFECTS contains the list of effects that
  * listen for the specific action (via ofType) from a smart component (via dispatching an action)
  * and map (via switchMap/ concatMap) a returned action (which include type and payload of action) with
@@ -14,7 +14,11 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { switchMap, map, concatMap, catchError } from 'rxjs/operators';
 
-import { GkClientsActionTypes, GkClientActionTypes } from './gkClients.actions';
+import {
+  GkClientsActionTypes,
+  GkClientActionTypes,
+  GkClientRequestActionTypes
+} from './gkClients.actions';
 import { GkClientsServices } from './gkClients.services';
 
 @Injectable()
@@ -24,35 +28,35 @@ export class GkClientsEffects {
     private gkClientsServices: GkClientsServices
   ) {}
 
-  /* ------------------------------------------------------------------------
-   * GKCLIENTS
-   * ------------------------------------------------------------------------ */
-    @Effect() getGkClients$ = this.actions$
-      .pipe(
-        ofType(GkClientsActionTypes.GET_MANY_GKCLIENTS),
-        switchMap(action => {
-          console.log(action);
-          return this.gkClientsServices.action1x(
-            action['payload']['filter'],
-            action['payload']['sort'],
-            action['payload']['first'],
-            action['payload']['rows']
-          )
-          .pipe(
-            // If successful, dispatch success action with result
-            map(gkClients =>{
-              console.log(gkClients);
-              return ({ type: GkClientsActionTypes.GET_MANY_GKCLIENTS_SUCCESS, payload: gkClients });
-            }),
-            // If request fails, dispatch failed action
-            catchError((err, caught) => Observable.of({type: GkClientsActionTypes.GET_MANY_GKCLIENTS_ERROR}))
-          )
-        })
-      );
+  /**
+  * GKCLIENTS
+  */
+  @Effect() getGkClients$ = this.actions$
+    .pipe(
+      ofType(GkClientsActionTypes.GET_MANY_GKCLIENTS),
+      switchMap(action => {
+        console.log(action);
+        return this.gkClientsServices.action1x(
+          action['payload']['filter'],
+          action['payload']['sort'],
+          action['payload']['first'],
+          action['payload']['rows']
+        )
+        .pipe(
+          // If successful, dispatch success action with result
+          map(gkClients =>{
+            console.log(gkClients);
+            return ({ type: GkClientsActionTypes.GET_MANY_GKCLIENTS_SUCCESS, payload: gkClients });
+          }),
+          // If request fails, dispatch failed action
+          catchError((err, caught) => Observable.of({type: GkClientsActionTypes.GET_MANY_GKCLIENTS_ERROR}))
+        )
+      })
+    );
 
-  /* ------------------------------------------------------------------------
-   * GKCLIENT
-   * ------------------------------------------------------------------------ */
+  /**
+  * GKCLIENT
+  */
   @Effect() getGkClient$ = this.actions$
     .pipe(
       ofType(GkClientActionTypes.GET_GKCLIENT),
@@ -203,4 +207,71 @@ export class GkClientsEffects {
       })
     );
 
+  /**
+  * GKCLIENT REQUEST
+  */
+
+  @Effect() getGkClientRequest$ = this.actions$
+    .pipe(
+      ofType(GkClientRequestActionTypes.GET_GKCLIENT_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.gkClientsServices.getModuleRequest(action['payload']['id'])
+          .pipe(
+            map(moduleRequest => {
+              console.log(moduleRequest);
+              return ({ type: GkClientRequestActionTypes.GET_GKCLIENT_REQUEST_SUCCESS, payload: moduleRequest });
+            }),
+            catchError((err, caught) => Observable.of({type: GkClientRequestActionTypes.GET_GKCLIENT_REQUEST_ERROR}))
+          )
+      })
+    );
+
+  @Effect() saveGkClientRequest$ = this.actions$
+    .pipe(
+      ofType(GkClientRequestActionTypes.SAVE_GKCLIENT_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.gkClientsServices.saveModuleRequest(action['payload']['data'])
+          .pipe(
+            map(moduleRequest => {
+              console.log(moduleRequest);
+              return ({ type: GkClientRequestActionTypes.SAVE_GKCLIENT_REQUEST_SUCCESS, payload: moduleRequest });
+            }),
+            catchError((err, caught) => Observable.of({type: GkClientRequestActionTypes.SAVE_GKCLIENT_REQUEST_ERROR}))
+          )
+      })
+    );
+
+  @Effect() postGkClientRequest$ = this.actions$
+    .pipe(
+      ofType(GkClientRequestActionTypes.POST_GKCLIENT_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.gkClientsServices.postModuleRequest(action['payload']['id'])
+          .pipe(
+            map(moduleRequest => {
+              console.log(moduleRequest);
+              return ({ type: GkClientRequestActionTypes.POST_GKCLIENT_REQUEST_SUCCESS, payload: moduleRequest });
+            }),
+            catchError((err, caught) => Observable.of({type: GkClientRequestActionTypes.POST_GKCLIENT_REQUEST_ERROR}))
+          )
+      })
+    );
+
+  @Effect() revertGkClientRequest$ = this.actions$
+    .pipe(
+      ofType(GkClientRequestActionTypes.REVERT_GKCLIENT_REQUEST),
+      switchMap(action => {
+        console.log(action);
+        return this.gkClientsServices.revertModuleRequest(action['payload']['id'])
+          .pipe(
+            map(moduleRequest => {
+              console.log(moduleRequest);
+              return ({ type: GkClientRequestActionTypes.REVERT_GKCLIENT_REQUEST_SUCCESS, payload: moduleRequest });
+            }),
+            catchError((err, caught) => Observable.of({type: GkClientRequestActionTypes.REVERT_GKCLIENT_REQUEST_ERROR}))
+          )
+      })
+    );
 }

@@ -14,7 +14,7 @@ import {
 import { BaseComponent } from '../../../../../base';
 
 @Component({
-  templateUrl: '../gkclnShared/shared/gkclnSharedForm.html'
+  templateUrl: '../shared/individualSharedForm.html'
 })
 export class GkCln15Component extends BaseComponent implements OnInit, OnDestroy {
 

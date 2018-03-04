@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, OnDestroy, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, OnDestroy, EventEmitter, ChangeDetectionStrategy, SimpleChanges, OnChanges } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { Message } from 'primeng/components/common/api';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -16,48 +17,32 @@ import {
   LocalStorageService,
 } from '../../../../../../nga/services';
 
-import { GkClient } from '../../../../../../store/_models/gkClient.model';
-import { GkClientService } from '../../../../../../store/_services/gkClient.service';
-
-/**********************************************************************************************************
- * FORM SERVES INPUT (11, 13) AND VIEW (12, 14, 15, 16, 17, 18)
- * Input tcode = prefix + action;
- * id & client is to determine client document
- * - Create (11)
- *    No id at first, after saving successfully (201) has client = true then no more SAVE button
- * - Other
- *    Id via URL, if client exist (http status 200) hasClient = true to display form for viewing/ editting
- ***********************************************************************************************************/
 @Component({
   selector: 'gkclient-form',
   templateUrl: './gkclnForm.html',
   styleUrls: ['./gkclnForm.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
-export class GkClnForm implements OnInit, OnDestroy {
+export class GkClnForm implements OnInit, OnDestroy, OnChanges {
 
   myScope = 'gkcln-form';
 
-  @Input() isRequest = false;
-  @Input() isEditableRequest = true;
-  @Input() tcode: any;
-  @Input() client: any;
-  @Output() getRequestBodyChange: EventEmitter<any> = new EventEmitter();
-  id = '';
-  /**
-   * To show form details when
-   * - action = 11 (before save and after save)
-   * - action = 12, 13, 14, 15, 16, 17, 18 only if http return status 200
-   */
-  hasClient = false;
+  @Input() prefix: any;
+  @Input() action: any;
+  @Input() isRequest:boolean;
+  @Input() isEditable: boolean;
 
-  prefix = '';
-  action = '';
+  @Input() source: any;
 
-  formEditable = false; // Action 11 (before save) and 13 allow form to be editted
+  @Output() onSaveAction: EventEmitter<any> = new EventEmitter();
+  // @Output() onInFormAction: EventEmitter<any> = new EventEmitter();
+
+  isNewCreationSuccess = false;
+  isDeletionSuccess = false;
+
   myForm: FormGroup;
-
-  msgs: Message[] = [];
   debugMode = false;
+  msgs: Message[] = [];
 
   industryList = [
     { label:'Select industry', value:null },
@@ -92,6 +77,7 @@ export class GkClnForm implements OnInit, OnDestroy {
   ];
 
   serviceList = [
+    { label:'Select service', value:null },
     { label:'Category 1', value: 'Cat 1'},
     { label:'Category 2', value: 'Cat 2'},
     { label:'Category 3', value: 'Cat 3'},
@@ -110,22 +96,8 @@ export class GkClnForm implements OnInit, OnDestroy {
     { label:'Unmarked', value:'Unmarked' },
   ];
 
-  // Redux based variables
-  selectedGkClient: Observable<GkClient>;
-  private subscription: Subscription;
-  /****************************************************************************
-   * INITIALIZATION
-   * Constructor
-   * ngOnInit
-   * parseTCode
-   * initBasicModelThenGetData
-   * initBasicModel
-   ****************************************************************************/
   constructor(
-    private activatedRoute: ActivatedRoute,
-
     private globalState: GlobalState,
-    private gkClientService: GkClientService,
     private securityService: SecurityService,
     private navigationService: NavigationService,
     private tcodeService: TcodeService,
@@ -135,167 +107,75 @@ export class GkClnForm implements OnInit, OnDestroy {
 
     private localStorage: LocalStorageService,
     private translateService: TranslateService,
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     // Local subscription to global state
-    this.subscribeLocalState(); // IMPORTANT: Only from and after OnInit, all input including isRequest is passed to
+    this.subscribeLocalState(); // IMPORTANT: Only from and after OnInit, all inputs is fully passed to component
 
-    this.initBlankModel();
-    this.buildForm();
-
-    // Get id
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if (params['id']) {
-        this.id = params['id'];
-      }
-    });
-    console.log(this.id);
-
-    // Set blank form (action 11) or form filled with returned data (other actions)
-    this.parseTCodeAndExecuteAction();
     this.debugMode = this.localStorage.getDebugMode();
-
-
   }
 
-  /**
-   * FUNCTION TO INITIALIZE BLANK MODEL (BASIC MODEL)
-   */
-  initBlankModel() {
-    this.client =  {
-      name: '',
-      clientDb: '',
-      industry: '',
-      service: '',
-      addresses: [],
-      contacts: [],
-      solutions: [],
-      remarks: [],
-      status1: 'Active',
-      status2: 'Unmarked',
-    };
-  }
+  ngOnChanges(changes: SimpleChanges) {
+    // Persistently monitoring changes of source from ngrx store
+    if (changes['source']) {
+      console.log(this.source);
 
-  /**
-   * FUNCTION TO PARSE TCODE AND EXECUTE ACTION (FOR INITIAL DATA)
-   */
-  parseTCodeAndExecuteAction() {
-    // Parse TCode - this must be in OnInit or after steps, otherwise no input is parsable
-    this.prefix = this.tcodeService.extractPrefix(this.tcode);
-    this.action = this.tcodeService.extractAction(this.tcode);
-    // console.log('Action:', this.action);
-
-    // Get initial data for ngrx then build form filled with return data
-    switch (this.action) {
-      case '11':
-        this.gkClientService.createBlankItem();
-        break;
-
-      case '12':
-        this.gkClientService.findById(this.id);
-        break;
-
-      case '13':
-        this.gkClientService.findById(this.id);
-        break;
-
-      case '14':
-        this.gkClientService.disable(this.id);
-        break;
-
-      case '15':
-        this.gkClientService.enable(this.id);
-        break;
-
-      case '16':
-        this.gkClientService.mark(this.id);
-        break;
-
-      case '17':
-        this.gkClientService.unmark(this.id);
-        break;
-
-      case '18':
-        this.gkClientService.delete(this.id);
-        break;
-
-      case '31':
-        if (!this.id) {
-          this.gkClientService.createDataItem({});
-        } else {
-          this.gkClientService.findOrCreateRequestById(this.id);
+      if (this.source) {
+        // For Master Data / Transaction - Once transaction completed
+        // 11 + id = Create New completed
+        if ((this.action=='11') && (this.source.data._id)) {
+          this.isNewCreationSuccess = true;
         }
-        break;
+        // 18 + id = Delete completed
+        else if((this.action=='18') && (this.source.data._id)) {
+          this.isDeletionSuccess = true;
+        }
+        // For Others: Master Data / Transaction + Request
+        else {
+          if (!this.source.pending && !this.source.error) {
+            this.buildForm();
+          }
+        }
+      }
+    }
 
-      case '32':
-        break;
-
-      case '33':
-        break;
-
-      default:
-        break;
+    if (changes['isEditable']) {
+      console.log(this.isEditable);
+      // this.buildForm();
     }
   }
 
-  /****************************************************************************
+  ngOnDestroy() {
+    this.unsubscribeLocalState();
+  }
+
+  /* LOCAL STATE */
+  subscribeLocalState() {
+    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
+      console.log(lang);
+      this.translateService.use(lang);
+    });
+  }
+
+  unsubscribeLocalState() {
+    this.globalState.unsubscribeEvent('language', this.myScope);
+  }
+
+  /**
    * FORM CONSTRUCTION
-   ****************************************************************************/
+   */
   private buildForm(): void {
 
     // Fill form with blank or valid client data
-    this.fillForm();
-
-    // Exit here if no client, otherwise continue to elaborate form details
-    if (!this.client) { return; }
-
-    // Data Block 1 - Addresses
-    const hasAddresses: boolean = this.objectService.hasProp(this.client, 'addresses');
-    if (hasAddresses) {
-      const countAddresses: number = this.client.addresses.length;
-      // console.log(`Number of nested addresses: ${countAddresses}`);
-      for (let addressCounter = 0; addressCounter < countAddresses; addressCounter++) {
-        const addressControl = <FormArray> this.myForm.controls['addresses'];
-        addressControl.push(this.addAddressWithData(this.client.addresses[addressCounter]));
-      }
-    }
-
-    // Data Block 2 - Contacts
-    const hasContacts: boolean = this.objectService.hasProp(this.client, 'contacts');
-    if (hasContacts) {
-      const countContacts: number = this.client.contacts.length;
-      // console.log(`Number of nested contacts: ${countContacts}`);
-      for (let contactCounter = 0; contactCounter < countContacts; contactCounter++) {
-        const contactControl = <FormArray> this.myForm.controls['contacts'];
-        contactControl.push(this.addContactWithData(this.client.contacts[contactCounter]));
-      }
-    }
-  }
-
-  /**
-   * Function to initialize form with client data
-   */
-  private fillForm() {
     this.myForm = this._fb.group({
-      _id: [
-        {
-          value: this.client._id,
-          disabled: false
-        }
-      ],
-      name: [ this.client.name,
-        [
-          Validators.required,
-          Validators.minLength(5),
-        ],
-      ],
-      industry: [this.client.industry],
-      service: [this.client.service],
+      _id: [{ value: this.source.data._id, disabled: false }],
+      name: [this.source.data.name, [ Validators.required, Validators.minLength(5) ]],
+      industry: [this.source.data.industry],
+      service: [this.source.data.service],
       addresses: this._fb.array([]),
       contacts: this._fb.array([]),
-      clientDb: [this.client.clientDb,
+      clientDb: [this.source.data.clientDb,
         [
           Validators.required,
           Validators.pattern('^[a-zA-Z0-9]*$'),       // Alphanumeric
@@ -304,68 +184,44 @@ export class GkClnForm implements OnInit, OnDestroy {
       ],
       solutions: this._fb.array([]),
       remarks: this._fb.array([]),
-      status1: [this.client.status1],
-      status2: [this.client.status2],
+      status1: [this.source.data.status1],
+      status2: [this.source.data.status2],
     });
 
-    // Disable header fiedls, all details fields are disabled via formEditable
-    // this.myForm.controls.name.disable();
-    // this.myForm.controls.clientDb.disable();
+    // Data Block 1 - Addresses
+    const hasAddresses: boolean = this.objectService.hasProp(this.source.data, 'addresses');
+    if (hasAddresses) {
+      const countAddresses: number = this.source.data.addresses.length;
+      // console.log(`Number of nested addresses: ${countAddresses}`);
+      for (let addressCounter = 0; addressCounter < countAddresses; addressCounter++) {
+        const addressControl = <FormArray> this.myForm.controls['addresses'];
+        addressControl.push(this.addAddressWithData(this.source.data.addresses[addressCounter]));
+      }
+    }
 
-    this.initFormEditable();
+    // Data Block 2 - Contacts
+    const hasContacts: boolean = this.objectService.hasProp(this.source.data, 'contacts');
+    if (hasContacts) {
+      const countContacts: number = this.source.data.contacts.length;
+      // console.log(`Number of nested contacts: ${countContacts}`);
+      for (let contactCounter = 0; contactCounter < countContacts; contactCounter++) {
+        const contactControl = <FormArray> this.myForm.controls['contacts'];
+        contactControl.push(this.addContactWithData(this.source.data.contacts[contactCounter]));
+      }
+    }
   }
 
   /**
-   * Function to determine formEditable at one place
-   */
-  initFormEditable() {
-    this.formEditable = false;
-
-    switch (this.action) {
-      case '11':
-        this.formEditable = true;
-        // this.myForm.controls.name.enable();
-        // this.myForm.controls.clientDb.enable();
-        break;
-
-      case '13':
-        this.formEditable = true;
-        // this.myForm.controls.name.enable();
-        // this.myForm.controls.clientDb.enable();
-        break;
-
-      default:
-        if (this.isEditableRequest) {
-          this.formEditable = true;
-          // this.myForm.controls.name.enable();
-          // this.myForm.controls.clientDb.enable();
-        }
-        break;
-    }
-
-  }
-
-  /****************************************************************************
-   * ADDRESSES
-   ****************************************************************************/
-
-   /**
-   * Function to create a blank address (for add new)
-   */
-   private addAddress() {
+  * ADDRESSES
+  * addAddress()                     Create a blank address (for add new)
+  * addAddressWithData(addressData)  Create an address with data (to insert an existing address into form)
+  * newAddress()                     Add a new address item in addresses array
+  * removeAddress()                  Remove an adress item from addresses array
+  */
+  private addAddress() {
     return this._fb.group({
-      type: ['',
-        [
-          Validators.required,
-          Validators.minLength(3),
-        ]
-      ],
-      line1: ['',
-        [
-          Validators.required,
-          Validators.minLength(1),
-        ]
-      ],
+      type: ['', [ Validators.required, Validators.minLength(3) ]],
+      line1: ['', [ Validators.required, Validators.minLength(1) ]],
       line2: [''],
       line3: [''],
       line4: [''],
@@ -373,23 +229,10 @@ export class GkClnForm implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Function to create an address with data (to insert an existing address into form)
-   */
   private addAddressWithData(addressData: any) {
     return this._fb.group({
-      type: [addressData.type,
-        [
-          Validators.required,
-          Validators.minLength(3),
-        ]
-      ],
-      line1: [addressData.line1,
-        [
-          Validators.required,
-          Validators.minLength(1),
-        ]
-      ],
+      type: [addressData.type, [ Validators.required, Validators.minLength(3) ]],
+      line1: [addressData.line1, [ Validators.required,Validators.minLength(1) ]],
       line2: [addressData.line2],
       line3: [addressData.line3],
       line4: [addressData.line4],
@@ -407,71 +250,26 @@ export class GkClnForm implements OnInit, OnDestroy {
     control.removeAt(i);
   }
 
-  /****************************************************************************
-   * CONTACTS
-   ****************************************************************************/
-
   /**
-  * Function to create a blank contact (for add new)
+  * CONTACTS
+  * addContact()                     Create a blank contact (for add new)
+  * addContactWithData(contactData)  Create a contact with data (to insert an existing contact into form)
   */
   private addContact() {
     return this._fb.group({
-      title: ['',
-        [
-          Validators.required,
-          Validators.minLength(1),
-        ]
-      ],
-      name: ['',
-        [
-          Validators.required,
-          Validators.minLength(1),
-        ]
-      ],
-      phone: ['',
-        [
-          Validators.required,
-          Validators.pattern('^[0-9]*$'),     // Number Only
-        ]
-      ],
-      email: ['',
-        [
-          Validators.required,
-          Validators.email,                  // Email
-        ]
-      ],
+      title: ['', [ Validators.required, Validators.minLength(1) ]],
+      name: ['', [ Validators.required, Validators.minLength(1) ]],
+      phone: ['', [ Validators.required, Validators.pattern('^[0-9]*$') ]],  // Number Only
+      email: ['', [ Validators.required, Validators.email ]], // Email
     });
   }
 
-  /**
-   * Function to create a contact with data (to insert an existing contact into form)
-   */
   private addContactWithData(contactData: any) {
     return this._fb.group({
-      title: [contactData.title,
-        [
-          Validators.required,
-          Validators.minLength(1),
-        ]
-      ],
-      name: [contactData.name,
-        [
-          Validators.required,
-          Validators.minLength(1),
-        ]
-      ],
-      phone: [contactData.phone,
-        [
-          Validators.required,
-          Validators.pattern('^[0-9]*$'),
-        ]
-      ],
-      email: [contactData.email,
-        [
-          Validators.required,
-          Validators.email,
-        ]
-      ],
+      title: [ contactData.title, [ Validators.required, Validators.minLength(1) ]],
+      name: [ contactData.name, [ Validators.required, Validators.minLength(1) ]],
+      phone: [ contactData.phone, [ Validators.required, Validators.pattern('^[0-9]*$') ]],
+      email: [ contactData.email, [ Validators.required, Validators.email ]],
     });
   }
 
@@ -485,9 +283,9 @@ export class GkClnForm implements OnInit, OnDestroy {
     control.removeAt(i);
   }
 
-  /****************************************************************************
+  /**
    * REMARKS
-   ****************************************************************************/
+   */
 
   /**
    * Function to create a blank remark (for add new)
@@ -517,12 +315,13 @@ export class GkClnForm implements OnInit, OnDestroy {
     control.removeAt(i);
   }
 
-  /****************************************************************************
+  /**
    * EVENT HANDLERS
    * To handle event emitted from form components
    * - nga-address
    * - nga-contact
-   ****************************************************************************/
+   *
+   */
   handleEvent($event) {
     console.log($event);
     const addresses = <FormArray> this.myForm.controls['addresses'];
@@ -542,92 +341,32 @@ export class GkClnForm implements OnInit, OnDestroy {
     }
   }
 
-  /****************************************************************************
-   * FORM ACTION
-   * Function to save or update form data
-   ****************************************************************************/
+  /**
+  * MASTER DATA/ TRANSACTION FORM ACTION
+  * @function submitForm
+  */
   submitForm() {
-    if (this.myForm.valid) {
-      const clientData: any = this.myForm['_value'];
-      // console.log(clientData);
-
-      switch (this.action) {
-        case '11':
-          this.gkClientService.create(this.myForm.value);
-          break;
-
-        case '13':
-          this.gkClientService.update(this.myForm.value);
-          break;
-
-        default:
-          break;
-      }
-    }
+    console.log('I am going to emit info via debounceClick!');
+    this.onSaveAction.emit({
+      valid: this.myForm.valid,
+      data: this.myForm.value
+    });
   }
 
   /**
-   * API AT FRONTEND TO ALLOW REQUEST MANIPULATION
-   */
-
-  updateIsEditableRequest(status) {
-    console.log('Change isEditableRequest to: ', status);
-    this.isEditableRequest = status;
-    this.buildForm();
-  }
-
-  saveRequest (action) {
+  * REQUEST ACTION
+  * @function saveRequest
+  */
+  saveRequest() {
     console.log('Save gkClient Request Form data');
     if (this.myForm.valid) {
-      this.gkClientService.updateRequest(this.myForm.value)
-      .subscribe((result) => {
-        console.log(result);
-
-        this.gkClientService.updateRequestStore(result.body.data);
-
-        this.getRequestBodyChange.emit({
-          status: 'OK',
-          action: action,
-          valid: this.myForm.valid,
-          value: this.myForm.value
-        });
-
-
-        // switch (result.status) {
-        //   case 'OK':
-        //     console.log('Updating Request Main on successful save of requestBody');
-        //     this.getRequestBodyChange.emit({
-        //       status: 'OK',
-        //       action: action,
-        //       valid: this.myForm.valid,
-        //       value: this.myForm.value
-        //     });
-        //     break;
-        //
-        //   case 'Error':
-        //     console.log('Updating Request Main on failed save of requestBody');
-        //
-        //     // const toastData = {
-        //     //   type: 'warning',
-        //     //   title: 'Validation Failed',
-        //     //   msg: 'Form Validation Failed',
-        //     //   showClose: true,
-        //     // };
-        //     // this.globalState.notifyMyDataChanged('toasty','', toastData);
-        //
-        //     // this.getRequestBodyChange.emit({
-        //     //   status: 'Error',
-        //     //   valid: this.myForm.valid,
-        //     //   value: this.myForm.value
-        //     // });
-        //     break;
-        //
-        //   default:
-        //     break;
-        // }
-      })
+      this.onSaveAction.emit({
+        valid: this.myForm.valid,
+        data: this.myForm.value
+      });
     } else {
       console.log('Validation Failed');
+      this.markAllDirty(this.myForm);
 
       const toastData = {
         type: 'warning',
@@ -639,83 +378,27 @@ export class GkClnForm implements OnInit, OnDestroy {
     }
   }
 
-  updateParentOnRequestBody() {
-    console.log('Updating Request on the Request Body Data');
-    this.getRequestBodyChange.emit({
-      valid: this.myForm.valid,
-      value: this.myForm.value
-    });
-  }
-
-  onTabChange(event) {
-    // const toastData = {
-    //   type: 'info',
-    //   title: 'Tab Expanded',
-    //   msg: 'Index: ' + event.index,
-    //   showClose: true,
-    // };
-    // this.globalState.notifyMyDataChanged('toasty','', toastData);      
-  }
-
-  ngOnDestroy() {
-    this.unsubscribeLocalState();
-  }
-
-  /* LOCAL STATE */
-  subscribeLocalState() {
-    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
-      this.translateService.use(lang);
-    });
-
-    // Redux store
-    this.selectedGkClient = this.gkClientService.selectedGkClient;
-    this.subscription = this.selectedGkClient
-    .subscribe(responseBodyData => {
-      if (!this.isRequest) {
-
-        if (this.action === '11') {
-          // Blank form ready for creating a new document
-          this.initBlankModel();
-          this.id = '';
-          this.hasClient = true;
-          this.buildForm();
-        } else {
-          if (responseBodyData['_id'] === this.id) { // IMPORTANT: To prevent getting the last Observable item by default
-            // Update returned data and build form
-            this.hasClient = true;
-            this.client = responseBodyData;
-            this.buildForm();
-          }
-        }
-
-      } else {
-
-        if (!responseBodyData['_id']) {
-          // Blank form ready for creating a new document
-          this.initBlankModel();
-          this.id = '';
-          this.hasClient = true;
-          this.buildForm();
-        } else {
-          if (responseBodyData['_id'] === this.id) { // IMPORTANT: To prevent getting the last Observable item by default
-            // Update returned data and build form
-            this.hasClient = true;
-            this.client = responseBodyData;
-            this.buildForm();
-          }
-        }
-
+  markAllDirty(control: AbstractControl) {
+    if(control.hasOwnProperty('controls')) {
+      control.markAsDirty({onlySelf: true}) // mark group
+      let ctrl = <any>control;
+      for (let inner in ctrl.controls) {
+          this.markAllDirty(ctrl.controls[inner] as AbstractControl);
       }
-
-    }, error => {
-      console.log(error);
-    });
+    }
+    else {
+      (<FormControl>(control)).markAsDirty({onlySelf: true});
+    }
   }
 
-  unsubscribeLocalState() {
-    this.globalState.unsubscribeEvent('language', this.myScope);
-    this.subscription.unsubscribe();
+  /**
+  * UTILITIES
+  */
+  gotoTcode(tcode) {
+    this.tcodeService.executeTCode(tcode,'');
   }
 
+  hasRight(tcode) {
+    return this.tcodeService.checkTcodeInMana(tcode);
+  }
 }
