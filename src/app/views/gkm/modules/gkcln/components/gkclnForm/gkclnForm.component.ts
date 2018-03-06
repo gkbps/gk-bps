@@ -21,7 +21,7 @@ import {
   selector: 'gkclient-form',
   templateUrl: './gkclnForm.html',
   styleUrls: ['./gkclnForm.scss'],
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GkClnForm implements OnInit, OnDestroy, OnChanges {
 

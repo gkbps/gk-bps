@@ -51,6 +51,11 @@
         <!-- ./BODY -->
 
         <!-- DOCUMENTS -->
+        <div *ngIf="id" class="ui-g-12">
+          <request-documents
+            [tcode]="tcode">
+          </request-documents>
+        </div>
         <!-- <div *ngIf="id" class="ui-g-12">
           <h-request-documents
             [tcode]="tcode">
@@ -59,6 +64,10 @@
         <!-- ./DOCUMENTS -->
 
         <!-- APPROVAL -->
+        <!-- <div *ngIf="id" class="ui-g-12">
+          <request-approval-flow>
+          </request-approval-flow>
+        </div> -->
         <!-- <div *ngIf="id" class="ui-g-12">
           <h-request-approval-flow>
           </h-request-approval-flow>

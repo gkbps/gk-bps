@@ -187,17 +187,17 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
 
       case 'cancel':
         console.log('cancel.00-Cancel requestHeader to request!');
-        // this.store.dispatch(cancelRequestAction(this.id));
+        this.store.dispatch(cancelRequestAction(this.id));
         break;
 
       case 'return':
         console.log('return.00-Return requestHeader to request!');
-        // this.store.dispatch(returnRequestAction(this.id));
+        this.store.dispatch(returnRequestAction(this.id));
         break;
 
       case 'approve':
         console.log('approve.00-Approve requestHeader to request!');
-        // this.store.dispatch(approveRequestAction(this.id));
+        // this.store.dispatch(approveRequestAction(this.id, event.data));
         break;
 
       case 'reject':
@@ -207,7 +207,7 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
 
       case 'abort':
         console.log('abort.00-Abort requestHeader to request!');
-        // this.store.dispatch(abortRequestAction(this.id));
+        this.store.dispatch(abortRequestAction(this.id));
         break;
 
       // case 'journal':

@@ -1,0 +1,95 @@
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { HttpClientService, SecurityService } from '../../nga/services/';
+import { RequestDocument } from './requestDocuments.models';
+
+@Injectable()
+export class RequestDocumentsServices {
+
+  suffixUrl = '/requestFiles/';
+
+  constructor(
+    private httpClientService: HttpClientService,
+    private securityService: SecurityService,
+  ) { }
+
+  action1x(_id) {
+    return this.httpClientService.get(this.suffixUrl + 'list/' + _id)
+      .map((res) => {
+        console.log(res);
+        return res.body.data || {};
+      });
+  }
+
+  action12(_id) {
+    return this.httpClientService.get(this.suffixUrl + 'list/' + _id)
+      .map((res) => {
+        console.log(res);
+        return res.body.data || {};
+      });
+  }
+
+  /****************************************************************************
+   * SEPARATE UPLOAD AND ADD REQUEST FILE TO SUPPORT FILEUPLOAD OPERATION
+   * - Update list of uploaded files
+   * - Reset fileupload status for new upload
+   ****************************************************************************/
+  uploadRequestDocument(_id, formData) {
+     return this.httpClientService.post(this.suffixUrl + _id, formData)
+      .map((res) => {
+        console.log(res);
+        return res.body.data || {};
+      });
+  }
+
+  downloadRequestDocument(_id) {
+    return this.httpClientService.get(this.suffixUrl + 'download/' + _id);
+  }
+
+  addRequestFile(payload) {
+    return new Observable((observer) => observer.next(payload))
+    .map((payload) => {
+      console.log(payload);
+      return { type: 'ADD_REQUEST_FILE', payload };
+    });
+  }
+
+  // MULTIPLE
+  uploadRequestFiles(_id, formData) {
+    return this.httpClientService.post(this.suffixUrl + 'upload/' + _id, formData);
+  }
+
+  action13(_id, desc) {
+    return this.httpClientService.put(this.suffixUrl + _id, {desc: desc})
+      .map((res) => {
+        console.log(res);
+        return res.body.data || {};
+      });
+  }
+
+  action16(_id) {
+    return this.httpClientService.patch(this.suffixUrl + 'mark/' + _id, {})
+      .map((res) => {
+        console.log(res);
+        return res.body.data || {};
+      });
+  }
+
+  action17(_id) {
+    return this.httpClientService.patch(this.suffixUrl + 'unmark/' + _id, {})
+      .map((res) => {
+        console.log(res);
+        return res.body.data || {};
+      });
+  }
+
+  action18(_id) {
+    return this.httpClientService.delete(this.suffixUrl + _id)
+      .map((res) => {
+        console.log(res);
+        return res.body.data || {};
+      });
+  }
+
+}

@@ -1,0 +1,102 @@
+<p-panel [toggleable]="true" [collapsed]="true">
+  <p-header>
+    <span class="ui-panel-title"><i class="fa ui-icon-people-outline"></i> {{'req_approval'|translate}}</span>
+  </p-header>
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-menubar [model]="items"></p-menubar>
+
+      <p-dataTable
+        [value]="requestApprovers"
+        [loading]="loading"
+        loadingIcon="fa-spinner"
+
+        [globalFilter]="gb" #dt
+
+        selectionMode="single"
+        [(selection)]="selectedApprover"
+
+        [responsive]="true"
+        [resizableColumns]="true"
+        [multiSortMeta]="multiSortMeta"
+
+        [reorderableColumns]="true"
+        [contextMenu]="cm"
+
+        scrollHeight="200px"
+        [style]="{'overflow':'visible'}">
+          <p-header>
+            <div class="ui-g" style="padding: 0px">
+              <div class="ui-g-12 ui-md-6 ui-lg-4" style="text-align:left">
+                <p-multiSelect [options]="columnOptions" [(ngModel)]="cols"></p-multiSelect>
+              </div>
+            </div>
+          </p-header>
+          <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [style]="{'width': col.width}" sortable="true"></p-column>
+      </p-dataTable>
+      <!-- dataKey="approver.username" -->
+      <p-contextMenu #cm [model]="items"></p-contextMenu>
+
+    </div>
+  </div>
+</p-panel>
+
+<p-dialog header="{{'approver'|translate}}" [(visible)]="display" modal="modal" width="500" [responsive]="true">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <span class="md-inputfield fixed-form">
+          <span class="fixed-label">{{'position'|translate}}</span>
+          <!-- style="display: block;" -->
+        </span>
+        <p-dropdown
+          [options]="position"
+          [(ngModel)]="selectedPosition"
+          [ngModelOptions]="{standalone: true}"
+          [autoWidth]="false"
+          [style]="{'width': '30%'}">
+        </p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-3">
+        <span class="md-inputfield fixed-form">
+          <input type="text" pInputText [(ngModel)]="step" [ngModelOptions]="{standalone: true}">
+          <label>{{'step'|translate}}</label>
+        </span>
+      </div>
+
+      <div class="ui-g-12 ui-md-9">
+        <span class="md-inputfield fixed-form">
+          <p-autoComplete
+            [suggestions]="filteredUsersSingle"
+            (completeMethod)="filterUserSingle($event)"
+            [(ngModel)]="selectedUser"
+            [ngModelOptions]="{standalone: true}"
+            [delay]="500"
+            field="fullname"
+            [size]="30"
+            [minLength]="1"
+            [dropdown]="false">
+            <!-- [forceSelection]="true" -->
+              <ng-template let-user pTemplate="item">
+                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                      <div style="float:left; margin:10px 10px 0 0">{{user.username}}</div>
+                      <div style="float:right; margin:10px 0 0 10px">{{user.fullname}}</div>
+                      <!-- font-size:18px; -->
+                  </div>
+              </ng-template>
+          </p-autoComplete>
+          <label>{{'requestor'|translate}} * <small *ngIf="!selectedUser" class="text-warning">{{'required'|translate}}</small></label>
+        </span>
+      </div>
+
+      <div class="ui-helper-clearfix" style="margin-bottom: 300px;"></div>
+
+    </div>
+
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="addApprover()" label="{{'yes'|translate}}" [disabled]="!selectedUser"></button>
+    <!--  -->
+    <button type="button" pButton icon="fa-close" (click)="display=false" label="{{'no'|translate}}"></button>
+  </p-footer>
+</p-dialog>

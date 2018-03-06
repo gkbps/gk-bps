@@ -24,6 +24,9 @@ import { GkClientsServices } from '../../../../../../ngrx/gkClient/gkClients.ser
 import { PanelModule } from 'primeng/panel';
 
 import { RequestHeaderModule } from '../../../../../../nga/components/requestHeader';
+import { RequestDocumentsModule } from '../../../../../../nga/components/requestDocuments';
+import { RequestApprovalModule } from '../../../../../../nga/components/requestApproval';
+
 // import { HRequestDocumentsModule } from '../../../../../../nga/components/hRequestDocuments';
 // import { HRequestApprovalFlowModule } from '../../../../../../nga/components/hRequestApprovalFlow';
 
@@ -57,6 +60,8 @@ import { GkCln31RoutingModule } from './gkcln31-routing.module';
     PanelModule,
 
     RequestHeaderModule,
+    RequestDocumentsModule,
+    RequestApprovalModule,
     // HRequestDocumentsModule,
     // HRequestApprovalFlowModule,
 
