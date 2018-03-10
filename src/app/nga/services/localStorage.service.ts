@@ -123,6 +123,13 @@ export class LocalStorageService {
     return env.wk.year;
   }
 
+  /* Client Setting */
+  getSetting() {
+    const savedSession = JSON.parse(this.getLocalStorage('savedSession'));
+    console.log(savedSession.setting);
+    return (savedSession.setting);
+  }
+
   /*****************************************************************************/
 
   /* Layout */

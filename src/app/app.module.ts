@@ -24,6 +24,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { TopNotificationsReducers } from './ngrx/notification/notifications.reducers';
+import { NotificationsEffects } from './ngrx/notification/notifications.effects';
+import { NotificationsServices } from './ngrx/notification/notifications.services';
+
 /**
  * 3RD PARTY - UI
  * ScrollTo
@@ -139,8 +143,8 @@ const APP_DIRECTIVES = [
     GraphQLModule,
 
     // Ngrx Store
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({ topnotifications: TopNotificationsReducers }),
+    EffectsModule.forRoot([ NotificationsEffects ]),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production // Restrict extension to log-only mode
     }),
@@ -169,7 +173,8 @@ const APP_DIRECTIVES = [
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
-    }
+    },
+    NotificationsServices
   ],
   exports: [
     ScrollPanelModule,

@@ -163,12 +163,15 @@ export class RequestDocumentsEffects {
     .pipe(
       ofType(RequestDocumentActionTypes.DOWNLOAD_REQUEST_DOCUMENT),
       switchMap(action => {
-        console.log(action);
-        return this.requestDocumentsServices.downloadRequestDocument(action['payload']['id'])
+        // console.log(action);
+        return this.requestDocumentsServices.downloadRequestDocument(
+          action['payload']['id'],
+          action['payload']['tcode']
+        )
           .pipe(
             map(requestDocument =>{
               console.log(requestDocument);
-              return { type: RequestDocumentActionTypes.DOWNLOAD_REQUEST_DOCUMENT, payload: requestDocument };
+              return { type: RequestDocumentActionTypes.DOWNLOAD_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentActionTypes.DOWNLOAD_REQUEST_DOCUMENT_ERROR}))
           )

@@ -6,6 +6,7 @@ export * from './bodyBackground.service';
 export * from './chat.service';
 export * from './color.service';
 export * from './dashboard.service';
+export * from './file.service';
 export * from './httpClient.service';
 export * from './help.service';
 export * from './helpers.service';

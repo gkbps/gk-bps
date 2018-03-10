@@ -1,4 +1,9 @@
 {
+	"view_all": "Xem tất cả",
+	"deferral": "Đang xử lý yêu cầu!",
+	"deferral_message": "Hệ thống sẽ thông báo khi yêu cầu đã được xử lý. Trong thời gian đó, bạn có thể thực hiện các thao tác khác!",
+	"deferral_completed": "Yêu cầu đã được xử lý!",
+	"deferral_completed_message": "Một yêu cầu trì hoãn vừa hoàn tất. Vui lòng xem chi tiết tại danh sách thông báo!",
 	"create_journal": "Đính Nhật ký",
 	"post_journal": "Chuyển Nhật ký",
 	"revert_journal": "Huỷ Nhật ký",

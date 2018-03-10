@@ -1,0 +1,133 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="card">
+      <div class="ui-g">
+
+        <div class="ui-g-12">
+          <p-toolbar>
+            <div class="ui-toolbar-group-left">
+              <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:6px; margin-left: 6px;">
+                {{module|translate}}
+              </span>
+            </div>
+
+            <div class="ui-toolbar-group-right">
+                <button pButton type="button" icon="ui-icon-search" (click)="executeTcode(module + '12')" pTooltip="{{'view'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-visibility-off" (click)="executeTcode(module + '16')" pTooltip="{{'mark'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-visibility" (click)="executeTcode(module + '17')" pTooltip="{{'unmark'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-delete-forever" (click)="executeTcode(module + '18')" pTooltip="{{'delete'|translate}}" tooltipPosition="top"></button>
+            </div>
+          </p-toolbar>
+        </div>
+
+        <div class="ui-g-12">
+          <!-- <p *ngIf="body.pending">
+            Loading...
+          </p> -->
+
+          <p-table
+            #dt
+            [loading]="body.pending"
+
+            [columns]="selectedColumns"
+            [value]="body.data.data"
+
+            [lazy]="true"
+            (onLazyLoad) = "loadData($event)"
+
+            [paginator]="true"
+            [rows]="rows"
+            [totalRecords]="body.data.total"
+            [rowsPerPageOptions]="[10,20,30]"
+            [(first)]="first"
+            paginatorPosition="both"
+
+            selectionMode="single"
+            [(selection)]="selectedClient"
+            dataKey="_id"
+
+            [responsive]="true"
+            [resizableColumns]="true"
+
+            sortMode="multiple"
+
+            [reorderableColumns]="true"
+            [(contextMenuSelection)]="selectedClient"
+            [contextMenu]="cm"
+
+            scrollHeight="200px"
+            [style]="{'overflow':'visible'}">
+
+            <ng-template pTemplate="caption">
+              <p-header>
+                <div class="ui-g form-group">
+
+                  <div class="ui-g-12 ui-md-6">
+                    <div style="text-align:left">
+                      <button icon="ui-icon-file-download" pButton type="button" (click)="dt.exportCSV()" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only" pTooltip="{{'export_csv'|translate}}" tooltipPosition="top"></button>
+                      <p-multiSelect
+                        class="fixed-multiSelect"
+                        [options]="columnOptions"
+                        [(ngModel)]="selectedColumns"
+                        [selectedItemsLabel]="selectedItemsLabel"
+                        [style]="{minWidth: '200px'}"
+                        defaultLabel="{{'select_an_item'|translate}}">
+                      </p-multiSelect>
+                    </div>
+                  </div>
+
+                  <div class="ui-g-12 ui-md-6">
+                    <div class="ui-inputgroup" style="float:right">
+                      <span class="md-inputfield" style="margin-top:12px;">
+                        <input #gb pInputText type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" (input)="dt.filterGlobal($event.target.value, 'contains')">
+                        <label style="color: #ffffff">{{'filter'|translate}}</label>
+                      </span>
+                      <i class="fa fa-search" style="margin-top:10px"></i>
+                    </div>
+                  </div>
+
+                </div>
+              </p-header>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th
+                  *ngFor="let col of columns"
+                  style="width: {{col.width}}"
+                  [pSortableColumn]="col.field"
+                  pResizableColumn
+                  pReorderableColumn>
+                  <!-- [style]="{'width': col.width}" -->
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr [pSelectableRow]="rowData" [pContextMenuRow]="rowData">
+                <td *ngFor="let col of columns">{{rowData[col.field]}}</td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="summary">
+              <div style="text-align: left">
+                  {{'selected'|translate}}: {{selectedClient ? selectedClient._id : 'none'}}
+              </div>
+            </ng-template>
+
+          </p-table>
+          <p-contextMenu #cm [model]="items"></p-contextMenu>
+
+
+          <p *ngIf="body.error">
+            {{body.error}}
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

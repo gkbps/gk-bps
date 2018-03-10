@@ -18,7 +18,7 @@ import {
 export class HLeadForm implements OnInit, OnDestroy {
 
   myScope = 'h-lead-form';
-  // @Input() tcode: string = '';
+  @Input() isShortTcode = false;
 
   currentUser: any;
   userRights: string[];
@@ -48,11 +48,19 @@ export class HLeadForm implements OnInit, OnDestroy {
   }
 
   execute(): void {
-    const urlComponents = this.router.url.split('/');
-    // console.log(urlComponents);
-    const url = '/' + urlComponents[1] + '/' + urlComponents[2] + '/' + this.myForm.controls['id'].value;
-    // console.log(url);
-    this.router.navigate([url]);
+    if (!this.isShortTcode) {
+      const urlComponents = this.router.url.split('/');
+      // console.log(urlComponents);
+      const url = '/' + urlComponents[1] + '/' + urlComponents[2] + '/' + this.myForm.controls['id'].value;
+      console.log(url);
+      this.router.navigate([url]);
+    } else {
+      const urlComponents = this.router.url.split('/');
+      const url = '/' + urlComponents[1] + '/' + this.myForm.controls['id'].value;
+      console.log(url);
+      this.router.navigate([url]);
+    }
+
   }
 
   ngOnDestroy() {

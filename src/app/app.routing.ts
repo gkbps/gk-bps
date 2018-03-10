@@ -30,6 +30,8 @@ export const routes: Routes = [
     path: '', component: GkFullLayoutComponent, canActivateChild: [AuthGuard],
     data: { title: '' },
     children: [
+      { path: 'blank', loadChildren: './views/common/blank/blank.module#BlankModule' },
+
       { path: 'inbox', loadChildren: './views/common/inbox/inbox.module#InboxModule' },
       { path: 'ibx', loadChildren: './views/common/inbox/inbox.module#InboxModule' },
       { path: 'outbox', loadChildren: './views/common/outbox/outbox.module#OutboxModule' },
@@ -54,6 +56,10 @@ export const routes: Routes = [
       { path: 'setting', loadChildren: './views/common/setting/setting.module#SettingModule' },
 
       { path: 'debug', loadChildren: './views/common/debug/debug.module#DebugModule' },
+      { path: 'notification', loadChildren: './views/common/notification/notification.module#NotificationModule' },
+      { path: 'ntfct', loadChildren: './views/common/ntfct/ntfct.module#NtfctModule' },
+      { path: 'dl', loadChildren: './views/common/download/download.module#DownloadModule' },
+      { path: 'download', loadChildren: './views/common/download/download.module#DownloadModule' },
 
       { path: 'help', loadChildren: './views/help/help.module#HelpModule' },
       { path: 'home', loadChildren: './views/home/home.module#HomeModule' },

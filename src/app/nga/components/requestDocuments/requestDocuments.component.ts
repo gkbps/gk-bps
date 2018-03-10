@@ -34,16 +34,6 @@ import {
   LocalStorageService,
 } from '../../../nga/services';
 
-
-// import { Store } from '@ngrx/store';
-// import { AppStore } from '../../../store/app.store';
-//
-// import { GkRequest } from '../../../store/_models/gkRequest.model';
-// import { GkRequestService } from '../../../store/_services/gkRequest.service';
-//
-// import { RequestFile } from '../../../store/_models/requestFile.model';
-// import { RequestFileService } from '../../../store/_services/requestFile.service';
-
 @Component({
   selector: 'request-documents',
   templateUrl: './requestDocuments.html',
@@ -99,11 +89,6 @@ export class RequestDocuments implements OnInit, OnDestroy {
   // Redux based variables
   storeRequest: any;
   requestStatus = '';
-  // selectedGkRequest: Observable<GkRequest>;
-  // private subscriptionSelectedGkRequest: Subscription;
-  //
-  // requestFiles: Observable<Array<RequestFile>>;
-  // private subscription: Subscription;
 
   constructor(
     private appConfig: AppConfig,
@@ -123,7 +108,12 @@ export class RequestDocuments implements OnInit, OnDestroy {
 
     // Derive class constructor
     this.rows = this.localStorageService.getRows();
+    const clientSetting = this.localStorageService.getSetting();
+    this.maxSize = clientSetting.maxUploadSize || 1000000;
+    console.log(this.maxSize);
 
+    // STORE
+    // request
     this.storeRequest = this.store.pipe(select('request'));
     this.storeRequest.subscribe(request => {
       console.log(request);
@@ -131,6 +121,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
       console.log(this.requestStatus);
     });
 
+    // requestDocument
     this.storeRequestDocuments = this.store.pipe(select('requestDocuments'));
     this.storeRequestDocuments.subscribe(data => {
       console.log(data);
@@ -250,32 +241,10 @@ export class RequestDocuments implements OnInit, OnDestroy {
       this.initDataTableColumn();
       this.initMenuItems();
     });
-
-    // Redux store
-    // this.selectedGkRequest = this.gkRequestService.selectedGkRequest;
-    // this.subscriptionSelectedGkRequest = this.selectedGkRequest
-    //   .subscribe(responseBodyData => {
-    //     // console.log(responseBodyData);
-    //     // console.log(responseBodyData);
-    //     this.requestStatus = responseBodyData.status;
-    //   }, error => {
-    //     console.log(error);
-    //   });
-
-    // this.requestFiles = this.requestFileService.requestFiles;
-    // this.subscription = this.requestFiles
-    //   .subscribe(responseBodyData => {
-    //     // console.log(responseBodyData);
-    //     this.requestDocuments = responseBodyData;
-    //   }, error => {
-    //     console.log(error);
-    //   });
   }
 
   unsubscribeLocalState() {
     this.globalState.unsubscribeEvent('language', this.myScope);
-    // this.subscription.unsubscribe();
-    // this.subscriptionSelectedGkRequest.unsubscribe();
   }
 
   /**
@@ -301,6 +270,10 @@ export class RequestDocuments implements OnInit, OnDestroy {
   /*****************************************************************************/
 
   downloadRequestFile() {
+    console.log(this.selectedDocument._id);
+    this.store.dispatch(downloadRequestDocumentAction(this.selectedDocument._id, this.tcode));
+
+
     // this.requestFileService.downloadRequestFile(this.selectedDocument._id)
     //   .subscribe(
     //     (result) => {

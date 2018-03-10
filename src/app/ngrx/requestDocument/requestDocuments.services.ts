@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+import { AppConfig } from '../../app.config';
 import { HttpClientService, SecurityService } from '../../nga/services/';
 import { RequestDocument } from './requestDocuments.models';
 
@@ -10,6 +11,7 @@ export class RequestDocumentsServices {
   suffixUrl = '/requestFiles/';
 
   constructor(
+    private appConfig: AppConfig,
     private httpClientService: HttpClientService,
     private securityService: SecurityService,
   ) { }
@@ -43,8 +45,14 @@ export class RequestDocumentsServices {
       });
   }
 
-  downloadRequestDocument(_id) {
-    return this.httpClientService.get(this.suffixUrl + 'download/' + _id);
+  downloadRequestDocument(_id, tcode) {
+    return this.httpClientService.post(this.suffixUrl + 'download/' + _id, { tcode: tcode }, { isDeferral: true })
+    .map((res) => {
+      console.log(res.body.data);
+      const result = Object.assign({}, res.body.data);
+      result.data.url = this.appConfig.apiUrl + '/repo/download/' + (result.data.url || {});
+      return result;
+    });
   }
 
   addRequestFile(payload) {

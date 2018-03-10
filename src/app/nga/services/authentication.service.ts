@@ -26,6 +26,8 @@ export class AuthenticationService {
         // login successful if there's a jwt token in the response
         const user = response.json();
         if (user && user.token) {
+          console.log(user);
+
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           this.securityService.setMana(JSON.stringify(user.tcodes));
           delete user.tcodes;
@@ -38,7 +40,8 @@ export class AuthenticationService {
           const savedSession = {
             avatar: user.avatar,
             fullname: user.firstName + ' ' + user.lastName,
-            username: user.username
+            username: user.username,
+            setting: user.setting
           };
           this.securityService.setSavedSession(JSON.stringify(savedSession));
         }

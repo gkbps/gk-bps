@@ -1,4 +1,9 @@
 {
+	"view_all": "View All",	
+	"deferral": "Request is being processed!",
+	"deferral_message": "System will alert once request is fully processed. Meanwhile, you could further other steps!",
+	"deferral_completed": "Request processing completed!",
+	"deferral_completed_message": "A deferral request was fulfilled. Please check out in notification list!",
 	"create_journal": "Attach Journal",
 	"post_journal": "Post Journal",
 	"revert_journal": "Revert Journal",

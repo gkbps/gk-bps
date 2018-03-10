@@ -10,11 +10,12 @@ export class TcodeService {
   // Tcodes belong this list shall not be under any module
   // then tcode shall execute in vanilla mode
   baseTcodes = [
+    'blank',
     'intro', 'login', 'lockscreen', 'register', 'forgot',
     'profile', 'policy', 'help', 'dict',
     'fav', 'terminal', 'setting',
     '401', '403', '404', '500', 'chat',
-    'debug',
+    'debug', 'notification', 'ntfct', 'download',
     'home', 'news', 'main',
     'mine', 'tray',
     'inbox', 'ibx',

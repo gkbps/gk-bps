@@ -32,6 +32,9 @@ RUN NIGNX SERVER FOR COMPILED APP
 sudo nginx -s stop
 sudo nginx
 
+brew services stop mongodb
+brew services start mongodb
+
 nga
 401 - Done
 403 - Done
@@ -58,3 +61,6 @@ help - structure of help and content
 main - video for training, intro, etc...
 
 gkm - Next review
+
+
+graphLookup -> employee reporting line

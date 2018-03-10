@@ -80,7 +80,7 @@ export class GkFullLayoutComponent implements OnInit, OnDestroy {
 
     // Toasty
     this.globalState.subscribeEvent('toasty', '', (toastData) => {
-      console.log(toastData);
+      // console.log(toastData);
 
       this.reInstateUserPref();
 
@@ -92,10 +92,10 @@ export class GkFullLayoutComponent implements OnInit, OnDestroy {
         timeout: this.toastyTimeOut,
         theme: this.toastyTheme,
         onAdd: (toast:ToastData) => {
-          console.log('Toast ' + toast.id + ' has been added!');
+          // console.log('Toast ' + toast.id + ' has been added!');
         },
         onRemove: function(toast:ToastData) {
-          console.log('Toast ' + toast.id + ' has been removed!');
+          // console.log('Toast ' + toast.id + ' has been removed!');
         }
       };
 

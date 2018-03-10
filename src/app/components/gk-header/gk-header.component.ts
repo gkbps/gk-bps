@@ -4,6 +4,11 @@ import { FormGroup } from '@angular/forms';
 
 import { AppConfig } from '../../app.config';
 
+import { Store, select } from '@ngrx/store';
+import {
+  getTopNotificationsAction,
+} from '../../ngrx/notification/notifications.actions';
+
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../global.state';
 import {
@@ -27,6 +32,10 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
   lang;
   currentWkBarStatus;
 
+  notification: any;
+  notificationCount = 0;
+  notificationsList = [];
+
   public form: FormGroup;
   public tcodeExecution = '';
 
@@ -40,8 +49,18 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
     private localStorageService: LocalStorageService,
     private securityService: SecurityService,
     private tcodeService: TcodeService,
+
+    private store: Store<any>
   ) {
     this.subscribeLocalState();
+
+    this.notification = this.store.pipe(select('topnotifications'));
+    this.notification.subscribe(res => {
+      this.notificationCount = res.data.total || 0;
+      this.notificationsList = res.data.data || [];
+      // console.log(this.notificationsList);
+    })
+    this.store.dispatch(getTopNotificationsAction('', '{"created_at": -1}', 0, 5));
 
     // Init user's preference
     this.lang = localStorageService.getLang();
@@ -104,6 +123,13 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
     return false; // prevent a href automatically link
   }
 
+  openNotification(item) {
+    console.log(item);
+    const target = item.id ? item.id : item._id;
+    this.tcodeService.executeTCode(item.tcode, target);
+    return false;
+  }
+
   gotoTcode(tcode) {
     this.tcodeService.executeTCode(tcode);
     return false; // prevent a href automatically link
@@ -112,5 +138,5 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
   public logOut() {
     this.navigationService.gotoIntro();
   }
-  
+
 }

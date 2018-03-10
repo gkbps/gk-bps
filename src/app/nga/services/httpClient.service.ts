@@ -12,11 +12,20 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 
+import { Store, select } from '@ngrx/store';
+import {
+  addNotificationAction,
+} from '../../ngrx/notification/notifications.actions';
+
+import { TranslateService } from '@ngx-translate/core';
+
 import { AppConfig } from '../../app.config';
 import { LoaderService } from './loader.service';
 import { APIResultHandlingService } from './apiResultHandling.service';
 
 import { GlobalState } from '../../global.state';
+import { LocalStorageService } from '../../nga/services/localStorage.service';
+import { ObjectService } from '../../nga/services/object.service';
 
 @Injectable()
 export class HttpClientService extends HttpClient {
@@ -30,15 +39,19 @@ export class HttpClientService extends HttpClient {
     private loaderService: LoaderService,
     private apiResultHandlingService: APIResultHandlingService,
     private globalState: GlobalState,
+    private translateService: TranslateService,
+    private localStorageService: LocalStorageService,
+    private objectService: ObjectService,
+    private store: Store<any>
   ) {
     super(handler);
     this.apiUrl = appConfig.apiUrl;
   }
 
   get(url: string, options?: any | {}): Observable<any> {
-    this.showLoader();
-    console.log(this.getFullUrl(url));
-    return super.get(this.getFullUrl(url), this.attachHeader(options))
+    const reqOptions = this.handleShowLoader(options);
+
+    return super.get(this.getFullUrl(url), this.attachHeader(reqOptions))
       .catch(this.onCatch)
       .do((res: Response) => {
         this.onSuccess(res, false);
@@ -46,30 +59,34 @@ export class HttpClientService extends HttpClient {
         this.onError(error);
       })
       .finally(() => {
-        this.onEnd();
+        this.onEnd(options);
       }
     );
-
   }
 
   post(url: string, body: any | null, options?: any | {}): Observable<any> {
-    this.showLoader();
-    return super.post(this.getFullUrl(url), body, this.attachHeader(options))
+    // console.log(options);
+
+    const reqOptions = this.handleShowLoader(options);
+
+    return super.post(this.getFullUrl(url), body, this.attachHeader(reqOptions))
       .catch(this.onCatch)
       .do((res: Response) => {
-          this.onSuccess(res, true);
+          // this.onSuccess(res, true);
+          this.handleSuccess(res, true, options);
         }, (error: any) => {
           this.onError(error);
         })
       .finally(() => {
-        this.onEnd();
+        this.onEnd(options);
       }
     );
   }
 
-  postManualResultHandler(url: string, body: any | null, options?: any | {}): Observable<any> {
-    this.showLoader();
-    return super.post(this.getFullUrl(url), body, this.attachHeader(options))
+  postCustomized(url: string, body: any | null, options?: any | {}): Observable<any> {
+    const reqOptions = this.handleShowLoader(options);
+
+    return super.post(this.getFullUrl(url), body, this.attachHeader(reqOptions))
       .catch(this.onCatch)
       .do((res: Response) => {
           return res;
@@ -77,14 +94,15 @@ export class HttpClientService extends HttpClient {
           this.onError(error);
         })
       .finally(() => {
-        this.onEnd();
+        this.onEnd(options);
       }
     );
   }
 
   put(url: string, body: any | null, options?: any | {}): Observable<any> {
-    this.showLoader();
-    return super.put(this.getFullUrl(url), body, this.attachHeader(options))
+    const reqOptions = this.handleShowLoader(options);
+
+    return super.put(this.getFullUrl(url), body, this.attachHeader(reqOptions))
       .catch(this.onCatch)
       .do((res: Response) => {
           this.onSuccess(res, true);
@@ -92,12 +110,12 @@ export class HttpClientService extends HttpClient {
           this.onError(error);
         })
       .finally(() => {
-        this.onEnd();
+        this.onEnd(options);
       }
     );
   }
 
-  putManualResultHandler(url: string, body: any | null, options?: any | {}): Observable<any> {
+  putCustomized(url: string, body: any | null, options?: any | {}): Observable<any> {
     this.showLoader();
     return super.put(this.getFullUrl(url), body, this.attachHeader(options))
       .catch(this.onCatch)
@@ -107,14 +125,15 @@ export class HttpClientService extends HttpClient {
           this.onError(error);
         })
       .finally(() => {
-        this.onEnd();
+        this.onEnd(options);
       }
     );
   }
 
   patch(url: string, body: any | null, options?: any | {}): Observable<any> {
-    this.showLoader();
-    return super.patch(this.getFullUrl(url), body, this.attachHeader(options))
+    const reqOptions = this.handleShowLoader(options);
+
+    return super.patch(this.getFullUrl(url), body, this.attachHeader(reqOptions))
       .catch(this.onCatch)
       .do((res: Response) => {
           this.onSuccess(res, true);
@@ -122,14 +141,15 @@ export class HttpClientService extends HttpClient {
           this.onError(error);
         })
       .finally(() => {
-        this.onEnd();
+        this.onEnd(options);
       }
     );
   }
 
   delete(url: string, options?: any | {}): Observable<any> {
-    this.showLoader();
-    return super.delete(this.getFullUrl(url), this.attachHeader(options))
+    const reqOptions = this.handleShowLoader(options);
+
+    return super.delete(this.getFullUrl(url), this.attachHeader(reqOptions))
       .catch(this.onCatch)
       .do((res: Response) => {
           this.onSuccess(res, true);
@@ -137,7 +157,7 @@ export class HttpClientService extends HttpClient {
           this.onError(error);
         })
       .finally(() => {
-        this.onEnd();
+        this.onEnd(options);
       }
     );
   }
@@ -180,6 +200,7 @@ export class HttpClientService extends HttpClient {
   }
 
   private getFullUrl(prefix: string): string {
+    console.log(this.apiUrl + prefix);
     return this.apiUrl + prefix;
   }
 
@@ -188,13 +209,30 @@ export class HttpClientService extends HttpClient {
     return Observable.throw(error);
   }
 
+  handleSuccess(res, alert, options) {
+    const tmpOptions = Object.assign({}, options);
+
+    this.onSuccess(res, alert);
+
+    // console.log(tmpOptions);
+    if (tmpOptions) {
+      if (this.objectService.hasProp(tmpOptions, 'isDeferral')) {
+        console.log('Update Store');
+        this.store.dispatch(addNotificationAction(res.body.data));
+      }
+    }
+  }
+
   private onSuccess(res: Response, alert: boolean): void {
     // console.log('request successful');
-    console.log(res);
+    // console.log(res);
+
+    // this.store.dispatch(addNotificationAction(res));
+
     if (alert) {
       this.apiResultHandlingService.processAPIResult(res)
       .then((msg) => {
-        // console.log(msg);
+        console.log(msg);
         // const toastData = {
         //   type: 'warning',
         //   title: res.navigation,
@@ -221,18 +259,69 @@ export class HttpClientService extends HttpClient {
     });
   }
 
-  private onEnd(): void {
-    this.hideLoader();
+  private onEnd(options): void {
+    const tmpOptions = Object.assign({}, options);
+
+    console.log(tmpOptions);
+    if (!tmpOptions) {
+      this.hideLoader(false);
+    } else if (this.objectService.hasProp(tmpOptions, 'isDeferral')) {
+      this.hideLoader(true);
+    } else {
+      this.hideLoader(false);
+    }
     // console.log('end');
   }
 
-  private showLoader(): void {
-    this.loaderService.show();
+  private handleShowLoader(options) {
+    const tmpOptions = Object.assign({}, options);
+
+    console.log(tmpOptions);
+    if (!tmpOptions) {
+      this.showLoader(false);
+    } else if (this.objectService.hasProp(tmpOptions, 'isDeferral')) {
+      this.showLoader(true);
+      delete tmpOptions['isDeferral'];
+    } else {
+      this.showLoader(false);
+    }
+
+    return tmpOptions;
+  }
+
+  private showLoader(isDeferral = false): void {
+    if (!isDeferral) {
+      this.loaderService.show();
+    } else {
+      this.translateService.get(['deferral', 'deferral_message'])
+        .subscribe((res) => {
+          const toastData = {
+            type: 'wait',
+            title: res['deferral'],
+            msg: res['deferral_message'],
+            showClose: true,
+          };
+          this.globalState.notifyMyDataChanged('toasty','', toastData);
+        });
+    }
     // console.log('showloader');
   }
 
-  private hideLoader(): void {
-    this.loaderService.hide();
+  private hideLoader(isDeferral = false): void {
+    if (!isDeferral) {
+      this.loaderService.hide();
+    } else {
+      this.translateService.get(['deferral_completed', 'deferral_completed_message'])
+        .subscribe((res) => {
+          const toastData = {
+            type: 'info',
+            title: res['deferral_completed'],
+            msg: res['deferral_completed_message'],
+            showClose: true,
+          };
+          this.globalState.notifyMyDataChanged('toasty','', toastData);
+        });
+    }
     // console.log('hideloader');
   }
 

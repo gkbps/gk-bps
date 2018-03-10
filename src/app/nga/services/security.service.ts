@@ -70,7 +70,7 @@ export class SecurityService {
     const awt = this.getAwt();
     return this.tcodeService.decode(awt[1]);
   }
-
+  
   /*
   getClientCode(): string {
     const awt = this.getAwt();

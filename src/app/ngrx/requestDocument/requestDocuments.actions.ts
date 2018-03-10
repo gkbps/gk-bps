@@ -95,8 +95,8 @@ export enum RequestDocumentActionTypes {
   GET_REQUEST_DOCUMENT_ERROR = '[Request Document] Get Request Document Error',
 
   DOWNLOAD_REQUEST_DOCUMENT = '[Request Document] Download Request Document',
-  DOWNLOAD_REQUEST_DOCUMENT_SUCCESS = '[Request] Download Request Document Success',
-  DOWNLOAD_REQUEST_DOCUMENT_ERROR = '[Request] Download Request Document Error',
+  DOWNLOAD_REQUEST_DOCUMENT_SUCCESS = '[Request Document] Download Request Document Success',
+  DOWNLOAD_REQUEST_DOCUMENT_ERROR = '[Request Document] Download Request Document Error',
 }
 
 export function getRequestDocumentAction(id) {
@@ -106,9 +106,12 @@ export function getRequestDocumentAction(id) {
   }
 }
 
-export function downloadRequestDocumentAction(id) {
+export function downloadRequestDocumentAction(id, tcode) {
   return {
     type: RequestDocumentActionTypes.DOWNLOAD_REQUEST_DOCUMENT,
-    payload: { id: id }
+    payload: {
+      id: id,
+      tcode: tcode
+    }
   }
 }
