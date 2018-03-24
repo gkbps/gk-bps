@@ -1,4 +1,5 @@
 {
+	"request_is_sent": "Yêu cầu đã được gửi đi. Nếu phát sinh lỗi, gỡ lỗi dưới đây!",
 	"view_all": "Xem tất cả",
 	"deferral": "Đang xử lý yêu cầu!",
 	"deferral_message": "Hệ thống sẽ thông báo khi yêu cầu đã được xử lý. Trong thời gian đó, bạn có thể thực hiện các thao tác khác!",

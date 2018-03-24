@@ -2,22 +2,47 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 
-import { AppConfig } from '../../app.config';
+import { TranslateService } from '@ngx-translate/core';
 
 import { Store, select } from '@ngrx/store';
 import {
   getTopNotificationsAction,
 } from '../../ngrx/notification/notifications.actions';
 
-import { TranslateService } from '@ngx-translate/core';
+// GK - Alphabet
+import { AppConfig } from '../../app.config';
 import { GlobalState } from '../../global.state';
-import {
-  NavigationService,
-  LocalStorageService,
-  SecurityService,
-  TcodeService,
-} from '../../nga/services';
+import { LocalStorageService } from '../../nga/services/localStorage.service';
+import { NavigationService } from '../../nga/services/navigation.service';
+import { SecurityService } from '../../nga/services/security.service';
+import { TcodeService } from '../../nga/services';
 
+/**
+* @module GkHeaderComponent
+* Header of the App, serves as placeholder for:
+* - Sidebar toggle button
+* - User avatar / dropdown menu
+* - Transaction command
+* - Notification list
+* - Message list
+* - Language
+* - Current woking bar toggle button
+*
+* @param myScope
+* @param fullname, @param username, @param avatar
+* @param tcodeExecution
+* @param notification, @param notificationCount, @param notificationsList
+* @param message, @param messageCount, @param messagesList
+* @param lang
+* @param currentWkBarStatus
+*
+* @function keyDownFunction
+* @function openNotification
+* @function openMessage
+* @function changeLanguage
+* @function toggleWkBar
+* @function gotoTcode
+*/
 @Component({
   selector: 'gk-header',
   templateUrl: './gk-header.component.html',
@@ -29,24 +54,31 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
   fullname;
   username;
   avatar;
-  lang;
-  currentWkBarStatus;
+
+  public form: FormGroup;
+  public tcodeExecution = '';
 
   notification: any;
   notificationCount = 0;
   notificationsList = [];
 
-  public form: FormGroup;
-  public tcodeExecution = '';
+  message: any;
+  messageCount = 0;
+  messagesList = [];
+
+  lang;
+  currentWkBarStatus;
 
   constructor(
     private router: Router,
+
     private translate: TranslateService,
 
-    private config: AppConfig,
+    // GK - Alphabet
+    private appConfig: AppConfig,
     private globalState: GlobalState,
-    private navigationService: NavigationService,
     private localStorageService: LocalStorageService,
+    private navigationService: NavigationService,
     private securityService: SecurityService,
     private tcodeService: TcodeService,
 
@@ -54,11 +86,10 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
   ) {
     this.subscribeLocalState();
 
-    this.notification = this.store.pipe(select('topnotifications'));
+    this.notification = this.store.pipe(select('top_notifications'));
     this.notification.subscribe(res => {
       this.notificationCount = res.data.total || 0;
       this.notificationsList = res.data.data || [];
-      // console.log(this.notificationsList);
     })
     this.store.dispatch(getTopNotificationsAction('', '{"created_at": -1}', 0, 5));
 
@@ -75,7 +106,7 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
     this.fullname = user.firstName + ' ' + user.lastName;
     this.username = user.username;
 
-    const rootPath = this.config.apiUrl;
+    const rootPath = this.appConfig.apiUrl;
     this.avatar = rootPath + '/repo/' + this.securityService.getToken() + '/users/' + user.avatar;
   }
 
@@ -86,14 +117,12 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
   /* LOCAL STATE */
   subscribeLocalState() {
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      // console.log(lang);
       this.lang = lang;
       this.translate.use(this.lang);
       this.localStorageService.setLang(lang);
     });
 
     this.globalState.subscribeEvent('wkBarStatus', this.myScope, (wkBarStatus) => {
-      // console.log(wkBarStatus);
       this.currentWkBarStatus = wkBarStatus;
       this.localStorageService.setWkBar(wkBarStatus);
     });
@@ -104,13 +133,28 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
     this.globalState.unsubscribeEvent('wkBarStatus', this.myScope);
   }
 
+  /* LOCAL OPERATION */
+
   public keyDownFunction(event) {
     if ((event.keyCode === 13) && (this.tcodeExecution.trim())) {
       const url: string = this.tcodeService.urlLead(this.tcodeExecution);
-      // console.log(url);
       this.tcodeExecution = '';
       this.router.navigate([url]);
     }
+  }
+
+  openNotification(item) {
+    // console.log(item);
+    const target = item.id ? item.id : item._id;
+    this.tcodeService.executeTCode(item.tcode, target);
+    return false; // prevent a href automatically link
+  }
+
+  openMessage(item) {
+    // console.log(item);
+    // const target = item.id ? item.id : item._id;
+    // this.tcodeService.executeTCode(item.tcode, target);
+    return false; // prevent a href automatically link
   }
 
   public changeLanguage(lang: string) {
@@ -121,13 +165,6 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
   public toggleWkBar() {
     this.globalState.notifyMyDataChanged('wkBarStatus', '', !this.currentWkBarStatus);
     return false; // prevent a href automatically link
-  }
-
-  openNotification(item) {
-    console.log(item);
-    const target = item.id ? item.id : item._id;
-    this.tcodeService.executeTCode(item.tcode, target);
-    return false;
   }
 
   gotoTcode(tcode) {

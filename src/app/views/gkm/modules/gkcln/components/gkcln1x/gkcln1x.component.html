@@ -1,9 +1,10 @@
-<h-data-table
+<h-turbo-table
   [module] = "module"
+  [actionSerial] = "actionSerial"
   [cols] = "cols"
   [selectedColumns] = "selectedColumns"
   [selectedItemsLabel] = "selectedItemsLabel"
   [columnOptions] = "columnOptions"
   [body] = "gkClients | async"
   (onPageChange)="doSomething($event)">
-</h-data-table>
+</h-turbo-table>

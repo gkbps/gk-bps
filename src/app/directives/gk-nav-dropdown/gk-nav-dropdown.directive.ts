@@ -1,6 +1,13 @@
 import { Directive, HostListener } from '@angular/core';
 import { UtilsService } from '../../nga/services/utils.service';
 
+/**
+* @module GkNavProfileDirective
+* Directive to add/ remove class for profile menu
+* Web mode
+*
+* @event toggleOpen
+*/
 @Directive({
   selector: '[gkNavProfile]'
 })
@@ -12,7 +19,6 @@ export class GkNavProfileDirective {
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {
     $event.preventDefault();
-    // console.log($event);
 
     const element = document.getElementById('profile-item');
     if (this.utilsService.hasClass(element, 'active-topmenuitem')) {
@@ -20,12 +26,19 @@ export class GkNavProfileDirective {
     } else {
       element.classList.add('active-topmenuitem');
       document.getElementById('setting-item').classList.remove('active-topmenuitem');
-      document.getElementById('message-item').classList.remove('active-topmenuitem');
       document.getElementById('notification-item').classList.remove('active-topmenuitem');
+      document.getElementById('message-item').classList.remove('active-topmenuitem');
     }
   }
 }
 
+/**
+* @module GkNavProfileMobileDirective
+* Directive to add/ remove class for profile menu
+* Mobile mode
+*
+* @event toggleOpen
+*/
 @Directive({
   selector: '[gkNavProfileMobile]'
 })
@@ -37,7 +50,6 @@ export class GkNavProfileMobileDirective {
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {
     $event.preventDefault();
-    // console.log($event);
 
     const element = document.getElementById('profile-item-mobile');
     if (this.utilsService.hasClass(element, 'topbar-menu-active')) {
@@ -51,6 +63,12 @@ export class GkNavProfileMobileDirective {
   }
 }
 
+/**
+* @module GkNavSettingDirective
+* Directive to add/ remove class for setting menu
+*
+* @event toggleOpen
+*/
 @Directive({
   selector: '[gkNavSetting]'
 })
@@ -62,7 +80,6 @@ export class GkNavSettingDirective {
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {
     $event.preventDefault();
-    // console.log($event);
 
     const element = document.getElementById('setting-item');
     if (this.utilsService.hasClass(element, 'active-topmenuitem')) {
@@ -77,6 +94,12 @@ export class GkNavSettingDirective {
   }
 }
 
+/**
+* @module GkNavLanguageDirective
+* Directive to add/ remove class for language menu
+*
+* @event toggleOpen
+*/
 @Directive({
   selector: '[gkNavLanguage]'
 })
@@ -88,7 +111,6 @@ export class GkNavLanguageDirective {
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {
     $event.preventDefault();
-    // console.log($event);
 
     const element = document.getElementById('language-item');
     if (this.utilsService.hasClass(element, 'active-topmenuitem')) {
@@ -103,6 +125,12 @@ export class GkNavLanguageDirective {
   }
 }
 
+/**
+* @module GkNavMessageDirective
+* Directive to add/ remove class for message menu
+*
+* @event toggleOpen
+*/
 @Directive({
   selector: '[gkNavMessage]'
 })
@@ -114,7 +142,6 @@ export class GkNavMessageDirective {
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {
     $event.preventDefault();
-    // console.log($event);
 
     const element = document.getElementById('message-item');
     if (this.utilsService.hasClass(element, 'active-topmenuitem')) {
@@ -129,6 +156,12 @@ export class GkNavMessageDirective {
   }
 }
 
+/**
+* @module GkNavNotificationDirective
+* Directive to add/ remove class for notification menu
+*
+* @event toggleOpen
+*/
 @Directive({
   selector: '[gkNavNotification]'
 })
@@ -140,7 +173,6 @@ export class GkNavNotificationDirective {
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {
     $event.preventDefault();
-    // console.log($event);
 
     const element = document.getElementById('notification-item');
     if (this.utilsService.hasClass(element, 'active-topmenuitem')) {

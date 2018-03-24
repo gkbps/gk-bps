@@ -1,14 +1,33 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ngx-toasty';
+import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ngx-toasty';
 
+// GK - Alphabet
+import { BodyBackgroundService } from '../../nga/services';
 import { GlobalState } from '../../global.state';
-import {
-  StateManagementService,
-  BodyBackgroundService,
-  LocalStorageService,
-  LoaderService
-} from '../../nga/services';
+import { LoaderService } from '../../nga/services';
+import { LocalStorageService } from '../../nga/services';
+import { StateManagementService } from '../../nga/services';
 
+/**
+* @module GkSimpleLayoutComponent
+*
+* @param myScope
+*
+* @param sbTitle
+* @param sbFullScreen
+* @param sbVisibility
+* @param sbPosition
+* @param sbSizeList
+*
+* @param blocked
+*
+* @param alertIcon
+* @param alertMsg
+* @param toastyTimeOut
+* @param toastyTheme
+* @param toastyPosition
+* @param toastOptions
+*/
 @Component({
   selector: 'gk-simple-layout',
   templateUrl: './gk-simple-layout.component.html',
@@ -44,15 +63,14 @@ export class GkSimpleLayoutComponent implements OnInit, OnDestroy {
   toastOptions: ToastOptions;
 
   constructor(
-    private globalState: GlobalState,
-
-    private stateManagementService: StateManagementService,
-    private bodyBackgroundService: BodyBackgroundService,
-    private localStorageService: LocalStorageService,
-    private loaderService: LoaderService,
-
+    private toastyConfig: ToastyConfig,
     private toastyService:ToastyService,
-    private toastyConfig: ToastyConfig
+
+    private bodyBackgroundService: BodyBackgroundService,
+    private globalState: GlobalState,
+    private loaderService: LoaderService,
+    private localStorageService: LocalStorageService,
+    private stateManagementService: StateManagementService,
   ) {
   }
 

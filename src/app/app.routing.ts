@@ -8,7 +8,12 @@ import {
 
 import { AuthGuard, TcodeGuard } from './nga/services';
 
+/**
+* @const Routes
+* Define lazy loading routes for app by security level and alphabet order
+*/
 export const routes: Routes = [
+  // Public Area - No security restriction
   {
     path: '',
     component: GkSimpleLayoutComponent,
@@ -26,6 +31,8 @@ export const routes: Routes = [
       { path: 'register', loadChildren: './views/common/register/register.module#RegisterModule' },
     ]
   },
+
+  // Common Area - Logged in user | Group by similarity for convinient, not Alphabet
   {
     path: '', component: GkFullLayoutComponent, canActivateChild: [AuthGuard],
     data: { title: '' },
@@ -67,6 +74,8 @@ export const routes: Routes = [
       { path: 'main', loadChildren: './views/main/main.module#MainModule' },
     ]
   },
+
+  // Modules Area - Module or Alphabet
   {
     path: '', component: GkFullLayoutComponent, canActivateChild: [AuthGuard],
     data: { title: '' },

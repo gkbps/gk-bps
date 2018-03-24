@@ -92,7 +92,7 @@ export class HHistory implements OnInit, OnDestroy {
       const reqOptions = this.securityService.jwt().merge({params: pagination});
       // console.log(reqOptions);
 
-      const url = this.config.apiUrl + '/' + this.module + '/history';
+      const url = this.config.apiUrl + '/' + this.module + '/changes';
       // console.log(url);
 
       return this.http.get(url, reqOptions)

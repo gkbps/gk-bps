@@ -14,7 +14,6 @@ import { BaseComponent } from '../../../../../base';
   templateUrl: '../shared/collectiveSharedForm.html'
 })
 export class GkCln21Component extends BaseComponent implements OnInit, OnDestroy {
-// gkcln21.component.html
 
   // Override Base class properties
   pageTitle = 'gkcln';

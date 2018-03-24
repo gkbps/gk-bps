@@ -8,6 +8,7 @@
 <a class="topbar-menu-btn" href="#">
   <i class="material-icons" gkNavProfileMobile></i>
 </a>
+<!--./Sidebar toggle in mobile layout-->
 
 <div class="layout-topbar-menu-wrapper">
   <ul id="profile-item-mobile" class="topbar-menu fadeInDown">
@@ -62,8 +63,6 @@
       <a href="#" (click)="toggleWkBar(); false">
         <i *ngIf="currentWkBarStatus" class="topbar-icon material-icons">layers</i>
         <i *ngIf="!currentWkBarStatus" class="topbar-icon material-icons">layers_clear</i>
-        <!-- keyboard_arrow_up keyboard_arrow_down -->
-        <!-- arrow_upward arrow_downward -->
         <span class="topbar-item-name">Settings</span>
       </a>
     </li>
@@ -177,7 +176,6 @@
 
         <li role="menuitem">
           <a href="#" (click)="gotoTcode('notification');" style="text-align: center; font-weight: bold">
-            <!-- <i class="material-icons">flight</i> -->
             <span>{{'view_all'|translate}}</span>
           </a>
         </li>
@@ -186,7 +184,6 @@
     <!-- ./NOTIFICATION -->
 
     <!-- TRANSACTION CODE -->
-
     <li class="search-item">
       <form (keydown)="keyDownFunction($event)">
         <span class="md-inputfield">

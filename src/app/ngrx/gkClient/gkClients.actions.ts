@@ -176,3 +176,75 @@ export function revertGkClientRequestAction(id) {
     payload: { id: id }
   }
 }
+
+/**
+* GKCLIENT DASHBOARDS
+*/
+
+export enum GkClientDashboardsActionTypes {
+  GET_MANY_GKCLIENT_DASHBOARDS = '[GkClientDashboard] Get Many GkClient Dashboards',
+  GET_MANY_GKCLIENT_DASHBOARDS_SUCCESS = '[GkClientDashboard] Get Many GkClient Dashboards Success',
+  GET_MANY_GKCLIENT_DASHBOARDS_ERROR = '[GkClientDashboard] Get Many GkClient Dashboards Error'
+}
+
+// To get GkClient dashboards by pagination
+export function getGkClientDashboardsAction(filter, sort, first, rows) {
+  // Return an action with type and payload
+  return {
+    type: GkClientDashboardsActionTypes.GET_MANY_GKCLIENT_DASHBOARDS,
+    payload: {
+      filter: filter,
+      sort: sort,
+      first: first,
+      rows: rows
+    }
+  }
+}
+
+/**
+* GKCLIENT SUMMARY REPORTS
+*/
+
+export enum GkClientReportsSummaryActionTypes {
+  GET_MANY_GKCLIENT_SUMMARY_REPORTS = '[GkClientSummaryReport] Get Many GkClient Summary Reports',
+  GET_MANY_GKCLIENT_SUMMARY_REPORTS_SUCCESS = '[GkClientSummaryReport] Get Many GkClient Summary Reports Success',
+  GET_MANY_GKCLIENT_SUMMARY_REPORTS_ERROR = '[GkClientSummaryReport] Get Many GkClient Summary Reports Error'
+}
+
+// To get GkClient dashboards by pagination
+export function getGkClientReportsSummaryAction(filter, sort, first, rows) {
+  // Return an action with type and payload
+  return {
+    type: GkClientReportsSummaryActionTypes.GET_MANY_GKCLIENT_SUMMARY_REPORTS,
+    payload: {
+      filter: filter,
+      sort: sort,
+      first: first,
+      rows: rows
+    }
+  }
+}
+
+/**
+* GKCLIENT DETAIL REPORTS
+*/
+
+export enum GkClientReportsDetailActionTypes {
+  GET_MANY_GKCLIENT_DETAIL_REPORTS = '[GkClientDetailReport] Get Many GkClient Detail Reports',
+  GET_MANY_GKCLIENT_DETAIL_REPORTS_SUCCESS = '[GkClientDetailReport] Get Many GkClient Detail Reports Success',
+  GET_MANY_GKCLIENT_DETAIL_REPORTS_ERROR = '[GkClientDetailReport] Get Many GkClient Detail Reports Error'
+}
+
+// To get GkClient dashboards by pagination
+export function getGkClientReportsDetailAction(filter, sort, first, rows) {
+  // Return an action with type and payload
+  return {
+    type: GkClientReportsDetailActionTypes.GET_MANY_GKCLIENT_DETAIL_REPORTS,
+    payload: {
+      filter: filter,
+      sort: sort,
+      first: first,
+      rows: rows
+    }
+  }
+}

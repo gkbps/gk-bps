@@ -1,9 +1,14 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { FileUpload } from 'primeng/fileupload';
+import { Header } from 'primeng/shared';
+import { Footer } from 'primeng/shared';
 import { MenuItem } from 'primeng/api';
 import { SelectItem } from 'primeng/api';
+// import { LazyLoadEvent } from 'primeng/api';
+import { SortEvent } from 'primeng/api';
+
+import { FileUpload } from 'primeng/fileupload';
 import { ConfirmationService } from 'primeng/api';
 import { Message } from 'primeng/components/common/api';
 
@@ -38,6 +43,7 @@ import {
   selector: 'request-documents',
   templateUrl: './requestDocuments.html',
   styleUrls: ['./requestDocuments.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RequestDocuments implements OnInit, OnDestroy {
 
@@ -51,14 +57,17 @@ export class RequestDocuments implements OnInit, OnDestroy {
   id ='';
 
   storeRequestDocuments: any;
-  requestDocuments: any[];
+  requestDocuments = [];
   selectedDocument: any;
 
   msgs: Message[] = [];
 
   // Header columns on the fly
   loading: boolean;
+
   cols: any[];
+  selectedColumns: any[];
+  selectedItemsLabel = '{0} items selected';
   columnOptions: SelectItem[];
 
   // Pagination
@@ -147,15 +156,14 @@ export class RequestDocuments implements OnInit, OnDestroy {
       }
     });
 
-
-
     this.initDataTableColumn();
     this.initMenuItems();
   }
 
   initDataTableColumn() {
-    this.translateService.get(['description', 'username', 'size', 'status', 'updated_at'])
+    this.translateService.get(['description', 'username', 'size', 'status', 'updated_at', 'selected_item_label'])
       .subscribe((res) => {
+        this.selectedItemsLabel = res.selected_item_label;
         this.cols = [
           { field: 'desc', header: res.description, width: '40%'  },
           { field: 'username', header: res.username, width: '15%'  },
@@ -164,10 +172,16 @@ export class RequestDocuments implements OnInit, OnDestroy {
           { field: 'updated_at', header: res.updated_at, width: '20%' },
         ];
 
+        this.selectedColumns = JSON.parse(JSON.stringify(this.cols));
         this.columnOptions = [];
         for (let i = 0; i < this.cols.length; i++) {
             this.columnOptions.push({ label: this.cols[i].header, value: this.cols[i] });
         }
+
+        // this.columnOptions = [];
+        // for (let i = 0; i < this.cols.length; i++) {
+        //     this.columnOptions.push({ label: this.cols[i].header, value: this.cols[i] });
+        // }
         // console.log(this.cols, this.columnOptions);
       });
   }
@@ -211,18 +225,15 @@ export class RequestDocuments implements OnInit, OnDestroy {
           {
             label: res.mark, icon: 'ui-icon-visibility-off',
             command: (event) => this.confirmAction('mark'),
-            // disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln16', this.userRights),
           },
           {
             label: res.unmark, icon: 'ui-icon-visibility',
             command: (event) => this.confirmAction('unmark'),
-            // disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln17', this.userRights),
           },
           // { separator: true },
           {
             label: res.delete, icon: 'ui-icon-delete-forever',
             command: (event) => this.confirmAction('delete'),
-            // disabled: (this.requestStatus == 'Draft'),
           }
         ];
 
@@ -272,21 +283,6 @@ export class RequestDocuments implements OnInit, OnDestroy {
   downloadRequestFile() {
     console.log(this.selectedDocument._id);
     this.store.dispatch(downloadRequestDocumentAction(this.selectedDocument._id, this.tcode));
-
-
-    // this.requestFileService.downloadRequestFile(this.selectedDocument._id)
-    //   .subscribe(
-    //     (result) => {
-    //       // console.log(result);
-    //       // const url = this.appConfig.apiUrl + '/repo/download/' + result['body'].data;
-    //       // console.log(url);
-    //       window.open(this.appConfig.apiUrl + '/repo/download/' + result['body'].data);
-    //     },
-    //     (error) => {
-    //       console.log('not ok');
-    //     },
-    //     () => { console.log('Subscription is completed'); },
-    //   );
   }
 
   /**
@@ -335,10 +331,11 @@ export class RequestDocuments implements OnInit, OnDestroy {
 
   executeAction(action: string): void {
     if (this.selectedDocument['_id']) {
+      const docId = this.selectedDocument['_id'];
       switch (action) {
         case 'mark':
           if (this.selectedDocument.status === 'Unmarked') {
-            this.store.dispatch(markRequestDocumentAction(this.selectedDocument['_id']));
+            this.store.dispatch(markRequestDocumentAction(docId));
             this.selectedDocument = null;
           } else {
             this.unavailable();
@@ -347,7 +344,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
 
         case 'unmark':
           if (this.selectedDocument.status === 'Marked') {
-            this.store.dispatch(unmarkRequestDocumentAction(this.selectedDocument['_id']));
+            this.store.dispatch(unmarkRequestDocumentAction(docId));
             this.selectedDocument = null;
           } else {
             this.unavailable();
@@ -356,7 +353,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
 
         case 'delete':
           if (this.requestStatus == 'Draft') {
-            this.store.dispatch(deleteRequestDocumentAction(this.selectedDocument['_id']));
+            this.store.dispatch(deleteRequestDocumentAction(docId));
             this.selectedDocument = null;
           } else {
             this.unavailable();
@@ -366,6 +363,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
         default:
           break;
       }
+      this.selectedDocument = null;
     }
   }
 

@@ -1,0 +1,8 @@
+https://medium.com/@ThomasTan/installing-nginx-in-mac-os-x-maverick-with-homebrew-d8867b7e8a5a
+
+RUN NIGNX SERVER FOR COMPILED APP
+sudo nginx -s stop
+sudo nginx
+
+EDIT CONFIGURATION FILE
+sudo nano /usr/local/etc/nginx/nginx.conf

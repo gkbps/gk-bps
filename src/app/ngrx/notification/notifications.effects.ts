@@ -39,7 +39,7 @@ export class NotificationsEffects {
       }),
       // If successful, dispatch success action with result
       map(requestDocuments =>{
-        console.log(requestDocuments);
+        // console.log(requestDocuments);
         return ({ type: TopNotificationsActionTypes.GET_TOP_NOTIFICATIONS_SUCCESS, payload: requestDocuments });
       })
     )
@@ -85,7 +85,7 @@ export class NotificationsEffects {
       }),
       // If successful, dispatch success action with result
       map(requestDocuments =>{
-        console.log(requestDocuments);
+        // console.log(requestDocuments);
         return ({ type: NotificationsActionTypes.GET_NOTIFICATIONS_SUCCESS, payload: requestDocuments });
       })
     )

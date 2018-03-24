@@ -1,16 +1,28 @@
+import { NgModule } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateService } from '@ngx-translate/core';
 
-import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-
 import { LocalStorageService } from './nga/services';
 
+/**
+* @function createTranslateLoader
+* A factory to create an address on the fly link to language file
+*
+* @param {HttpClient} http
+*
+* @return {url}
+*/
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+/**
+* @const translationOptions
+* Define translation options before hand
+*/
 const translationOptions = {
   loader: {
     provide: TranslateLoader,
@@ -19,6 +31,10 @@ const translationOptions = {
   },
 };
 
+/**
+* @module AppTranslationModule
+* Define languages available and initialize default language
+*/
 @NgModule({
   imports: [
     HttpClientModule,
@@ -43,6 +59,5 @@ export class AppTranslationModule {
 
     let browserLang = translate.getBrowserLang();
     //translate.use(browserLang.match(/en|vn|de/) ? browserLang : 'en');
-
   }
 }

@@ -1,5 +1,10 @@
 <div *ngIf="id" class="card card-w-title">
-  <h1>{{'gkcln'|translate}}</h1>
+  <h1>{{'notification'|translate}}</h1>
+
+  <p>
+    {{notification|json}}
+  </p>
+
 </div>
 
 <h-lead-form *ngIf="!id" isShortTcode="true"></h-lead-form>

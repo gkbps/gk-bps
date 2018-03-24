@@ -1,6 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
+/**/
+import { Store, select } from '@ngrx/store';
+import { getNotificationAction } from '../../../ngrx/notification/notifications.actions';
+/**/
+
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../../global.state';
 import {
@@ -30,6 +35,9 @@ export class NtfctComponent extends BaseComponent implements OnInit, OnDestroy {
   tcode = 'ntfct';
   id: string;
 
+  notificationStore: any;
+  notification: any;
+
   constructor(
     // Base class services
     public translateService: TranslateService,
@@ -41,11 +49,18 @@ export class NtfctComponent extends BaseComponent implements OnInit, OnDestroy {
     // Derive class services
     private activatedRoute: ActivatedRoute,
     private security: SecurityService,
+    private store: Store<any>
   ) {
     // Base class constructor: Re-injection for inheritance
     super(translateService, globalState, localStorageService, navigationService, menuService);
 
     // Derive class constructor
+    // Derive class constructor
+    this.notificationStore = store.pipe(select('notification'));
+    this.notificationStore.subscribe(data => {
+      this.notification = data;
+      console.log(this.notification);
+    });
   }
 
   ngOnInit() {
@@ -60,6 +75,9 @@ export class NtfctComponent extends BaseComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe((params: Params) => {
         this.id = params['id'];
         console.log(this.id);
+        if (this.id) {
+          this.store.dispatch(getNotificationAction(this.id));
+        }
       });
   }
 

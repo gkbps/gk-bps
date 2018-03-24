@@ -15,7 +15,7 @@ import { GkClientsServices } from '../../../../../../ngrx/gkClient/gkClients.ser
 import { GkCln1xComponent } from './gkcln1x.component';
 import { GkCln1xRoutingModule } from './gkcln1x-routing.module';
 
-import { HDataTableModule } from '../../../../../../nga/components/hDataTable';
+import { HTurboTableModule } from '../../../../../../nga/components/hTurboTable';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { HDataTableModule } from '../../../../../../nga/components/hDataTable';
     StoreModule.forFeature('gkClients', GkClientsReducers),
     EffectsModule.forFeature([GkClientsEffects]),
 
-    HDataTableModule,
+    HTurboTableModule,
 
     GkCln1xRoutingModule
   ],

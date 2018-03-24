@@ -6,7 +6,8 @@ import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-// GraphiQL: https://launchpad.graphql.com/1jzxrj179
+import { AppConfig } from '../app.config';
+
 const uri = 'http://localhost:4000/graphql';
 
 @NgModule({
@@ -19,7 +20,8 @@ const uri = 'http://localhost:4000/graphql';
 export class GraphQLModule {
   constructor(
     apollo: Apollo,
-    httpLink: HttpLink
+    httpLink: HttpLink,
+    appConfig: AppConfig
   ) {
     // create Apollo
     apollo.create({

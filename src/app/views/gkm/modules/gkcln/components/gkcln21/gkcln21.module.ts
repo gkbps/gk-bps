@@ -1,9 +1,5 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
-
-// import { TranslateModule } from '@ngx-translate/core';
 
 import { HUploadFormModule } from '../../../../../../nga/components/hUploadForm';
 
@@ -16,10 +12,6 @@ import { GkCln21RoutingModule } from './gkcln21-routing.module';
   ],
   imports: [
     CommonModule,
-    // FormsModule,
-    // RouterModule,
-
-    // TranslateModule,
 
     HUploadFormModule,
 

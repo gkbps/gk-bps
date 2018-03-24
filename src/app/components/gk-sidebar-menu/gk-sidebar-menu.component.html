@@ -6,7 +6,12 @@
     <i *ngIf="item.children" class="material-icons layout-submenu-toggler">keyboard_arrow_down</i>
   </a>
 
+  <!--
+    IMPORTANT:
+    Sử dụng đệ quy trong HTML để tạo ra menu con và
+    Sử dụng <ul gkSidebarMenu Inputs></ul>
+    thay vì <gkSidebarMenu></gkSidebarMenu> để giữ CSS style
+  -->
   <ul gkSidebarMenu [menu]="item.children" *ngIf="item.children && (item==selectedMenu)"></ul>
-
 </li>
 <!-- ./Menu Item -->

@@ -2,7 +2,10 @@ import { initialState } from '../initial.state';
 import {
   GkClientsActionTypes,
   GkClientActionTypes,
-  GkClientRequestActionTypes
+  GkClientRequestActionTypes,
+  GkClientDashboardsActionTypes,
+  GkClientReportsSummaryActionTypes,
+  GkClientReportsDetailActionTypes
 } from './gkClients.actions';
 
 export function GkClientsReducers( state = initialState, { type, payload }) {
@@ -78,6 +81,54 @@ export function GkClientRequestReducers( state = initialState, { type, payload }
     case GkClientRequestActionTypes.SAVE_GKCLIENT_REQUEST_ERROR:
     case GkClientRequestActionTypes.POST_GKCLIENT_REQUEST_ERROR:
     case GkClientRequestActionTypes.REVERT_GKCLIENT_REQUEST_ERROR:
+      return Object.assign({}, state, {pending: false, error: 'Error'});
+
+    default:
+      return state;
+  }
+}
+
+export function GkClientDashboardsReducers( state = initialState, { type, payload }) {
+  switch (type) {
+    case GkClientDashboardsActionTypes.GET_MANY_GKCLIENT_DASHBOARDS:
+      return Object.assign({}, state, {pending: true, error: null});
+
+    case GkClientDashboardsActionTypes.GET_MANY_GKCLIENT_DASHBOARDS_SUCCESS:
+      return Object.assign({}, state, {data: payload, pending: false});
+
+    case GkClientDashboardsActionTypes.GET_MANY_GKCLIENT_DASHBOARDS_ERROR:
+      return Object.assign({}, state, {pending: false, error: 'Error'});
+
+    default:
+      return state;
+  }
+}
+
+export function GkClientReportsSummaryReducers( state = initialState, { type, payload }) {
+  switch (type) {
+    case GkClientReportsSummaryActionTypes.GET_MANY_GKCLIENT_SUMMARY_REPORTS:
+      return Object.assign({}, state, {pending: true, error: null});
+
+    case GkClientReportsSummaryActionTypes.GET_MANY_GKCLIENT_SUMMARY_REPORTS_SUCCESS:
+      return Object.assign({}, state, {data: payload, pending: false});
+
+    case GkClientReportsSummaryActionTypes.GET_MANY_GKCLIENT_SUMMARY_REPORTS_ERROR:
+      return Object.assign({}, state, {pending: false, error: 'Error'});
+
+    default:
+      return state;
+  }
+}
+
+export function GkClientReportsDetailReducers( state = initialState, { type, payload }) {
+  switch (type) {
+    case GkClientReportsDetailActionTypes.GET_MANY_GKCLIENT_DETAIL_REPORTS:
+      return Object.assign({}, state, {pending: true, error: null});
+
+    case GkClientReportsDetailActionTypes.GET_MANY_GKCLIENT_DETAIL_REPORTS_SUCCESS:
+      return Object.assign({}, state, {data: payload, pending: false});
+
+    case GkClientReportsDetailActionTypes.GET_MANY_GKCLIENT_DETAIL_REPORTS_ERROR:
       return Object.assign({}, state, {pending: false, error: 'Error'});
 
     default:

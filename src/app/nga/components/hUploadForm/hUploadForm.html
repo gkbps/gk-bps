@@ -1,5 +1,6 @@
 <div class="ui-g ui-fluid">
-  <div class="ui-g-12 ui-md-6">
+
+  <div *ngIf="!isUploadCompleted" class="ui-g-12 ui-md-6">
     <div class="card card-w-title">
       <h1>{{'upload'|translate}}</h1>
 
@@ -19,6 +20,30 @@
         </div>
         <div class="ui-g-12" style="text-align: right">
           <button style="width: auto;" pButton type="button" icon="ui-icon-file-upload" label="{{'proceed'|translate}}" (click)="execute()"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isUploadCompleted" class="ui-g-12">
+    <div class="card card-w-title">
+      <h1>{{'upload'|translate}}</h1>
+
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+          <div class="ui-messages ui-widget ui-corner-all ui-messages-info" style="margin: 0 0 1em 0; display: block">
+              <!-- <span class="ui-messages-icon fa fa-fw fa-2x fa-check"></span> -->
+              <ul>
+                  <li>
+                    <span class="ui-messages-summary" style="font-size:16px">
+                      {{'request_is_sent'|translate}}
+                    </span>
+                  </li>
+              </ul>
+          </div>
+          <div class="ui-g-12" style="text-align: center;">
+            <button style="width: auto;" pButton type="button" icon="ui-icon-bug-report" label="{{'debug'|translate}}" (click)="gotoTcode('debug')"></button>
+          </div>
         </div>
       </div>
     </div>

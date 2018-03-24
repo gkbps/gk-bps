@@ -17,7 +17,6 @@ import { environment } from '../environments/environment';
  * Apollo GraphQL
  * Ngrx Store
  */
-
 import { GraphQLModule } from './apollo/graphql.module';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -39,7 +38,6 @@ import { NotificationsServices } from './ngrx/notification/notifications.service
  * - Dropdown:        List of working years and legal entities (gk-working)
  * - Sidebar:         Potential for other purposes
  */
-
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { ToastyModule } from 'ngx-toasty';
 
@@ -55,7 +53,6 @@ import { ConfirmationService } from 'primeng/api';
   * 3RD PARTY - UTILITIES
   * Translate
   */
-
 import { TranslateService } from '@ngx-translate/core';
 
 /**
@@ -143,7 +140,7 @@ const APP_DIRECTIVES = [
     GraphQLModule,
 
     // Ngrx Store
-    StoreModule.forRoot({ topnotifications: TopNotificationsReducers }),
+    StoreModule.forRoot({ top_notifications: TopNotificationsReducers }),
     EffectsModule.forRoot([ NotificationsEffects ]),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production // Restrict extension to log-only mode
@@ -155,8 +152,6 @@ const APP_DIRECTIVES = [
     // PrimeNg
     ScrollPanelModule,
     ProgressBarModule,
-    // GrowlModule,
-    // MessagesModule,
     OverlayPanelModule,
     DropdownModule,
     SidebarModule,

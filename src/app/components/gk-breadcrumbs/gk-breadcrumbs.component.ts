@@ -2,15 +2,29 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/filter';
 
-import { Message } from 'primeng/components/common/api';
-
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../global.state';
-import {
-  NavigationService ,
-  HelpService
-} from '../../nga/services';
 
+// GK - Alphabet
+import { GlobalState } from '../../global.state';
+import { HelpService } from '../../nga/services/help.service';
+import { NavigationService } from '../../nga/services/navigation.service';
+
+/**
+* @module GkBreadcrumbsComponent
+* A bar showing breadcrumbs of the app and other shortcuts, including:
+* - return previous transaction code
+* - favourite management
+* - help on context
+* - setting management
+* - logout
+*
+* @param myScope        A unique name to define the scope of component
+* @param helpFile       Key part of language file name
+* @param helpContext    Content of language file to be displayed
+* @param breadcrumbs    An arrays contain breadcrumbs
+*
+* @function returnPrevious
+*/
 @Component({
   selector: 'gk-breadcrumbs',
   templateUrl: './gk-breadcrumbs.component.html'
@@ -22,8 +36,6 @@ export class GkBreadcrumbsComponent implements OnInit, OnDestroy {
   helpContext: String;
 
   breadcrumbs: Array<Object>;
-
-  msgs: Message[] = [];
 
   constructor(
     private router: Router,
@@ -58,6 +70,7 @@ export class GkBreadcrumbsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // Listen to 'help' event
     this.globalState.subscribeEvent('help', this.myScope, (helpFile) => {
       this.helpFile = helpFile;
       this.helpService.getHelpFromHTMLFile(helpFile)
@@ -67,6 +80,7 @@ export class GkBreadcrumbsComponent implements OnInit, OnDestroy {
         });
     });
 
+    // Listen to 'language' event
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
       this.helpService.getHelpFromHTMLFile(this.helpFile)
         .subscribe((helpContext) => {
@@ -82,7 +96,8 @@ export class GkBreadcrumbsComponent implements OnInit, OnDestroy {
       this.navigationService.returnPrevious();
     } else {
       this.translateService.get([
-        'navigation', 'top_of_history'
+        'navigation',
+        'top_of_history'
       ])
         .subscribe((res) => {
           const toastData = {

@@ -5,10 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'primeng/shared';
 import { PanelModule } from 'primeng/panel';
 import { MenubarModule } from 'primeng/menubar';
-import { DataTableModule } from 'primeng/datatable';
+import { TooltipModule } from 'primeng/tooltip';
+// import { DataTableModule } from 'primeng/datatable';
+import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextModule } from 'primeng/inputtext';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ButtonModule } from 'primeng/button';
@@ -37,10 +40,13 @@ import { RequestDocuments } from './requestDocuments.component';
     SharedModule,
     PanelModule,
     MenubarModule,
-    DataTableModule,
+    TooltipModule,
+    // DataTableModule,
+    TableModule,
     MultiSelectModule,
     InputTextModule,
     ContextMenuModule,
+    DropdownModule,
     DialogModule,
     FileUploadModule,
     ButtonModule,

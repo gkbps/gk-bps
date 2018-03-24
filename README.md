@@ -32,6 +32,7 @@ RUN NIGNX SERVER FOR COMPILED APP
 sudo nginx -s stop
 sudo nginx
 
+
 brew services stop mongodb
 brew services start mongodb
 

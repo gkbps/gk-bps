@@ -1,21 +1,20 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { HNavBoardModule } from '../../../../../../nga/components/hNavBoard';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { GkClientReportsSummaryReducers } from '../../../../../../ngrx/gkClient/gkClients.reducers';
+import { GkClientsEffects } from '../../../../../../ngrx/gkClient/gkClients.effects';
+import { GkClientsServices } from '../../../../../../ngrx/gkClient/gkClients.services';
 
 import { GkCln6xComponent } from './gkcln6x.component';
 import { GkCln6xRoutingModule } from './gkcln6x-routing.module';
 
-import { MenubarModule } from 'primeng/menubar';
-import { DataTableModule } from 'primeng/datatable';
-import { ButtonModule } from 'primeng/button';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { InputTextModule } from 'primeng/inputtext';
-import { ContextMenuModule } from 'primeng/contextmenu';
+import { HTurboTableModule } from '../../../../../../nga/components/hTurboTable';
 
 @NgModule({
   declarations: [
@@ -24,22 +23,21 @@ import { ContextMenuModule } from 'primeng/contextmenu';
   imports: [
     CommonModule,
     FormsModule,
-    // RouterModule,
 
     TranslateModule,
 
-    MenubarModule,
-    DataTableModule,
-    ButtonModule,
-    MultiSelectModule,
-    InputTextModule,
-    ContextMenuModule,
+    StoreModule.forFeature('gkClientReportsSummary', GkClientReportsSummaryReducers),
+    EffectsModule.forFeature([GkClientsEffects]),
 
-    HNavBoardModule,
+    HTurboTableModule,
+
     GkCln6xRoutingModule
   ],
   exports: [
   ],
+  providers: [
+    GkClientsServices
+  ]
 })
 export class GkCln6xModule {
 }

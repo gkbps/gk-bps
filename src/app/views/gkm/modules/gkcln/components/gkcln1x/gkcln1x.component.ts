@@ -33,6 +33,7 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
 
   // Derive class properties
   module = 'gkcln';
+  actionSerial = '1';
 
   cols: any[];                  // Header columns on the fly
   columnOptions: SelectItem[];

@@ -1,4 +1,10 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef, Renderer } from '@angular/core';
+import {
+  HttpClient,
+  HttpHandler,
+  HttpHeaders,
+} from '@angular/common/http';
+
 import { Http, Response } from '@angular/http';
 // import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,6 +22,7 @@ import {
   TcodeService,
   APIResultHandlingService,
   LocalStorageService,
+  HttpClientService
 } from '../../../nga/services';
 
 @Component({
@@ -43,8 +50,11 @@ export class HUploadForm implements OnInit, OnDestroy {
 
   alertSubscription: Subscription;
 
+  isUploadCompleted = false;
+
   constructor(
     private http: Http,
+    private httpClient: HttpClient,
     private el: ElementRef,
     private renderer: Renderer,
     private translate: TranslateService,
@@ -56,13 +66,15 @@ export class HUploadForm implements OnInit, OnDestroy {
     private securityService: SecurityService,
     private tcodeService: TcodeService,
     private apiResultHandlingService: APIResultHandlingService,
-
+    private httpClientService: HttpClientService,
     private localStorage: LocalStorageService,
   ) {
     this.subscribeGlobalState();
   }
 
   ngOnInit () {
+    this.isUploadCompleted = false;
+
     this.action = this.tcodeService.extractAction(this.tcode);
     switch (this.action) {
       case '21':
@@ -97,8 +109,6 @@ export class HUploadForm implements OnInit, OnDestroy {
         break;
     }
     this.url = this.config.apiUrl + '/' + this.module + this.actionUrl;
-    // this.url = this.config.apiUrl + '/' + this.module + '/upload/';
-
     // console.log(this.url);
   }
 
@@ -125,7 +135,22 @@ export class HUploadForm implements OnInit, OnDestroy {
        const file = files[0];
        formData.append('file', file);
        // formData.append('file', inputEl.files.item(0));
-       this.http.post(this.url, formData, this.securityService.jwt())
+
+       // Deferral
+       this.translate.get(['deferral', 'deferral_message'])
+         .subscribe((res) => {
+           const toastData = {
+             type: 'wait',
+             title: res['deferral'],
+             msg: res['deferral_message'],
+             showClose: true,
+           };
+           this.globalState.notifyMyDataChanged('toasty','', toastData);
+         });
+
+       //TODO: Remove http    
+       // this.http.post(this.url, formData, this.securityService.jwt())
+       this.httpClient.post(this.url, formData, this.httpClientService.attachHeader({}))
          // Do not map to have full response headers and _body
          // .map((res: Response) => res.json())
          .subscribe(
@@ -144,14 +169,22 @@ export class HUploadForm implements OnInit, OnDestroy {
     this.apiResultHandlingService.processAPIResult(result)
       .then((msg) => {
         console.log(msg);
-        // const toastData = {
-        //   type: 'warning',
-        //   title: res.navigation,
-        //   msg: res.top_of_history,
-        //   showClose: true,
-        // };
-        // this.globalState.notifyMyDataChanged('toasty','', toastData);                
+
+        this.isUploadCompleted = true;
+
+        const toastData = {
+          type: msg['type'],
+          title: msg['title'],
+          msg: msg['msg'],
+          showClose: true,
+        };
+
+        this.globalState.notifyMyDataChanged('toasty','', toastData);
       });
+  }
+
+  gotoTcode(tcode) {
+    this.tcodeService.executeTCode(tcode,'');
   }
 
   ngOnDestroy() {

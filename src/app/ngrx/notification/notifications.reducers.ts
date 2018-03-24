@@ -16,7 +16,9 @@ export function TopNotificationsReducers( state = initialState, { type, payload 
     case TopNotificationsActionTypes.ADD_NOTIFICATION_SUCCESS:
       console.log(payload);
 
-      state.data['data'].pop();
+      if (state.data['total']>=5) {
+        state.data['data'].pop();
+      }      
       state.data['data'].unshift(payload)
 
       // const listAfterUpload = [...state.data['data'], payload];

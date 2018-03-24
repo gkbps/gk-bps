@@ -12,6 +12,7 @@ import { RequestsEffects } from '../../../ngrx/request/requests.effects';
 import { RequestsServices } from '../../../ngrx/request/requests.services';
 
 import { HDataTableByTrayModule } from '../../../nga/components/hDataTableByTray';
+// import { HTurboTableForTrayModule } from '../../../nga/components/hTurboTableForTray';
 
 import { InboxComponent } from './inbox.component';
 import { InboxRoutingModule } from './inbox-routing.module';
@@ -30,6 +31,7 @@ import { InboxRoutingModule } from './inbox-routing.module';
     EffectsModule.forFeature([RequestsEffects]),
 
     HDataTableByTrayModule,
+    // HTurboTableForTrayModule,
 
     InboxRoutingModule
   ],

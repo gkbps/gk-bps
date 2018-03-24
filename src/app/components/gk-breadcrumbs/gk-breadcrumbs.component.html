@@ -13,8 +13,8 @@
     <div class="layout-breadcrumb-options">
       <a href="#" (click)="returnPrevious()" title="{{'returnPrevious'|translate}}"><i class="material-icons">keyboard_backspace</i></a>
       <a href="#" [routerLink]="['/fav']" title="{{'myFavourites'|translate}}"><i class="material-icons">star_border</i></a>
-      <a href="#" (click)="opHelp.toggle($event); false;" title="{{'help'|translate}}"><i class="material-icons">help_outline</i></a>
 
+      <a href="#" (click)="opHelp.toggle($event); false;" title="{{'help'|translate}}"><i class="material-icons">help_outline</i></a>
       <p-overlayPanel #opHelp [showCloseIcon]="true" [dismissable]="true" appendTo="body" [style]="{'width': '500px'}">
           <div [innerHTML]="helpContext"></div>
       </p-overlayPanel>

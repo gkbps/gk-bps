@@ -84,7 +84,7 @@ export class NotificationTableComponent implements OnInit, OnDestroy {
   }
 
   initColumns() {
-    this.translateService.get(['_id', 'tcode', 'id', 'description', 'username', 'creator', 'mark', 'created_at'])
+    this.translateService.get(['_id', 'tcode', 'id', 'description', 'username', 'creator', 'mark', 'created_at', 'selected_item_label'])
       .subscribe((res) => {
         this.selectedItemsLabel = res.selected_item_label;
         this.cols = [

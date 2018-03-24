@@ -1,5 +1,6 @@
 {
-	"view_all": "View All",	
+	"request_is_sent": "Request is sent. In case of error, debug below!",
+	"view_all": "View All",
 	"deferral": "Request is being processed!",
 	"deferral_message": "System will alert once request is fully processed. Meanwhile, you could further other steps!",
 	"deferral_completed": "Request processing completed!",

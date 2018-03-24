@@ -1,6 +1,6 @@
 <div *ngIf="id" class="card card-w-title">
   <h1>{{'download'|translate}}</h1>
-
+  <pre>{{notification|json}}</pre>
   <!-- <button pButton type="button" icon="ui-icon-file-download" ></button> -->
   <button *ngIf="notification.data" pbutton type="button" (click)="downloadFile()" style="margin-bottom:10px" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
     <!-- <span (click)="downloadFile()" class="ui-button-text ui-clickable">{{'download'|translate}}</span> -->

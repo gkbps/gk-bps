@@ -1,14 +1,37 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ngx-toasty';
+import { ToastyService, ToastyConfig, ToastOptions, ToastData } from 'ngx-toasty';
 
+// GK - Alphabet
+import { BodyBackgroundService } from '../../nga/services';
 import { GlobalState } from '../../global.state';
-import {
-  StateManagementService,
-  BodyBackgroundService,
-  LocalStorageService,
-  LoaderService
-} from '../../nga/services';
+import { LoaderService } from '../../nga/services';
+import { LocalStorageService } from '../../nga/services';
+import { StateManagementService } from '../../nga/services';
 
+/**
+* @module GkFullLayoutComponent
+*
+* @param myScope
+*
+* @param sbTitle
+* @param sbFullScreen
+* @param sbVisibility
+* @param sbPosition
+* @param sbSizeList
+*
+* @param blocked
+*
+* @param alertIcon
+* @param alertMsg
+* @param toastyTimeOut
+* @param toastyTheme
+* @param toastyPosition
+* @param toastOptions
+*
+* @param msgStatus
+* @param msgContent
+*
+*/
 @Component({
   selector: 'gk-full-layout',
   templateUrl: './gk-full-layout.component.html'
@@ -42,18 +65,20 @@ export class GkFullLayoutComponent implements OnInit, OnDestroy {
   toastyPosition = 'top-right';
   toastOptions: ToastOptions;
 
+  // System wide message
+  msgStatus = 'success';
+  msgContent = 'This system is under development and going to be rolled out in 2018.';
+
   constructor(
-    private globalState: GlobalState,
-
-    private stateManagementService: StateManagementService,
-    private bodyBackgroundService: BodyBackgroundService,
-    private localStorageService: LocalStorageService,
-    private loaderService: LoaderService,
-
+    private toastyConfig: ToastyConfig,
     private toastyService:ToastyService,
-    private toastyConfig: ToastyConfig
-  ) {
-  }
+
+    private bodyBackgroundService: BodyBackgroundService,
+    private globalState: GlobalState,
+    private loaderService: LoaderService,
+    private localStorageService: LocalStorageService,
+    private stateManagementService: StateManagementService,
+  ) { }
 
   ngOnInit(): void {
     this.subscribeLocalState();

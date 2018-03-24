@@ -1,3 +1,7 @@
+Nếu muốn giữ style css chuyển từ dạng
+As is: <component inputs></component>
+To be: <tag component inputs></component>
+
 Put all API into ngrx store as well and under the name apiUser
 
 Nguyen tac

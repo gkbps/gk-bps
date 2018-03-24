@@ -9,6 +9,8 @@ import { SortEvent } from 'primeng/api';
 
 import { Store, select } from '@ngrx/store';
 import {
+  getTopNotificationsAction,
+
   getNotificationsAction,
   markNotificationAction,
   unmarkNotificationAction,
@@ -85,12 +87,10 @@ export class NotificationComponent extends BaseComponent implements OnInit, OnDe
 
     // Derive class constructor
     this.notification = this.store.pipe(select('notifications1'));
-    // this.notification.subscribe(res => {
-    //   this.notificationCount = res.data.total;
-    //   this.notificationsList = res.data.data || [];
-    //   console.log(this.notificationsList);
-    // })
-    this.store.dispatch(getNotificationsAction('', '{}', 0, 5));
+    this.notification.subscribe(res => {
+      this.store.dispatch(getTopNotificationsAction('', '{"created_at": -1}', 0, 5));
+    })
+    // this.store.dispatch(getNotificationsAction('', '{}', 0, 5));
   }
 
   ngOnInit() {
@@ -107,7 +107,7 @@ export class NotificationComponent extends BaseComponent implements OnInit, OnDe
   }
 
   doSomething(event) {
-    console.log(event);
+    // console.log(event);
 
     switch (event.action) {
       case 'query':
