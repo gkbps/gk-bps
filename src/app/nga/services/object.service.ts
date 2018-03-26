@@ -1,23 +1,34 @@
 import { Injectable } from '@angular/core';
 
+/**
+* @module ObjectService
+* Service contains all helpers for objects
+*
+* @function hasProp
+* @function hasOwnProperty
+*/
 @Injectable()
 export class ObjectService {
 
-  constructor( ) {
-  }
+  constructor( ) { }
 
-  /*****************************************************************************
-   * OBJECT
-   * hasProp:        Check if a property exists in an Object
-   *****************************************************************************/
-   hasProp (obj, prop) {
+  /**
+  * @function hasProp
+  * Check if a property exists in an Object
+  *
+  * @return {boolean}
+  */
+  hasProp(obj, prop) {
     return Object.prototype.hasOwnProperty.call(obj, prop);
   }
 
+  /**
+  * @function hasOwnProperty
+  */
   hasOwnProperty(obj, prop) {
     var proto = obj.__proto__ || obj.constructor.prototype;
     return (prop in obj) &&
-        (!(prop in proto) || proto[prop] !== obj[prop]);
+      (!(prop in proto) || proto[prop] !== obj[prop]);
   }
 
 }

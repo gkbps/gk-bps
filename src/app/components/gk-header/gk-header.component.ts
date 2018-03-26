@@ -146,14 +146,14 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
   openNotification(item) {
     // console.log(item);
     const target = item.id ? item.id : item._id;
-    this.tcodeService.executeTCode(item.tcode, target);
+    this.tcodeService.executeTcode(item.tcode, target);
     return false; // prevent a href automatically link
   }
 
   openMessage(item) {
     // console.log(item);
     // const target = item.id ? item.id : item._id;
-    // this.tcodeService.executeTCode(item.tcode, target);
+    // this.tcodeService.executeTcode(item.tcode, target);
     return false; // prevent a href automatically link
   }
 
@@ -168,7 +168,7 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
   }
 
   gotoTcode(tcode) {
-    this.tcodeService.executeTCode(tcode);
+    this.tcodeService.executeTcode(tcode);
     return false; // prevent a href automatically link
   }
 

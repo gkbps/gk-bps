@@ -3,8 +3,7 @@ import { UtilsService } from '../../nga/services/utils.service';
 
 /**
 * @module GkNavProfileDirective
-* Directive to add/ remove class for profile menu
-* Web mode
+* Directive to add/ remove class for profile menu - web mode
 *
 * @event toggleOpen
 */
@@ -34,8 +33,7 @@ export class GkNavProfileDirective {
 
 /**
 * @module GkNavProfileMobileDirective
-* Directive to add/ remove class for profile menu
-* Mobile mode
+* Directive to add/ remove class for profile menu - mobile mode
 *
 * @event toggleOpen
 */

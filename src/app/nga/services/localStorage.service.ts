@@ -2,6 +2,84 @@ import { Injectable } from '@angular/core';
 
 import { UtilsService } from './utils.service';
 
+/**
+* @module LocalStorageService
+* Service to provide helpers for dealing with local storage
+*
+* @function setLocalStorage
+* @function getLocalStorage
+* @function removeLocalStorage
+*
+* @function setEnv
+* @function getEnv
+*
+* @function setWorkingLge
+* @function getWorkingLge
+*
+* @function setWkLge
+* @function getWkLge
+*
+* @function setWkYear
+* @function getWkYear
+*
+* @function getSetting
+*
+* @function setLayout
+* @function getLayout
+*
+* @function setTheme
+* @function getTheme
+*
+* @function setDark
+* @function getDark
+*
+* @function setWrapperStatic
+* @function getWrapperStatic
+*
+* @function setLang
+* @function getLang
+*
+* @function setNavType
+* @function getNavType
+*
+* @function setNavEffect
+* @function getNavEffect
+*
+* @function setNotificationMode
+* @function getNotificationMode
+*
+* TODO: To eliminate
+* @function setNotificationType
+* @function getNotificationType
+*
+* @function setToastyTimeOut
+* @function getToastyTimeOut
+*
+* @function setToastyTheme
+* @function getToastyTheme
+*
+* @function setToastyPosition
+* @function getToastyPosition
+*
+* @function setDebugMode
+* @function getDebugMode
+*
+* @function clearError
+* @function pushError
+* @function getErrors
+*
+* @function setFav
+* @function getFav
+*
+* @function setFavPosition
+* @function getFavPosition
+*
+* @function setRows
+* @function getRows
+*
+* @function setChatRoom
+* @function getChatRoom
+*/
 @Injectable()
 export class LocalStorageService {
 
@@ -9,32 +87,49 @@ export class LocalStorageService {
     private utilsService: UtilsService
   ) { }
 
-  /*****************************************************************************
-   * TO UTILIZE LOCAL STORAGE
-   * setLocalStorage
-   * getLocalStorage
-   * setWorkingLge
-   * getWorkingLge
-   * setWorkingEnv
-   * getWorkingEnv
-   *****************************************************************************/
+  /*****************************************************************************/
 
-  /* Customized localStorage */
+  /**
+  * @function setLocalStorage
+  * Set an item in local storage with assigned value
+  *
+  * @param {string} item
+  * @param {any} value
+  */
   setLocalStorage(item: string, value: any) {
     localStorage.setItem(item, value);
   }
 
+  /**
+  * @function getLocalStorage
+  * Get value of an item in local storage
+  *
+  * @param {string} item
+  *
+  * @return {any}
+  */
   getLocalStorage(item: string): any {
     return localStorage.getItem(item);
   }
 
+  /**
+  * @function removeLocalStorage
+  * Remove an item in local storage
+  *
+  * @param {string} item
+  */
   removeLocalStorage(item: string) {
     localStorage.removeItem(item);
   }
 
   /*****************************************************************************/
 
-  /* Enviroment */
+  /**
+  * @function setEnv
+  * Set or update (env) item in local storage, if no input then set initial
+  *
+  * @param {string} env
+  */
   setEnv(env: string = '') {
     if (env === '' ) {
       env = JSON.stringify({
@@ -68,6 +163,14 @@ export class LocalStorageService {
     localStorage.setItem('env', env);
   }
 
+  /**
+  * @function getEnv
+  * Get value of (env) item in local storage, if no value then set/ return initial
+  *
+  * @param {string} env
+  *
+  * @return {any}
+  */
   getEnv(): any {
     const env = localStorage.getItem('env');
     if (env) {
@@ -78,9 +181,12 @@ export class LocalStorageService {
     }
   }
 
-  /*****************************************************************************/
-
-  /* Working */
+  /**
+  * @function setWkBar
+  * Set or update working bar status in (env)
+  *
+  * @param wkBarStatus
+  */
   setWkBar(wkBarStatus: boolean) {
     let env = this.getEnv();
     if (env.wk.status !== wkBarStatus) {
@@ -89,12 +195,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getWkBar
+  * Get working bar status in (env)
+  */
   getWkBar(): boolean {
     const env = this.getEnv();
     return (env.wk.status);
   }
 
-  /* Working Legal Entity */
+  /**
+  * @function setWkLge
+  * Set or update working legal entity in in (env)
+  *
+  * @param lge
+  */
   setWkLge(lge: string) {
     const env = this.getEnv();
     const lcLge = lge.toLowerCase();
@@ -104,12 +219,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getWkLge
+  * Get working legal entiry in (env)
+  */
   getWkLge(): string {
     const env = this.getEnv();
     return env.wk.lge;
   }
 
-  /* Working Year */
+  /**
+  * @function setWkYear
+  * Set or update working year in (env)
+  *
+  * @param year
+  */
   setWkYear(year: string) {
     const env = this.getEnv();
     if (env.wk.year !== year) {
@@ -118,12 +242,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getWkYear
+  * Get working year in (env)
+  */
   getWkYear(): string {
     const env = this.getEnv();
     return env.wk.year;
   }
 
-  /* Client Setting */
+  /*****************************************************************************/
+
+  /**
+  * @function getSetting
+  *
+  */
   getSetting() {
     const savedSession = JSON.parse(this.getLocalStorage('savedSession'));
     console.log(savedSession.setting);
@@ -132,7 +265,12 @@ export class LocalStorageService {
 
   /*****************************************************************************/
 
-  /* Layout */
+  /**
+  * @function setLayout
+  * Set or update layout for the App
+  *
+  * @param {string} layout
+  */
   setLayout(layout: string = 'moody') {
     let env = this.getEnv();
     if (env.pref.layout !== layout) {
@@ -141,12 +279,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getLayout
+  * Get layout of the App
+  */
   getLayout(): string {
     const env = this.getEnv();
     return (env.pref.layout);
   }
 
-  /* Theme */
+  /**
+  * @function setTheme
+  * Set or update Theme for the App
+  *
+  * @param {string} theme
+  */
   setTheme(theme: string = 'bluegrey') {
     let env = this.getEnv();
     if (env.pref.theme !== theme) {
@@ -155,12 +302,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getTheme
+  * Get Theme of the App
+  */
   getTheme(): string {
     const env = this.getEnv();
     return (env.pref.theme);
   }
 
-  /* Dark */
+  /**
+  * @function setDark
+  * Set or update Dark status for the App
+  *
+  * @param {boolean} dark
+  */
   setDark(dark: boolean = false) {
     let env = this.getEnv();
     if (env.pref.dark !== dark) {
@@ -169,12 +325,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getDark
+  * Get Dark status of the App
+  */
   getDark(): boolean {
     const env = this.getEnv();
     return (env.pref.dark);
   }
 
-  /* Wrapper Static State */
+  /**
+  * @function setWrapperStatic
+  * Set or update Wrapper Static State for the App
+  *
+  * @param {string} value
+  */
   setWrapperStatic(value) {
     const env = this.getEnv();
     if (env.pref.wrapperStatic !== value) {
@@ -183,12 +348,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getWrapperStatic
+  * Get Wrapper Static State for the App
+  */
   getWrapperStatic() {
     const env = this.getEnv();
     return env.pref.wrapperStatic;
   }
 
-  /* Language */
+  /**
+  * @function setLang
+  * Set or update language for the App
+  *
+  * @param {string} lang
+  */
   setLang(lang: string = 'en') {
     let env = this.getEnv();
     if (env.pref.lang !== lang) {
@@ -197,12 +371,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getLang
+  * Get language of the App
+  */
   getLang(): string {
     const env = this.getEnv();
     return (env.pref.lang);
   }
 
-  /* Nav Type */
+  /**
+  * @function setNavType
+  * Set or update Navigation Icon Type of Navigation Page
+  *
+  * @param navType
+  */
   setNavType(navType: string = 'circle') {
     let env = this.getEnv();
     if (env.pref.navType !== navType) {
@@ -211,12 +394,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getNavType
+  * Get Navigation Icon Type of Navigation Page
+  */
   getNavType(): string {
     const env = this.getEnv();
     return (env.pref.navType);
   }
 
-  /* Nav Effect */
+  /**
+  * @function setNavEffect
+  * Set or update Navigation Effect of Navigation Page
+  *
+  * @param navEffect
+  */
   setNavEffect(navEffect: string = 'effect1') {
     let env = this.getEnv();
     if (env.pref.navEffect !== navEffect) {
@@ -225,12 +417,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getNavEffect
+  * Get Navigation Effect of Navigation Page
+  */
   getNavEffect(): string {
     const env = this.getEnv();
     return (env.pref.navEffect);
   }
 
-  /* Navigation Size */
+  /**
+  * @function setNavSize
+  * Set or update Navigation Size of Navigation Page
+  *
+  * @param isSmall
+  */
   setNavSize(isSmall: boolean = false) {
     let env = this.getEnv();
     if (env.pref.isSmall !== isSmall) {
@@ -239,12 +440,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getNavSize
+  * Get Navigation Size of Navigation Page
+  */
   getNavSize(): boolean {
     const env = this.getEnv();
     return (env.pref.isSmall);
   }
 
-  /* Notification Mode */
+  /**
+  * @function setNotificationMode
+  * Set or update Notification Mode of the App
+  *
+  * @param notificationMode
+  */
   setNotificationMode(notificationMode: boolean = false) {
     const env = this.getEnv();
     console.log(notificationMode);
@@ -254,24 +464,42 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getNotificationMode
+  * Get Notification Mode of the App
+  */
   getNotificationMode() {
     const env = this.getEnv();
     return (env.pref.notificationMode);
   }
 
-  /* Notification Type */
+  /**
+  * @function setNotificationType
+  * Set or update Notification Type of the App
+  *
+  * @param isGrowl
+  */
   setNotificationType(isGrowl: boolean = true) {
     let env = this.getEnv();
     env.pref.isGrowl = isGrowl;
     this.setEnv(JSON.stringify(env));
   }
 
+  /**
+  * @function getNotificationType
+  * Get Notification Type of the App
+  */
   getNotificationType(): boolean {
     const env = this.getEnv();
     return (env.pref.isGrowl);
   }
 
-  /* Toasty TimeOut */
+  /**
+  * @function setToastyTimeOut
+  * Set or update timeout for Toasty
+  *
+  * @param timeOut
+  */
   setToastyTimeOut(timeOut = 5000) {
     let env = this.getEnv();
     if (env.pref.toastyTimeOut !== timeOut) {
@@ -280,12 +508,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getToastyTimeOut
+  * Get timeout of Toasty
+  */
   getToastyTimeOut(): number {
     const env = this.getEnv();
     return (env.pref.toastyTimeOut);
   }
 
-  /* Toasty Theme */
+  /**
+  * @function setToastyTheme
+  * Set or update theme for Toasty
+  *
+  * @param theme
+  */
   setToastyTheme(theme = 'default') {
     let env = this.getEnv();
     if (env.pref.toastyTheme !== theme) {
@@ -294,12 +531,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getToastyTheme
+  * Get theme of Toasty
+  */
   getToastyTheme(): string {
     const env = this.getEnv();
     return (env.pref.toastyTheme);
   }
 
-  /* Toasty Position */
+  /**
+  * @function setToastyPosition
+  * Set or update position for Toasty
+  *
+  * @param position
+  */
   setToastyPosition(position = 'bottom-right') {
     let env = this.getEnv();
     if (env.pref.toastyPosition !== position) {
@@ -308,12 +554,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getToastyPosition
+  * Get position of Toasty
+  */
   getToastyPosition(): string {
     const env = this.getEnv();
     return (env.pref.toastyPosition);
   }
 
-  /* Debug Mode */
+  /**
+  * @function setDebugMode
+  * Set or update mode of Debug
+  *
+  * @param debugMode
+  */
   setDebugMode(debugMode: boolean = false) {
     const env = this.getEnv();
     if (env.pref.debug !== debugMode) {
@@ -322,17 +577,30 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getDebugMode
+  * Get mode of Debug
+  */
   getDebugMode() {
     const env = this.getEnv();
     return (env.pref.debug);
   }
   /*****************************************************************************/
 
-  /* Error */
+  /**
+  * @function clearError
+  * Clear all error history
+  */
   clearError() {
     localStorage.setItem('errorHistory', '[]');
   }
 
+  /**
+  * @function pushError
+  * Push new error in the array of errors stored in local storage
+  *
+  * @param error
+  */
   pushError(error) {
     if (localStorage.getItem('errorHistory') === null) {
       localStorage.setItem('errorHistory', '[]');
@@ -345,6 +613,12 @@ export class LocalStorageService {
     localStorage.setItem('errorHistory', JSON.stringify(errorHistory));
   }
 
+  /**
+  * @function getErrors
+  * Get the last item or whole array of errors stored in local storage
+  *
+  * @param {boolean} last
+  */
   getErrors(last: boolean): string {
     const errors = JSON.parse(localStorage.getItem('errorHistory'));
     if (last) {
@@ -356,11 +630,20 @@ export class LocalStorageService {
 
   /*****************************************************************************/
 
-  /* Fav */
+  /**
+  * @function setFav
+  * Set or update favorite into local storage
+  *
+  * @param fav
+  */
   setFav(fav: any = []) {
     localStorage.setItem('fav', JSON.stringify(fav));
   }
 
+  /**
+  * @function getFav
+  * Get favorite from local storage
+  */
   getFav() {
     const fav = localStorage.getItem('fav');
     if (fav && this.utilsService.isJsonString(fav)) {
@@ -381,7 +664,12 @@ export class LocalStorageService {
     }
   }
 
-  /* Fav Position */
+  /**
+  * @function setFavPosition
+  * Set or update favorite position in the sidebar menu
+  *
+  * @param isFavTop
+  */
   setFavPosition(isFavTop: boolean = true) {
     const env = this.getEnv();
     if (env.pref.isFavTop !== isFavTop) {
@@ -390,12 +678,21 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getFavPosition
+  * Get favorite position in the sidebar menu
+  */
   getFavPosition() {
     const env = this.getEnv();
     return (env.pref.isFavTop);
   }
 
-  /* Fav Position */
+  /**
+  * @function setRows
+  * Set or update rows in the master list
+  *
+  * @param {number} rows
+  */
   setRows(rows: number = 10) {
     const env = this.getEnv();
     if (env.data_pref.rows !== rows) {
@@ -404,17 +701,30 @@ export class LocalStorageService {
     }
   }
 
+  /**
+  * @function getRows
+  * Get rows to be displayed in master list
+  */
   getRows() {
     const env = this.getEnv();
     return (env.data_pref.rows);
   }
   /*****************************************************************************/
 
-  /* chatRoom */
+  /**
+  * @function setChatRoom
+  * Set or update the list of chat room available to logged in user
+  *
+  * @param chatRoom
+  */
   setChatRoom(chatRoom: any = [{ data: { 'rid': 'about' } }]) {
     localStorage.setItem('chatRoom', JSON.stringify(chatRoom));
   }
 
+  /**
+  * @function getChatRoom
+  * Get the list of chat room available to logged in user
+  */
   getChatRoom() {
     const chatRoom = localStorage.getItem('chatRoom');
     if (chatRoom && this.utilsService.isJsonString(chatRoom)) {

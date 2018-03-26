@@ -1,32 +1,52 @@
-// TODO: To handle apiResultHandling in this services
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/finally';
 
-import {
-  HttpClient,
-  HttpHandler,
-  HttpHeaders,
-} from '@angular/common/http';
-
 import { Store, select } from '@ngrx/store';
-import {
-  addNotificationAction,
-} from '../../ngrx/notification/notifications.actions';
+import { addNotificationAction } from '../../ngrx/notification/notifications.actions';
 
 import { TranslateService } from '@ngx-translate/core';
 
+// GK - Alphabet
 import { AppConfig } from '../../app.config';
-import { LoaderService } from './loader.service';
 import { APIResultHandlingService } from './apiResultHandling.service';
-
 import { GlobalState } from '../../global.state';
+import { LoaderService } from './loader.service';
 import { LocalStorageService } from '../../nga/services/localStorage.service';
 import { ObjectService } from '../../nga/services/object.service';
 
+/**
+* @module HttpClientService
+* Customized HttpClient functions to support HTTP REQUEST CYCLE MANAGEMENT
+* 1. Do activity before sending the request (i.e.: Waiting notification)
+* 2. Send request by http verb (get, post, put, patch, delete)
+* 3. Receive response and process
+* - Catch if error then handle error via (onCatch)
+* - Handle success response: onSuccess
+* - Handle error response: onError
+* 4. Complete the cycle by some activity: onEnd
+*
+* @function get
+* @function post
+* @function put
+* @function patch
+* @function delete
+*
+* @function handleShowLoader
+* @function showLoader
+* @function onCatch
+* @function onSuccess
+* @function onError
+* @function onEnd
+* @function hideLoader
+*
+* @function attachHeader
+* @function getFullUrl
+*/
 @Injectable()
 export class HttpClientService extends HttpClient {
 
@@ -35,29 +55,20 @@ export class HttpClientService extends HttpClient {
   constructor(
     handler: HttpHandler,
 
+    private store: Store<any>,
+
+    private translateService: TranslateService,
+
     private appConfig: AppConfig,
-    private loaderService: LoaderService,
     private apiResultHandlingService: APIResultHandlingService,
     private globalState: GlobalState,
-    private translateService: TranslateService,
+    private loaderService: LoaderService,
     private localStorageService: LocalStorageService,
     private objectService: ObjectService,
-    private store: Store<any>
   ) {
     super(handler);
     this.apiUrl = appConfig.apiUrl;
   }
-
-  /**
-  * HTTP REQUEST CYCLE MANAGEMENT
-  * 1. Do activity before sending the request (i.e.: Waiting notification)
-  * 2. Send request by http verb (get, post, put, patch, delete)
-  * 3. Receive response and process
-  * - Catch if error then handle error via (onCatch)
-  * - Handle success response: onSuccess
-  * - Handle error response: onError
-  * 4. Complete the cycle by some activity: onEnd
-  */
 
   /**
   * @function get
@@ -148,6 +159,7 @@ export class HttpClientService extends HttpClient {
     );
   }
 
+  // TODO: To check and eliminate this
   putCustomized(url: string, body: any | null, options?: any | {}): Observable<any> {
     this.showLoader();
     return super.put(this.getFullUrl(url), body, this.attachHeader(options))
@@ -395,6 +407,7 @@ export class HttpClientService extends HttpClient {
   * @function attachHeader
   * Utility to generate standard header with JWT and
   * attach other options into request before it is sent
+  *
   * Below is the options format of HttpClient
     options: {
       headers?: HttpHeaders | {

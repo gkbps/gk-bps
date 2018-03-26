@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+
 import { WebsocketService } from './websocket.service';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { AppConfig } from '../../app.config';
+import { HttpClientService } from './httpClient.service';
 import { SecurityService } from './security.service';
 
+/**
+* @module ChatService
+* Service for Chat App
+*
+* @function registerRoom
+* @function sendMsg
+*/
 @Injectable()
 export class ChatService {
 
@@ -15,30 +24,47 @@ export class ChatService {
 
   // Our constructor calls our wsService connect method
   constructor(
+    private httpClient: HttpClient,
+    private httpClientService: HttpClientService,
     private wsService: WebsocketService,
-    private http: Http,
-    private config: AppConfig,
+
+    private appConfig: AppConfig,
     private securityService: SecurityService,
   ) {
     this.messages = <Subject<any>>wsService
       .connect()
-      .map((response: any): any => {
+      .map((response) => {
         return response;
       });
+  }
+
+   /**
+   * @function registerRoom
+   * Function to register a char room
+   *
+   * @return {Promise}
+   */
+   registerRoom() {
+     return this.httpClient.get(
+         this.appConfig.apiUrl + this.prefix + 'register',
+         this.httpClientService.attachHeader()
+       )
+     .map((response) => {
+       console.log(response);
+       return response;
+     });
    }
 
-  // Our simplified interface for sending messages back to our socket.io server
+  /**
+  * @function sendMsg
+  * Function to send messages tosocket.io server
+  *
+  * @param msg
+  */
   sendMsg(msg) {
     this.messages.next(msg);
   }
 
-  registerRoom() {
-    return this.http.get(
-        this.config.apiUrl + this.prefix + 'register',
-        this.securityService.jwt(),
-      )
-    .map((response: Response) => response.json());
-  }
 
   unsubscribe() {
     this.messages.unsubscribe();

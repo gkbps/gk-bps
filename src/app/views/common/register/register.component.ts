@@ -128,7 +128,7 @@ export class RegisterComponent {
     }
 
     gotoPage(page) {
-      this.tcodeService.executeTCode(page);
+      this.tcodeService.executeTcode(page);
     }
 
 }

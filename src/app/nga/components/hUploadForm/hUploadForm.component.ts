@@ -184,7 +184,7 @@ export class HUploadForm implements OnInit, OnDestroy {
   }
 
   gotoTcode(tcode) {
-    this.tcodeService.executeTCode(tcode,'');
+    this.tcodeService.executeTcode(tcode,'');
   }
 
   ngOnDestroy() {

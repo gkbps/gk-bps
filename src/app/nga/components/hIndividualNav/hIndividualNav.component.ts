@@ -48,43 +48,43 @@ export class HIndividualNav implements OnInit, OnDestroy {
         this.items = [
           {
             label: res.create, icon: 'ui-icon-add',
-            command: (event) => this.executeTCode('11')
+            command: (event) => this.executeTcode('11')
           },
           {
             label: res.view, icon: 'ui-icon-search',
-            command: (event) => this.executeTCode('12')
+            command: (event) => this.executeTcode('12')
           },
           {
             label: res.edit, icon: 'ui-icon-edit',
-            command: (event) => this.executeTCode('13')
+            command: (event) => this.executeTcode('13')
           },
           // { separator: true },
           {
             label: res.disable, icon: 'ui-icon-bookmark',
-            command: (event) => this.executeTCode('14')
+            command: (event) => this.executeTcode('14')
           },
           {
             label: res.enable, icon: 'ui-icon-bookmark-border',
-            command: (event) => this.executeTCode('15')
+            command: (event) => this.executeTcode('15')
           },
           // { separator: true },
           {
             label: res.mark, icon: 'ui-icon-visibility-off',
-            command: (event) => this.executeTCode('16')
+            command: (event) => this.executeTcode('16')
           },
           {
             label: res.unmark, icon: 'ui-icon-visibility',
-            command: (event) => this.executeTCode('17')
+            command: (event) => this.executeTcode('17')
           },
           // { separator: true },
           {
             label: res.delete, icon: 'ui-icon-delete-forever',
-            command: (event) => this.executeTCode('18')
+            command: (event) => this.executeTcode('18')
           },
           // { separator: true },
           {
             label: res.viewChange, icon: 'ui-icon-track-changes',
-            command: (event) => this.executeTCode('19')
+            command: (event) => this.executeTcode('19')
           },
         ];
 
@@ -99,7 +99,7 @@ export class HIndividualNav implements OnInit, OnDestroy {
    * @param {string} action
    * @memberof GkIndividualNav
    */
-  executeTCode(action: string): void {
+  executeTcode(action: string): void {
     this.activatedRoute.params.subscribe((params: Params) => {
       const tcode: string = this.prefix + action;
       let workingId = '';
@@ -110,7 +110,7 @@ export class HIndividualNav implements OnInit, OnDestroy {
       }
 
       this.onSelectAction.emit({ action: action });
-      this.tcodeService.executeTCode(tcode, workingId);
+      this.tcodeService.executeTcode(tcode, workingId);
     });
   }
 

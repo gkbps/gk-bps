@@ -2,19 +2,23 @@ import { Injectable } from '@angular/core';
 
 import * as Tinycolor from 'tinycolor2';
 
+/**
+* @module ColorService
+* Color Service for chart
+*/
 @Injectable()
 export class ColorService {
 
   _seed: any;
 
   chartColors = {
-    red: 'rgb(255, 99, 132)',
+    red:    'rgb(255, 99, 132)',
   	orange: 'rgb(255, 159, 64)',
   	yellow: 'rgb(255, 205, 86)',
-  	green: 'rgb(75, 192, 192)',
-  	blue: 'rgb(54, 162, 235)',
+  	green:  'rgb(75, 192, 192)',
+  	blue:   'rgb(54, 162, 235)',
   	purple: 'rgb(153, 102, 255)',
-  	grey: 'rgb(201, 203, 207)'
+  	grey:   'rgb(201, 203, 207)'
   };
 
   Months = [
@@ -44,9 +48,14 @@ export class ColorService {
 		'#8549ba'
 	];
 
-  constructor() {
-  }
+  constructor() { }
 
+  /**
+  * @function stringToColour
+  * Convert string to Colour
+  *
+  * @param str
+  */
 	stringToColour(str) {
 	  let hash = 0;
 		for (let i = 0; i < str.length; i++) {
@@ -60,10 +69,25 @@ export class ColorService {
 	  return colour;
 	}
 
+  /**
+  * @function srand
+  * Set seed for randomize helper
+  *
+  * @param seed
+  */
   srand(seed) {
 		this._seed = seed;
 	}
 
+  /**
+  * @function rand
+  * Randomize a value
+  *
+  * @param min
+  * @param max
+  *
+  * @return {number}
+  */
 	rand(min?, max?) {
 		let seed = this._seed;
 		min = min === undefined ? 0 : min;
@@ -72,6 +96,13 @@ export class ColorService {
 		return min + (this._seed / 233280) * (max - min);
 	}
 
+  /**
+  * @function numbers
+  *
+  * @param config
+  *
+  * @return {array}
+  */
   numbers(config) {
 		let cfg = config || {};
 		let min = cfg.min || 0;
@@ -96,6 +127,13 @@ export class ColorService {
 		return data;
 	}
 
+  /**
+  * @function labels
+  *
+  * @param config
+  *
+  * @return {array}
+  */
   labels(config) {
 		let cfg = config || {};
 		let min = cfg.min || 0;
@@ -115,6 +153,13 @@ export class ColorService {
 		return values;
 	}
 
+  /**
+  * @function months
+  *
+  * @param config
+  *
+  * @return {array}
+  */
   months(config) {
 		let cfg = config || {};
 		let count = cfg.count || 12;
@@ -130,10 +175,25 @@ export class ColorService {
 		return values;
 	}
 
+  /**
+  * @function color
+  *
+  * @param index
+  *
+  * @return {color}
+  */
   color(index) {
 		return this.COLORS[index % this.COLORS.length];
 	}
 
+  /**
+  * @function transparentize
+  *
+  * @param color
+  * @param opacity
+  *
+  * @return {string}
+  */
 	transparentize(color, opacity) {
 
 		let alpha = opacity === undefined ? 0.5 : 1 - opacity;

@@ -1,19 +1,22 @@
 import { Directive, HostListener } from '@angular/core';
-import {
-  StateManagementService,
-  LocalStorageService,
-  UtilsService
-} from '../../nga/services';
 
-/*******************************************************************************
- * LAYOUT WRAPPER
- * Status:
- *  - Overlay:
- *  - Static:   layout-wrapper-static
- * Behavious:
- *  - Logo anchor
- *  - Menu
- *******************************************************************************/
+// GK - Alphabet
+import { LocalStorageService } from '../../nga/services/localStorage.service';
+import { StateManagementService } from '../../nga/services/stateManagement.service';
+import { UtilsService } from '../../nga/services/utils.service';
+
+/**
+* @module GkLayoutWrapperToggleDirective
+* LAYOUT WRAPPER
+* Status:
+*  - Overlay:
+*  - Static:   layout-wrapper-static
+* Behavious:
+*  - Logo anchor
+*  - Menu
+*
+* @function toggleOpen
+*/
 @Directive({
   selector: '[gkLayoutWrapperToggle]',
 })
@@ -24,7 +27,6 @@ export class GkLayoutWrapperToggleDirective {
     private utilsService: UtilsService
   ) { }
 
-  // CLICK
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {
     $event.preventDefault();
@@ -44,15 +46,19 @@ export class GkLayoutWrapperToggleDirective {
 
 }
 
-/*******************************************************************************
- * LAYOUT SIDEBAR - WEB (MOUSE) MODE
- * Status:
- *  - Small:
- *  - No show:
- *  - Full show:   layout-sidebar-active
- * Behavious:
- *  - Mouse Enter / Mouse Leave
- *******************************************************************************/
+/**
+* @module GkLayoutSidebarToggleWebModeDirective
+* LAYOUT SIDEBAR - WEB (MOUSE) MODE
+* Status:
+*  - Small:
+*  - No show:
+*  - Full show:   layout-sidebar-active
+* Behavious:
+*  - Mouse Enter / Mouse Leave
+*
+* @function onmouseenter
+* @function onmouseleave
+*/
 @Directive({
   selector: '[gkLayoutSidebarToggleWebMode]'
 })
@@ -62,7 +68,6 @@ export class GkLayoutSidebarToggleWebModeDirective {
     private utilsService: UtilsService
   ) { }
 
-  // ON MOUSE ENTER
   @HostListener('mouseenter', ['$event'])
   onmouseenter($event: any) {
     $event.preventDefault();
@@ -76,7 +81,6 @@ export class GkLayoutSidebarToggleWebModeDirective {
     return false;
   }
 
-  // ON MOUSE LEAVE
   @HostListener('mouseleave', ['$event'])
   onmouseleave($event: any) {
     $event.preventDefault();
@@ -91,15 +95,20 @@ export class GkLayoutSidebarToggleWebModeDirective {
   }
 }
 
-/*******************************************************************************
- * LAYOUT SIDEBAR - MOBILE (TOUCH) MODE
- * Status:
- *  - Small:
- *  - No show:
- *  - Full show:   layout-sidebar-active
- * Behavious:
- *  - Mouse Enter / Mouse Leave
- *******************************************************************************/
+/**
+* @module GkLayoutSidebarToggleMobileModeDirective
+* LAYOUT SIDEBAR - MOBILE (TOUCH) MODE
+* Status:
+*  - Small:
+*  - No show:
+*  - Full show:   layout-sidebar-active
+* Behavious:
+*  - Mouse Enter / Mouse Leave
+*
+* @function toggleOpen
+* @function onmouseenter
+* @function onmouseleave
+*/
 @Directive({
   selector: '[gkLayoutSidebarToggleMobileMode]'
 })
@@ -110,7 +119,6 @@ export class GkLayoutSidebarToggleMobileModeDirective {
     private utilsService: UtilsService
   ) { }
 
-  // CLICK ICON
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {
     $event.preventDefault();
@@ -126,7 +134,6 @@ export class GkLayoutSidebarToggleMobileModeDirective {
     return false;
   }
 
-  // ON MOUSE ENTER
   @HostListener('mouseenter', ['$event'])
   onmouseenter($event: any) {
     $event.preventDefault();
@@ -139,7 +146,6 @@ export class GkLayoutSidebarToggleMobileModeDirective {
     return false; // prevent a href automatically open
   }
 
-  // ON MOUSE LEAVE
   @HostListener('mouseleave', ['$event'])
   onmouseleave($event: any) {
     $event.preventDefault();

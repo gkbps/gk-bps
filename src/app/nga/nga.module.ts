@@ -17,8 +17,20 @@ const NGA_DIRECTIVES = [
 ];
 
 // PIPES
-// import { } from './pipes';
+import {
+ SafeHTMLPipe,
+ SafeResourceURLPipe,
+ SafeScriptPipe,
+ SafeStylePipe,
+ SafeURLPipe
+} from './pipes';
+
 const NGA_PIPES = [
+  SafeHTMLPipe,
+  SafeResourceURLPipe,
+  SafeScriptPipe,
+  SafeStylePipe,
+  SafeURLPipe
 ];
 
 // SERVICES
@@ -42,7 +54,6 @@ import {
   NavigationService,
   ObjectService,
   PaginationService,
-  SanitizerByPassService,
   SecurityService,
   SessionService,
   StateManagementService,
@@ -73,7 +84,6 @@ const NGA_SERVICES = [
   NavigationService,
   ObjectService,
   PaginationService,
-  SanitizerByPassService,
   SecurityService,
   SessionService,
   StateManagementService,

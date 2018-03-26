@@ -104,6 +104,6 @@ export class ForgotComponent {
     }
 
     gotoPage(page) {
-      this.tcodeService.executeTCode(page);
+      this.tcodeService.executeTcode(page);
     }
 }

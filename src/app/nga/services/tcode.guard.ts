@@ -1,11 +1,16 @@
-// External
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-// Internal
+// GK - Alphabet
 import { SecurityService } from './security.service';
 import { TcodeService } from './tcode.service';
 
+/**
+* @module TcodeGuard
+* Guard to prevent openning route without corresponding tcode
+*
+* @function canActivate
+*/
 @Injectable()
 export class TcodeGuard implements CanActivate {
 
@@ -15,9 +20,12 @@ export class TcodeGuard implements CanActivate {
     private tcodeService: TcodeService,
   ) { }
 
-  /*
-   * canActivate is used to check if user entered tcode is included in user's Mana
-   */
+  /**
+  * @function canActivate
+  * Check if entered tcode is included in user's Mana or not
+  *
+  * @return {boolean}
+  */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
     if (localStorage.getItem('currentUser')) {

@@ -297,7 +297,7 @@ export class HChatComponent implements OnInit, OnDestroy, AfterViewChecked {
           // console.log(room);
           // Create new room
           const members = [this.username, id];
-          this.createNewRoom(room.data, members);
+          this.createNewRoom(room['data'], members);
 
           // Send invite-message to invited chatter
           // this.comment = `${this.user.username} is inviting ${id} join discussion!`;

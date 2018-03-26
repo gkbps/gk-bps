@@ -262,7 +262,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
           this.items.push({ label: res.create, icon: 'ui-icon-add',
             command: (event) => {
               // TODO: TO check if could access gkcln31 or relied on Guard or disable if no priviledge
-              this.tcodeService.executeTCode(this.tcode);
+              this.tcodeService.executeTcode(this.tcode);
             }
           });
           this.items.push({ label: res.copy, icon: 'ui-icon-content-copy', command: (event) => this.confirmAction('copy') });
@@ -544,7 +544,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
           } else {
             // console.log(responseBodyData['_id']);
             // console.log(this.tcode);
-            this.tcodeService.executeTCode(this.tcode, responseBodyData['_id']);
+            this.tcodeService.executeTcode(this.tcode, responseBodyData['_id']);
           }
         } else {
           if (responseBodyData['_id'] === this.id) { // IMPORTANT: To prevent getting the last Observable item by default

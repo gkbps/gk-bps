@@ -44,9 +44,9 @@ export class IntroComponent implements OnInit, OnDestroy {
   gotoLogin() {
     const securityService = this.securityService.getSavedSession();
     if (securityService) {
-      this.tcodeService.executeTCode('lockscreen');
+      this.tcodeService.executeTcode('lockscreen');
     } else {
-      this.tcodeService.executeTCode('login');
+      this.tcodeService.executeTcode('login');
     }
   }
 

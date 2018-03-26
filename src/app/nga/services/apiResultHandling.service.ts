@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
+/**
+* @module APIResultHandlingService
+* Service process the response reveived from server.
+*
+* @function processAPIResult
+* @function trackError
+*/
 @Injectable()
 export class APIResultHandlingService {
 
@@ -8,12 +15,20 @@ export class APIResultHandlingService {
     private translate: TranslateService,
   ) { }
 
-  /*
-   * Function: processAPIResult
-   * Purpose: To provide a single handler for all results received from API restful server
-   * Design:
-   * result = {status, url, _body {code, message, data ={anything}}
-   */
+  /**
+  * @function processAPIResult
+  * A handler for all response received from server
+  *
+  * @param result (response) = {
+  * - status,
+  * - url,
+  * - _body {
+  *   + code,
+  *   + message,
+  *   + data = {anything}
+  * }
+  * @return {Promise}
+  */
   public processAPIResult(result) {
     console.log(result);
 
@@ -24,15 +39,14 @@ export class APIResultHandlingService {
 
         key1 = result.status.toString();
         key2 = result.status.toString() + 'Msg';
-        // const key3: string = JSON.parse(result._body).action + 'Action';
 
         this.translate.get([key1, key2, 'invalid_http_return'])
           .subscribe((res) => {
 
-            let type = '';
-            let trackError = false;
-            let title = res[key1];
-            let msg = res[key2];
+            let type        = '';
+            let trackError  = false;
+            let title       = res[key1];
+            let msg         = res[key2];
 
             switch (result.status) {
               case 200: // OK: GET, POST, PUT, PATCH, DELETE
@@ -89,6 +103,7 @@ export class APIResultHandlingService {
               });
             }
 
+            // Return promise
             resolve({
               type: type,
               title: title,
@@ -110,14 +125,20 @@ export class APIResultHandlingService {
     });
   }
 
-
+  /**
+  * @function trackError
+  * Function to capture response with error status into local storage for later debug
+  * Max record = 20
+  *
+  * @param error
+  */
   trackError(error): void {
     // console.log(error);
     if (localStorage.getItem('errorHistory') === null) {
       localStorage.setItem('errorHistory', '[]');
     }
     const errorHistory: any[] = JSON.parse(localStorage.getItem('errorHistory'));
-    while (errorHistory.length >= 10 ) {
+    while (errorHistory.length >= 20 ) {
       errorHistory.shift();
     }
     errorHistory.push(error);

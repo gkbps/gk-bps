@@ -94,7 +94,7 @@ export class HDataTablePlainComponent implements OnInit, OnDestroy {
             label: res.open, icon: 'ui-icon-search',
             command: (event) => {
               console.log(this.selectedClient.tcode, this.selectedClient._id);
-              this.tcodeService.executeTCode(this.selectedClient.tcode, this.selectedClient.id);
+              this.tcodeService.executeTcode(this.selectedClient.tcode, this.selectedClient.id);
             }
           },
           {
@@ -119,7 +119,7 @@ export class HDataTablePlainComponent implements OnInit, OnDestroy {
   }
 
   executeTcode(tcode) {
-    this.tcodeService.executeTCode(tcode, this.selectedClient ? this.selectedClient._id : null)
+    this.tcodeService.executeTcode(tcode, this.selectedClient ? this.selectedClient._id : null)
   }
 
   loadData(event: LazyLoadEvent) {

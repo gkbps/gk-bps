@@ -7,16 +7,28 @@ import { AppConfig } from '../../app.config';
 
 // import { environment } from '../environments/environment';
 
+/**
+* @module WebsocketService
+* Service for websocket
+*
+* @function connect
+*/
 @Injectable()
 export class WebsocketService {
 
-  // Our socket connection
+  // Socket connection
   private socket;
 
   constructor(
     private appConfig: AppConfig
   ) { }
 
+  /**
+  * @function connect
+  * Connect to server via websocket
+  *
+  * @return {subject}
+  */
   connect(): Subject<MessageEvent> {
     // If you aren't familiar with environment variables then
     // you can hard code `environment.ws_url` as `http://localhost:5000`

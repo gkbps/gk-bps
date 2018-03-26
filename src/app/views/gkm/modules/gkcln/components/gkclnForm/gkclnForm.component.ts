@@ -395,7 +395,7 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   * UTILITIES
   */
   gotoTcode(tcode) {
-    this.tcodeService.executeTCode(tcode,'');
+    this.tcodeService.executeTcode(tcode,'');
   }
 
   hasRight(tcode) {

@@ -169,7 +169,7 @@ export class NotificationComponent extends BaseComponent implements OnInit, OnDe
   //       this.items = [
   //         {
   //           label: res.open, icon: 'ui-icon-add',
-  //           // command: (event) => this.tcodeService.executeTCode(this.module + '11'),
+  //           // command: (event) => this.tcodeService.executeTcode(this.module + '11'),
   //         },
   //         {
   //           label: res.mark, icon: 'ui-icon-search',

@@ -127,51 +127,51 @@ export class GkCln8xComponent extends BaseComponent implements OnInit, OnDestroy
         this.items = [
           {
             label: res.create, icon: 'ui-icon-add',
-            command: (event) => this.tcodeService.executeTCode('gkcln11'),
+            command: (event) => this.tcodeService.executeTcode('gkcln11'),
             disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln11', this.userRights),
           },
           {
             label: res.view, icon: 'ui-icon-search',
-            command: (event) => this.tcodeService.executeTCode('gkcln12', this.selectedClient ? this.selectedClient._id : null),
+            command: (event) => this.tcodeService.executeTcode('gkcln12', this.selectedClient ? this.selectedClient._id : null),
             disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln12', this.userRights),
           },
           {
             label: res.edit, icon: 'ui-icon-edit',
-            command: (event) => this.tcodeService.executeTCode('gkcln13', this.selectedClient ? this.selectedClient._id : null),
+            command: (event) => this.tcodeService.executeTcode('gkcln13', this.selectedClient ? this.selectedClient._id : null),
             disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln13', this.userRights),
           },
           { separator: true },
           {
             label: res.disable, icon: 'ui-icon-bookmark',
-            command: (event) => this.tcodeService.executeTCode('gkcln14', this.selectedClient ? this.selectedClient._id : null),
+            command: (event) => this.tcodeService.executeTcode('gkcln14', this.selectedClient ? this.selectedClient._id : null),
             disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln14', this.userRights),
           },
           {
             label: res.enable, icon: 'ui-icon-bookmark-border',
-            command: (event) => this.tcodeService.executeTCode('gkcln15', this.selectedClient ? this.selectedClient._id : null),
+            command: (event) => this.tcodeService.executeTcode('gkcln15', this.selectedClient ? this.selectedClient._id : null),
             disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln15', this.userRights),
           },
           { separator: true },
           {
             label: res.mark, icon: 'ui-icon-visibility-off',
-            command: (event) => this.tcodeService.executeTCode('gkcln16', this.selectedClient ? this.selectedClient._id : null),
+            command: (event) => this.tcodeService.executeTcode('gkcln16', this.selectedClient ? this.selectedClient._id : null),
             disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln16', this.userRights),
           },
           {
             label: res.unmark, icon: 'ui-icon-visibility',
-            command: (event) => this.tcodeService.executeTCode('gkcln17', this.selectedClient ? this.selectedClient._id : null),
+            command: (event) => this.tcodeService.executeTcode('gkcln17', this.selectedClient ? this.selectedClient._id : null),
             disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln17', this.userRights),
           },
           { separator: true },
           {
             label: res.delete, icon: 'ui-icon-delete-forever',
-            command: (event) => this.tcodeService.executeTCode('gkcln18', this.selectedClient ? this.selectedClient._id : null),
+            command: (event) => this.tcodeService.executeTcode('gkcln18', this.selectedClient ? this.selectedClient._id : null),
             disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln18', this.userRights),
           },
           { separator: true },
           {
             label: res.viewChange, icon: 'ui-icon-track-changes',
-            command: (event) => this.tcodeService.executeTCode('gkcln19', this.selectedClient ? this.selectedClient._id : null),
+            command: (event) => this.tcodeService.executeTcode('gkcln19', this.selectedClient ? this.selectedClient._id : null),
             disabled: !this.tcodeService.checkTcodeInEncodeArray('gkcln19', this.userRights),
           },
         ];

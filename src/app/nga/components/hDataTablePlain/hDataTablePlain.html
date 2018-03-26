@@ -12,7 +12,7 @@
             </div>
 
             <div class="ui-toolbar-group-right">
-                <button pButton type="button" icon="ui-icon-add" [disabled]="notInRights(module + '11')" (click)="tcodeService.executeTCode(module + '11')" pTooltip="{{'create'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-add" [disabled]="notInRights(module + '11')" (click)="tcodeService.executeTcode(module + '11')" pTooltip="{{'create'|translate}}" tooltipPosition="top"></button>
                 <button pButton type="button" icon="ui-icon-search" [disabled]="notInRights(module + '12')" (click)="executeTcode(module + '12')" pTooltip="{{'view'|translate}}" tooltipPosition="top"></button>
                 <button pButton type="button" icon="ui-icon-edit" [disabled]="notInRights(module + '13')" (click)="executeTcode(module + '13')" pTooltip="{{'edit'|translate}}" tooltipPosition="top"></button>
                 <button pButton type="button" icon="ui-icon-bookmark" [disabled]="notInRights(module + '14')" (click)="executeTcode(module + '14')" pTooltip="{{'disable'|translate}}" tooltipPosition="top"></button>

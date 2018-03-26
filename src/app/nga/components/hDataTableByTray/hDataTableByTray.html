@@ -24,10 +24,11 @@
             Loading...
           </p> -->
 
+          <!-- [loading]="body.pending" -->
+
           <p-table
             #dt
-            [loading]="body.pending"
-
+            
             [columns]="selectedColumns"
             [value]="body.data.data"
 

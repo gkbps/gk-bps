@@ -159,7 +159,7 @@ export class HTurboTableByTrayComponent implements OnInit, OnDestroy {
               command: (event) => {
                 console.log(this.selectedRequest);
                 if (this.selectedRequest) {
-                  this.tcodeService.executeTCode(this.selectedRequest.tcode, this.selectedRequest._id);
+                  this.tcodeService.executeTcode(this.selectedRequest.tcode, this.selectedRequest._id);
                 } else {
                   alert('Select an item to proceed!');
                 }
@@ -179,7 +179,7 @@ export class HTurboTableByTrayComponent implements OnInit, OnDestroy {
                 console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '32';
-                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                  this.tcodeService.executeTcode(tcode, this.selectedRequest._id);
                 } else {
                   alert('Select an item to proceed!');
                 }
@@ -192,7 +192,7 @@ export class HTurboTableByTrayComponent implements OnInit, OnDestroy {
                 console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '41';
-                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                  this.tcodeService.executeTcode(tcode, this.selectedRequest._id);
                 } else {
                   alert('Select an item to proceed!');
                 }
@@ -205,7 +205,7 @@ export class HTurboTableByTrayComponent implements OnInit, OnDestroy {
                 console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '42';
-                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                  this.tcodeService.executeTcode(tcode, this.selectedRequest._id);
                 } else {
                   alert('Select an item to proceed!');
                 }
@@ -218,7 +218,7 @@ export class HTurboTableByTrayComponent implements OnInit, OnDestroy {
                 console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '43';
-                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                  this.tcodeService.executeTcode(tcode, this.selectedRequest._id);
                 } else {
                   alert('Select an item to proceed!');
                 }
@@ -231,7 +231,7 @@ export class HTurboTableByTrayComponent implements OnInit, OnDestroy {
                 console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '45';
-                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                  this.tcodeService.executeTcode(tcode, this.selectedRequest._id);
                 } else {
                   alert('Select an item to proceed!');
                 }
@@ -244,7 +244,7 @@ export class HTurboTableByTrayComponent implements OnInit, OnDestroy {
                 console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '46';
-                  this.tcodeService.executeTCode(tcode, this.selectedRequest._id);
+                  this.tcodeService.executeTcode(tcode, this.selectedRequest._id);
                 } else {
                   alert('Select an item to proceed!');
                 }
@@ -258,14 +258,14 @@ export class HTurboTableByTrayComponent implements OnInit, OnDestroy {
 
   viewRequest() {
     if (this.selectedRequest) {
-      this.tcodeService.executeTCode(this.selectedRequest.tcode, this.selectedRequest._id);
+      this.tcodeService.executeTcode(this.selectedRequest.tcode, this.selectedRequest._id);
     } else {
       alert('Select an item to proceed!');
     }
   }
 
   gotoTcode(tcode) {
-    this.tcodeService.executeTCode(tcode);
+    this.tcodeService.executeTcode(tcode);
   }
 
   loadData(event: LazyLoadEvent) {

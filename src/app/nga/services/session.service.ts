@@ -1,26 +1,42 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+// GK- Alphabet
 import { AppConfig } from '../../app.config';
+import { HttpClientService } from './httpClient.service';
 import { SecurityService } from './security.service';
 
-import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
-
+/**
+* @module SessionService
+* Service to put Awt
+*
+* @function updateAwt
+*/
 @Injectable()
 export class SessionService {
 
-    prefix = '/settings/';
+  prefix = '/settings/';
 
-    constructor(
-      private http: Http,
-      private config: AppConfig,
-      private securityService: SecurityService,
-    ) { }
+  constructor(
+    private httpClient: HttpClient,
+    private httpClientService: HttpClientService,
 
-    updateAwt() {
-      return this.http.put(
-          this.config.apiUrl + this.prefix,
-          {},
-          this.securityService.jwt(),
-        );
-    }
+    // GK - Alphabet
+    private config: AppConfig,
+    private securityService: SecurityService,
+  ) { }
+
+  /**
+  * @function updateAwt
+  * Put Awt value
+  * TODO ?
+  */
+  updateAwt() {
+    return this.httpClient.put(
+        this.config.apiUrl + this.prefix,
+        {},
+        this.httpClientService.attachHeader()
+      );
+  }
 
 }

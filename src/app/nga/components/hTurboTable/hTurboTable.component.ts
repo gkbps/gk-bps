@@ -93,7 +93,7 @@ export class HTurboTableComponent implements OnInit, OnDestroy {
             this.items = [
               {
                 label: res.create, icon: 'ui-icon-add',
-                command: (event) => this.tcodeService.executeTCode(this.module + '11'),
+                command: (event) => this.tcodeService.executeTcode(this.module + '11'),
                 disabled: this.notInRights(this.module + '11'),
               },
               {
@@ -153,7 +153,7 @@ export class HTurboTableComponent implements OnInit, OnDestroy {
                 label: res.view, icon: 'ui-icon-search',
                 command: (event) => {
                   console.log(this.module + this.actionSerial + '2', this.selectedClient._id);
-                  this.tcodeService.executeTCode(this.module + this.actionSerial + '5', this.selectedClient.id);
+                  this.tcodeService.executeTcode(this.module + this.actionSerial + '5', this.selectedClient.id);
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '2'),
               },
@@ -187,7 +187,7 @@ export class HTurboTableComponent implements OnInit, OnDestroy {
   }
 
   executeTcode(tcode) {
-    this.tcodeService.executeTCode(tcode, this.selectedClient ? this.selectedClient._id : null)
+    this.tcodeService.executeTcode(tcode, this.selectedClient ? this.selectedClient._id : null)
   }
 
   isFullMenu() {

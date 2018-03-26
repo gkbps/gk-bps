@@ -92,7 +92,7 @@ export class HDataTableComponent implements OnInit, OnDestroy {
         this.items = [
           {
             label: res.create, icon: 'ui-icon-add',
-            command: (event) => this.tcodeService.executeTCode(this.module + '11'),
+            command: (event) => this.tcodeService.executeTcode(this.module + '11'),
             disabled: this.notInRights(this.module + '11'),
           },
           {
@@ -149,7 +149,7 @@ export class HDataTableComponent implements OnInit, OnDestroy {
   }
 
   executeTcode(tcode) {
-    this.tcodeService.executeTCode(tcode, this.selectedClient ? this.selectedClient._id : null)
+    this.tcodeService.executeTcode(tcode, this.selectedClient ? this.selectedClient._id : null)
   }
 
   loadData(event: LazyLoadEvent) {

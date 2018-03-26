@@ -1,20 +1,34 @@
 import { Injectable } from '@angular/core';
 
-import { LocalStorageService } from './localStorage.service';
+// GK - Alphabet
 import { BodyBackgroundService } from './bodyBackground.service';
+import { LocalStorageService } from './localStorage.service';
+
+/**
+* @module StateManagementService
+* Service to handle general state of the App UI
+*
+* @function initState
+* @function wrapperStatic
+* @function wrapperStaticForSidebar
+* @function sidebarActive
+* @function sidebarDark
+*/
 
 @Injectable()
 export class StateManagementService {
 
   constructor(
-    private localStorageService: LocalStorageService,
     private bodyBackgroundService: BodyBackgroundService,
-  ) {
-  }
+    private localStorageService: LocalStorageService,
+  ) { }
 
   /**
-   * To initialize current state of application once app change container
-   */
+  * @function initState
+  * Initialize current state of App once app change container
+  *
+  * @param {string} bg
+  */
   public initState(bg: string = '') {
     // Initialize background
     this.bodyBackgroundService.clearBodyBackground();
@@ -29,12 +43,19 @@ export class StateManagementService {
   }
 
   /**
-   * To manage state for sidebar including:
-   * - wrapper static or overlay status of Anchor
-   * - wrapper static or overlay status of Sidebar
-   * - sidebar active of sidebar in mobile status
-   * - light or dark status of Sidebar
-   */
+  * States for sidebar including:
+  * - wrapper static or overlay status of Anchor
+  * - wrapper static or overlay status of Sidebar
+  * - sidebar active of sidebar in mobile status
+  * - light or dark status of Sidebar
+  */
+
+  /**
+  * @function wrapperStatic
+  * Wrapper static or overlay status of Anchor
+  *
+  * @param {boolean} status
+  */
   public wrapperStatic(status: boolean = false) {
     let element = document.getElementById('layout-wrapper');
     if (element) {
@@ -48,6 +69,12 @@ export class StateManagementService {
     }
   }
 
+  /**
+  * @function wrapperStaticForSidebar
+  * Wrapper static or overlay status of Sidebar
+  *
+  * @param {boolean} status
+  */
   public wrapperStaticForSidebar(status: boolean = false) {
     const element = document.getElementById('layout-sidebar');
     if (element) {
@@ -61,6 +88,12 @@ export class StateManagementService {
     }
   }
 
+  /**
+  * @function sidebarActive
+  * Sidebar active of sidebar in mobile status
+  *
+  * @param {boolean} status
+  */
   public sidebarActive(status = false) {
     const element = document.getElementById('layout-sidebar');
     if (element) {
@@ -74,6 +107,12 @@ export class StateManagementService {
     }
   }
 
+  /**
+  * @function sidebarDark
+  * Light or dark status of Sidebar
+  *
+  * @param {boolean} status
+  */
   public sidebarDark(status = false) {
     const element = document.getElementById('layout-sidebar');
     if (element) {

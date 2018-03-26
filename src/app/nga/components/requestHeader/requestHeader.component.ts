@@ -200,7 +200,7 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
           this.items.push({ label: res.create, icon: 'ui-icon-add',
             command: (event) => {
               // TODO: TO check if could access gkcln31 or relied on Guard or disable if no priviledge
-              this.tcodeService.executeTCode(this.tcode);
+              this.tcodeService.executeTcode(this.tcode);
             }
           });
           this.items.push({ label: res.copy, icon: 'ui-icon-content-copy', command: (event) => this.confirmAction('copy') });

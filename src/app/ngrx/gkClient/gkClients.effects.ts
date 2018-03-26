@@ -38,7 +38,7 @@ export class GkClientsEffects {
     .pipe(
       ofType(GkClientsActionTypes.GET_MANY_GKCLIENTS),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
         return this.gkClientsServices.action1x(
           action['payload']['filter'],
           action['payload']['sort'],
@@ -48,7 +48,7 @@ export class GkClientsEffects {
         .pipe(
           // If successful, dispatch success action with result
           map(gkClients =>{
-            console.log(gkClients);
+            // console.log(gkClients);
             return ({ type: GkClientsActionTypes.GET_MANY_GKCLIENTS_SUCCESS, payload: gkClients });
           }),
           // If request fails, dispatch failed action
