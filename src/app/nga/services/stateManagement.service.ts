@@ -37,7 +37,7 @@ export class StateManagementService {
     }
 
     // Initialize wrapper static status
-    let env = this.localStorageService.getEnv();
+    const env = this.localStorageService.getEnv();
     this.wrapperStatic(env.pref.wrapperStatic ? env.pref.wrapperStatic : false);
     this.sidebarDark(env.pref.dark);
   }
@@ -57,7 +57,7 @@ export class StateManagementService {
   * @param {boolean} status
   */
   public wrapperStatic(status: boolean = false) {
-    let element = document.getElementById('layout-wrapper');
+    const element = document.getElementById('layout-wrapper');
     if (element) {
       if (status) {
         // console.log('Add layout-wrapper-static to Wrapper');

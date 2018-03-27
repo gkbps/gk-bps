@@ -52,12 +52,12 @@ export class AppTranslationModule {
     private translate: TranslateService,
     private localStorageService: LocalStorageService,
   ) {
-    translate.addLangs(['en','vn','jp','kr','ch','fr']);
+    translate.addLangs(['en', 'vn', 'jp', 'kr', 'ch', 'fr']);
     translate.setDefaultLang('en');
 
     translate.use(localStorageService.getLang());
 
-    let browserLang = translate.getBrowserLang();
-    //translate.use(browserLang.match(/en|vn|de/) ? browserLang : 'en');
+    const browserLang = translate.getBrowserLang();
+    // translate.use(browserLang.match(/en|vn|de/) ? browserLang : 'en');
   }
 }

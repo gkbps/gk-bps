@@ -20,7 +20,8 @@ export class HAddress implements OnInit, OnDestroy {
 
   @Input() isEditable = false;
   @Input() item: number;
-  @Input('formGroup') public addressItem: FormGroup;
+  // @Input('formGroup') public addressItem: FormGroup;
+  @Input() addressItem: FormGroup;
 
   @Output() itemEvent: EventEmitter<any> = new EventEmitter();
   editStatus = false;

@@ -4,15 +4,13 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
 
 import { TranslateService } from '@ngx-translate/core';
 
-import {
-  AuthenticationService,
-  SecurityService,
-  LocalStorageService,
-  BodyBackgroundService,
-  ThemeService,
-  TcodeService,
-  StateManagementService,
-} from '../../../nga/services';
+import { AuthenticationService } from '../../../nga/services/authentication.service';
+import { BodyBackgroundService } from '../../../nga/services/bodyBackground.service';
+import { LocalStorageService } from '../../../nga/services/localStorage.service';
+import { SecurityService } from '../../../nga/services/security.service';
+import { StateManagementService } from '../../../nga/services/stateManagement.service';
+import { TcodeService } from '../../../nga/services/tcode.service';
+import { ThemeService } from '../../../nga/services/theme.service';
 
 @Component({
   templateUrl: 'login.component.html',
@@ -32,17 +30,18 @@ export class LoginComponent {
   message: string;
 
   constructor(
-    private localStorageService: LocalStorageService,
-    private translate: TranslateService,
-    private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
+    private route: ActivatedRoute,
+    private translate: TranslateService,
     private fb: FormBuilder,
-    private securityService: SecurityService,
+
+    private authenticationService: AuthenticationService,
     private bodyBackgroundService: BodyBackgroundService,
-    private themeService: ThemeService,
+    private localStorageService: LocalStorageService,
+    private securityService: SecurityService,
     private stateManagementService: StateManagementService,
     private tcodeService: TcodeService,
+    private themeService: ThemeService
   ) {
     // Initialize state
     stateManagementService.initState('login-body');
@@ -72,6 +71,10 @@ export class LoginComponent {
     this.token = this.form.controls['token'];
   }
 
+  /**
+  * @function onSubmit
+  * Check the dirty state of the form
+  */
   public onSubmit(values: Object): void {
     this.submitted = true;
     if (this.form.valid) {
@@ -80,6 +83,10 @@ export class LoginComponent {
     }
   }
 
+  /**
+  * @function login
+  * Manage message of login form
+  */
   login() {
     this.loading = true;
     this.message = '';
@@ -112,11 +119,15 @@ export class LoginComponent {
           this.loading = false;
 
           setTimeout(() => {
-            this.message = ''
+            this.message = '';
           }, 3000);
         });
     }
 
+    /**
+    * @function gotoPage
+    * Goto a page
+    */
     gotoPage(page) {
       this.tcodeService.executeTcode(page);
     }

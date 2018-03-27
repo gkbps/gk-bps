@@ -10,15 +10,14 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
 
-  SecurityService,
-  TcodeService,
-} from '../../../../../../nga/services';
+import { GlobalState } from '../../../../../../global.state';
+import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
+import { MenuService } from '../../../../../../nga/services/menu.service';
+import { NavigationService } from '../../../../../../nga/services/navigation.service';
+
+import { SecurityService } from '../../../../../../nga/services/security.service';
+import { TcodeService } from '../../../../../../nga/services/tcode.service';
 
 import { GkClient } from '../../../../../../store/_models/gkClient.model';
 import { GkClientService } from '../../../../../../store/_services/gkClient.service';
@@ -27,7 +26,7 @@ import { BaseComponent } from '../../../../../base';
 
 @Component({
   templateUrl: 'gkcln8x.component.html',
-  styleUrls:['./gkcln8x.scss']
+  styleUrls: ['./gkcln8x.scss']
 })
 export class GkCln8xComponent extends BaseComponent implements OnInit, OnDestroy {
 
@@ -75,7 +74,7 @@ export class GkCln8xComponent extends BaseComponent implements OnInit, OnDestroy
     private gkClientService: GkClientService,
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
 
     // Derive class constructor
     this.rows = this.localStorageService.getRows();
@@ -191,7 +190,7 @@ export class GkCln8xComponent extends BaseComponent implements OnInit, OnDestroy
     // console.log(sort);
 
     this.gkClientService.findMasterListPagination(event.globalFilter, JSON.stringify(sort), event.first, event.rows);
-    //this.first = event.first;
+    // this.first = event.first;
     this.rows = event.rows;
     console.log(this.first, this.rows);
     this.localStorageService.setRows(event.rows);

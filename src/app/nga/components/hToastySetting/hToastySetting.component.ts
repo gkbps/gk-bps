@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import {SelectItem} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -20,7 +20,7 @@ export class HToastySettingComponent implements OnInit {
 
   toastyPosition;
   toastyTheme;
-  toastyTimeOut
+  toastyTimeOut;
 
   constructor(
     private globalState: GlobalState,
@@ -66,12 +66,12 @@ export class HToastySettingComponent implements OnInit {
       msg: 'Save successfully!',
       showClose: true,
     };
-    this.globalState.notifyMyDataChanged('toasty','', toastData);
+    this.globalState.notifyMyDataChanged('toasty', '', toastData);
   }
 
   testToasty() {
     const toastType = ['default', 'info', 'success', 'wait', 'error', 'warning'];
-    for (let i=0; i<toastType.length; i++) {
+    for (let i = 0; i < toastType.length; i++) {
       setTimeout(()=> {
         const toastData = {
           type: toastType[i],
@@ -80,8 +80,8 @@ export class HToastySettingComponent implements OnInit {
           showClose: true,
         };
         console.log(toastData);
-        this.globalState.notifyMyDataChanged('toasty','', toastData);
-      }, i*750);
+        this.globalState.notifyMyDataChanged('toasty', '', toastData);
+      }, i * 750);
     }
   }
 

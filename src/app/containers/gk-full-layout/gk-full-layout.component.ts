@@ -50,10 +50,10 @@ export class GkFullLayoutComponent implements OnInit, OnDestroy {
     sm: 'ui-sidebar-sm',
     md: 'ui-sidebar-md',
     lg: 'ui-sidebar-lg'
-  }
+  };
 
   // System wide progress
-  blocked: boolean = false;
+  blocked = false;
 
   // System wide alert
   alertIcon: string;
@@ -71,7 +71,7 @@ export class GkFullLayoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private toastyConfig: ToastyConfig,
-    private toastyService:ToastyService,
+    private toastyService: ToastyService,
 
     private bodyBackgroundService: BodyBackgroundService,
     private globalState: GlobalState,
@@ -87,7 +87,7 @@ export class GkFullLayoutComponent implements OnInit, OnDestroy {
     this.bodyBackgroundService.clearBodyBackground();
   }
 
-  reInstateUserPref(){
+  reInstateUserPref() {
     // Reinstate user preference
     this.toastyTheme = this.localStorageService.getToastyTheme();
     this.toastyTimeOut = this.localStorageService.getToastyTimeOut();
@@ -116,10 +116,10 @@ export class GkFullLayoutComponent implements OnInit, OnDestroy {
 
         timeout: this.toastyTimeOut,
         theme: this.toastyTheme,
-        onAdd: (toast:ToastData) => {
+        onAdd: (toast: ToastData) => {
           // console.log('Toast ' + toast.id + ' has been added!');
         },
-        onRemove: function(toast:ToastData) {
+        onRemove: function(toast: ToastData) {
           // console.log('Toast ' + toast.id + ' has been removed!');
         }
       };

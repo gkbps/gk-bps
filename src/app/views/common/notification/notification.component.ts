@@ -19,16 +19,20 @@ import {
 } from '../../../ngrx/notification/notifications.actions';
 
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
 
-  SecurityService,
-} from '../../../nga/services';
+import { GlobalState } from '../../../global.state';
+import { LocalStorageService } from '../../../nga/services/localStorage.service';
+import { NavigationService } from '../../../nga/services/navigation.service';
+import { MenuService } from '../../../nga/services/menu.service';
+
+import { SecurityService } from '../../../nga/services/security.service';
+
 import { BaseComponent } from '../../base';
 
+/**
+* @module NotificationComponent
+* Component for Notification page
+*/
 @Component({
   selector: 'notification',
   templateUrl: 'notification.component.html',
@@ -53,44 +57,30 @@ export class NotificationComponent extends BaseComponent implements OnInit, OnDe
   selectedColumns: any[];
   selectedItemsLabel = '{0} items selected';
   columnOptions: SelectItem[];
-  //
-  // // Pagination
-  // filter = '';
-  // first = 0;
-  // rows = 10;
-  // totalRecords: number;
-  // multiSortMeta: any;
 
   notification: any;
-  // notificationCount = 0;
-  // notificationsList = [];
-  //
-  // selectedNotification: any;
-  //
-  // // Items of menubar and context menu
-  // items: MenuItem[];
 
   constructor(
     // Base class services
     public translateService: TranslateService,
+
     public globalState: GlobalState,
     public localStorageService: LocalStorageService,
-    public navigationService: NavigationService,
     public menuService: MenuService,
+    public navigationService: NavigationService,
 
     // Derive class services
     private security: SecurityService,
     private store: Store<any>
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
 
     // Derive class constructor
-    this.notification = this.store.pipe(select('notifications1'));
+    this.notification = this.store.pipe(select('notifications'));
     this.notification.subscribe(res => {
       this.store.dispatch(getTopNotificationsAction('', '{"created_at": -1}', 0, 5));
-    })
-    // this.store.dispatch(getNotificationsAction('', '{}', 0, 5));
+    });
   }
 
   ngOnInit() {
@@ -101,9 +91,13 @@ export class NotificationComponent extends BaseComponent implements OnInit, OnDe
     // Derive class initialization
     this.initSidebarMenu();
     this.globalState.notifyMyDataChanged('help', '', 'policy');
+  }
 
-    // this.initMenuItems();
-    // this.initColumns();
+  ngOnDestroy() {
+    // Base class destroy
+    super.ngOnDestroy();
+
+    // Derive class destroy here
   }
 
   doSomething(event) {
@@ -132,105 +126,5 @@ export class NotificationComponent extends BaseComponent implements OnInit, OnDe
         break;
     }
 
-  }
-
-  // initColumns() {
-  //   this.translateService.get(['_id', 'tcode', 'id', 'description', 'username', 'creator', 'isMark', 'created_at'])
-  //     .subscribe((res) => {
-  //       this.selectedItemsLabel = res.selected_item_label;
-  //       this.cols = [
-  //         // { field: 'tcode', header: res.tcode, width: '10%' },
-  //         // { field: 'id', header: res.id, width: '10%' },
-  //         { field: 'desc', header: res.description, width: '80%'  },
-  //         // { field: 'username', header: res.username, width: '10%'},
-  //         // { field: 'creator', header: res.creator, width: '10%'  },
-  //         { field: 'isMark', header: res.isMark, width: '10%'  },
-  //         { field: 'created_at', header: res.created_at, width: '20%'  },
-  //       ];
-  //
-  //       console.log(this.cols);
-  //
-  //       this.selectedColumns = JSON.parse(JSON.stringify(this.cols));
-  //       console.log(this.selectedColumns);
-  //
-  //       this.columnOptions = [];
-  //       for (let i = 0; i < this.cols.length; i++) {
-  //           this.columnOptions.push({ label: this.cols[i].header, value: this.cols[i] });
-  //       }
-  //       console.log(this.columnOptions);
-  //
-  //     });
-  // }
-  //
-  // initMenuItems() {
-  //   this.translateService.get(['open', 'mark', 'unmark', 'delete'])
-  //     .subscribe((res) => {
-  //
-  //       this.items = [
-  //         {
-  //           label: res.open, icon: 'ui-icon-add',
-  //           // command: (event) => this.tcodeService.executeTcode(this.module + '11'),
-  //         },
-  //         {
-  //           label: res.mark, icon: 'ui-icon-search',
-  //           // command: (event) => this.executeTcode(this.module + '12'),
-  //         },
-  //         {
-  //           label: res.delete, icon: 'ui-icon-edit',
-  //           // command: (event) => this.executeTcode(this.module + '13'),
-  //         }
-  //       ];
-  //
-  //     });
-  // }
-
-  // loadData(event: LazyLoadEvent) {
-  //   // console.log(event);
-  //
-  //   const sort = {};
-  //   // sortMode = single
-  //   // if (event.sortField) {
-  //   //   sort[event.sortField] = event.sortOrder;
-  //   // }
-  //
-  //   // sortMode = multiple
-  //   if (event.multiSortMeta) {
-  //     for (let i=0; i< event.multiSortMeta.length; i++) {
-  //       sort[event.multiSortMeta[i]['field']] = event.multiSortMeta[i].order;
-  //     }
-  //   }
-  //   // console.log(sort);
-  //
-  //   const pagination = {
-  //     filter: event.globalFilter? event.globalFilter: '',
-  //     sort: JSON.stringify(sort),
-  //     first: event.first,
-  //     rows: event.rows
-  //   }
-  //
-  //   this.rows = event.rows;
-  //   this.localStorageService.setRows(event.rows);
-  //
-  //   this.store.dispatch(getNotificationsAction(pagination.filter, pagination.sort, pagination.first, pagination.rows));
-  // }
-
-  ngOnDestroy() {
-    // Base class destroy
-    super.ngOnDestroy();
-
-    // Derive class destroy here
-    this.unsubscribeLocalState();
-  }
-
-  subscribeLocalState() {
-    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      this.translateService.use(lang);
-      // this.initMenuItems();
-      // this.initColumns();
-    });
-  }
-
-  unsubscribeLocalState() {
-    this.globalState.unsubscribeEvent('language', this.myScope);
   }
 }

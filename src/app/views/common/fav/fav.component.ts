@@ -9,27 +9,69 @@ import { ConfirmationService } from 'primeng/api';
 import * as _ from 'lodash';
 
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
 
-  TcodeService,
-  ArrayService,
-} from '../../../nga/services';
+// GK - Alphabet
+import { GlobalState } from '../../../global.state';
+import { LocalStorageService } from '../../../nga/services/localStorage.service';
+import { NavigationService } from '../../../nga/services/navigation.service';
+import { MenuService } from '../../../nga/services/menu.service';
+
+import { ArrayService } from '../../../nga/services/array.service';
 import { IconsService } from '../../../nga/common/icons.service';
-import { BaseComponent } from '../../base';
+import { TcodeService } from '../../../nga/services/tcode.service';
 
 import { FavTcodeService } from './favTcode.service';
 
+import { BaseComponent } from '../../base';
+
+/**
+* @module FavComponent
+* Component for Fav(ourite)
+*
+* @function initContextMenu
+* @function initForms
+* @function initFavListPage
+* @function refreshTree
+*
+* @function moveInTree
+* @function moveNode
+*
+* @function sortTreeAsc
+* @function sortTreeDesc
+*
+* @function flagDocument
+* @function nodeSelect
+* @function nodeUnselect
+*
+* @function checkNodeThenProceed
+* @function openFavExpandSection
+*
+* @function showRenameSectionDialog
+* @function showRenameItemDialog
+* @function renameSectionOrItem
+* @function saveSection
+* @function saveDocument
+* @function cancelDialog
+*
+* @function confirmDelete
+* @function deleteNode
+*
+* @function unselectFile
+*
+* @function expandAll
+* @function collapseAll
+* @function expandRecursive
+*
+* @function saveFav2LocalStorage
+* @function cleanRecursive
+*/
 @Component({
   selector: 'fav',
   templateUrl: './fav.html',
   styleUrls: ['./fav.scss'],
 })
 
-export class Fav extends BaseComponent implements OnInit, OnDestroy {
+export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
 
   myScope = 'fav';
 
@@ -97,21 +139,26 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
   constructor(
     // Base class services
     public translateService: TranslateService,
+
     public globalState: GlobalState,
     public localStorageService: LocalStorageService,
-    public navigationService: NavigationService,
     public menuService: MenuService,
+    public navigationService: NavigationService,
 
     // Derive class services
     private fb: FormBuilder,
+
     private confirmationService: ConfirmationService,
-    private tcodeService: TcodeService,
+
+
     private arrayService: ArrayService,
+    private iconsService: IconsService,
+    private tcodeService: TcodeService,
+
     private favListService: FavTcodeService,
-    private iconsService: IconsService
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
 
     // Derive class constructor
     this.iconList = iconsService.getIconsMenu();
@@ -130,9 +177,34 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     this.initForms();
     this.initContextMenu();
     this.initFavListPage();
-
   }
 
+  ngOnDestroy() {
+    // Base class destroy
+    super.ngOnDestroy();
+
+    // Derive class destroy here
+    this.unscribeLocalState();
+  }
+
+  /* LOCAL STATE */
+  subscribeLocalState() {
+    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
+      this.translateService.use(lang);
+      this.initContextMenu();
+    });
+  }
+
+  unscribeLocalState() {
+    this.globalState.unsubscribeEvent('language', this.myScope);
+  }
+
+  // OPERATIONS
+
+  /**
+  * @function initContextMenu
+  * Initialize context menu by in force language
+  */
   initContextMenu() {
     this.translateService.get([
       'execute',
@@ -185,6 +257,10 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+  * @function initForms
+  * Initialize sectionForm and documentForm
+  */
   initForms() {
     this.sectionForm = this.fb.group({
       'sectionLabel': new FormControl('', Validators.compose([Validators.required, Validators.minLength(3)])),
@@ -200,10 +276,20 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+  * @function initFavListPage
+  * Initialize Favourite page by refreshing Tree
+  * {@linkTo refreshTree}
+  */
   initFavListPage() {
     this.refreshTree();
   }
 
+  /**
+  * @function refreshTree
+  * Refresh the tree and expand all nodes
+  * {@linkTo expandAll}
+  */
   refreshTree() {
     this.favList = JSON.parse(JSON.stringify(this.favListService.getFavList()));
     console.log(this.favList);
@@ -211,11 +297,15 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     this.expandAll();
   }
 
+  /**
+  * @function moveInTree
+  * Show the Dialog to select destination node
+  *
+  * Principles:
+  * - Do not move if selectedNode is undeterminable
+  * - Root node could not be moved
+  */
   moveInTree() {
-    /*
-     * Do not move if selectedNode is undeterminable
-     * Root node could not be moved
-     */
     if (!this.selectedNode) {
       const toastData = {
         type: 'warning',
@@ -223,7 +313,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
         msg: this.langList['selectItemToExecute'],
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
       return false;
     }
 
@@ -234,7 +324,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
         msg: this.langList['rootCanNotBeMoved'],
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
       return false;
     }
 
@@ -242,13 +332,16 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     this.displayMoveDialog = true;
   }
 
+  /**
+  * @function moveNode
+  * Move the target node to destination note and save into local storage
+  *
+  * Principles
+  * - Do not move if targetNode is undeterminable
+  * - Do not move if targetNode is its self (error)  *
+  * - Do not move if targetNode suggest no change of node position in tree
+  */
   moveNode() {
-    /*
-     * Do not move if targetNode is undeterminable
-     * Do not move if targetNode is its self (error)
-     *
-     * Do not move if targetNode suggest no change of node position in tree
-     */
     if ((!this.targetNode) || (this.selectedNode === this.targetNode)) {
       this.displayMoveDialog = false;
       return false;
@@ -275,17 +368,21 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
       msg: this.langList['actionCompleted'],
       showClose: true,
     };
-    this.globalState.notifyMyDataChanged('toasty','', toastData);
+    this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
     this.displayMoveDialog = false;
     this.saveFav2LocalStorage();
   }
 
+  /**
+  * @function sortTreeAsc
+  * Sort nodes of tree ascending
+  */
   sortTreeAsc() {
     const sortRecursive = (node, fn) => {
       fn(node);
       if (this.arrayService.getLengthArrayOfObject(node.children) > 0) {
-        node.children.forEach(function(e){
+        node.children.forEach(function(e) {
             sortRecursive(e, fn);
         });
         node.children.sort((a, b) => {
@@ -299,11 +396,15 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+  * @function sortTreeDesc
+  * Sort nodes of tree descending
+  */
   sortTreeDesc() {
     const sortRecursive = (node, fn) => {
       fn(node);
       if (this.arrayService.getLengthArrayOfObject(node.children) > 0) {
-        node.children.forEach(function(e){
+        node.children.forEach(function(e) {
             sortRecursive(e, fn);
         });
         node.children.sort((a, b) => {
@@ -317,6 +418,10 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+  * @function flagDocument
+  * Flag a document and save into local storage
+  */
   flagDocument() {
     if (!this.selectedNode) {
       const toastData = {
@@ -325,7 +430,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
         msg: this.langList['selectItemToExecute'],
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
       return false;
     }
@@ -337,22 +442,34 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
       msg: this.langList['actionCompleted'],
       showClose: true,
     };
-    this.globalState.notifyMyDataChanged('toasty','', toastData);
+    this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
     this.saveFav2LocalStorage();
   }
 
+  /**
+  * @function nodeSelect
+  * Event return information of selected node
+  */
   nodeSelect(event) {
       // this.msgs = [];
       // this.msgs.push({ severity: 'success', summary: 'Node Selected', detail: event.node.data.name });
       // console.log(event.node);
   }
 
+  /**
+  * @function nodeUnselect
+  * Event return information of node is just unselected
+  */
   nodeUnselect(event) {
       // this.msgs = [];
       // this.msgs.push({ severity: 'success', summary: 'Node Unselected', detail: event.node.data.name });
   }
 
+  /**
+  * @function checkNodeThenProceed
+  * A local helper to check if selected node then perform a callback
+  */
   checkNodeThenProceed(cb) {
     console.log(this.selectedNode);
     if (!this.selectedNode) {
@@ -362,7 +479,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
         msg: this.langList['selectItemToExecute'],
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
       return false;
     } else {
@@ -370,6 +487,10 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+  * @function openFavExpandSection
+  * Open a tcode or expand a section
+  */
   openFavExpandSection() {
     if (!this.selectedNode) {
       const toastData = {
@@ -378,7 +499,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
         msg: this.langList['selectItemToExecute'],
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
       return false;
     }
@@ -397,10 +518,17 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
         msg: this.langList['actionCompleted'],
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
     }
   }
 
+  /**
+  * @function showRenameSectionDialog
+  * Show section dialog for creating new or renaming section
+  *
+  * @param {boolean} isRename default is creation of new section
+  * @param {TreeNode} node
+  */
   showRenameSectionDialog(isRename: boolean = false, node: TreeNode = null) {
     if (!isRename) {
       console.log('New Section');
@@ -439,6 +567,13 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+  * @function showRenameItemDialog
+  * Show item dialog for creating new or renaming item
+  *
+  * @param {boolean} isRename default is creation of new item
+  * @param {TreeNode} node
+  */
   showRenameItemDialog(isRename: boolean = false, node: TreeNode = null) {
     if (!isRename) {
       console.log('New Item');
@@ -462,7 +597,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
           msg: this.langList['selectItemToExecute'],
           showClose: true,
         };
-        this.globalState.notifyMyDataChanged('toasty','', toastData);
+        this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
         return false;
       } else {
@@ -484,6 +619,10 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+  * @function renameSectionOrItem
+  * Rename selected Node, might be Section or Item
+  */
   renameSectionOrItem(node: TreeNode = null) {
     if (!node) {
       const toastData = {
@@ -492,8 +631,8 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
         msg: this.langList['selectItemToExecute'],
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
-            
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
+
       return false;
     } else {
       if (node.data.type === 'section') {
@@ -506,6 +645,10 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+  * @function saveSection
+  * Save section into local storage
+  */
   saveSection() {
     if (!this.isRenameDialog) {
       // If no node selected, set to root
@@ -545,11 +688,15 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
       msg: this.langList['actionCompleted'],
       showClose: true,
     };
-    this.globalState.notifyMyDataChanged('toasty','', toastData);
+    this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
     this.displaySectionDialog = false;
   }
 
+  /**
+  * @function saveDocument
+  * Save Document into local storage
+  */
   saveDocument() {
     if (!this.isRenameDialog) {
       // If no node selected, set to root
@@ -597,17 +744,25 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
       msg: this.langList['actionCompleted'],
       showClose: true,
     };
-    this.globalState.notifyMyDataChanged('toasty','', toastData);
+    this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
     this.displayDocumentDialog = false;
   }
 
+  /**
+  * @function cancelDialog
+  * Cancel dialog
+  */
   cancelDialog() {
     this.displayMoveDialog = false;
     this.displaySectionDialog = false;
     this.displayDocumentDialog = false;
   }
 
+  /**
+  * @function confirmDelete
+  * Reconfirm user delete action before proceeding
+  */
   confirmDelete() {
     this.msgs = [];
 
@@ -618,7 +773,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
         msg: this.langList['selectItemToExecute'],
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
       return false;
     }
@@ -630,7 +785,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
         msg: this.langList['rootCanNotBeDeleted'],
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
       return false;
     }
@@ -657,7 +812,7 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
                 msg: this.langList['actionCancelled'],
                 showClose: true,
               };
-              this.globalState.notifyMyDataChanged('toasty','', toastData);
+              this.globalState.notifyMyDataChanged('toasty', '', toastData);
           },
       });
     } else {
@@ -679,12 +834,18 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
                 msg: this.langList['actionCancelled'],
                 showClose: true,
               };
-              this.globalState.notifyMyDataChanged('toasty','', toastData);
+              this.globalState.notifyMyDataChanged('toasty', '', toastData);
           },
       });
     }
   }
 
+  /**
+  * @function deleteNode
+  * Delete a node
+  *
+  * @param {TreeNode} node
+  */
   deleteNode(node: TreeNode) {
       node.parent.children = node.parent.children.filter( n => n.data !== node.data);
 
@@ -694,27 +855,46 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
         msg: this.langList['actionCompleted'],
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
       this.saveFav2LocalStorage();
   }
 
+  /**
+  * @function unselectFile
+  * Unselect a document/ file
+  */
   unselectFile() {
       this.selectedNode = null;
   }
 
+  /**
+  * @function expandAll
+  * Expand all nodes in tree
+  */
   expandAll() {
       this.favList.forEach( node => {
           this.expandRecursive(node, true);
       } );
   }
 
+  /**
+  * @function collapseAll
+  * Collapse all nodes in tree
+  */
   collapseAll() {
       this.favList.forEach( node => {
           this.expandRecursive(node, false);
       } );
   }
 
+  /**
+  * @function expandRecursive
+  * Using recursive to expand all children nodes of a node
+  *
+  * @param {TreeNode} node
+  * @param {boolean} isExpand
+  */
   private expandRecursive(node: TreeNode, isExpand: boolean) {
       if (node.data.type === 'section') {
         node.expanded = isExpand;
@@ -726,14 +906,22 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
       }
   }
 
+  /**
+  * @function saveFav2LocalStorage
+  * Save Fav into local storage
+  */
   saveFav2LocalStorage() {
-    let cleanedList = _.cloneDeep(this.favList);
+    const cleanedList = _.cloneDeep(this.favList);
     // To cleanup the tree and avoid JSON recursive error due to JSON.stringify
     this.cleanRecursive(cleanedList[0]);
 
     this.localStorageService.setFav(cleanedList);
   }
 
+  /**
+  * @function cleanRecursive
+  * Clean all _proto for cleaned JSON tree for storing purpose
+  */
   private cleanRecursive(node: TreeNode) {
       delete node.parent;
       delete node.expanded;
@@ -742,26 +930,6 @@ export class Fav extends BaseComponent implements OnInit, OnDestroy {
               this.cleanRecursive(childNode);
           } );
       }
-  }
-
-  ngOnDestroy() {
-    // Base class destroy
-    super.ngOnDestroy();
-
-    // Derive class destroy here
-    this.unscribeLocalState();
-  }
-
-  /* LOCAL STATE */
-  subscribeLocalState() {
-    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      this.translateService.use(lang);
-      this.initContextMenu();
-    });
-  }
-
-  unscribeLocalState() {
-    this.globalState.unsubscribeEvent('language', this.myScope);
   }
 
 }

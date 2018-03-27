@@ -19,7 +19,7 @@ export function getGkClientsAction(filter, sort, first, rows) {
       first: first,
       rows: rows
     }
-  }
+  };
 }
 
 /**
@@ -31,7 +31,7 @@ export enum GkClientActionTypes {
   GET_GKCLIENT_SUCCESS = '[GkClient] Get GkClient Success',
   GET_GKCLIENT_ERROR = '[GkClient] Get GkClient Error',
 
-  RESET_GKCLIENT ='[GkClient] Reset GkClient',
+  RESET_GKCLIENT = '[GkClient] Reset GkClient',
   RESET_GKCLIENT_SUCCESS = '[GkClient] Reset GkClient Success',
   RESET_GKCLIENT_ERROR = '[GkClient] Reset GkClient Error',
 
@@ -68,63 +68,63 @@ export function getGkClientAction(id) {
   return {
     type: GkClientActionTypes.GET_GKCLIENT,
     payload: { id: id }
-  }
+  };
 }
 
 export function resetGkClientAction() {
   return {
     type: GkClientActionTypes.RESET_GKCLIENT,
     payload: {}
-  }
+  };
 }
 
 export function addGkClientAction(gkClient) {
   return {
     type: GkClientActionTypes.ADD_GKCLIENT,
     payload: { data: gkClient }
-  }
+  };
 }
 
 export function saveGkClientAction(gkClient) {
   return {
     type: GkClientActionTypes.SAVE_GKCLIENT,
     payload: { data: gkClient }
-  }
+  };
 }
 
 export function enableGkClientAction(id) {
   return {
     type: GkClientActionTypes.ENABLE_GKCLIENT,
     payload: { id: id }
-  }
+  };
 }
 
 export function disableGkClientAction(id) {
   return {
     type: GkClientActionTypes.DISABLE_GKCLIENT,
     payload: { id: id }
-  }
+  };
 }
 
 export function markGkClientAction(id) {
   return {
     type: GkClientActionTypes.MARK_GKCLIENT,
     payload: { id: id }
-  }
+  };
 }
 
 export function unmarkGkClientAction(id) {
   return {
     type: GkClientActionTypes.UNMARK_GKCLIENT,
     payload: { id: id }
-  }
+  };
 }
 
 export function deleteGkClientAction(id) {
   return {
     type: GkClientActionTypes.DELETE_GKCLIENT,
     payload: { id: id }
-  }
+  };
 }
 
 /**
@@ -153,28 +153,28 @@ export function getGkClientRequestAction(id) {
   return {
     type: GkClientRequestActionTypes.GET_GKCLIENT_REQUEST,
     payload: { id: id }
-  }
+  };
 }
 
 export function saveGkClientRequestAction(gkClientRequest) {
   return {
     type: GkClientRequestActionTypes.SAVE_GKCLIENT_REQUEST,
     payload: { data: gkClientRequest }
-  }
+  };
 }
 
 export function postGkClientRequestAction(id) {
   return {
     type: GkClientRequestActionTypes.POST_GKCLIENT_REQUEST,
     payload: { id: id }
-  }
+  };
 }
 
 export function revertGkClientRequestAction(id) {
   return {
     type: GkClientRequestActionTypes.REVERT_GKCLIENT_REQUEST,
     payload: { id: id }
-  }
+  };
 }
 
 /**
@@ -198,7 +198,7 @@ export function getGkClientDashboardsAction(filter, sort, first, rows) {
       first: first,
       rows: rows
     }
-  }
+  };
 }
 
 /**
@@ -222,7 +222,7 @@ export function getGkClientReportsSummaryAction(filter, sort, first, rows) {
       first: first,
       rows: rows
     }
-  }
+  };
 }
 
 /**
@@ -246,5 +246,5 @@ export function getGkClientReportsDetailAction(filter, sort, first, rows) {
       first: first,
       rows: rows
     }
-  }
+  };
 }

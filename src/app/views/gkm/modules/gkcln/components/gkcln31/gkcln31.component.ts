@@ -36,15 +36,15 @@ import {
 } from '../../../../../../ngrx/gkClient/gkClients.actions';
 
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
 
-  SecurityService,
-  TcodeService,
-} from '../../../../../../nga/services';
+import { GlobalState } from '../../../../../../global.state';
+import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
+import { MenuService } from '../../../../../../nga/services/menu.service';
+import { NavigationService } from '../../../../../../nga/services/navigation.service';
+
+import { SecurityService } from '../../../../../../nga/services/security.service';
+import { TcodeService } from '../../../../../../nga/services/tcode.service';
+
 import { BaseComponent } from '../../../../../base';
 
 import { RequestHeader } from '../../../../../../nga/components/requestHeader/requestHeader.component';
@@ -100,7 +100,7 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
     private store: Store<any>
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
   }
 
   ngOnInit() {
@@ -161,7 +161,7 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
       case 'save':
         console.log('save.01-Save requestHeader to request!');
         if (event.valid) {
-          if (event.data.status==='New') {
+          if (event.data.status === 'New') {
             this.store.dispatch(addRequestAction(event.data));
           } else {
             this.store.dispatch(saveRequestAction(event.data));

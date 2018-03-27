@@ -15,7 +15,7 @@ const routes: Routes = [
       title: 'gkcln'
     },
     children: [
-			{
+      {
         path: '',
         redirectTo: 'gkcln00',
         pathMatch: 'full',

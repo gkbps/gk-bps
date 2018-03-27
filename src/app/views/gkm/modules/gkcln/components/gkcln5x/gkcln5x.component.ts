@@ -9,17 +9,17 @@ import { getGkClientDashboardsAction } from '../../../../../../ngrx/gkClient/gkC
 /**/
 
 import { TranslateService } from '@ngx-translate/core';
+
 import { GlobalState } from '../../../../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService
-} from '../../../../../../nga/services';
+import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
+import { MenuService } from '../../../../../../nga/services/menu.service';
+import { NavigationService } from '../../../../../../nga/services/navigation.service';
+
 import { BaseComponent } from '../../../../../base';
 
 @Component({
   templateUrl: 'gkcln5x.component.html',
-  styleUrls:['./gkcln5x.scss']
+  styleUrls: ['./gkcln5x.scss']
 })
 export class GkCln5xComponent extends BaseComponent implements OnInit, OnDestroy {
 
@@ -54,7 +54,7 @@ export class GkCln5xComponent extends BaseComponent implements OnInit, OnDestroy
     private store: Store<any>
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
 
     // Derive class constructor
     this.initDataTableColumn();

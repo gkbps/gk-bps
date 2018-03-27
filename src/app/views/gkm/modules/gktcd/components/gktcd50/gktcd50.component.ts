@@ -5,15 +5,15 @@ import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
 
-  SecurityService,
-  TcodeService,
-} from '../../../../../../nga/services';
+import { GlobalState } from '../../../../../../global.state';
+import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
+import { MenuService } from '../../../../../../nga/services/menu.service';
+import { NavigationService } from '../../../../../../nga/services/navigation.service';
+
+import { SecurityService } from '../../../../../../nga/services/security.service';
+import { TcodeService } from '../../../../../../nga/services/tcode.service';
+
 import { BaseComponent } from '../../../../../base';
 
 @Component({
@@ -61,7 +61,7 @@ export class GkTcd50Component extends BaseComponent implements OnInit, OnDestroy
     private tcodeService: TcodeService,
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
   }
 
   ngOnInit() {

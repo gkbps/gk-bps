@@ -9,7 +9,7 @@ import { ConfirmationService } from 'primeng/api';
 
 import { Store, select } from '@ngrx/store';
 // import { getApprovalItemsAction } from '../../../ngrx/approvalItem/approvalItems.actions'
-import { getRequestApprovalAction } from '../../../ngrx/requestApproval/requestApproval.actions'
+import { getRequestApprovalAction } from '../../../ngrx/requestApproval/requestApproval.actions';
 
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalState } from '../../../global.state';
@@ -105,7 +105,7 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
     }
 
     if (changes['myForm.valid']) {
-        console.log('Oh yeah')
+        console.log('Oh yeah');
     }
   }
 
@@ -115,7 +115,7 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
     // console.log(this.source.data.status);
     switch (this.source.data.status) {
       case 'New':
-        if (this.source.data.owner.includes(this.user.username)){
+        if (this.source.data.owner.includes(this.user.username)) {
           this.formEditable = true;
         }
         // console.log(this.source.data.owner, this.user.username)
@@ -123,14 +123,14 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
         break;
 
       case 'Draft':
-        if (this.source.data.owner.includes(this.user.username)){
+        if (this.source.data.owner.includes(this.user.username)) {
           this.formEditable = true;
         }
         break;
 
       case 'P. Submit':
         // Consider this as it's quite odd for requestor return instead of edit himself to submit
-        if (this.source.data.requestor.username === this.user.username){
+        if (this.source.data.requestor.username === this.user.username) {
           this.formEditable = true;
         }
         break;
@@ -180,7 +180,7 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
       remark: [ this.source.data.remark ],
       status: [ this.source.data.status, [ Validators.required ]],
       step: [ this.source.data.step ],
-      approval_type: [ this.source.data.approval_type], //[ Validators.required ]
+      approval_type: [ this.source.data.approval_type], // [Validators.required ]
       requestor: [ this.source.data.requestor, [ Validators.required ]],
       owner: [ this.source.data.owner, [ Validators.required ]],
       approved: [ this.source.data.approved ],
@@ -193,10 +193,14 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
   }
 
   initNav() {
-    this.translateService.get(['create', 'new', 'save', 'return', 'submit', 'withdraw', 'cancel', 'reject', 'approve', 'abort', 'post', 'revert', 'copy', 'print'])
+    this.translateService.get([
+      'create', 'new', 'save', 'return', 'submit',
+      'withdraw', 'cancel', 'reject', 'approve',
+      'abort', 'post', 'revert', 'copy', 'print'
+    ])
       .subscribe((res) => {
         this.items = [];
-        if (this.source.data.status!=='New') {
+        if (this.source.data.status !== 'New') {
           this.items.push({ label: res.create, icon: 'ui-icon-add',
             command: (event) => {
               // TODO: TO check if could access gkcln31 or relied on Guard or disable if no priviledge
@@ -335,7 +339,7 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
   * @function filterUser
   */
   filterUserSingle(event) {
-    let query = event.query;
+    const query = event.query;
     console.log(query);
     if (query.length >1) {
       this.userService.findAPIListPagination(query, '{}', 0, 20)
@@ -364,14 +368,13 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
   */
 
   markAllDirty(control: AbstractControl) {
-    if(control.hasOwnProperty('controls')) {
-      control.markAsDirty({onlySelf: true}) // mark group
-      let ctrl = <any>control;
-      for (let inner in ctrl.controls) {
+    if (control.hasOwnProperty('controls')) {
+      control.markAsDirty({onlySelf: true}); // mark group
+      const ctrl = <any>control;
+      for (const inner in ctrl.controls) {
           this.markAllDirty(ctrl.controls[inner] as AbstractControl);
       }
-    }
-    else {
+    } else {
       (<FormControl>(control)).markAsDirty({onlySelf: true});
     }
   }

@@ -2,7 +2,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { HttpClientService } from '../../services/'
+import { HttpClientService } from '../../services/';
 
 import { Header } from 'primeng/shared';
 import { Footer } from 'primeng/shared';

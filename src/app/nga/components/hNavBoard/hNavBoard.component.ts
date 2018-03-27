@@ -112,7 +112,7 @@ export class HNavBoard implements OnInit, OnDestroy {
   }
 
   toggleNavType(navType) {
-    if (this.navType!=navType) {
+    if (this.navType !== navType) {
       this.navType = navType;
       this.navEffectReflection(this.navEffect);
     }

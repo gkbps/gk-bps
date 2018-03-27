@@ -4,16 +4,19 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EmailValidator, EqualPasswordsValidator } from '../../../nga/validators';
-// import { UserService } from '../../../services';
-import { UserService } from '../../../nga/common/user.service';
-import {
-  LocalStorageService,
-  SecurityService,
-  BodyBackgroundService,
-  StateManagementService,
-  TcodeService,
-} from '../../../nga/services';
 
+import { UserService } from '../../../nga/common/user.service';
+
+import { BodyBackgroundService } from '../../../nga/services';
+import { LocalStorageService } from '../../../nga/services';
+import { SecurityService } from '../../../nga/services';
+import { StateManagementService } from '../../../nga/services';
+import { TcodeService } from '../../../nga/services';
+
+/**
+* @module RegisterComponent
+* Component for registration page
+*/
 @Component({
   templateUrl: 'register.component.html',
   styleUrls: ['../login/fixed.scss']
@@ -82,6 +85,10 @@ export class RegisterComponent {
     this.token = this.form.controls['token'];
   }
 
+  /**
+  * @function onSubmit
+  * Check form dirty state
+  */
   public onSubmit(values: Object): void {
     this.submitted = true;
     if (this.form.valid) {
@@ -90,7 +97,10 @@ export class RegisterComponent {
     }
   }
 
-  // Add by HTD
+  /**
+  * @function register
+  * Manage message for register form
+  */
   register() {
     this.loading = true;
     // this.securityService.setToken(this.model.token);
@@ -122,11 +132,15 @@ export class RegisterComponent {
               this.loading = false;
 
               setTimeout(() => {
-                this.message = ''
+                this.message = '';
               }, 3000);
             });
     }
 
+    /**
+    * @function gotoPage
+    * Goto a page
+    */
     gotoPage(page) {
       this.tcodeService.executeTcode(page);
     }

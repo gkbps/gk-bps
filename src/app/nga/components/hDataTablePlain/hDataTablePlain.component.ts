@@ -119,7 +119,7 @@ export class HDataTablePlainComponent implements OnInit, OnDestroy {
   }
 
   executeTcode(tcode) {
-    this.tcodeService.executeTcode(tcode, this.selectedClient ? this.selectedClient._id : null)
+    this.tcodeService.executeTcode(tcode, this.selectedClient ? this.selectedClient._id : null);
   }
 
   loadData(event: LazyLoadEvent) {
@@ -133,18 +133,18 @@ export class HDataTablePlainComponent implements OnInit, OnDestroy {
 
     // sortMode = multiple
     if (event.multiSortMeta) {
-      for (let i=0; i< event.multiSortMeta.length; i++) {
+      for (let i = 0; i < event.multiSortMeta.length; i++) {
         sort[event.multiSortMeta[i]['field']] = event.multiSortMeta[i].order;
       }
     }
     // console.log(sort);
 
     const pagination = {
-      filter: event.globalFilter? event.globalFilter: '',
+      filter: event.globalFilter ? event.globalFilter : '',
       sort: JSON.stringify(sort),
       first: event.first,
       rows: event.rows
-    }
+    };
 
     this.rows = event.rows;
     this.localStorageService.setRows(event.rows);

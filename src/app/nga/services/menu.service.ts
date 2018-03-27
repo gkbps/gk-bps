@@ -50,7 +50,7 @@ export class MenuService {
       .map((res: any) => {
         // console.log(res);
         let jsonMenu = res;
-        let fav = this.localStorageService.getFav();
+        const fav = this.localStorageService.getFav();
         const favTopPosition = this.localStorageService.getFavPosition();
 
         if (favTopPosition) {

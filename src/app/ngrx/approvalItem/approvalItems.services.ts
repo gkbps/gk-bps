@@ -38,27 +38,27 @@ export class ApprovalItemsServices {
   }
 
   updateApprovalType(approvalType) {
-    return this.httpClientService.put(this.suffixApprovalTypesUrl + approvalType._id, approvalType)
+    return this.httpClientService.put(this.suffixApprovalTypesUrl + approvalType._id, approvalType);
   }
 
   disableApprovalType(_id) {
-    return this.httpClientService.patch(this.suffixApprovalTypesUrl + 'disable/' + _id, {})
+    return this.httpClientService.patch(this.suffixApprovalTypesUrl + 'disable/' + _id, {});
   }
 
   enableApprovalType(_id) {
-    return this.httpClientService.patch(this.suffixApprovalTypesUrl + 'enable/' + _id, {})
+    return this.httpClientService.patch(this.suffixApprovalTypesUrl + 'enable/' + _id, {});
   }
 
   markApprovalType(_id) {
-    return this.httpClientService.patch(this.suffixApprovalTypesUrl + 'mark/' + _id, {})
+    return this.httpClientService.patch(this.suffixApprovalTypesUrl + 'mark/' + _id, {});
   }
 
   unmarkApprovalType(_id) {
-    return this.httpClientService.patch(this.suffixApprovalTypesUrl + 'unmark/' + _id, {})
+    return this.httpClientService.patch(this.suffixApprovalTypesUrl + 'unmark/' + _id, {});
   }
 
   deleteApprovalType(_id) {
-    return this.httpClientService.delete(this.suffixApprovalTypesUrl + _id, {})
+    return this.httpClientService.delete(this.suffixApprovalTypesUrl + _id, {});
   }
 
 }

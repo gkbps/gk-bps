@@ -127,7 +127,7 @@ export class ArrayService {
    * @return {array}
    */
    getAvailable(population, selected) {
-     let available = JSON.parse(JSON.stringify(population));
+     const available = JSON.parse(JSON.stringify(population));
      for (let i = 0; i < available.length; i++) {
        for (let j = 0; j < selected.length; j++) {
          if (JSON.stringify(available[i]) === JSON.stringify(selected[j])) {

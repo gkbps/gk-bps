@@ -1,4 +1,11 @@
-import { NgModule,Component,ElementRef,AfterViewInit,AfterContentInit,DoCheck,OnInit,OnDestroy,Input,Output,SimpleChange,EventEmitter,ContentChild,ContentChildren,TemplateRef,QueryList,IterableDiffers } from '@angular/core';
+import {
+  NgModule,
+  Component, ElementRef,
+  AfterViewInit, AfterContentInit, DoCheck,
+  OnInit, OnDestroy, Input, Output, SimpleChange, EventEmitter,
+  ContentChild, ContentChildren, TemplateRef,
+  QueryList, IterableDiffers
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'primeng/shared';
 import { Header } from 'primeng/shared';

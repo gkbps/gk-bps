@@ -7,16 +7,21 @@ import { Message } from 'primeng/api';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
 
-  StateManagementService,
-} from '../../../nga/services';
+// GK - Alphabet
+import { GlobalState } from '../../../global.state';
+import { LocalStorageService } from '../../../nga/services';
+import { MenuService } from '../../../nga/services';
+import { NavigationService } from '../../../nga/services';
+
+import { StateManagementService } from '../../../nga/services';
+
 import { BaseComponent } from '../../base';
 
+/**
+* @module ChatComponent
+* Component for Chat
+*/
 @Component({
   templateUrl: 'chat.component.html'
 })
@@ -35,16 +40,17 @@ export class ChatComponent extends BaseComponent implements OnInit, OnDestroy {
   constructor(
     // Base class services
     public translateService: TranslateService,
+
     public globalState: GlobalState,
     public localStorageService: LocalStorageService,
-    public navigationService: NavigationService,
     public menuService: MenuService,
+    public navigationService: NavigationService,
 
     // Derive class services
     private stateManagementService: StateManagementService,
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
 
     // Derive class constructor
     stateManagementService.initState();

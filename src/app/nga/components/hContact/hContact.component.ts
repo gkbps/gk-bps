@@ -19,7 +19,8 @@ export class HContact implements OnInit, OnDestroy {
 
   @Input() isEditable = false;
   @Input() item: number;
-  @Input('formGroup') public contactItem: FormGroup;
+  // @Input('formGroup') public contactItem: FormGroup;
+  @Input() contactItem: FormGroup;
 
   @Output() itemEvent: EventEmitter<any> = new EventEmitter();
   editStatus = false;

@@ -60,6 +60,10 @@ export class HDashboardChartBarComponent implements OnInit, OnChanges {
 
   selectData(event) {
       this.msgs = [];
-      this.msgs.push({severity: 'info', summary: 'Data Selected', 'detail': this.data.datasets[event.element._datasetIndex].data[event.element._index]});
+      this.msgs.push({
+        severity: 'info',
+        summary: 'Data Selected',
+        'detail': this.data.datasets[event.element._datasetIndex].data[event.element._index]
+      });
   }
 }

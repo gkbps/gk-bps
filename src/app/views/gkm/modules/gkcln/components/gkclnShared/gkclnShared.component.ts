@@ -183,7 +183,7 @@ export class GkClnShared implements OnInit, OnDestroy {
         msg: 'Form Validation Failed',
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
     }
   }
 

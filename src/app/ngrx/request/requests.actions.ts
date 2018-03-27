@@ -24,7 +24,7 @@ export function getRequestsAction(filter, sort, first, rows, tray, prefix = '') 
       tray: tray,
       prefix: prefix
     }
-  }
+  };
 }
 
 /**
@@ -36,7 +36,7 @@ export enum RequestActionTypes {
   GET_REQUEST_SUCCESS = '[Request] Get Request Success',
   GET_REQUEST_ERROR = '[Request] Get Request Error',
 
-  RESET_REQUEST ='[Request] Reset Request',
+  RESET_REQUEST = '[Request] Reset Request',
   RESET_REQUEST_SUCCESS = '[Request] Reset Request Success',
   RESET_REQUEST_ERROR = '[Request] Reset Request Error',
 
@@ -109,49 +109,49 @@ export function getRequestAction(id) {
   return {
     type: RequestActionTypes.GET_REQUEST,
     payload: { id: id }
-  }
+  };
 }
 
 export function resetRequestAction(tcode) {
   return {
     type: RequestActionTypes.RESET_REQUEST,
     payload: { tcode: tcode }
-  }
+  };
 }
 
 export function addRequestAction(Request) {
   return {
     type: RequestActionTypes.ADD_REQUEST,
     payload: { data: Request }
-  }
+  };
 }
 
 export function saveRequestAction(Request) {
   return {
     type: RequestActionTypes.SAVE_REQUEST,
     payload: { data: Request }
-  }
+  };
 }
 
 export function submitRequestAction(Request) {
   return {
     type: RequestActionTypes.SUBMIT_REQUEST,
     payload: { data: Request }
-  }
+  };
 }
 
 export function withdrawRequestAction(id) {
   return {
     type: RequestActionTypes.WITHDRAW_REQUEST,
     payload: { id: id }
-  }
+  };
 }
 
 export function cancelRequestAction(id) {
   return {
     type: RequestActionTypes.CANCEL_REQUEST,
     payload: { id: id }
-  }
+  };
 }
 
 export function returnRequestAction(id) {
@@ -169,35 +169,35 @@ export function approveRequestAction(id, approverId, step) {
       approverId: approverId,
       step: step
     }
-  }
+  };
 }
 
 export function rejectRequestAction(id) {
   return {
     type: RequestActionTypes.REJECT_REQUEST,
     payload: { id: id }
-  }
+  };
 }
 
 export function abortRequestAction(id) {
   return {
     type: RequestActionTypes.ABORT_REQUEST,
     payload: { id: id }
-  }
+  };
 }
 
 export function postRequestAction(id) {
   return {
     type: RequestActionTypes.POST_REQUEST,
     payload: { id: id }
-  }
+  };
 }
 
 export function revertRequestAction(id) {
   return {
     type: RequestActionTypes.REVERT_REQUEST,
     payload: { id: id }
-  }
+  };
 }
 
 export function createRequestJournalAction(id, journal) {
@@ -207,21 +207,21 @@ export function createRequestJournalAction(id, journal) {
       id: id,
       journal: journal
     }
-  }
+  };
 }
 
 export function postRequestJournalAction(id) {
   return {
     type: RequestActionTypes.POST_REQUEST_JOURNAL,
     payload: { id: id }
-  }
+  };
 }
 
 export function revertRequestJournalAction(id) {
   return {
     type: RequestActionTypes.REVERT_REQUEST_JOURNAL,
     payload: { id: id }
-  }
+  };
 }
 
 export function moveRequestApprovalAction(id, approval) {
@@ -231,7 +231,7 @@ export function moveRequestApprovalAction(id, approval) {
       id: id,
       approval: approval
     }
-  }
+  };
 }
 
 export function moveRequestStatusAction(id, status) {
@@ -241,5 +241,5 @@ export function moveRequestStatusAction(id, status) {
       id: id,
       status: status
     }
-  }
+  };
 }

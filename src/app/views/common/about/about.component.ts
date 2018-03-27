@@ -1,17 +1,22 @@
 import { Component, OnInit,  OnDestroy } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
 
-  StateManagementService,
-  ThemeService,
-} from '../../../nga/services';
+// GK - Alphabet
+import { GlobalState } from '../../../global.state';
+import { LocalStorageService } from '../../../nga/services/localStorage.service';
+import { NavigationService } from '../../../nga/services/navigation.service';
+import { MenuService } from '../../../nga/services/menu.service';
+
+import { StateManagementService } from '../../../nga/services/stateManagement.service';
+import { ThemeService } from '../../../nga/services/theme.service';
+
 import { BaseComponent } from '../../base';
 
+/**
+* @module AboutComponent
+* Component introduces the Author
+*/
 @Component({
   templateUrl: 'about.component.html'
 })
@@ -30,17 +35,18 @@ export class AboutComponent extends BaseComponent implements OnInit, OnDestroy {
   constructor(
     // Base class services
     public translateService: TranslateService,
+
     public globalState: GlobalState,
     public localStorageService: LocalStorageService,
-    public navigationService: NavigationService,
     public menuService: MenuService,
+    public navigationService: NavigationService,
 
     // Derive class services
     private stateManagementService: StateManagementService,
     private themeService: ThemeService,
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
 
     // Derive class constructor
     stateManagementService.initState();

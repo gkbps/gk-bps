@@ -13,7 +13,7 @@ export class GkClientsServices {
     private httpClientService: HttpClientService,
   ) {}
 
-  createBlankItem(){
+  createBlankItem() {
     const value = {
       name: '',
       clientDb: '',
@@ -25,7 +25,7 @@ export class GkClientsServices {
       remarks: [],
       status1: 'Active',
       status2: 'Unmarked'
-    }
+    };
     return Observable.of(value);
   }
 

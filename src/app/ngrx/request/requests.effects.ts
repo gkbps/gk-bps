@@ -11,7 +11,7 @@
 
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { switchMap, map, concatMap, catchError } from 'rxjs/operators';
 
 import { RequestsActionTypes, RequestActionTypes } from './requests.actions';
@@ -42,10 +42,10 @@ export class RequestsEffects {
           action['payload']['rows'],
           action['payload']['tray'],
           action['payload']['prefix']
-        )
+        );
       }),
       // If successful, dispatch success action with result
-      map(requests =>{
+      map(requests => {
         console.log(requests);
         return ({ type: RequestsActionTypes.GET_REQUESTS_SUCCESS, payload: requests });
       })
@@ -111,12 +111,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.action11(action['payload']['data'])
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.ADD_REQUEST_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.ADD_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -127,12 +127,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.action13(action['payload']['data'])
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.SAVE_REQUEST_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.SAVE_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -143,12 +143,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.submitRequest(action['payload']['data'])
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.SUBMIT_REQUEST_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.SUBMIT_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -159,12 +159,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.withdrawRequest(action['payload']['id'])
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.WITHDRAW_REQUEST_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.WITHDRAW_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -175,12 +175,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.cancelRequest(action['payload']['id'])
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.CANCEL_REQUEST_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.CANCEL_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -191,12 +191,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.returnRequest(action['payload']['id'])
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.RETURN_REQUEST_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.RETURN_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -207,12 +207,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.rejectRequest(action['payload']['id'])
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.REJECT_REQUEST_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.REJECT_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -227,12 +227,12 @@ export class RequestsEffects {
           action['payload']['step'],
         )
         .pipe(
-          map(request =>{
+          map(request => {
             console.log(request);
             return { type: RequestActionTypes.APPROVE_REQUEST_SUCCESS, payload: request };
           }),
           catchError((err, caught) => Observable.of({type: RequestActionTypes.APPROVE_REQUEST_ERROR}))
-        )
+        );
       })
     );
 
@@ -243,12 +243,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.abortRequest(action['payload']['id'])
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.ABORT_REQUEST_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.ABORT_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -268,12 +268,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.postRequest(action['payload']['id'])
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.POST_REQUEST_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.POST_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -284,12 +284,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.revertRequest(action['payload']['id'])
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.REVERT_REQUEST_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.REVERT_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -303,12 +303,12 @@ export class RequestsEffects {
           action['payload']['journal']
         )
           .pipe(
-            map(journal =>{
+            map(journal => {
               console.log(journal);
               return { type: RequestActionTypes.CREATE_REQUEST_JOURNAL_SUCCESS, payload: journal };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.CREATE_REQUEST_JOURNAL_ERROR}))
-          )
+          );
       })
     );
 
@@ -319,12 +319,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.postRequestJournal(action['payload']['id'])
           .pipe(
-            map(journal =>{
+            map(journal => {
               console.log(journal);
               return { type: RequestActionTypes.POST_REQUEST_JOURNAL_SUCCESS, payload: journal };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.POST_REQUEST_JOURNAL_ERROR}))
-          )
+          );
       })
     );
 
@@ -335,12 +335,12 @@ export class RequestsEffects {
         console.log(action);
         return this.requestsServices.revertRequestJournal(action['payload']['id'])
           .pipe(
-            map(journal =>{
+            map(journal => {
               console.log(journal);
               return { type: RequestActionTypes.REVERT_REQUEST_JOURNAL_SUCCESS, payload: journal };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.REVERT_REQUEST_JOURNAL_ERROR}))
-          )
+          );
       })
     );
 
@@ -360,12 +360,12 @@ export class RequestsEffects {
           action['payload']['approval']
         )
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.MOVE_REQUEST_APPROVAL_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.MOVE_REQUEST_APPROVAL_ERROR}))
-          )
+          );
       })
     );
 
@@ -379,12 +379,12 @@ export class RequestsEffects {
           action['payload']['status']
         )
           .pipe(
-            map(request =>{
+            map(request => {
               console.log(request);
               return { type: RequestActionTypes.MOVE_REQUEST_STATUS_SUCCESS, payload: request };
             }),
             catchError((err, caught) => Observable.of({type: RequestActionTypes.MOVE_REQUEST_STATUS_ERROR}))
-          )
+          );
       })
     );
 }

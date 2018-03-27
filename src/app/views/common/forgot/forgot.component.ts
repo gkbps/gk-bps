@@ -7,14 +7,20 @@ import { EmailValidator, EqualPasswordsValidator } from '../../../nga/validators
 
 import { UserService } from '../../../nga/common/user.service';
 
-import {
-  SecurityService,
-  LocalStorageService,
-  BodyBackgroundService,
-  StateManagementService,
-  TcodeService,
-} from '../../../nga/services';
+import { BodyBackgroundService } from '../../../nga/services/bodyBackground.service';
+import { LocalStorageService } from '../../../nga/services/localStorage.service';
+import { SecurityService } from '../../../nga/services/security.service';
+import { StateManagementService } from '../../../nga/services/stateManagement.service';
+import { TcodeService } from '../../../nga/services/tcode.service';
 
+/**
+* @module ForgotComponent
+* Component for Forgot / Reset Password page
+*
+* @function onSubmit
+* @function forgot
+* @function gotoPage
+*/
 @Component({
   templateUrl: 'forgot.component.html',
   styleUrls: ['../login/fixed.scss']
@@ -32,12 +38,15 @@ export class ForgotComponent {
 
   constructor(
       private router: Router,
-      private userService: UserService,
       private fb: FormBuilder,
-      private securityService: SecurityService,
+
       private translate: TranslateService,
-      private localStorage: LocalStorageService,
+
+      private userService: UserService,
+
       private bodyBackgroundService: BodyBackgroundService,
+      private localStorage: LocalStorageService,
+      private securityService: SecurityService,
       private stateManagementService: StateManagementService,
       private tcodeService: TcodeService,
   ) {
@@ -60,6 +69,10 @@ export class ForgotComponent {
     this.token = this.form.controls['token'];
   }
 
+  /**
+  * @function onSubmit
+  * Track if form is submitted or not to set up message
+  */
   public onSubmit(values: Object): void {
     this.submitted = true;
     if (this.form.valid) {
@@ -68,7 +81,10 @@ export class ForgotComponent {
     }
   }
 
-  // Add by HTD
+  /**
+  * @function forgot
+  * Set up message for forgot form
+  */
   forgot() {
     this.loading = true;
     this.securityService.setToken(this.model.token);
@@ -98,11 +114,15 @@ export class ForgotComponent {
 
             this.loading = false;
             setTimeout(() => {
-              this.message = ''
+              this.message = '';
             }, 3000);
           });
     }
 
+    /**
+    * @function gotoPage
+    * Goto a page
+    */
     gotoPage(page) {
       this.tcodeService.executeTcode(page);
     }

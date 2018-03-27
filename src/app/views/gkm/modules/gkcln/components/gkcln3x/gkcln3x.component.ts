@@ -6,17 +6,17 @@ import { SelectItem } from 'primeng/api';
 import { Store } from '@ngrx/store';
 
 import { TranslateService } from '@ngx-translate/core';
+
 import { GlobalState } from '../../../../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService
-} from '../../../../../../nga/services';
+import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
+import { MenuService } from '../../../../../../nga/services/menu.service';
+import { NavigationService } from '../../../../../../nga/services/navigation.service';
+
 import { TrayBaseComponent } from '../../../../../base/tray/tray.component';
 
 @Component({
   templateUrl: '../../../../../base/tray/tray.component.html',
-  styleUrls:['./gkcln3x.scss']
+  styleUrls: ['./gkcln3x.scss']
 })
 export class GkCln3xComponent extends TrayBaseComponent implements OnInit, OnDestroy {
 
@@ -34,7 +34,7 @@ export class GkCln3xComponent extends TrayBaseComponent implements OnInit, OnDes
     public store: Store<any>
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService, store);
+    super(translateService, globalState, localStorageService, menuService, navigationService, store);
   }
 
   ngOnInit() {

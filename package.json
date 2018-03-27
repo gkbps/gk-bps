@@ -58,6 +58,7 @@
     "graphql": "^0.13.1",
     "graphql-tag": "^2.8.0",
     "jquery": "^3.3.1",
+    "lint": "^1.1.2",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "ng-drag-drop": "^4.0.0",
@@ -74,6 +75,7 @@
     "socket.io-client": "^2.0.4",
     "tinycolor2": "^1.4.1",
     "ts-helpers": "1.1.2",
+    "tslint": "^5.9.1",
     "typed.js": "^2.0.6",
     "underscore": "^1.8.3",
     "videogular2": "^6.0.1",
@@ -102,7 +104,6 @@
     "protractor": "~5.1.2",
     "sw-precache": "^5.2.1",
     "ts-node": "~3.2.0",
-    "tslint": "~5.7.0",
     "typescript": "^2.6.2",
     "webpack-bundle-analyzer": "^2.9.2"
   }

@@ -94,7 +94,7 @@ export class NavigationService {
             msg: res['top_of_history'],
             showClose: true,
           };
-          this.globalState.notifyMyDataChanged('toasty','', toastData);
+          this.globalState.notifyMyDataChanged('toasty', '', toastData);
         });
     }
   }

@@ -7,5 +7,5 @@ export enum TodosActionTypes {
 export function getTodosAction() {
   return {
     type: TodosActionTypes.GET_TODOS
-  }
+  };
 }

@@ -8,16 +8,19 @@ import { LazyLoadEvent } from 'primeng/api';
 import { SortEvent } from 'primeng/api';
 
 import { TranslateService } from '@ngx-translate/core';
+
 import { GlobalState } from '../../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
+import { LocalStorageService } from '../../../../nga/services/localStorage.service';
+import { MenuService } from '../../../../nga/services/menu.service';
+import { NavigationService } from '../../../../nga/services/navigation.service';
 
-  SecurityService,
-  TcodeService
-} from '../../../../nga/services';
+import { SecurityService } from '../../../../nga/services/security.service';
+import { TcodeService } from '../../../../nga/services/tcode.service';
 
+/**
+* @module NotificationTableComponent
+* Component for table of notifications
+*/
 @Component({
   selector: 'notification-table',
   templateUrl: './notification-table.html',
@@ -51,10 +54,12 @@ export class NotificationTableComponent implements OnInit, OnDestroy {
 
   constructor(
     private translateService: TranslateService,
+
     private globalState: GlobalState,
+    private localStorageService: LocalStorageService,
+
     private securityService: SecurityService,
     private tcodeService: TcodeService,
-    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit () {
@@ -83,6 +88,12 @@ export class NotificationTableComponent implements OnInit, OnDestroy {
     this.globalState.unsubscribeEvent('language', this.myScope);
   }
 
+  // FORM OPERATIONS
+
+  /**
+  * @function initColumns
+  * Initialize Columns of table
+  */
   initColumns() {
     this.translateService.get(['_id', 'tcode', 'id', 'description', 'username', 'creator', 'mark', 'created_at', 'selected_item_label'])
       .subscribe((res) => {
@@ -95,7 +106,6 @@ export class NotificationTableComponent implements OnInit, OnDestroy {
           // { field: 'id', header: res.id, width: '10%' },
           // { field: 'username', header: res.username, width: '10%'},
           // { field: 'creator', header: res.creator, width: '10%'  },
-
         ];
 
         this.selectedColumns = JSON.parse(JSON.stringify(this.cols));
@@ -107,6 +117,10 @@ export class NotificationTableComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+  * @function initMenuItems
+  * Initialize menu based on context
+  */
   initMenuItems() {
     this.translateService.get(['open', 'mark', 'unmark', 'delete'])
       .subscribe((res) => {
@@ -116,7 +130,10 @@ export class NotificationTableComponent implements OnInit, OnDestroy {
             label: res.open, icon: 'ui-icon-search',
             command: (event) => {
               console.log(this.selectedClient.tcode, this.selectedClient.id, this.selectedClient._id);
-              this.tcodeService.executeTcode(this.selectedClient.tcode, this.selectedClient.id? this.selectedClient.id : this.selectedClient._id);
+              this.tcodeService.executeTcode(
+                this.selectedClient.tcode,
+                this.selectedClient.id ? this.selectedClient.id : this.selectedClient._id
+              );
             }
           },
           {
@@ -136,19 +153,33 @@ export class NotificationTableComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+  * @function executeTcode
+  * Execute a tcode
+  *
+  * @param tcode
+  */
   executeTcode(tcode) {
-    this.tcodeService.executeTcode(tcode, this.selectedClient ? this.selectedClient._id : null)
+    this.tcodeService.executeTcode(tcode, this.selectedClient ? this.selectedClient._id : null);
   }
 
+  /**
+  * @function emitAction
+  * Emit an action
+  */
   emitAction(action) {
     if (this.isSelected) {
       this.onAction.emit({
         action: action,
         id: this.selectedClient._id
-      })
+      });
     }
   }
 
+  /**
+  * @function isSelected
+  * Check if any notification is selected
+  */
   isSelected() {
     if (this.selectedClient) {
       return true;
@@ -157,6 +188,10 @@ export class NotificationTableComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+  * @function loadData
+  * Lazy loading notification list by pagination on demand
+  */
   loadData(event: LazyLoadEvent) {
     // console.log(event);
 
@@ -168,18 +203,18 @@ export class NotificationTableComponent implements OnInit, OnDestroy {
 
     // sortMode = multiple
     if (event.multiSortMeta) {
-      for (let i=0; i< event.multiSortMeta.length; i++) {
+      for (let i = 0; i < event.multiSortMeta.length; i++) {
         sort[event.multiSortMeta[i]['field']] = event.multiSortMeta[i].order;
       }
     }
     // console.log(sort);
 
     const pagination = {
-      filter: event.globalFilter? event.globalFilter: '',
+      filter: event.globalFilter ? event.globalFilter : '',
       sort: JSON.stringify(sort),
       first: event.first,
       rows: event.rows
-    }
+    };
 
     this.rows = event.rows;
     this.localStorageService.setRows(event.rows);

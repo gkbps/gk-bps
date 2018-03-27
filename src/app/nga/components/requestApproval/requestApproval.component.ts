@@ -35,7 +35,7 @@ import { GkUserService } from '../../../store/_services/gkUser.service';
 export class RequestApproval implements OnInit, OnDestroy {
   myScope = 'request-approval';
 
-  id ='';
+  id = '';
   gb: any;
 
   items: MenuItem[];
@@ -60,7 +60,7 @@ export class RequestApproval implements OnInit, OnDestroy {
   selectedApprover: any;
 
   // Dialog variables
-  display: boolean = false;
+  display = false;
   position = [];
   selectedPosition = 'before';
   step = '';
@@ -306,7 +306,7 @@ export class RequestApproval implements OnInit, OnDestroy {
       msg: this.messageText,
       showClose: true,
     };
-    this.globalState.notifyMyDataChanged('toasty','', toastData);
+    this.globalState.notifyMyDataChanged('toasty', '', toastData);
   }
 
   notifyCanNotRemoveMandatoryApprover() {
@@ -316,7 +316,7 @@ export class RequestApproval implements OnInit, OnDestroy {
       msg: this.lblRemoveMandatoryApprover,
       showClose: true,
     };
-    this.globalState.notifyMyDataChanged('toasty','', toastData);
+    this.globalState.notifyMyDataChanged('toasty', '', toastData);
   }
 
   removeApprover() {
@@ -324,18 +324,18 @@ export class RequestApproval implements OnInit, OnDestroy {
   }
 
   filterUserSingle(event) {
-    let query = event.query;
+    const query = event.query;
     console.log(query);
     if (query.length >1) {
       this.gkUserService.findAPIListPagination(query, '{}', 0, 20);
     }
   }
 
-  filterUser(query, users: any[]):any[] {
-    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-    let filtered : any[] = [];
-    for(let i = 0; i < users.length; i++) {
-      let user = users[i];
+  filterUser(query, users: any[]): any[] {
+    // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    const filtered : any[] = [];
+    for (let i = 0; i < users.length; i++) {
+      const user = users[i];
       if (user.fullname.toLowerCase().includes(query.toLowerCase()))  {
           filtered.push(user);
       }

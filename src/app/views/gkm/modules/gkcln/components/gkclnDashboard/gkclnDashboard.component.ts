@@ -6,7 +6,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 // import { InputTextModule } from 'primeng/inputtext';
 // import { DropdownModule } from 'primeng/dropdown';
 
-Component({
+@Component({
   selector: 'generic-html',
   template: `<ng-content></ng-content>`
 })

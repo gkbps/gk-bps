@@ -5,6 +5,16 @@ import { RouterModule } from '@angular/router';
 
 import { AppTranslationModule } from '../app.translation.module';
 
+/**
+* NGA contains global accessible module to
+* - Directives
+* - Pipes
+* - Services
+* - Validators
+*
+* NGA components are independent and include on the demand
+*/
+
 // DIRECTIVES
 import {
   DebounceClickDirective,
@@ -37,8 +47,8 @@ const NGA_PIPES = [
 import {
   APIResultHandlingService,
   ArrayService,
-  AuthenticationService,
   AuthGuard,
+  AuthenticationService,
   BodyBackgroundService,
   ChatService,
   ColorService,
@@ -47,7 +57,7 @@ import {
   HelpService,
   HelperService,
   HttpClientService,
-  // LanguageService,
+  LanguageService,
   LoaderService,
   LocalStorageService,
   MenuService,
@@ -67,8 +77,8 @@ import {
 const NGA_SERVICES = [
   APIResultHandlingService,
   ArrayService,
-  AuthenticationService,
   AuthGuard,
+  AuthenticationService,
   BodyBackgroundService,
   ChatService,
   ColorService,
@@ -77,7 +87,7 @@ const NGA_SERVICES = [
   HelpService,
   HelperService,
   HttpClientService,
-  // LanguageService,
+  LanguageService,
   LoaderService,
   LocalStorageService,
   MenuService,

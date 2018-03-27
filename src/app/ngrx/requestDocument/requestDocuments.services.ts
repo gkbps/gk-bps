@@ -57,9 +57,9 @@ export class RequestDocumentsServices {
 
   addRequestFile(payload) {
     return new Observable((observer) => observer.next(payload))
-    .map((payload) => {
-      console.log(payload);
-      return { type: 'ADD_REQUEST_FILE', payload };
+    .map((_payload) => {
+      console.log(_payload);
+      return { type: 'ADD_REQUEST_FILE', _payload };
     });
   }
 

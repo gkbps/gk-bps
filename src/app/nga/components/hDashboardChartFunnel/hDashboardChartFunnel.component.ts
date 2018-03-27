@@ -27,7 +27,6 @@ export class HDashboardChartFunnelComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -41,5 +40,5 @@ export class HDashboardChartFunnelComponent implements OnInit, OnChanges {
   changeInEdit() {
     this.inEdit = !this.inEdit;
   }
-  
+    
 }

@@ -1,16 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 
-import {
-  LocalStorageService,
-  BodyBackgroundService,
-  SecurityService,
-  TcodeService,
-} from '../../../nga/services';
-// import { GlobalState } from '../../../global.state';
+import { BodyBackgroundService } from '../../../nga/services/bodyBackground.service';
+import { LocalStorageService } from '../../../nga/services/localStorage.service';
+import { SecurityService } from '../../../nga/services/security.service';
+import { TcodeService } from '../../../nga/services/tcode.service';
 
+/**
+* @module IntroComponent
+* Component for Intro page
+* @function changeLanguage
+* @function gotoLogin
+*/
 @Component({
   templateUrl: 'intro.html',
   styleUrls: [
@@ -31,16 +34,31 @@ export class IntroComponent implements OnInit, OnDestroy {
     // globalState.unsubscribeAll();
   }
 
-  public changeLanguage(lang: string) {
-    this.localStorageService.setLang(lang);
-    this.translate.use(lang);
-  }
-
   ngOnInit() {
     const element = document.getElementsByTagName('body')[0];
     element.classList.add('landing-body');
   }
 
+  ngOnDestroy() {
+    const element = document.getElementsByTagName('body')[0];
+    element.classList.remove('landing-body');
+  }
+
+  /**
+  * @function changeLanguage
+  * Change language of the page
+  *
+  * @param {string} lang
+  */
+  public changeLanguage(lang: string) {
+    this.localStorageService.setLang(lang);
+    this.translate.use(lang);
+  }
+
+  /**
+  * @function gotoLogin
+  * Goto Login page  
+  */
   gotoLogin() {
     const securityService = this.securityService.getSavedSession();
     if (securityService) {
@@ -48,11 +66,6 @@ export class IntroComponent implements OnInit, OnDestroy {
     } else {
       this.tcodeService.executeTcode('login');
     }
-  }
-
-  ngOnDestroy() {
-    const element = document.getElementsByTagName('body')[0];
-    element.classList.remove('landing-body');
   }
 
 }

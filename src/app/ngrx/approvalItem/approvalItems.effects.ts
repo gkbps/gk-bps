@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { switchMap, map, concatMap, catchError } from 'rxjs/operators';
 
 import { ApprovalItemsActionTypes } from './approvalItems.actions';
@@ -25,11 +25,11 @@ export class ApprovalItemsEffects {
             // If successful, dispatch success action with result
             map(standardApprovalItems => {
               console.log(standardApprovalItems);
-              return ({type: ApprovalItemsActionTypes.GET_MANY_APPROVAL_ITEMS_SUCCESS, payload: standardApprovalItems})
+              return ({type: ApprovalItemsActionTypes.GET_MANY_APPROVAL_ITEMS_SUCCESS, payload: standardApprovalItems});
             }),
             // If request fails, dispatch failed action
             catchError((err, caught) => Observable.of({type: ApprovalItemsActionTypes.GET_MANY_APPROVAL_ITEMS_ERROR}))
-          )
+          );
       })
     );
 

@@ -150,7 +150,7 @@ export class HDataTableByTrayComponent implements OnInit, OnDestroy {
   }
 
   initMenuItems() {
-    if (this.trayType!=='module') {
+    if (this.trayType !== 'module') {
       this.translateService.get(['view', 'print'])
         .subscribe((res) => {
           this.items = [
@@ -279,19 +279,20 @@ export class HDataTableByTrayComponent implements OnInit, OnDestroy {
 
     // sortMode = multiple
     if (event.multiSortMeta) {
-      for (let i=0; i< event.multiSortMeta.length; i++) {
+      for (let i = 0; i < event.multiSortMeta.length; i++) {
         sort[event.multiSortMeta[i]['field']] = event.multiSortMeta[i].order;
       }
     }
     // console.log(sort);
 
     const pagination = {
-      filter: event.globalFilter? event.globalFilter: '',
+      filter: event.globalFilter ? event.globalFilter : '',
       sort: JSON.stringify(sort),
       first: event.first,
       rows: event.rows,
       tray: this.trayType
-    }
+    };
+    console.log(pagination);
 
     this.rows = event.rows;
     this.localStorageService.setRows(event.rows);

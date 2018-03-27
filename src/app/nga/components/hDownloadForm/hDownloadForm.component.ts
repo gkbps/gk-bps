@@ -22,8 +22,6 @@ import {
 // import * as FileSaver from 'file-saver';
 // import * as StreamSaver from 'streamsaver';
 
-import { BaseComponent } from '../../../views/base';
-
 @Component({
   selector: 'h-download-form',
   templateUrl: './hDownloadForm.html',
@@ -117,7 +115,7 @@ export class HDownloadForm implements OnInit, OnDestroy {
           msg: msg['msg'],
           showClose: true,
         };
-        this.globalState.notifyMyDataChanged('toasty','', toastData);
+        this.globalState.notifyMyDataChanged('toasty', '', toastData);
       });
   }
 

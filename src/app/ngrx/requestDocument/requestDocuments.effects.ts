@@ -11,7 +11,7 @@
 
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { switchMap, map, concatMap, catchError } from 'rxjs/operators';
 
 import { RequestDocumentsActionTypes, RequestDocumentActionTypes } from './requestDocuments.actions';
@@ -41,10 +41,10 @@ export class RequestDocumentsEffects {
       ofType(RequestDocumentsActionTypes.GET_REQUEST_DOCUMENTS),
       switchMap(action => {
         // console.log(action);
-        return this.requestDocumentsServices.action1x(action['payload']['id'])
+        return this.requestDocumentsServices.action1x(action['payload']['id']);
       }),
       // If successful, dispatch success action with result
-      map(requestDocuments =>{
+      map(requestDocuments => {
         console.log(requestDocuments);
         return ({ type: RequestDocumentsActionTypes.GET_REQUEST_DOCUMENTS_SUCCESS, payload: requestDocuments });
       })
@@ -81,12 +81,12 @@ export class RequestDocumentsEffects {
           action['payload']['desc']
         )
           .pipe(
-            map(requestDocument =>{
+            map(requestDocument => {
               console.log(requestDocument);
               return { type: RequestDocumentsActionTypes.SAVE_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentsActionTypes.SAVE_REQUEST_DOCUMENT_ERROR}))
-          )
+          );
       })
     );
 
@@ -97,12 +97,12 @@ export class RequestDocumentsEffects {
         console.log(action);
         return this.requestDocumentsServices.action16(action['payload']['id'])
           .pipe(
-            map(requestDocument =>{
+            map(requestDocument => {
               console.log(requestDocument);
               return { type: RequestDocumentsActionTypes.MARK_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentsActionTypes.MARK_REQUEST_DOCUMENT_ERROR}))
-          )
+          );
       })
     );
 
@@ -113,12 +113,12 @@ export class RequestDocumentsEffects {
         console.log(action);
         return this.requestDocumentsServices.action17(action['payload']['id'])
           .pipe(
-            map(requestDocument =>{
+            map(requestDocument => {
               console.log(requestDocument);
               return { type: RequestDocumentsActionTypes.UNMARK_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentsActionTypes.UNMARK_REQUEST_DOCUMENT_ERROR}))
-          )
+          );
       })
     );
 
@@ -129,12 +129,12 @@ export class RequestDocumentsEffects {
         console.log(action);
         return this.requestDocumentsServices.action18(action['payload']['id'])
           .pipe(
-            map(requestDocument =>{
+            map(requestDocument => {
               console.log(requestDocument);
               return { type: RequestDocumentsActionTypes.DELETE_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentsActionTypes.DELETE_REQUEST_DOCUMENT_ERROR}))
-          )
+          );
       })
     );
   /**
@@ -169,12 +169,12 @@ export class RequestDocumentsEffects {
           action['payload']['tcode']
         )
           .pipe(
-            map(requestDocument =>{
+            map(requestDocument => {
               console.log(requestDocument);
               return { type: RequestDocumentActionTypes.DOWNLOAD_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentActionTypes.DOWNLOAD_REQUEST_DOCUMENT_ERROR}))
-          )
+          );
       })
     );
 

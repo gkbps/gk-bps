@@ -38,8 +38,8 @@ export interface DashboardbItem {
   label: string;
   grid: string;
   component: Function;
-  inputs: any,
-  outputs: any
+  inputs: any;
+  outputs: any;
 }
 
 @Component({
@@ -55,7 +55,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
   DB_COMPONENTS = {
     'HDashboardBlankComponent': HDashboardBlankComponent,
     'HDashboardKPIComponent': HDashboardKPIComponent,
-    'HDashboardChartPDPComponent':HDashboardChartPDPComponent,
+    'HDashboardChartPDPComponent': HDashboardChartPDPComponent,
     'HDashboardChartLineComponent': HDashboardChartLineComponent,
     'HDashboardChartBarComponent': HDashboardChartBarComponent,
     // 'HDashboardChartRadarComponent': HDashboardChartRadarComponent,
@@ -128,7 +128,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
     const ds_composite = this.dashboardHelperService.genDataByComposite(src_status);
 
     const src_cat_abs = this.dashboardHelperService.getDataByCat();
-    const src_cat_rel = this.dashboardHelperService.convertRelativeDataByCat(src_cat_abs)
+    const src_cat_rel = this.dashboardHelperService.convertRelativeDataByCat(src_cat_abs);
     const transformed_cat = this.dashboardHelperService.genDataByCatForPDP(src_cat_abs);
 
     // console.log(transformed_cat);
@@ -170,7 +170,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
           editMode: this.editMode,
           data: { title: 'Active', figure: src_status.active },
           options: { style: 'overview-box-2', icon: 'layers' },
-          something: () =>'can really complex'
+          something: () => 'can really complex'
         },
         'outputs': { onSomething: (type) => alert(type) }
       },
@@ -552,7 +552,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
 
   addBlankItem() {
     this.blankId = this.blankId + 1;
-    let newBlankDashboardItem = JSON.parse(JSON.stringify(this.blankDashboardItem));
+    const newBlankDashboardItem = JSON.parse(JSON.stringify(this.blankDashboardItem));
     newBlankDashboardItem.id = this.blankId;
 
     this.selectedDashboardItems.push(newBlankDashboardItem);

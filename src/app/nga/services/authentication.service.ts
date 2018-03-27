@@ -50,7 +50,7 @@ export class AuthenticationService {
           this.securityService.setMana(JSON.stringify(user['tcodes']));
           delete user['tcodes'];
 
-          let env = this.localStorage.getEnv();
+          const env = this.localStorage.getEnv();
           env.wk.lge = user['defaultLge'];
           this.localStorage.setEnv(JSON.stringify(env));
 

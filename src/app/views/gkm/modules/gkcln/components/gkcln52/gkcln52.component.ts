@@ -17,15 +17,15 @@ import { HChartDoughnutModule } from '../../../../../../nga/components/hChartDou
 /* ./RUNTIME COMPONENTS */
 
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
 
-  SecurityService,
-  TcodeService,
-} from '../../../../../../nga/services';
+import { GlobalState } from '../../../../../../global.state';
+import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
+import { MenuService } from '../../../../../../nga/services/menu.service';
+import { NavigationService } from '../../../../../../nga/services/navigation.service';
+
+import { SecurityService } from '../../../../../../nga/services/security.service';
+import { TcodeService } from '../../../../../../nga/services/tcode.service';
+
 import { BaseComponent } from '../../../../../base';
 
 @Component({
@@ -52,7 +52,7 @@ export class GkCln52Component extends BaseComponent implements OnInit, OnDestroy
   @ViewChild('container', { read: ViewContainerRef })
   container: ViewContainerRef;
   private componentRef: ComponentRef<{}>;
-  template: string = '<div>\nHello, {{name}}\n</div>';
+  template = '<div>\nHello, {{name}}\n</div>';
   /* ./RUNTIME COMPONENTS */
 
   constructor(
@@ -71,7 +71,7 @@ export class GkCln52Component extends BaseComponent implements OnInit, OnDestroy
     /* ./RUNTIME COMPONENTS */
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
   }
 
   ngOnInit() {
@@ -86,12 +86,12 @@ export class GkCln52Component extends BaseComponent implements OnInit, OnDestroy
 
   /* RUNTIME COMPONENTS */
   compileTemplate() {
-    let metadata = {
+    const metadata = {
         selector: `runtime-component-sample`,
         template: this.template
     };
 
-    let factory = this.createComponentFactorySync(this.compiler, metadata, null);
+    const factory = this.createComponentFactorySync(this.compiler, metadata, null);
 
     if (this.componentRef) {
         this.componentRef.destroy();
@@ -101,13 +101,13 @@ export class GkCln52Component extends BaseComponent implements OnInit, OnDestroy
   }
 
   private createComponentFactorySync(compiler: Compiler, metadata: Component, componentClass: any): ComponentFactory<any> {
-      const cmpClass = componentClass || class RuntimeComponent { name: string = 'Denys' };
+      const cmpClass = componentClass || class RuntimeComponent { name = 'Denys'; };
       const decoratedCmp = Component(metadata)(cmpClass);
 
       @NgModule({ imports: [CommonModule], declarations: [decoratedCmp] })
       class RuntimeComponentModule { }
 
-      let module: ModuleWithComponentFactories<any> = compiler.compileModuleAndAllComponentsSync(RuntimeComponentModule);
+      const module: ModuleWithComponentFactories<any> = compiler.compileModuleAndAllComponentsSync(RuntimeComponentModule);
       return module.componentFactories.find(f => f.componentType === decoratedCmp);
   }
   /* ./RUNTIME COMPONENTS */

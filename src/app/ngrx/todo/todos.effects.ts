@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { concatMap } from 'rxjs/operator/concatMap';
 
 import { TodosActionTypes } from './todos.actions';
@@ -19,7 +19,7 @@ export class TodosEffects {
     .switchMap(action =>
       this.todosServices.getTodos()
         // If successful, dispatch success action with result
-        .map(todos =>({type: TodosActionTypes.GET_TODOS_SUCCESS, payload: todos}))
+        .map(todos => ({type: TodosActionTypes.GET_TODOS_SUCCESS, payload: todos}))
         // If request fails, dispatch failed action
         .catch(() => Observable.of({type: TodosActionTypes.GET_TODOS_ERROR})));
 }

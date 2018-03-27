@@ -106,7 +106,7 @@ export class GkBreadcrumbsComponent implements OnInit, OnDestroy {
             msg: res.top_of_history,
             showClose: true,
           };
-          this.globalState.notifyMyDataChanged('toasty','', toastData);
+          this.globalState.notifyMyDataChanged('toasty', '', toastData);
         });
     }
     return false;

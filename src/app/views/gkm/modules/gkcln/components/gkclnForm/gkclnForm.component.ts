@@ -1,4 +1,8 @@
-import { Component, OnInit, Input, Output, OnDestroy, EventEmitter, ChangeDetectionStrategy, SimpleChanges, OnChanges } from '@angular/core';
+import {
+  Component,
+  OnInit, Input, Output, OnDestroy, EventEmitter,
+  ChangeDetectionStrategy, SimpleChanges, OnChanges
+} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AbstractControl, FormControl } from '@angular/forms';
@@ -29,7 +33,7 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
 
   @Input() prefix: any;
   @Input() action: any;
-  @Input() isRequest:boolean;
+  @Input() isRequest: boolean;
   @Input() isEditable: boolean;
 
   @Input() source: any;
@@ -45,55 +49,55 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   msgs: Message[] = [];
 
   industryList = [
-    { label:'Select industry', value:null },
-    { label:'Pharma', value:'Pharma' },
-    { label:'Bank', value:'Bank' },
-    { label:'Insurance', value:'Insurance' },
-    { label:'FMCG', value:'FMCG' },
-    { label:'Financial Services', value:'Financial Services' },
-    { label:'Software', value:'Software' },
-    { label:'Consulting', value:'Consulting' },
-    { label:'IT', value:'IT' },
-    { label:'Auto', value:'Auto' },
-    { label:'Auditing', value:'Auditing' },
-    { label:'Travel Agency', value:'Travel Agency' },
-    { label:'Government', value:'Government' },
-    { label:'Others', value:'Others' },
-    { label:'News Agency', value:'News Agency' },
-    { label:'Business & Information', value: 'Business & Information'},
-    { label:'Construction/Utilities/Contracting', value: 'Construction/Utilities/Contracting'},
-    { label:'Education', value: 'Education'},
-    { label:'Finance & Insurance', value: 'Finance & Insurance'},
-    { label:'Food & Hospitality', value: 'Food & Hospitality'},
-    { label:'Gaming', value: 'Gaming'},
-    { label:'Health Services', value: 'Health Services'},
-    { label:'Motor Vehicle', value: 'Motor Vehicle'},
-    { label:'Natural Resources/Environmental', value: 'Natural Resources/Environmental'},
-    { label:'Other', value: 'Other'},
-    { label:'Personal Services', value: 'Personal Services'},
-    { label:'Real Estate & Housing', value: 'Real Estate & Housing'},
-    { label:'Safety/Security & Legal', value: 'Safety/Security & Legal'},
-    { label:'Transportation', value: 'Transportation'}
+    { label: 'Select industry', value: null },
+    { label: 'Pharma', value: 'Pharma' },
+    { label: 'Bank', value: 'Bank' },
+    { label: 'Insurance', value: 'Insurance' },
+    { label: 'FMCG', value: 'FMCG' },
+    { label: 'Financial Services', value: 'Financial Services' },
+    { label: 'Software', value: 'Software' },
+    { label: 'Consulting', value: 'Consulting' },
+    { label: 'IT', value: 'IT' },
+    { label: 'Auto', value: 'Auto' },
+    { label: 'Auditing', value: 'Auditing' },
+    { label: 'Travel Agency', value: 'Travel Agency' },
+    { label: 'Government', value: 'Government' },
+    { label: 'Others', value: 'Others' },
+    { label: 'News Agency', value: 'News Agency' },
+    { label: 'Business & Information', value: 'Business & Information'},
+    { label: 'Construction/Utilities/Contracting', value: 'Construction/Utilities/Contracting'},
+    { label: 'Education', value: 'Education'},
+    { label: 'Finance & Insurance', value: 'Finance & Insurance'},
+    { label: 'Food & Hospitality', value: 'Food & Hospitality'},
+    { label: 'Gaming', value: 'Gaming'},
+    { label: 'Health Services', value: 'Health Services'},
+    { label: 'Motor Vehicle', value: 'Motor Vehicle'},
+    { label: 'Natural Resources/Environmental', value: 'Natural Resources/Environmental'},
+    { label: 'Other', value: 'Other'},
+    { label: 'Personal Services', value: 'Personal Services'},
+    { label: 'Real Estate & Housing', value: 'Real Estate & Housing'},
+    { label: 'Safety/Security & Legal', value: 'Safety/Security & Legal'},
+    { label: 'Transportation', value: 'Transportation'}
   ];
 
   serviceList = [
-    { label:'Select service', value:null },
-    { label:'Category 1', value: 'Cat 1'},
-    { label:'Category 2', value: 'Cat 2'},
-    { label:'Category 3', value: 'Cat 3'},
-    { label:'Category 4', value: 'Cat 4'},
+    { label: 'Select service', value: null },
+    { label: 'Category 1', value: 'Cat 1'},
+    { label: 'Category 2', value: 'Cat 2'},
+    { label: 'Category 3', value: 'Cat 3'},
+    { label: 'Category 4', value: 'Cat 4'},
   ];
 
   status1List = [
-    { label:'Select status', value:null },
-    { label:'Active', value:'Active' },
-    { label:'Inactive', value:'Inactive' },
+    { label: 'Select status', value: null },
+    { label: 'Active', value: 'Active' },
+    { label: 'Inactive', value: 'Inactive' },
   ];
 
   status2List = [
-    { label:'Select mark', value:null },
-    { label:'Marked', value:'Marked' },
-    { label:'Unmarked', value:'Unmarked' },
+    { label: 'Select mark', value: null },
+    { label: 'Marked', value: 'Marked' },
+    { label: 'Unmarked', value: 'Unmarked' },
   ];
 
   constructor(
@@ -122,17 +126,18 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
       console.log(this.source);
 
       if (this.source) {
-        // For Master Data / Transaction - Once transaction completed
-        // 11 + id = Create New completed
-        if ((this.action=='11') && (this.source.data._id)) {
+        if ((this.action === '11') && (this.source.data._id)) {
+          // For Master Data / Transaction - Once transaction completed
+          // 11 + id = Create New completed
+
           this.isNewCreationSuccess = true;
-        }
-        // 18 + id = Delete completed
-        else if((this.action=='18') && (this.source.data._id)) {
+        } else if ((this.action === '18') && (this.source.data._id)) {
+          // 18 + id = Delete completed
+
           this.isDeletionSuccess = true;
-        }
-        // For Others: Master Data / Transaction + Request
-        else {
+        } else {
+          // For Others: Master Data / Transaction + Request
+
           if (!this.source.pending && !this.source.error) {
             this.buildForm();
           }
@@ -232,7 +237,7 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   private addAddressWithData(addressData: any) {
     return this._fb.group({
       type: [addressData.type, [ Validators.required, Validators.minLength(3) ]],
-      line1: [addressData.line1, [ Validators.required,Validators.minLength(1) ]],
+      line1: [addressData.line1, [ Validators.required, Validators.minLength(1) ]],
       line2: [addressData.line2],
       line3: [addressData.line3],
       line4: [addressData.line4],
@@ -374,19 +379,18 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
         msg: 'Form Validation Failed',
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty','', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', toastData);
     }
   }
 
   markAllDirty(control: AbstractControl) {
-    if(control.hasOwnProperty('controls')) {
-      control.markAsDirty({onlySelf: true}) // mark group
-      let ctrl = <any>control;
-      for (let inner in ctrl.controls) {
+    if (control.hasOwnProperty('controls')) {
+      control.markAsDirty({onlySelf: true}); // mark group
+      const ctrl = <any>control;
+      for (const inner in ctrl.controls) {
           this.markAllDirty(ctrl.controls[inner] as AbstractControl);
       }
-    }
-    else {
+    } else {
       (<FormControl>(control)).markAsDirty({onlySelf: true});
     }
   }
@@ -395,7 +399,7 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   * UTILITIES
   */
   gotoTcode(tcode) {
-    this.tcodeService.executeTcode(tcode,'');
+    this.tcodeService.executeTcode(tcode, '');
   }
 
   hasRight(tcode) {

@@ -21,13 +21,12 @@
         </div>
 
         <div class="ui-g-12">
-          <!-- <p *ngIf="body.pending">
+          <p *ngIf="body.pending">
             Loading...
-          </p> -->
+          </p>
 
           <p-table
             #dt
-            [loading]="body.pending"
 
             [columns]="selectedColumns"
             [value]="body.data.data"

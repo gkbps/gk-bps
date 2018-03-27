@@ -41,7 +41,7 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
   messageText = '';
 
   // Dialog variables
-  display: boolean = false;
+  display = false;
   approvalTypeDesc = '';
   dialogType = 'new';
 
@@ -83,7 +83,7 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
   selectApprovalType(selectedApprovalType) {
     // console.log('Selected Approval Type:', selectedApprovalType);
     this.selectedApprovalType = selectedApprovalType;
-    this.initApprovalPickList(selectedApprovalType.items)
+    this.initApprovalPickList(selectedApprovalType.items);
   }
 
   initApprovalPickList(selectedApprovalItems) {
@@ -123,7 +123,13 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
   /****************************************************************************/
 
   initNav() {
-    this.translateService.get(['create', 'view', 'edit', 'save', 'disable', 'enable', 'mark', 'unmark', 'delete', 'viewChange', 'notifications', 'selectItemToExecute'])
+    this.translateService.get([
+      'create', 'view', 'edit', 'save',
+      'disable', 'enable',
+      'mark', 'unmark',
+      'delete',
+      'viewChange', 'notifications', 'selectItemToExecute'
+    ])
       .subscribe((res) => {
 
         this.items = [
@@ -207,7 +213,7 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
       msg: this.messageText,
       showClose: true,
     };
-    this.globalState.notifyMyDataChanged('toasty','', toastData);
+    this.globalState.notifyMyDataChanged('toasty', '', toastData);
   }
 
   showDialog(dialogType) {
@@ -227,11 +233,11 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
             tcode: this.tcode,
             status1: 'Active',
             status2: 'Unmarked'
-          }
+          };
           this.approvalItemService.createApprovalType(updatedApprovalType)
             .subscribe(responseBodyData => {
               // console.log(responseBodyData);
-              let newApprovalList = JSON.parse(JSON.stringify(this.approvalTypeList));
+              const newApprovalList = JSON.parse(JSON.stringify(this.approvalTypeList));
               updatedApprovalType['_id'] = responseBodyData['body'].data;
               newApprovalList.push(updatedApprovalType);
               this.approvalTypeList = newApprovalList;
@@ -251,7 +257,7 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
             desc: this.approvalTypeDesc,
             items: this.selectedApprovalType.items,
             tcode: this.selectedApprovalType.tcode
-          }
+          };
 
           this.approvalItemService.updateApprovalType(updatedApprovalType)
             .subscribe(responseBodyData => {
@@ -272,7 +278,7 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
           desc: this.selectedApprovalType.desc,
           items: this.targetApprovalItems,
           tcode: this.selectedApprovalType.tcode
-        }
+        };
 
         this.approvalItemService.updateApprovalType(updatedApprovalType)
           .subscribe(responseBodyData => {
@@ -293,9 +299,9 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
     this.approvalItemService.deleteApprovalType(id)
       .subscribe(responseBodyData => {
         // console.log(responseBodyData);
-        let tmpList = this.approvalTypeList.filter((element) => {
-          return element._id != id;
-        })
+        const tmpList = this.approvalTypeList.filter((element) => {
+          return element._id !== id;
+        });
         this.selectedApprovalType = null;
         this.approvalTypeList = tmpList;
       }, error => {

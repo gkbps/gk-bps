@@ -48,7 +48,7 @@ export class NewsDeptComponent implements OnInit, OnDestroy {
   /* GLOBAL STATE */
   subscribeGlobalState() {
     // Register Language Callback in Global Status
-    this.globalState.subscribeEvent('language', this.myScope, (lang)=>{
+    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
       console.log(lang);
       this.translate.use(lang);
     });

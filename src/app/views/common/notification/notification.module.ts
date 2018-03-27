@@ -49,7 +49,7 @@ import { NotificationTableComponent } from './components/notification-table.comp
     ContextMenuModule,
     DropdownModule,
 
-    StoreModule.forFeature('notifications1', NotificationsReducers),
+    StoreModule.forFeature('notifications', NotificationsReducers),
     StoreModule.forFeature('notification', NotificationReducers),
     EffectsModule.forFeature([ NotificationsEffects ]),
 

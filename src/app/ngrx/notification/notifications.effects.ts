@@ -11,7 +11,7 @@
 
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { switchMap, map, concatMap, catchError } from 'rxjs/operators';
 
 import { TopNotificationsActionTypes, NotificationsActionTypes, NotificationActionTypes } from './notifications.actions';
@@ -35,10 +35,10 @@ export class NotificationsEffects {
           action['payload']['sort'],
           action['payload']['first'],
           action['payload']['rows']
-        )
+        );
       }),
       // If successful, dispatch success action with result
-      map(requestDocuments =>{
+      map(requestDocuments => {
         // console.log(requestDocuments);
         return ({ type: TopNotificationsActionTypes.GET_TOP_NOTIFICATIONS_SUCCESS, payload: requestDocuments });
       })
@@ -51,7 +51,7 @@ export class NotificationsEffects {
     .pipe(
       ofType(TopNotificationsActionTypes.ADD_NOTIFICATION),
       // If successful, dispatch success action with result
-      map(action =>{
+      map(action => {
         console.log(action);
         return ({ type: TopNotificationsActionTypes.ADD_NOTIFICATION_SUCCESS, payload: action['payload']['notification'] });
       })
@@ -84,7 +84,7 @@ export class NotificationsEffects {
         )
       }),
       // If successful, dispatch success action with result
-      map(requestDocuments =>{
+      map(requestDocuments => {
         // console.log(requestDocuments);
         return ({ type: NotificationsActionTypes.GET_NOTIFICATIONS_SUCCESS, payload: requestDocuments });
       })
@@ -99,12 +99,12 @@ export class NotificationsEffects {
         console.log(action);
         return this.notificationsServices.action16(action['payload']['id'])
           .pipe(
-            map(requestDocument =>{
+            map(requestDocument => {
               console.log(requestDocument);
               return { type: NotificationsActionTypes.MARK_NOTIFICATION_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: NotificationsActionTypes.MARK_NOTIFICATION_ERROR}))
-          )
+          );
       })
     );
 
@@ -115,12 +115,12 @@ export class NotificationsEffects {
         console.log(action);
         return this.notificationsServices.action17(action['payload']['id'])
           .pipe(
-            map(requestDocument =>{
+            map(requestDocument => {
               console.log(requestDocument);
               return { type: NotificationsActionTypes.UNMARK_NOTIFICATION_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: NotificationsActionTypes.UNMARK_NOTIFICATION_ERROR}))
-          )
+          );
       })
     );
 
@@ -131,12 +131,12 @@ export class NotificationsEffects {
         console.log(action);
         return this.notificationsServices.action18(action['payload']['id'])
           .pipe(
-            map(requestDocument =>{
+            map(requestDocument => {
               console.log(requestDocument);
               return { type: NotificationsActionTypes.DELETE_NOTIFICATION_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: NotificationsActionTypes.DELETE_NOTIFICATION_ERROR}))
-          )
+          );
       })
     );
   /**

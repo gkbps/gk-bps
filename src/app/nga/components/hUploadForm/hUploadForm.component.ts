@@ -145,10 +145,10 @@ export class HUploadForm implements OnInit, OnDestroy {
              msg: res['deferral_message'],
              showClose: true,
            };
-           this.globalState.notifyMyDataChanged('toasty','', toastData);
+           this.globalState.notifyMyDataChanged('toasty', '', toastData);
          });
 
-       //TODO: Remove http    
+       // TODO: Remove http
        // this.http.post(this.url, formData, this.securityService.jwt())
        this.httpClient.post(this.url, formData, this.httpClientService.attachHeader({}))
          // Do not map to have full response headers and _body
@@ -179,12 +179,12 @@ export class HUploadForm implements OnInit, OnDestroy {
           showClose: true,
         };
 
-        this.globalState.notifyMyDataChanged('toasty','', toastData);
+        this.globalState.notifyMyDataChanged('toasty', '', toastData);
       });
   }
 
   gotoTcode(tcode) {
-    this.tcodeService.executeTcode(tcode,'');
+    this.tcodeService.executeTcode(tcode, '');
   }
 
   ngOnDestroy() {

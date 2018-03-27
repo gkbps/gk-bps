@@ -90,7 +90,7 @@ export class GkHeaderComponent implements OnInit, OnDestroy {
     this.notification.subscribe(res => {
       this.notificationCount = res.data.total || 0;
       this.notificationsList = res.data.data || [];
-    })
+    });
     this.store.dispatch(getTopNotificationsAction('', '{"created_at": -1}', 0, 5));
 
     // Init user's preference

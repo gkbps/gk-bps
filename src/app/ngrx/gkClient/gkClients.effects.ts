@@ -11,7 +11,7 @@
 
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { switchMap, map, concatMap, catchError } from 'rxjs/operators';
 
 import {
@@ -47,13 +47,13 @@ export class GkClientsEffects {
         )
         .pipe(
           // If successful, dispatch success action with result
-          map(gkClients =>{
+          map(gkClients => {
             // console.log(gkClients);
             return ({ type: GkClientsActionTypes.GET_MANY_GKCLIENTS_SUCCESS, payload: gkClients });
           }),
           // If request fails, dispatch failed action
           catchError((err, caught) => Observable.of({type: GkClientsActionTypes.GET_MANY_GKCLIENTS_ERROR}))
-        )
+        );
       })
     );
 
@@ -75,7 +75,7 @@ export class GkClientsEffects {
             }),
             // If request fails, dispatch failed action
             catchError((err, caught) => Observable.of({type: GkClientActionTypes.RESET_GKCLIENT_ERROR}))
-          )
+          );
       })
     );
 
@@ -93,7 +93,7 @@ export class GkClientsEffects {
             }),
             // If request fails, dispatch failed action
             catchError((err, caught) => Observable.of({type: GkClientActionTypes.ADD_GKCLIENT_ERROR}))
-          )
+          );
         })
       );
 
@@ -111,7 +111,7 @@ export class GkClientsEffects {
             }),
             // If request fails, dispatch failed action
             catchError((err, caught) => Observable.of({type: GkClientActionTypes.GET_GKCLIENT_ERROR}))
-          )
+          );
       })
     );
 
@@ -127,7 +127,7 @@ export class GkClientsEffects {
               return ({ type: GkClientActionTypes.SAVE_GKCLIENT_SUCCESS, payload: gkClient });
             }),
             catchError((err, caught) => Observable.of({type: GkClientActionTypes.SAVE_GKCLIENT_ERROR}))
-          )
+          );
       })
     );
 
@@ -143,7 +143,7 @@ export class GkClientsEffects {
               return ({ type: GkClientActionTypes.DISABLE_GKCLIENT_SUCCESS, payload: gkClient });
             }),
             catchError((err, caught) => Observable.of({type: GkClientActionTypes.DISABLE_GKCLIENT_ERROR}))
-          )
+          );
       })
     );
 
@@ -159,7 +159,7 @@ export class GkClientsEffects {
               return ({ type: GkClientActionTypes.ENABLE_GKCLIENT_SUCCESS, payload: gkClient });
             }),
             catchError((err, caught) => Observable.of({type: GkClientActionTypes.ENABLE_GKCLIENT_ERROR}))
-          )
+          );
       })
     );
 
@@ -175,7 +175,7 @@ export class GkClientsEffects {
               return ({ type: GkClientActionTypes.MARK_GKCLIENT_SUCCESS, payload: gkClient });
             }),
             catchError((err, caught) => Observable.of({type: GkClientActionTypes.MARK_GKCLIENT_ERROR}))
-          )
+          );
       })
     );
 
@@ -191,7 +191,7 @@ export class GkClientsEffects {
               return ({ type: GkClientActionTypes.UNMARK_GKCLIENT_SUCCESS, payload: gkClient });
             }),
             catchError((err, caught) => Observable.of({type: GkClientActionTypes.UNMARK_GKCLIENT_ERROR}))
-          )
+          );
       })
     );
 
@@ -207,7 +207,7 @@ export class GkClientsEffects {
               return ({ type: GkClientActionTypes.DELETE_GKCLIENT_SUCCESS, payload: gkClient });
             }),
             catchError((err, caught) => Observable.of({type: GkClientActionTypes.DELETE_GKCLIENT_ERROR}))
-          )
+          );
       })
     );
 
@@ -227,7 +227,7 @@ export class GkClientsEffects {
               return ({ type: GkClientRequestActionTypes.GET_GKCLIENT_REQUEST_SUCCESS, payload: moduleRequest });
             }),
             catchError((err, caught) => Observable.of({type: GkClientRequestActionTypes.GET_GKCLIENT_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -243,7 +243,7 @@ export class GkClientsEffects {
               return ({ type: GkClientRequestActionTypes.SAVE_GKCLIENT_REQUEST_SUCCESS, payload: moduleRequest });
             }),
             catchError((err, caught) => Observable.of({type: GkClientRequestActionTypes.SAVE_GKCLIENT_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -259,7 +259,7 @@ export class GkClientsEffects {
               return ({ type: GkClientRequestActionTypes.POST_GKCLIENT_REQUEST_SUCCESS, payload: moduleRequest });
             }),
             catchError((err, caught) => Observable.of({type: GkClientRequestActionTypes.POST_GKCLIENT_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -275,7 +275,7 @@ export class GkClientsEffects {
               return ({ type: GkClientRequestActionTypes.REVERT_GKCLIENT_REQUEST_SUCCESS, payload: moduleRequest });
             }),
             catchError((err, caught) => Observable.of({type: GkClientRequestActionTypes.REVERT_GKCLIENT_REQUEST_ERROR}))
-          )
+          );
       })
     );
 
@@ -295,13 +295,13 @@ export class GkClientsEffects {
         )
         .pipe(
           // If successful, dispatch success action with result
-          map(dashboards =>{
+          map(dashboards => {
             console.log(dashboards);
             return ({ type: GkClientDashboardsActionTypes.GET_MANY_GKCLIENT_DASHBOARDS_SUCCESS, payload: dashboards });
           }),
           // If request fails, dispatch failed action
           catchError((err, caught) => Observable.of({type: GkClientDashboardsActionTypes.GET_MANY_GKCLIENT_DASHBOARDS_ERROR}))
-        )
+        );
       })
     );
 
@@ -322,13 +322,13 @@ export class GkClientsEffects {
         )
         .pipe(
           // If successful, dispatch success action with result
-          map(reports =>{
+          map(reports => {
             console.log(reports);
             return ({ type: GkClientReportsSummaryActionTypes.GET_MANY_GKCLIENT_SUMMARY_REPORTS_SUCCESS, payload: reports });
           }),
           // If request fails, dispatch failed action
           catchError((err, caught) => Observable.of({type: GkClientReportsSummaryActionTypes.GET_MANY_GKCLIENT_SUMMARY_REPORTS_ERROR}))
-        )
+        );
       })
     );
 
@@ -348,13 +348,13 @@ export class GkClientsEffects {
         )
         .pipe(
           // If successful, dispatch success action with result
-          map(reports =>{
+          map(reports => {
             console.log(reports);
             return ({ type: GkClientReportsDetailActionTypes.GET_MANY_GKCLIENT_DETAIL_REPORTS_SUCCESS, payload: reports });
           }),
           // If request fails, dispatch failed action
           catchError((err, caught) => Observable.of({type: GkClientReportsDetailActionTypes.GET_MANY_GKCLIENT_DETAIL_REPORTS_ERROR}))
-        )
+        );
       })
     );
 }

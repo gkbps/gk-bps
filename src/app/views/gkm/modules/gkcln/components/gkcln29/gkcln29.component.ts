@@ -2,12 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
+
 import { GlobalState } from '../../../../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
-} from '../../../../../../nga/services';
+import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
+import { MenuService } from '../../../../../../nga/services/menu.service';
+import { NavigationService } from '../../../../../../nga/services/navigation.service';
+
 import { BaseComponent } from '../../../../../base';
 
 @Component({
@@ -39,7 +39,7 @@ export class GkCln29Component extends BaseComponent implements OnInit, OnDestroy
     private activatedRoute: ActivatedRoute,
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
 
     // Derive class constructor
   }

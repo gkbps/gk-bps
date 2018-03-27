@@ -1,16 +1,21 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
 
-  SecurityService,
-} from '../../../nga/services';
+// GK - Alphabet
+import { GlobalState } from '../../../global.state';
+import { LocalStorageService } from '../../../nga/services/localStorage.service';
+import { MenuService } from '../../../nga/services/menu.service';
+import { NavigationService } from '../../../nga/services/navigation.service';
+
+import { SecurityService } from '../../../nga/services/security.service';
+
 import { BaseComponent } from '../../base';
 
+/**
+* @module DictComponent
+* Component for Dictionary
+*/
 @Component({
   selector: 'dict',
   templateUrl: 'dict.component.html',
@@ -31,16 +36,17 @@ export class DictComponent extends BaseComponent implements OnInit, OnDestroy {
   constructor(
     // Base class services
     public translateService: TranslateService,
+
     public globalState: GlobalState,
     public localStorageService: LocalStorageService,
-    public navigationService: NavigationService,
     public menuService: MenuService,
+    public navigationService: NavigationService,
 
     // Derive class services
     private security: SecurityService,
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
 
     // Derive class constructor
   }

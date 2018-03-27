@@ -188,7 +188,7 @@ export class LocalStorageService {
   * @param wkBarStatus
   */
   setWkBar(wkBarStatus: boolean) {
-    let env = this.getEnv();
+    const env = this.getEnv();
     if (env.wk.status !== wkBarStatus) {
       env.wk.status = wkBarStatus;
       this.setEnv(JSON.stringify(env));
@@ -272,7 +272,7 @@ export class LocalStorageService {
   * @param {string} layout
   */
   setLayout(layout: string = 'moody') {
-    let env = this.getEnv();
+    const env = this.getEnv();
     if (env.pref.layout !== layout) {
       env.pref.layout = layout;
       this.setEnv(JSON.stringify(env));
@@ -295,7 +295,7 @@ export class LocalStorageService {
   * @param {string} theme
   */
   setTheme(theme: string = 'bluegrey') {
-    let env = this.getEnv();
+    const env = this.getEnv();
     if (env.pref.theme !== theme) {
       env.pref.theme = theme;
       this.setEnv(JSON.stringify(env));
@@ -318,7 +318,7 @@ export class LocalStorageService {
   * @param {boolean} dark
   */
   setDark(dark: boolean = false) {
-    let env = this.getEnv();
+    const env = this.getEnv();
     if (env.pref.dark !== dark) {
       env.pref.dark = dark;
       this.setEnv(JSON.stringify(env));
@@ -364,7 +364,7 @@ export class LocalStorageService {
   * @param {string} lang
   */
   setLang(lang: string = 'en') {
-    let env = this.getEnv();
+    const env = this.getEnv();
     if (env.pref.lang !== lang) {
       env.pref.lang = lang;
       this.setEnv(JSON.stringify(env));
@@ -387,7 +387,7 @@ export class LocalStorageService {
   * @param navType
   */
   setNavType(navType: string = 'circle') {
-    let env = this.getEnv();
+    const env = this.getEnv();
     if (env.pref.navType !== navType) {
       env.pref.navType = navType;
       this.setEnv(JSON.stringify(env));
@@ -410,7 +410,7 @@ export class LocalStorageService {
   * @param navEffect
   */
   setNavEffect(navEffect: string = 'effect1') {
-    let env = this.getEnv();
+    const env = this.getEnv();
     if (env.pref.navEffect !== navEffect) {
       env.pref.navEffect = navEffect;
       this.setEnv(JSON.stringify(env));
@@ -433,7 +433,7 @@ export class LocalStorageService {
   * @param isSmall
   */
   setNavSize(isSmall: boolean = false) {
-    let env = this.getEnv();
+    const env = this.getEnv();
     if (env.pref.isSmall !== isSmall) {
       env.pref.isSmall = isSmall;
       this.setEnv(JSON.stringify(env));
@@ -480,7 +480,7 @@ export class LocalStorageService {
   * @param isGrowl
   */
   setNotificationType(isGrowl: boolean = true) {
-    let env = this.getEnv();
+    const env = this.getEnv();
     env.pref.isGrowl = isGrowl;
     this.setEnv(JSON.stringify(env));
   }
@@ -501,7 +501,7 @@ export class LocalStorageService {
   * @param timeOut
   */
   setToastyTimeOut(timeOut = 5000) {
-    let env = this.getEnv();
+    const env = this.getEnv();
     if (env.pref.toastyTimeOut !== timeOut) {
       env.pref.toastyTimeOut = timeOut;
       this.setEnv(JSON.stringify(env));
@@ -524,7 +524,7 @@ export class LocalStorageService {
   * @param theme
   */
   setToastyTheme(theme = 'default') {
-    let env = this.getEnv();
+    const env = this.getEnv();
     if (env.pref.toastyTheme !== theme) {
       env.pref.toastyTheme = theme;
       this.setEnv(JSON.stringify(env));
@@ -547,7 +547,7 @@ export class LocalStorageService {
   * @param position
   */
   setToastyPosition(position = 'bottom-right') {
-    let env = this.getEnv();
+    const env = this.getEnv();
     if (env.pref.toastyPosition !== position) {
       env.pref.toastyPosition = position;
       this.setEnv(JSON.stringify(env));

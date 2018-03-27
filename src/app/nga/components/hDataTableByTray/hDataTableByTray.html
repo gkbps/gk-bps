@@ -10,25 +10,23 @@
             </div>
 
             <div class="ui-toolbar-group-right">
-                <button pButton type="button" icon="ui-icon-move-to-inbox" (click)="gotoTcode('tray01')" pTooltip="{{'inbox'|translate}}" tooltipPosition="top"></button>
-                <button pButton type="button" icon="ui-icon-check" (click)="gotoTcode('tray02')" pTooltip="{{'outbox'|translate}}" tooltipPosition="top"></button>
-                <button pButton type="button" icon="ui-icon-playlist-add" (click)="gotoTcode('tray11')" pTooltip="{{'draft'|translate}}" tooltipPosition="top"></button>
-                <button pButton type="button" icon="ui-icon-playlist-play" (click)="gotoTcode('tray12')" pTooltip="{{'inProgress'|translate}}" tooltipPosition="top"></button>
-                <button pButton type="button" icon="ui-icon-playlist-add-check" (click)="gotoTcode('tray13')" pTooltip="{{'completed'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-move-to-inbox" (click)="gotoTcode('inbox')" pTooltip="{{'inbox'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-check" (click)="gotoTcode('outbox')" pTooltip="{{'outbox'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-playlist-add" (click)="gotoTcode('draft')" pTooltip="{{'draft'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-playlist-play" (click)="gotoTcode('inprogress')" pTooltip="{{'inProgress'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-playlist-add-check" (click)="gotoTcode('completed')" pTooltip="{{'completed'|translate}}" tooltipPosition="top"></button>
             </div>
           </p-toolbar>
         </div>
 
         <div class="ui-g-12">
-          <!-- <p *ngIf="body.pending">
+          <p *ngIf="body.pending">
             Loading...
-          </p> -->
-
-          <!-- [loading]="body.pending" -->
+          </p>
 
           <p-table
             #dt
-            
+
             [columns]="selectedColumns"
             [value]="body.data.data"
 
@@ -96,8 +94,8 @@
                   *ngFor="let col of columns"
                   [pSortableColumn]="col.field"
                   pResizableColumn
-                  pReorderableColumn
-                  [style]="{'width': col.width}">
+                  pReorderableColumn>
+                  <!-- [style]="{'width': col.width}" -->
                     {{col.header}}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                 </th>

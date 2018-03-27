@@ -21,7 +21,7 @@ import { ConfirmationService } from 'primeng/api';
 import { AppTranslationModule } from '../../../app.translation.module';
 
 import { FavTcodeService } from './favTcode.service';
-import { Fav } from './fav.component';
+import { FavComponent } from './fav.component';
 import { routing } from './fav.routing';
 
 import { IconsService } from '../../../nga/common/icons.service';
@@ -47,7 +47,7 @@ import { IconsService } from '../../../nga/common/icons.service';
     ConfirmDialogModule,
   ],
   declarations: [
-    Fav,
+    FavComponent,
   ],
   providers: [
     FavTcodeService,

@@ -5,15 +5,15 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
 
-  SecurityService,
-  TcodeService,
-} from '../../../../../../nga/services';
+import { GlobalState } from '../../../../../../global.state';
+import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
+import { MenuService } from '../../../../../../nga/services/menu.service';
+import { NavigationService } from '../../../../../../nga/services/navigation.service';
+
+import { SecurityService } from '../../../../../../nga/services/security.service';
+import { TcodeService } from '../../../../../../nga/services/tcode.service';
+
 import { HelperService } from '../../../../../../nga/services/helpers.service';
 import { DashboardHelperService } from '../../../../../../nga/services/dashboard.service';
 import { IconsService } from '../../../../../../nga/common/icons.service';
@@ -56,14 +56,14 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
   myForm: FormGroup;
 
   dashboardItemsList: any;
-  selectedItem= [];
+  selectedItem = [];
 
 
   // Mode
   editMode = true;
 
   // Dialog
-  dialogTitle = "Dashboard Item";
+  dialogTitle = 'Dashboard Item';
   displayDialog = false;
   displayForm = false;
 
@@ -74,10 +74,10 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
   // CHART TYPES
   DB_COMPONENTS = {
     'HDashboardKPIComponent': HDashboardKPIComponent,
-    'HDashboardChartPDPComponent':HDashboardChartPDPComponent,
+    'HDashboardChartPDPComponent': HDashboardChartPDPComponent,
     'HDashboardChartLineComponent': HDashboardChartLineComponent,
     'HDashboardChartBarComponent': HDashboardChartBarComponent
-  }
+  };
 
   chartList = [
     { label: 'KPI', value: 'HDashboardKPIComponent' },
@@ -166,7 +166,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
     private iconsService: IconsService
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
 
     // Derive class constructor
     this.datasource = datasourceService.datasource;
@@ -185,7 +185,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
     const params = {
       dimensions: dimensions,
       measures: measures
-    }
+    };
     // ['status1', 'status2'];
     this.datasourceService.getDatasourceByModuleInStore('gkClients', params);
 
@@ -230,7 +230,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
     };
   }
 
-  buildForm(){
+  buildForm() {
     this.myForm = this._fb.group({
       _id: [{
         value: this.dbItem._id,
@@ -312,7 +312,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
 
   }
 
-  doAction(action){
+  doAction(action) {
     console.log(action);
     switch (action) {
       case 'new':

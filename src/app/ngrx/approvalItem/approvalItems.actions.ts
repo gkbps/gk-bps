@@ -19,5 +19,5 @@ export function getApprovalItemsAction(prefix, filter, sort, first, rows) {
       first: first,
       rows: rows
     }
-  }
+  };
 }

@@ -22,7 +22,7 @@
        first: first,
        rows: rows
      }
-   }
+   };
  }
 
  export function addNotificationAction(notification) {
@@ -30,7 +30,7 @@
    return {
      type: TopNotificationsActionTypes.ADD_NOTIFICATION,
      payload: { notification: notification }
-   }
+   };
  }
 
 export enum NotificationsActionTypes {
@@ -65,14 +65,14 @@ export function getNotificationsAction(filter, sort, first, rows) {
       first: first,
       rows: rows
     }
-  }
+  };
 }
 
 export function markNotificationAction(id) {
   return {
     type: NotificationsActionTypes.MARK_NOTIFICATION,
     payload: { id: id }
-  }
+  };
 }
 
 export function unmarkNotificationAction(id) {
@@ -86,7 +86,7 @@ export function deleteNotificationAction(id) {
   return {
     type: NotificationsActionTypes.DELETE_NOTIFICATION,
     payload: { id: id }
-  }
+  };
 }
 
 /**
@@ -103,5 +103,5 @@ export function getNotificationAction(id) {
   return {
     type: NotificationActionTypes.GET_NOTIFICATION,
     payload: { id: id }
-  }
+  };
 }

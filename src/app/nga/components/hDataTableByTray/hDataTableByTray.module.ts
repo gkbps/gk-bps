@@ -32,7 +32,7 @@ import { HDataTableByTrayComponent } from './hDataTableByTray.component';
     MultiSelectModule,
     InputTextModule,
     ContextMenuModule,
-    DropdownModule,
+    DropdownModule
   ],
   exports: [
     HDataTableByTrayComponent

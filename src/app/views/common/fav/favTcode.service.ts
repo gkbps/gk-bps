@@ -69,7 +69,7 @@ export class FavTcodeService {
                     },
                     {
                         data: {
-                            label:'2-MARKET TO PROMOTE',
+                            label: '2-MARKET TO PROMOTE',
                             icon: 'menu',
                             desc: 'Hellow',
                             url: 'tcode',
@@ -260,7 +260,7 @@ export class FavTcodeService {
 
     getFavList() {
       const fav = this.localStorageService.getFav();
-      if (!fav || (fav.length==0)) {
+      if (!fav || (fav.length === 0)) {
         console.log('Get default');
         this.localStorageService.setFav(this.files.data);
         return this.files.data;
@@ -268,13 +268,5 @@ export class FavTcodeService {
         console.log('Get from Local Storage');
         return fav;
       }
-
-
-      /*
-      return this.http.get('/showcase/resources/data/cars-large.json')
-                  .toPromise()
-                  .then(res => <Car[]> res.json().data)
-                  .then(data => { return data; });
-      */
     }
 }

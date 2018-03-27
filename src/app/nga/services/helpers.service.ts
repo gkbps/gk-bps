@@ -100,7 +100,7 @@ export class HelperService {
 	* @param {Boolean} [reverse] - If true, iterates backward on the loopable.
 	*/
 	each(loopable, fn, thisArg?, reverse?) {
-		var i, len, keys;
+		let i, len, keys;
 		if (this.isArray(loopable)) {
 			len = loopable.length;
 			if (reverse) {
@@ -132,7 +132,7 @@ export class HelperService {
 	* @returns {Boolean}
 	*/
 	arrayEquals(a0, a1) {
-		var i, ilen, v0, v1;
+		let i, ilen, v0, v1;
 
 		if (!a0 || !a1 || a0.length !== a1.length) {
 			return false;
@@ -170,10 +170,10 @@ export class HelperService {
 		}
 
 		if (this.isObject(source)) {
-			var target = {};
-			var keys = Object.keys(source);
-			var klen = keys.length;
-			var k = 0;
+			let target = {};
+			let keys = Object.keys(source);
+			let klen = keys.length;
+			let k = 0;
 
 			for (; k < klen; ++k) {
 				target[keys[k]] = this.clone(source[keys[k]]);
@@ -216,8 +216,8 @@ export class HelperService {
 	* @private
 	*/
 	_merger(key, target, source, options) {
-		var tval = target[key];
-		var sval = source[key];
+		let tval = target[key];
+		let sval = source[key];
 
 		if (this.isObject(tval) && this.isObject(sval)) {
 			this.merge(tval, sval, options);
@@ -231,8 +231,8 @@ export class HelperService {
 	* @private
 	*/
 	_mergerIf(key, target, source) {
-		var tval = target[key];
-		var sval = source[key];
+		let tval = target[key];
+		let sval = source[key];
 
 		if (this.isObject(tval) && this.isObject(sval)) {
 			this.mergeIf(tval, sval);
@@ -251,9 +251,9 @@ export class HelperService {
 	* @returns {Object} The `target` object.
 	*/
 	merge(target, source, options) {
-		var sources = this.isArray(source) ? source : [source];
-		var ilen = sources.length;
-		var merge, i, keys, klen, k;
+		let sources = this.isArray(source) ? source : [source];
+		let ilen = sources.length;
+		let merge, i, keys, klen, k;
 
 		if (!this.isObject(target)) {
 			return target;
@@ -296,10 +296,10 @@ export class HelperService {
 	* @returns {Object} The `target` object.
 	*/
 	extend(target) {
-		var setFn = function(value, key) {
+		let setFn = function(value, key) {
 			target[key] = value;
 		};
-		for (var i = 1, ilen = arguments.length; i < ilen; ++i) {
+		for (let i = 1, ilen = arguments.length; i < ilen; ++i) {
 			this.each(arguments[i], setFn);
 		}
 		return target;

@@ -6,8 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['hMap.scss']
 })
 export class HMapComponent implements OnInit {
-  @Input() header: string = 'Hellow';
-  @Input() image: string = '';
+  @Input() header = 'Hellow';
+  @Input() image = '';
 
   constructor(
   ) {

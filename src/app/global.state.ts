@@ -80,7 +80,7 @@ export class GlobalState {
   * {@link getMySubscriptionItemByEvent}
   */
   _onMyEvent(myData: any) {
-    let mySubscribers = this.getMySubscriptionItemByEvent(myData['event']) || [];
+    const mySubscribers = this.getMySubscriptionItemByEvent(myData['event']) || [];
     // DEBUG
     // console.log(mySubscribers);
     // console.log(myData);

@@ -41,15 +41,15 @@ export class DashboardHelperService {
    * 2. Request: (Draft, In progress, ...)
    * - getDataByProgress
    *****************************************************************************/
-	getDataByStatus(){
+  getDataByStatus() {
     const data = {
       active: 150,
-      inactive:50,
+      inactive: 50,
       marked: 30,
       unmarked: 170
     }
     return data;
-  }
+  };
 
   genDataByActiveInactive(src_status) {
     const datasets = [{

@@ -133,7 +133,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
       if (changes['myForm.valid']) {
-          console.log('Oh yeah')
+          console.log('Oh yeah');
       }
   }
 
@@ -142,7 +142,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
    */
   initBlankModelAndForm() {
     this.requestHeader = {
-      _id:'',
+      _id: '',
       tcode: this.tcode,
       desc: '',
       remark: '',
@@ -177,20 +177,20 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
 
     switch (this.status) {
       case 'New':
-        if (this.requestHeader.owner.includes(this.username)){
+        if (this.requestHeader.owner.includes(this.username)) {
           this.formEditable = true;
         }
         break;
 
       case 'Draft':
-        if (this.requestHeader.owner.includes(this.username)){
+        if (this.requestHeader.owner.includes(this.username)) {
           this.formEditable = true;
         }
         break;
 
       case 'P. Submit':
         // Consider this as it's quite odd for requestor return instead of edit himself to submit
-        if (this.requestHeader.requestor.username === this.username){
+        if (this.requestHeader.requestor.username === this.username) {
           this.formEditable = true;
         }
         break;
@@ -255,10 +255,16 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
   }
 
   initNav() {
-    this.translateService.get(['create', 'new', 'save', 'return', 'submit', 'withdraw', 'cancel', 'reject', 'approve', 'abort', 'post', 'revert', 'copy', 'print'])
+    this.translateService.get([
+      'create', 'new', 'save', 'return', 'submit',
+      'withdraw', 'cancel', 'reject', 'approve',
+      'abort',
+      'post', 'revert',
+      'copy', 'print'
+    ])
       .subscribe((res) => {
         this.items = [];
-        if (this.status!=='New') {
+        if (this.status !== 'New') {
           this.items.push({ label: res.create, icon: 'ui-icon-add',
             command: (event) => {
               // TODO: TO check if could access gkcln31 or relied on Guard or disable if no priviledge
@@ -377,14 +383,13 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
   }
 
   markAllDirty(control: AbstractControl) {
-      if(control.hasOwnProperty('controls')) {
-          control.markAsDirty({onlySelf: true}) // mark group
-          let ctrl = <any>control;
-          for (let inner in ctrl.controls) {
+      if (control.hasOwnProperty('controls')) {
+          control.markAsDirty({onlySelf: true}); // mark group
+          const ctrl = <any>control;
+          for (const inner in ctrl.controls) {
               this.markAllDirty(ctrl.controls[inner] as AbstractControl);
           }
-      }
-      else {
+      } else {
           (<FormControl>(control)).markAsDirty({onlySelf: true});
       }
   }
@@ -403,14 +408,14 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
             msg: res.invalid_form_message,
             showClose: true,
           };
-          this.globalState.notifyMyDataChanged('toasty','', toastData);
+          this.globalState.notifyMyDataChanged('toasty', '', toastData);
         });
     } else {
       console.log(this.myForm.controls['status'].value);
 
       switch (action) {
         case 'save':
-          if (this.myForm.controls['status'].value==='New'){
+          if (this.myForm.controls['status'].value === 'New'){
             this.saveRequestHeader();
           }
           // Else prioritize save requestBody first
@@ -499,12 +504,9 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
   }
 
   saveRequestHeader() {
-    // NEW -> DRAFT
-    if (!this.id) {
+    if (!this.id) { // NEW -> DRAFT
       this.gkRequestService.createNew(this.myForm.value);
-    }
-    // DRAFT -> DRAFT
-    else {
+    } else { // DRAFT -> DRAFT
       // console.log(this.myForm.value);
       this.gkRequestService.update(this.myForm.value);
     }
@@ -613,18 +615,18 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
   }
 
   filterUserSingle(event) {
-    let query = event.query;
+    const query = event.query;
     console.log(query);
-    if (query.length >1) {
+    if (query.length > 1) {
       this.gkUserService.findAPIListPagination(query, '{}', 0, 20);
     }
   }
 
-  filterUser(query, users: any[]):any[] {
-    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-    let filtered : any[] = [];
-    for(let i = 0; i < users.length; i++) {
-      let user = users[i];
+  filterUser(query, users: any[]): any[] {
+    // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    const filtered: any[] = [];
+    for (let i = 0; i < users.length; i++) {
+      const user = users[i];
       if (user.fullname.toLowerCase().includes(query.toLowerCase()))  {
           filtered.push(user);
       }

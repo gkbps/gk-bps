@@ -54,7 +54,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
   @ViewChild('singleFileUploader') singleFileUploader: FileUpload;
   // @ViewChild(FileUpload) fileUpload;
 
-  id ='';
+  id = '';
 
   storeRequestDocuments: any;
   requestDocuments = [];
@@ -263,7 +263,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
    * Upload a document for the request
    */
   uploadSingleFileHandler(event) {
-    let formData = new FormData();
+    const formData = new FormData();
 
     if (event.files.length) {
       formData.append('files', event.files[0]);
@@ -290,7 +290,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
   * Rename description of a document of the request
   */
   renameRequestFile() {
-    if (this.selectedDocument._id && (this.desc!== this.selectedDocument.desc)) {
+    if (this.selectedDocument._id && (this.desc !== this.selectedDocument.desc)) {
       this.store.dispatch(saveRequestDocumentAction(this.selectedDocument._id, this.desc));
 
       this.selectedDocument = null;
@@ -352,7 +352,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
           break;
 
         case 'delete':
-          if (this.requestStatus == 'Draft') {
+          if (this.requestStatus === 'Draft') {
             this.store.dispatch(deleteRequestDocumentAction(docId));
             this.selectedDocument = null;
           } else {
@@ -376,7 +376,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
           msg: res.unavailable_msg,
           showClose: true,
         };
-        this.globalState.notifyMyDataChanged('toasty','', toastData);
+        this.globalState.notifyMyDataChanged('toasty', '', toastData);
       });
   }
 }

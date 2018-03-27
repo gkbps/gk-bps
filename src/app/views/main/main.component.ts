@@ -1,13 +1,12 @@
 import { Component, OnInit,  OnDestroy } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
 
-} from '../../nga/services';
+import { GlobalState } from '../../global.state';
+import { LocalStorageService } from '../../nga/services/localStorage.service';
+import { MenuService } from '../../nga/services/menu.service';
+import { NavigationService } from '../../nga/services/navigation.service';
+
 import { BaseComponent } from '../base';
 
 // Videogular
@@ -33,7 +32,7 @@ export interface IMedia {
   templateUrl: 'main.component.html',
   styleUrls: ['main.scss']
 })
-export class MainComponent extends BaseComponent {
+export class MainComponent extends BaseComponent  implements OnInit, OnDestroy {
 
   // Override Base class properties
   pageTitle = 'main';
@@ -47,7 +46,7 @@ export class MainComponent extends BaseComponent {
   api: VgAPI;
   video: string;
 
-  streams:IMediaStream[] = [
+  streams: IMediaStream[] = [
       {
         label: 'Chapter 1-VOD',
         source: 'http://static.videogular.com/assets/videos/videogular.mp4'
@@ -106,10 +105,9 @@ export class MainComponent extends BaseComponent {
     public menuService: MenuService,
 
     // Derive class services
-
-  ){
+  ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
 
     // Derive class constructor
   }
@@ -124,14 +122,14 @@ export class MainComponent extends BaseComponent {
     this.currentStream = this.streams[0];
   }
 
-  onPlayerReady(api:VgAPI) {
+  onPlayerReady(api: VgAPI) {
     this.api = api;
   }
 
-  onClickStream(stream:IMediaStream) {
+  onClickStream(stream: IMediaStream) {
     this.api.pause();
 
-    let timer:Subscription = TimerObservable.create(0, 10).subscribe(
+    const timer: Subscription = TimerObservable.create(0, 10).subscribe(
       () => {
         this.currentStream = stream;
         timer.unsubscribe();

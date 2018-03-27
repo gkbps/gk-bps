@@ -1,14 +1,13 @@
 import { Component, OnInit,  OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-// Internal
 import { TranslateService } from '@ngx-translate/core';
+
+// GK - Alphabet
 import { GlobalState } from '../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService,
-} from '../../nga/services';
+import { LocalStorageService } from '../../nga/services';
+import { MenuService } from '../../nga/services';
+import { NavigationService } from '../../nga/services';
 
 @Component({
   selector: 'base-component',
@@ -18,7 +17,7 @@ export class BaseComponent implements OnInit, OnDestroy {
 
   myScope = 'base';
 
-  /* PROPERTIES */
+  /* Base Properties - To be overriden at inherited components */
   pageTitle = 'base';
   sidebarMenuJSONFile = 'blank.menu.json';
   globalConfig = {
@@ -27,13 +26,13 @@ export class BaseComponent implements OnInit, OnDestroy {
   };
   sidebarMenuSubscription: Subscription;
 
-  /* CONSTRUCTOR AND LIFECYCLE HOOKS */
   constructor(
     public translateService: TranslateService,
+
     public globalState: GlobalState,
     public localStorageService: LocalStorageService,
-    public navigationService: NavigationService,
     public menuService: MenuService,
+    public navigationService: NavigationService,
   ) {
   }
 
@@ -65,8 +64,6 @@ export class BaseComponent implements OnInit, OnDestroy {
     if (this.sidebarMenuSubscription) {
       this.sidebarMenuSubscription.unsubscribe();
     }
-    // this.globalState.unsubscribeAll();
-
   }
 
   /* COMMON FUNCTIONS */

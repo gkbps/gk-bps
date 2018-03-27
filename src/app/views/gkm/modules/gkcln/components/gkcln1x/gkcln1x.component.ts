@@ -9,17 +9,17 @@ import { getGkClientsAction } from '../../../../../../ngrx/gkClient/gkClients.ac
 /**/
 
 import { TranslateService } from '@ngx-translate/core';
+
 import { GlobalState } from '../../../../../../global.state';
-import {
-  LocalStorageService,
-  NavigationService,
-  MenuService
-} from '../../../../../../nga/services';
+import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
+import { MenuService } from '../../../../../../nga/services/menu.service';
+import { NavigationService } from '../../../../../../nga/services/navigation.service';
+
 import { BaseComponent } from '../../../../../base';
 
 @Component({
   templateUrl: 'gkcln1x.component.html',
-  styleUrls:['./gkcln1x.scss']
+  styleUrls: ['./gkcln1x.scss']
 })
 export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy {
 
@@ -54,7 +54,7 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
     private store: Store<any>
   ) {
     // Base class constructor: Re-injection for inheritance
-    super(translateService, globalState, localStorageService, navigationService, menuService);
+    super(translateService, globalState, localStorageService, menuService, navigationService);
 
     // Derive class constructor
     this.store.dispatch(getGkClientsAction('', '{}', 0, 10));

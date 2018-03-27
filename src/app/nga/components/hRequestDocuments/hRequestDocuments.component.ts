@@ -42,7 +42,7 @@ export class HRequestDocuments implements OnInit, OnDestroy {
   @ViewChild('singleFileUploader') singleFileUploader: FileUpload;
   // @ViewChild(FileUpload) fileUpload;
 
-  id ='';
+  id = '';
 
   requestDocuments: any[];
   selectedDocument: any;
@@ -251,7 +251,7 @@ export class HRequestDocuments implements OnInit, OnDestroy {
    * Disadvantage: User experience
    *****************************************************************************/
   uploadSingleFileHandler(event) {
-    let formData = new FormData();
+    const formData = new FormData();
 
     if (event.files.length) {
       formData.append('files', event.files[0]);
@@ -375,7 +375,7 @@ export class HRequestDocuments implements OnInit, OnDestroy {
           break;
 
         case 'delete':
-          if (this.requestStatus == 'Draft') {
+          if (this.requestStatus === 'Draft') {
             this.requestFileService.deleteRequestFile(this.selectedDocument._id);
             this.selectedDocument = null;
           } else {
@@ -398,7 +398,7 @@ export class HRequestDocuments implements OnInit, OnDestroy {
           msg: res.unavailable_msg,
           showClose: true,
         };
-        this.globalState.notifyMyDataChanged('toasty','', toastData);
+        this.globalState.notifyMyDataChanged('toasty', '', toastData);
       });
   }
 }

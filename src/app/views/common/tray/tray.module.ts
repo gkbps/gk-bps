@@ -19,21 +19,10 @@ import { TrayComponent } from './tray.component';
 import { TrayRoutingModule } from './tray-routing.module';
 
 import { Tray00Component } from './components/tray00/tray00.component';
-import { InboxComponent } from './components/inbox.component';
-import { OutboxComponent } from './components/outbox.component';
-import { DraftComponent } from './components/draft.component';
-import { InProgressComponent } from './components/inProgress.component';
-import { CompletedComponent } from './components/completed.component';
+
 
 @NgModule({
   declarations: [
-    InboxComponent,
-    OutboxComponent,
-
-    DraftComponent,
-    InProgressComponent,
-    CompletedComponent,
-
     TrayComponent,
     Tray00Component,
   ],

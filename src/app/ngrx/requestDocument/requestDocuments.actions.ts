@@ -40,7 +40,7 @@ export function getRequestDocumentsAction(id) {
     payload: {
       id: id
     }
-  }
+  };
 }
 
 export function uploadRequestDocumentAction(id, formData) {
@@ -50,7 +50,7 @@ export function uploadRequestDocumentAction(id, formData) {
       id: id,
       formData: formData
     }
-  }
+  };
 }
 
 export function saveRequestDocumentAction(id, desc) {
@@ -59,30 +59,29 @@ export function saveRequestDocumentAction(id, desc) {
     payload: {
       id: id,
       desc: desc
-
     }
-  }
+  };
 }
 
 export function markRequestDocumentAction(id) {
   return {
     type: RequestDocumentsActionTypes.MARK_REQUEST_DOCUMENT,
     payload: { id: id }
-  }
+  };
 }
 
 export function unmarkRequestDocumentAction(id) {
   return {
     type: RequestDocumentsActionTypes.UNMARK_REQUEST_DOCUMENT,
     payload: { id: id }
-  }
+  };
 }
 
 export function deleteRequestDocumentAction(id) {
   return {
     type: RequestDocumentsActionTypes.DELETE_REQUEST_DOCUMENT,
     payload: { id: id }
-  }
+  };
 }
 
 /**
@@ -103,7 +102,7 @@ export function getRequestDocumentAction(id) {
   return {
     type: RequestDocumentActionTypes.GET_REQUEST_DOCUMENT,
     payload: { id: id }
-  }
+  };
 }
 
 export function downloadRequestDocumentAction(id, tcode) {
@@ -113,5 +112,5 @@ export function downloadRequestDocumentAction(id, tcode) {
       id: id,
       tcode: tcode
     }
-  }
+  };
 }

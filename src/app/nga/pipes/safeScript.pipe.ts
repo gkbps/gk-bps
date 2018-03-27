@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser'
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
 * @module SafeScriptPipe
@@ -17,7 +17,7 @@ export class SafeScriptPipe implements PipeTransform  {
   ) {}
 
   transform(value) {
-    console.log(this.sanitized.bypassSecurityTrustScript(value))
+    console.log(this.sanitized.bypassSecurityTrustScript(value));
     return this.sanitized.bypassSecurityTrustScript(value);
   }
 
