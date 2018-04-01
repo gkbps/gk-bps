@@ -9,12 +9,14 @@ import { NavigationService } from '../../../../../../nga/services/navigation.ser
 
 import { BaseComponent } from '../../../../../base';
 
+/**
+* @module GkCln00Component
+* Navigation board for GkCln - 00
+*/
 @Component({
   selector: 'gkcln-00',
-  templateUrl: './gkcln00.html',
-  styleUrls: ['./gkcln00.scss'],
+  templateUrl: '../../../../../base/commonHTML/navBoard.html'
 })
-
 export class GkCln00Component extends BaseComponent implements OnInit, OnDestroy {
 
   // Override Base class properties
@@ -38,13 +40,13 @@ export class GkCln00Component extends BaseComponent implements OnInit, OnDestroy
   constructor(
     // Base class services
     public translateService: TranslateService,
+
     public globalState: GlobalState,
     public localStorageService: LocalStorageService,
-    public navigationService: NavigationService,
     public menuService: MenuService,
+    public navigationService: NavigationService,
 
     // Derive class services
-
   ) {
     // Base class constructor: Re-injection for inheritance
     super(translateService, globalState, localStorageService, menuService, navigationService);
@@ -60,10 +62,24 @@ export class GkCln00Component extends BaseComponent implements OnInit, OnDestroy
     // Derive class initialization
     this.initSidebarMenu();
     this.globalState.notifyMyDataChanged('help', '', 'tcd.x0.navBoard');
-    this.navigationService.trackHistory();
+
     this.initNavBoard();
   }
 
+  ngOnDestroy() {
+    // Base class destroy
+    super.ngOnDestroy();
+
+    // Derive class destroy here
+  }
+
+  // COMPONENT OPERATION
+
+  /**
+  * @function initNavBoard
+  * Initialize title and navItems for Navigation Board
+  * NOTE: No need to handle language change as it shall be managed by Navigation Board
+  */
   initNavBoard() {
     this.title = 'client';
     this.navItems = [
@@ -131,14 +147,6 @@ export class GkCln00Component extends BaseComponent implements OnInit, OnDestroy
         'title': 'administration'
       },
     ];
-
-  }
-
-  ngOnDestroy() {
-    // Base class destroy
-    super.ngOnDestroy();
-
-    // Derive class destroy here
   }
 
 }

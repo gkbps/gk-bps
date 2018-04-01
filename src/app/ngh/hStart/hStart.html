@@ -1,0 +1,32 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="card">
+      <div class="ui-g">
+
+        <div class="ui-g-12">
+          <p-toolbar>
+            <div class="ui-toolbar-group-left">
+              <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:6px; margin-left: 6px;">
+                {{title|translate}}
+              </span>
+            </div>
+
+            <div class="ui-toolbar-group-right">
+                <button pButton type="button" icon="ui-icon-app" (click)="toggleUI('app')" pTooltip="{{'circle_shape'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-format-list-bulleted" (click)="toggleUI('list')" pTooltip="{{'square_shape'|translate}}" tooltipPosition="top"></button>
+            </div>
+          </p-toolbar>
+        </div>
+
+        <div class="ui-g-12">
+          <div class="map">
+            <p-panel header="{{header}}">
+              <img library="serenity-layout" src="{{image}}">
+            </p-panel>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

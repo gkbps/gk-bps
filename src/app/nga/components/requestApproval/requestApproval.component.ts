@@ -326,14 +326,14 @@ export class RequestApproval implements OnInit, OnDestroy {
   filterUserSingle(event) {
     const query = event.query;
     console.log(query);
-    if (query.length >1) {
+    if (query.length > 1) {
       this.gkUserService.findAPIListPagination(query, '{}', 0, 20);
     }
   }
 
   filterUser(query, users: any[]): any[] {
     // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-    const filtered : any[] = [];
+    const filtered: any[] = [];
     for (let i = 0; i < users.length; i++) {
       const user = users[i];
       if (user.fullname.toLowerCase().includes(query.toLowerCase()))  {

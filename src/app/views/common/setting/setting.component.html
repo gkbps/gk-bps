@@ -1,268 +1,57 @@
-<p-growl *ngIf="notificationMode && notificationType" [value]="msgs" [life]="5000"></p-growl>
-<p-messages *ngIf="notificationMode && (!notificationType)" [(value)]="msgs"></p-messages>
-
 <div class="ui-g dashboard">
 
-  <div class="ui-g-12 ui-md-3">
-    <h-overview-box-header
-      [style]="'overview-box-1'"
-      [icon]="'inbox'"
-      [title]="'Messages'"
-      [figure]="'152'">
-    </h-overview-box-header>
-  </div>
-
-  <div class="ui-g-12 ui-md-3">
-    <h-overview-box-header
-      [style]="'overview-box-2'"
-      [icon]="'person_pin_circle'"
-      [title]="'Check-Ins'"
-      [figure]="'532'">
-    </h-overview-box-header>
-  </div>
-
-  <div class="ui-g-12 ui-md-3">
-    <h-overview-box-header
-      [style]="'overview-box-3'"
-      [icon]="'insert_drive_file'"
-      [title]="'Files Sycned'"
-      [figure]="'28'">
-    </h-overview-box-header>
-  </div>
-
-  <div class="ui-g-12 ui-md-3">
-    <h-overview-box-header
-      [style]="'overview-box-4'"
-      [icon]="'supervisor_account'"
-      [title]="'Users Online'"
-      [figure]="'256'">
-    </h-overview-box-header>
-  </div>
-
-  <div class="ui-g-12 ui-lg-4">
-    <h-task-box
-      [style]="'task-box-1'"
-      [header]="'Client Meeting'"
-      [text]="'Waiting brief from the client'"
-      [status]="'WAITING'"
-      [members]="members">
-    </h-task-box>
-  </div>
-
-  <div class="ui-g-12 ui-lg-4">
-    <h-task-box
-      [style]="'task-box-2'"
-      [header]="'Sale Reports'"
-      [text]="'Annual reports per branch'"
-      [status]="'IN PROGRESS'"
-      [members]="members">
-    </h-task-box>
-  </div>
-
-  <div class="ui-g-12 ui-lg-4">
-    <h-task-box
-      [style]="'task-box-3'"
-      [header]="'Marketing Meeting'"
-      [text]="'Marketing meeting to review sales.'"
-      [status]="'ON HOLD'"
-      [members]="members">
-    </h-task-box>
-  </div>
-
-  <div class="ui-g-12 ui-md-6 ui-lg-4 ui-fluid">
-    <h-contact-form></h-contact-form>
-  </div>
-
-  <div class="ui-g-12 ui-md-6 ui-lg-4 ui-fluid">
-    <h-toasty-setting></h-toasty-setting>
-  </div>
-
-  <div class="ui-g-12 ui-lg-4">
-    <h-message-list
-      [header]="'Chat'"
-      [messageList]="messageList">
-    </h-message-list>
-  </div>
-
-  <div class="ui-g-12 ui-lg-4">
-    <h-user-card
-      [bgImage]="'assets/images/dashboard/usercard.png'"
-      [userAvatar]="'assets/images/avatar.png'"
-      [userName]="'Wendy Lorina'"
-      [data]="userData">
-    </h-user-card>
-  </div>
-
-  <!-- <div class="ui-g-12">
-    <div class="ui-g-12 ui-lg-8">
-      <p-panel header="Sales Graph">
-        <p-chart type="line" [data]="data" (onDataSelect)="selectData($event)"></p-chart>
-      </p-panel>
-    </div>
-
-    <div class="ui-g-12 ui-lg-4">
-      <h-map [header]="'Map'" [image]="'assets/images/dashboard/map.png'"></h-map>
-    </div>
-  </div> -->
-
-  <div class="ui-g-12 ui-lg-6 ui-g-nopad">
-    <div class="ui-g-12 status-bars">
-      <h-status-bar [statusList]="statusList"></h-status-bar>
-    </div>
-
-    <div class="ui-g-12 ui-g-nopad">
-      <h-image-box
-        [image]="'assets/images/dashboard/gradient-waters.png'"
-        [header]="'Gradient Waters'"
-        [icon]="'article'">
-        <p>
-          Derive inexpedient reason law virtues superiority victorious. Overcome pious horror suicide revaluation. Holiest ocean society disgust passion value love.
-          Faithful mountains morality hope disgust merciful moral will revaluation society fearful love.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis,
-          culpa ratione quam perferendis esse, cupiditate neque quas!
-        </p>
-        <p>
-          In et blandit turpis, ut congue nibh. Nam vitae tincidunt nunc, sed accumsan lacus. Sed efficitur malesuada augue ut varius. Pellentesque ultricies leo massa, eu posuere diam sodales quis.
-        </p>
-      </h-image-box>
-    </div>
-
-  </div>
-
-  <div class="ui-g-12 ui-lg-6 ui-g-nopad">
-    <h-change-dashboard
-      [header] = "'Globale Sales by Region'"
-      [lastUpdate] = "'21m'"
-      [data]="globalSales">
-    </h-change-dashboard>
-  </div>
-
+  <!-- Default -->
   <div class="ui-g-12">
-    <div class="card">
-      <p-dataTable [value]="cars" selectionmode="single">
-          <p-header>Recent Sales</p-header>
-          <p-column field="vin" header="Vin"></p-column>
-          <p-column field="year" header="Year"></p-column>
-          <p-column field="brand" header="Brand"></p-column>
-          <p-column field="color" header="Color"></p-column>
-      </p-dataTable>
-    </div>
-  </div>
+    <p-panel header ="{{'default'|translate}}" [toggleable]="true" [collapsed]="false">
+      <div class="ui-g form-group">
 
-  <h-nav-board
-    [title]="title"
-    [navItems]="navItems">
-  </h-nav-board>
-
-  <div class="ui-g-12">
-    <ul>
-      <li>
-        {{'fav_position'|translate}}: {{favTopPosition}}
-      </li>
-      <li>
-        {{'notification_toggle'|translate}}: {{notificationMode}}
-      </li>
-      <li>
-        {{'debug_toggle'|translate}}: {{debugMode}}
-      </li>
-    </ul>
-
-    <div *ngIf="debugMode" class="ui-g-12">
-      <p-panel header ="{{'debug'|translate}}" [toggleable]="true" [collapsed]="true">
-        <div class="ui-helper-clearfix" style="margin-top:10px">
-          <pre>{{'formValue'|translate}}: <br>{{members | json}}</pre>
+        <div class="ui-g-12 ui-md-6">
+          <span class="md-inputfield fixed-form">
+            <span class="fixed-label">{{'style'|translate}} *</span>
+          </span>
+          <p-dropdown [options]="styleList" name="style" [style]="{'width': '100%'}"></p-dropdown>
         </div>
-      </p-panel>
-    </div>
+
+      </div>
+    </p-panel>
+  </div>
+
+  <!-- Locale -->
+  <div class="ui-g-12">
+    <p-panel header ="{{'locale'|translate}}" [toggleable]="true" [collapsed]="false">
+      <div class="ui-g form-group">
+
+        <div class="ui-g-12 ui-md-6">
+          <span class="md-inputfield fixed-form">
+            <span class="fixed-label">{{'time_zone'|translate}} *</span>
+          </span>
+          <p-dropdown [options]="localeList" name="locale" [style]="{'width': '100%'}"></p-dropdown>
+        </div>
+
+        <div class="ui-helper-clearfix"></div>
+
+        <div class="ui-g-12 ui-md-6">
+          <span class="md-inputfield fixed-form">
+            <span class="fixed-label">{{'language'|translate}} *</span>
+          </span>
+          <p-dropdown [options]="langList" name="language" [style]="{'width': '100%'}"></p-dropdown>
+        </div>
+
+      </div>
+    </p-panel>
+  </div>
+
+  <!-- Notification -->
+  <div class="ui-g-12">
+    <p-panel header ="{{'notifications'|translate}}" [toggleable]="true" [collapsed]="false">
+      <div class="ui-g form-group">
+
+        <div class="ui-g-12 ui-md-6 ui-lg-4 ui-fluid">
+          <h-toasty-setting></h-toasty-setting>
+        </div>
+
+      </div>
+    </p-panel>
   </div>
 
 </div>
-
-
-
-<!-- <h3 class="first">Basic</h3>
-<div class="ui-g">
-  <div class="ui-g-1">1</div>
-  <div class="ui-g-1">1</div>
-  <div class="ui-g-1">1</div>
-  <div class="ui-g-1">1</div>
-  <div class="ui-g-1">1</div>
-  <div class="ui-g-1">1</div>
-  <div class="ui-g-1">1</div>
-  <div class="ui-g-1">1</div>
-  <div class="ui-g-1">1</div>
-  <div class="ui-g-1">1</div>
-  <div class="ui-g-1">1</div>
-  <div class="ui-g-1">1</div>
-</div>
-
-<div class="ui-g">
-  <div class="ui-g-2">2</div>
-  <div class="ui-g-2">2</div>
-  <div class="ui-g-2">2</div>
-  <div class="ui-g-2">2</div>
-  <div class="ui-g-2">2</div>
-  <div class="ui-g-2">2</div>
-</div>
-
-<div class="ui-g">
-  <div class="ui-g-3">3</div>
-  <div class="ui-g-3">3</div>
-  <div class="ui-g-3">3</div>
-  <div class="ui-g-3">3</div>
-</div>
-
-<div class="ui-g">
-  <div class="ui-g-4">4</div>
-  <div class="ui-g-4">4</div>
-  <div class="ui-g-4">4</div>
-</div>
-
-<div class="ui-g">
-  <div class="ui-g-6">6</div>
-  <div class="ui-g-6">6</div>
-</div>
-
-<div class="ui-g">
-  <div class="ui-g-12">12</div>
-</div>
-
-<div class="ui-g">
-  <div class="ui-g-4">4</div>
-  <div class="ui-g-8">8</div>
-</div>
-
-<div class="ui-g">
-  <div class="ui-g-3">3</div>
-  <div class="ui-g-9">9</div>
-</div>
-
-<div class="ui-g">
-  <div class="ui-g-3">3</div>
-  <div class="ui-g-5">5</div>
-  <div class="ui-g-4">4</div>
-</div>
-
-<div class="ui-g">
-  <div class="ui-g-4">4</div>
-  <div class="ui-g-2">2</div>
-  <div class="ui-g-2">2</div>
-  <div class="ui-g-3">3</div>
-  <div class="ui-g-1">1</div>
-</div>
-
-<h3>Responsive</h3>
-<div class="ui-g">
-  <div class="ui-g-12 ui-md-6 ui-lg-3">ui-g-12 ui-md-6 ui-lg-3</div>
-  <div class="ui-g-12 ui-md-6 ui-lg-3">ui-g-12 ui-md-6 ui-lg-3</div>
-  <div class="ui-g-12 ui-md-6 ui-lg-3">ui-g-12 ui-md-6 ui-lg-3</div>
-  <div class="ui-g-12 ui-md-6 ui-lg-3">ui-g-12 ui-md-6 ui-lg-3</div>
-</div>
-
-<div class="ui-g">
-  <div class="ui-g-12 ui-md-6 ui-lg-4">ui-g-12 ui-md-6 ui-lg-4</div>
-  <div class="ui-g-12 ui-md-6 ui-lg-4">ui-g-12 ui-md-6 ui-lg-4</div>
-  <div class="ui-g-12 ui-lg-4">ui-g-12 ui-lg-4</div>
-</div> -->

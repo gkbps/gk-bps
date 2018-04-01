@@ -1,4 +1,5 @@
-<h-turbo-table
+<h-table 
+  *ngIf="listType"
   [module] = "module"
   [actionSerial] = "actionSerial"
   [cols] = "cols"
@@ -7,4 +8,16 @@
   [columnOptions] = "columnOptions"
   [body] = "gkClients | async"
   (onPageChange)="doSomething($event)">
-</h-turbo-table>
+</h-table>
+
+<h-data-grid
+  *ngIf="!listType"
+  [module] = "module"
+  [actionSerial] = "actionSerial"
+  [cols] = "cols"
+  [selectedColumns] = "selectedColumns"
+  [selectedItemsLabel] = "selectedItemsLabel"
+  [columnOptions] = "columnOptions"
+  [body] = "gkClients | async"
+  (onPageChange)="doSomething($event)">
+</h-data-grid>

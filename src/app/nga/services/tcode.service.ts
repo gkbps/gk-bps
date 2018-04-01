@@ -54,7 +54,7 @@ export class TcodeService {
     'blank',
     'intro', 'login', 'lockscreen', 'register', 'forgot',
     'profile', 'policy', 'help', 'dict',
-    'fav', 'terminal', 'setting',
+    'fav', 'terminal', 'setting', 'theme',
     '401', '403', '404', '500', 'chat',
     'debug', 'notification', 'ntfct', 'download',
     'home', 'news', 'main',

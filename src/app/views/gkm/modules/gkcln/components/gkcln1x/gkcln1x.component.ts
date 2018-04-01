@@ -3,12 +3,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { SelectItem } from 'primeng/api';
 
-/**/
+import { TranslateService } from '@ngx-translate/core';
+
 import { Store, select } from '@ngrx/store';
 import { getGkClientsAction } from '../../../../../../ngrx/gkClient/gkClients.actions';
-/**/
-
-import { TranslateService } from '@ngx-translate/core';
 
 import { GlobalState } from '../../../../../../global.state';
 import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
@@ -35,12 +33,15 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
   module = 'gkcln';
   actionSerial = '1';
 
-  cols: any[];                  // Header columns on the fly
+  // Header columns on the fly
+  cols: any[];
   columnOptions: SelectItem[];
   selectedColumns: any[];
   selectedItemsLabel = '{0} items selected';
 
   gkClients: Observable<any>;
+
+  listType = false;
 
   constructor(
     // Base class services
@@ -59,6 +60,8 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
     // Derive class constructor
     this.store.dispatch(getGkClientsAction('', '{}', 0, 10));
     this.gkClients = store.pipe(select('gkClients'));
+
+    // this.listType = this.localStorageService.getListType();
   }
 
   ngOnInit() {
@@ -74,6 +77,29 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
     this.initDataTableColumn();
   }
 
+  ngOnDestroy() {
+    // Base class destroy
+    super.ngOnDestroy();
+
+    // Derive class destroy here
+    this.unsubscribeLocalState();
+  }
+
+  /* LOCAL STATE */
+  subscribeLocalState() {
+    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
+      this.translateService.use(lang);
+      this.initDataTableColumn();
+    });
+  }
+
+  unsubscribeLocalState() {
+    this.globalState.unsubscribeEvent('language', this.myScope);
+  }
+
+  /**
+  * COMPONENT OPERATION
+  */
   initDataTableColumn() {
     this.translateService.get(['id', 'description', 'db', 'status', 'marked', 'selected_item_label'])
       .subscribe((res) => {
@@ -99,7 +125,6 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
 
   doSomething(event) {
     // console.log(event);
-
     this.store.dispatch(getGkClientsAction(
       event.filter,
       event.sort,
@@ -108,23 +133,4 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
     ));
   }
 
-  ngOnDestroy() {
-    // Base class destroy
-    super.ngOnDestroy();
-
-    // Derive class destroy here
-    this.unsubscribeLocalState();
-  }
-
-  /* LOCAL STATE */
-  subscribeLocalState() {
-    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      this.translateService.use(lang);
-      this.initDataTableColumn();
-    });
-  }
-
-  unsubscribeLocalState() {
-    this.globalState.unsubscribeEvent('language', this.myScope);
-  }
 }

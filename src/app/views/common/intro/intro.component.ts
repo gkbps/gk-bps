@@ -57,7 +57,7 @@ export class IntroComponent implements OnInit, OnDestroy {
 
   /**
   * @function gotoLogin
-  * Goto Login page  
+  * Goto Login page
   */
   gotoLogin() {
     const securityService = this.securityService.getSavedSession();

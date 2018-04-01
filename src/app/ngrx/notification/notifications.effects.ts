@@ -81,7 +81,7 @@ export class NotificationsEffects {
           action['payload']['sort'],
           action['payload']['first'],
           action['payload']['rows']
-        )
+        );
       }),
       // If successful, dispatch success action with result
       map(requestDocuments => {

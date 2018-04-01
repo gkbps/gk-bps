@@ -51,7 +51,7 @@ export class RequestsServices {
       approval_type: '',
       approval: [],
       docs: []
-    };    
+    };
     value.owner.push(user.username);
     return Observable.of(value);
   }

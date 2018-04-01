@@ -1,8 +1,9 @@
 // Alphabet
-export * from './gk-breadcrumbs';
-export * from './gk-footer';
-export * from './gk-header';
-export * from './gk-logo';
-export * from './gk-sidebar-menu';
-export * from './gk-sidebar-wrapper';
-export * from './gk-working';
+export * from './app-breadcrumbs';
+export * from './app-footer';
+export * from './app-header';
+export * from './app-logo';
+export * from './app-menu';
+export * from './app-menu-item';
+export * from './app-topbar';
+export * from './app-working';

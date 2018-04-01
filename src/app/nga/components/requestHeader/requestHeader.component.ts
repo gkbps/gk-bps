@@ -233,7 +233,11 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
           case 'In progress':
             console.log(this.user.username, this.source.data.owner, this.source.data.pic);
             if (this.source.data.owner.includes(this.user.username)) {
-              this.items.push({ label: res.withdraw, icon: 'ui-icon-subdirectory-arrow-left', command: (event) => this.confirmAction('withdraw') });
+              this.items.push({
+                label: res.withdraw,
+                icon: 'ui-icon-subdirectory-arrow-left',
+                command: (event) => this.confirmAction('withdraw')
+              });
               this.items.push({ label: res.cancel, icon: 'ui-icon-no-sim', command: (event) => this.confirmAction('cancel') });
             }
 
@@ -341,7 +345,7 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
   filterUserSingle(event) {
     const query = event.query;
     console.log(query);
-    if (query.length >1) {
+    if (query.length > 1) {
       this.userService.findAPIListPagination(query, '{}', 0, 20)
         .subscribe(data => {
           console.log(data);
@@ -417,7 +421,7 @@ export class RequestHeader implements OnInit, OnDestroy, OnChanges {
             msg: res.invalid_form_message,
             showClose: true,
           };
-          this.globalState.notifyMyDataChanged('toasty','', toastData);
+          this.globalState.notifyMyDataChanged('toasty', '', toastData);
         });
     } else {
       // console.log(this.myForm.controls['status'].value);

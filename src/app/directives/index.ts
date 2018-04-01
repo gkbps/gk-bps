@@ -1,3 +1,3 @@
 // Alphabet
-export * from './gk-nav-dropdown';
-export * from './gk-sidebar';
+export * from './app-nav-dropdown';
+export * from './app-sidebar';

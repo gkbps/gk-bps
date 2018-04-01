@@ -1,9 +1,4 @@
-// External
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { MenubarModule } from 'primeng/menubar';
-import { MenuItem } from 'primeng/api';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -12,20 +7,18 @@ import { LocalStorageService } from '../../../../../../nga/services/localStorage
 import { MenuService } from '../../../../../../nga/services/menu.service';
 import { NavigationService } from '../../../../../../nga/services/navigation.service';
 
-import { SecurityService } from '../../../../../../nga/services/security.service';
-import { TcodeService } from '../../../../../../nga/services/tcode.service';
-
 import { BaseComponent } from '../../../../../base';
 
+/**
+* @module GkCln60Component
+* Navigation board for GkCln - 60
+*/
 @Component({
   selector: 'gkcln-60',
-  templateUrl: './gkcln60.html',
-  styleUrls: ['./gkcln60.scss'],
+  templateUrl: '../../../../../base/commonHTML/navBoard.html'
 })
 
 export class GkCln60Component extends BaseComponent implements OnInit, OnDestroy {
-
-  myScope = 'gkcln-60';
 
   // Override Base class properties
   pageTitle = 'gkcln';
@@ -37,10 +30,9 @@ export class GkCln60Component extends BaseComponent implements OnInit, OnDestroy
 
   // Derive class properties
   prefix = '/gkcln';
+
   public circleImagePath = 'modules/common/circle/';
   public squareImagePath = 'modules/common/square/';
-
-  userRights: Array<any>;
 
   title: string;
   navItems: any[];
@@ -54,9 +46,6 @@ export class GkCln60Component extends BaseComponent implements OnInit, OnDestroy
     public menuService: MenuService,
 
     // Derive class services
-    private router: Router,
-    private securityService: SecurityService,
-    private tcodeService: TcodeService,
   ) {
     // Base class constructor: Re-injection for inheritance
     super(translateService, globalState, localStorageService, menuService, navigationService);
@@ -70,13 +59,24 @@ export class GkCln60Component extends BaseComponent implements OnInit, OnDestroy
     // Derive class initialization
     this.initSidebarMenu();
     this.globalState.notifyMyDataChanged('help', '', 'tcd.x0.navBoard');
-    this.subscribeLocalState();
-    this.initNavBoard();
 
-    const currentUser: any = this.securityService.getCurrentUser();
-    this.userRights = this.securityService.getMana();
+    this.initNavBoard();
   }
 
+  ngOnDestroy() {
+    // Base class destroy
+    super.ngOnDestroy();
+
+    // Derive class destroy here
+  }
+
+  // COMPONENT OPERATION
+
+  /**
+  * @function initNavBoard
+  * Initialize title and navItems for Navigation Board
+  * NOTE: No need to handle language change as it shall be managed by Navigation Board
+  */
   initNavBoard() {
     this.title = 'reports';
     this.navItems = [
@@ -151,28 +151,6 @@ export class GkCln60Component extends BaseComponent implements OnInit, OnDestroy
         'title': 'view_change'
       },
     ];
-
   }
 
-  ngOnDestroy() {
-    // Base class destroy
-    super.ngOnDestroy();
-
-    // Derive class destroy here
-    this.unsubscribeLocalState();
-  }
-
-  /* LOCAL STATE */
-  subscribeLocalState() {
-    // Register Language Callback in Global Status
-    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
-      this.translateService.use(lang);
-      this.initNavBoard();
-    });
-  }
-
-  unsubscribeLocalState() {
-    this.globalState.unsubscribeEvent('language', this.myScope);
-  }
 }

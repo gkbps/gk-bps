@@ -1,4 +1,11 @@
 {
+	"sort_by": "Sort by",
+	"asc": "Asc",
+	"desc": "Desc",
+	"default": "Default",
+	"language": "Language",
+	"locale": "Locale",
+	"time_zone": "Time Zone",
 	"request_is_sent": "Request is sent. In case of error, debug below!",
 	"view_all": "View All",
 	"deferral": "Request is being processed!",

@@ -1,0 +1,23 @@
+<!--
+* IMPORTANT: https://angular.io/guide/styleguide#style-05-03
+* Use component as HTML element
+* app-logo
+* appMenuItem
+-->
+
+<div id="layout-sidebar" class="layout-sidebar" appLayoutSidebarToggleWebMode>
+
+  <div app-logo class="sidebar-logo"></div>
+
+  <p-scrollPanel [style]="{ height: '100%' }">
+    <ul
+      appMenuItem
+      [menu]="menu"
+      class="layout-menu"
+      root="true"
+      visible="true">
+    </ul>
+    <div class="ui-helper-clearfix" style="margin-bottm: 60px;"></div>
+  </p-scrollPanel>
+
+</div>

@@ -15,5 +15,5 @@ export function getRequestApprovalAction(tcode) {
     payload: {
       tcode: tcode,
     }
-  }
+  };
 }

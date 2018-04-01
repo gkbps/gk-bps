@@ -74,6 +74,9 @@ import { UtilsService } from './utils.service';
 * @function setFavPosition
 * @function getFavPosition
 *
+* @function setMasterListType
+* @function getMasterListType
+*
 * @function setRows
 * @function getRows
 *
@@ -155,6 +158,7 @@ export class LocalStorageService {
           'home': ''
         },
         'data_pref': {
+          'listType': true,
           'rows': 10,
         }
       });
@@ -685,6 +689,29 @@ export class LocalStorageService {
   getFavPosition() {
     const env = this.getEnv();
     return (env.pref.isFavTop);
+  }
+
+  /**
+  * @function setListType
+  * Set or update type of the master list
+  *
+  * @param {boolean}
+  */
+  setListType(listType = true) {
+    const env = this.getEnv();
+    if (env.data_pref.listType !== listType) {
+      env.data_pref.listType = listType;
+      this.setEnv(JSON.stringify(env));
+    }
+  }
+
+  /**
+  * @function getListType
+  * Get type of the master list
+  */
+  getListType() {
+    const env = this.getEnv();
+    return (env.data_pref.listType);
   }
 
   /**

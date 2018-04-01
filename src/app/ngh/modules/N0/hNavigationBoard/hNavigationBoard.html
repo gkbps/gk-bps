@@ -1,0 +1,97 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="card">
+      <div class="ui-g">
+
+        <div class="ui-g-12">
+          <p-toolbar>
+            <div class="ui-toolbar-group-left">
+              <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:6px; margin-left: 6px;">
+                {{title|translate}}
+              </span>
+            </div>
+
+            <div class="ui-toolbar-group-right">
+                <button pButton type="button" icon="ui-icon-hdr-weak" (click)="toggleNavType('circle')" pTooltip="{{'circle_shape'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-crop-portrait" (click)="toggleNavType('square')" pTooltip="{{'square_shape'|translate}}" tooltipPosition="top"></button>
+                <button pButton type="button" icon="ui-icon-photo-size-select-small" (click)="toggleSize()" pTooltip="{{'toggle_size'|translate}}" tooltipPosition="top"></button>
+            </div>
+          </p-toolbar>
+        </div>
+
+        <div class="ui-g-12">
+          <!-- CIRCLE -->
+          <div *ngIf="navType=='circle'" class="ui-g">
+            <section *ngIf="navEffect!=='effect8'" class="no-bg" style="width: 100%">
+              <div class="navItem ui-g-12" *ngFor="let item of navItems; let i=index" [ngClass]="{'ui-md-4': isSmall, 'ui-lg-3': isSmall, 'ui-md-6': !isSmall, 'ui-lg-4': !isSmall}">
+                  <div class="ih-item circle {{(i+1)%2==0? 'colored':''}} {{navEffect}} {{navAnimate[navDirection][(i+1)%navAnimateLength]}}">
+                    <a href routerLink="{{item.url}}">
+                      <div class="spinner"></div>
+                      <div class="img">
+                        <img src="{{assetPath}}{{item.img}}" alt="img">
+                      </div>
+                      <div class="info">
+                        <div class="info-back">
+                          <h3>TCODE {{item.tcode}}</h3>
+                          <p>{{item.title|translate}}</p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+              </div>
+            </section>
+
+            <section *ngIf="navEffect=='effect8'" class="no-bg">
+              <div class="navItem ui-g-12" *ngFor="let item of navItems; let i=index" [ngClass]="{'ui-md-4': isSmall, 'ui-lg-3': isSmall, 'ui-md-6': !isSmall, 'ui-lg-4': !isSmall}">
+                  <div class="ih-item circle {{(i+1)%2==0? 'colored':''}} {{navEffect}} {{navAnimate[navDirection][(i+1)%navAnimateLength]}}">
+
+                    <div class="ih-item circle {{(i+1)%2==0? 'colored':''}} {{navEffect}} {{navAnimate[navDirection][(i+1)%navAnimateLength]}}">
+                      <a href routerLink="{{item.url}}">
+                      <div class="img-container">
+                        <div class="img">
+                          <img src="{{assetPath}}{{item.img}}" alt="img">
+                        </div>
+                      </div>
+                      <div class="info-container">
+                        <div class="info">
+                          <h3>TCODE {{item.tcode}}</h3>
+                          <p>{{item.title|translate}}</p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+          </div>
+          <!-- ./CIRCLE -->
+
+          <!-- SQUARE -->
+          <div *ngIf="navType=='square'" class="ui-g">
+            <section class="no-bg">
+              <div class="navItem ui-g-12" *ngFor="let item of navItems; let i=index" [ngClass]="{'ui-md-4': isSmall, 'ui-lg-3': isSmall, 'ui-md-6': !isSmall, 'ui-lg-4': !isSmall}">
+                  <div class="ih-item square {{(i+1)%2==0? 'colored':''}} {{navEffect}} {{navAnimate[navDirection][(i+1)%navAnimateLength]}}">
+                    <a href routerLink="{{item.url}}">
+                      <div class="spinner"></div>
+                      <div class="img img-square">
+                        <img src="{{assetPath}}{{item.squareImg}}" alt="img">
+                      </div>
+                      <div class="info">
+                        <div class="info-back">
+                          <h3>TCODE {{item.tcode}}</h3>
+                          <p>{{item.title|translate}}</p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+              </div>
+            </section>
+          </div>
+          <!-- ./SQUARE -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

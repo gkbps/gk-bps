@@ -72,7 +72,7 @@ export class HToastySettingComponent implements OnInit {
   testToasty() {
     const toastType = ['default', 'info', 'success', 'wait', 'error', 'warning'];
     for (let i = 0; i < toastType.length; i++) {
-      setTimeout(()=> {
+      setTimeout(() => {
         const toastData = {
           type: toastType[i],
           title: toastType[i].toUpperCase(),

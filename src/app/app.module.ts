@@ -75,45 +75,47 @@ import { NgaModule } from './nga/nga.module';
 
 // Containers
 import {
-  GkFullLayoutComponent,
-  GkSimpleLayoutComponent,
+  AppFullLayoutComponent,
+  AppSimpleLayoutComponent,
 } from './containers';
 
 const APP_CONTAINERS = [
-  GkFullLayoutComponent,
-  GkSimpleLayoutComponent,
+  AppFullLayoutComponent,
+  AppSimpleLayoutComponent,
 ];
 
 // Components
 import {
-  GkLogoComponent,
-  GkSidebarWrapperComponent,
-  GkSidebarMenuComponent,
-  GkHeaderComponent,
-  GkBreadcrumbsComponent,
-  GkWorkingComponent,
-  GkFooterComponent,
+  AppBreadcrumbsComponent,
+  AppFooterComponent,
+  AppHeaderComponent,
+  AppLogoComponent,
+  AppMenuComponent,
+  AppMenuItemComponent,
+  AppTopBarComponent,
+  AppWorkingComponent
 } from './components';
 
 const APP_COMPONENTS = [
-  GkLogoComponent,
-  GkSidebarWrapperComponent,
-  GkSidebarMenuComponent,
-  GkHeaderComponent,
-  GkBreadcrumbsComponent,
-  GkWorkingComponent,
-  GkFooterComponent,
+  AppBreadcrumbsComponent,
+  AppFooterComponent,
+  AppHeaderComponent,
+  AppLogoComponent,
+  AppMenuComponent,
+  AppMenuItemComponent,
+  AppTopBarComponent,
+  AppWorkingComponent
 ];
 
 // Directives
 import {
-  GK_NAV_DROPDOWN_DIRECTIVES,
-  GK_SIDEBAR_TOGGLE_DIRECTIVES,
+  APP_NAV_DROPDOWN_DIRECTIVES,
+  APP_SIDEBAR_TOGGLE_DIRECTIVES,
 } from './directives';
 
 const APP_DIRECTIVES = [
-  GK_NAV_DROPDOWN_DIRECTIVES,
-  GK_SIDEBAR_TOGGLE_DIRECTIVES,
+  APP_NAV_DROPDOWN_DIRECTIVES,
+  APP_SIDEBAR_TOGGLE_DIRECTIVES,
 ];
 
 @NgModule({

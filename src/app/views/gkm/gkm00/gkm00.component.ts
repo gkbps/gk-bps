@@ -9,12 +9,14 @@ import { NavigationService } from '../../../nga/services/navigation.service';
 
 import { BaseComponent } from '../../base';
 
+/**
+* @module Gkm00Component
+* Navigation board for GKM
+*/
 @Component({
   selector: 'gkm-00',
-  templateUrl: './gkm00.html',
-  styleUrls: ['./gkm00.scss'],
+  templateUrl: '../../base/commonHTML/navBoard.html'
 })
-
 export class Gkm00Component extends BaseComponent implements OnInit, OnDestroy {
 
   // Override Base class properties
@@ -33,7 +35,6 @@ export class Gkm00Component extends BaseComponent implements OnInit, OnDestroy {
   public tcdImagePath: String = 'modules/tcd/';
 
   title: String;
-  subtitle: String;
   navItems: any[];
 
   constructor(
@@ -60,15 +61,27 @@ export class Gkm00Component extends BaseComponent implements OnInit, OnDestroy {
 
     // Derive class initialization
     this.initSidebarMenu();
-    // this.globalState.notifyDataChanged('help', 'tcd.x0.navBoard');
     this.globalState.notifyMyDataChanged('help', '', 'tcd.x0.navBoard');
-    this.navigationService.trackHistory();
+
     this.initNavBoard();
   }
 
+  ngOnDestroy() {
+    // Base class destroy
+    super.ngOnDestroy();
+
+    // Derive class destroy here
+  }
+
+  // COMPONENT OPERATION
+
+  /**
+  * @function initNavBoard
+  * Initialize title and navItems for Navigation Board
+  * NOTE: No need to handle language change as it shall be managed by Navigation Board
+  */
   initNavBoard() {
     this.title = 'gkm00';
-    this.subtitle = 'gkm00Subtitle';
     this.navItems = [
       {
         'url': '/gkcln/gkcln00',
@@ -92,13 +105,6 @@ export class Gkm00Component extends BaseComponent implements OnInit, OnDestroy {
         'title': 'gktcd00' // 'GK Tcodes Management'
       },
     ];
-  }
-
-  ngOnDestroy() {
-    // Base class destroy
-    // super.ngOnDestroy();
-
-    // Derive class destroy here
   }
 
 }

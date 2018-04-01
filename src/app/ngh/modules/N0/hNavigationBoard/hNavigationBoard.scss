@@ -1,0 +1,49 @@
+.no-bg {
+  overflow: hidden;
+  position: relative;
+  padding: 20px;
+}
+
+.navBoard {
+  padding: 20px 20px;
+  margin: 20px auto 20px;
+}
+
+section {
+  width: 100%;
+}
+
+.img-square {
+  height: 100%;
+}
+
+.navItem {
+  display: flex;            // one item issue
+  align-items: center;      //vertical
+  justify-content: center;  //horizontal
+  margin-bottom: 30px;
+}
+
+@media (min-width: 425px) {
+	.navBoard{
+	  max-width: 200px;
+	}
+}
+
+@media (min-width: 768px) {
+	.navBoard{
+	  max-width: 600px;
+	}
+}
+
+@media (min-width: 992px) {
+	.navBoard{
+	  max-width: 700px;
+	}
+}
+
+@media (min-width: 1430px) {
+	.navBoard {
+	 	max-width: 1200px;
+	}
+}

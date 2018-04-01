@@ -158,7 +158,7 @@ export function returnRequestAction(id) {
   return {
     type: RequestActionTypes.RETURN_REQUEST,
     payload: { id: id }
-  }
+  };
 }
 
 export function approveRequestAction(id, approverId, step) {

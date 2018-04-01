@@ -1,7 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -12,10 +11,11 @@ import { GkClientsReducers } from '../../../../../../ngrx/gkClient/gkClients.red
 import { GkClientsEffects } from '../../../../../../ngrx/gkClient/gkClients.effects';
 import { GkClientsServices } from '../../../../../../ngrx/gkClient/gkClients.services';
 
-import { GkCln1xComponent } from './gkcln1x.component';
 import { GkCln1xRoutingModule } from './gkcln1x-routing.module';
+import { GkCln1xComponent } from './gkcln1x.component';
 
-import { HTurboTableModule } from '../../../../../../nga/components/hTurboTable';
+import { HTableModule } from '../../../../../../ngh/modules/Nx/hTable';
+import { HDataGridModule } from '../../../../../../ngh/modules/Nx/hDataGrid';
 
 @NgModule({
   declarations: [
@@ -24,18 +24,16 @@ import { HTurboTableModule } from '../../../../../../nga/components/hTurboTable'
   imports: [
     CommonModule,
     FormsModule,
-    // RouterModule,
 
     TranslateModule,
 
     StoreModule.forFeature('gkClients', GkClientsReducers),
     EffectsModule.forFeature([GkClientsEffects]),
 
-    HTurboTableModule,
+    HTableModule,
+    HDataGridModule,
 
     GkCln1xRoutingModule
-  ],
-  exports: [
   ],
   providers: [
     GkClientsServices

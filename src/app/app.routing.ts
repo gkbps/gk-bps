@@ -2,8 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import {
-  GkFullLayoutComponent,
-  GkSimpleLayoutComponent,
+  AppFullLayoutComponent,
+  AppSimpleLayoutComponent,
+
+  // GkFullLayoutComponent,
+  // GkSimpleLayoutComponent,
 } from './containers';
 
 import { AuthGuard, TcodeGuard } from './nga/services';
@@ -16,7 +19,7 @@ export const routes: Routes = [
   // Public Area - No security restriction
   {
     path: '',
-    component: GkSimpleLayoutComponent,
+    component: AppSimpleLayoutComponent,
     data: { title: 'Public' },
     children: [
       { path: '', redirectTo: 'intro',  pathMatch: 'full' },
@@ -34,7 +37,7 @@ export const routes: Routes = [
 
   // Common Area - Logged in user | Group by similarity for convinient, not Alphabet
   {
-    path: '', component: GkFullLayoutComponent, canActivateChild: [AuthGuard],
+    path: '', component: AppFullLayoutComponent, canActivateChild: [AuthGuard],
     data: { title: '' },
     children: [
       { path: 'blank', loadChildren: './views/common/blank/blank.module#BlankModule' },
@@ -61,6 +64,7 @@ export const routes: Routes = [
       { path: 'policy', loadChildren: './views/common/policy/policy.module#PolicyModule' },
       { path: 'profile', loadChildren: './views/common/profile/profile.module#ProfileModule' },
       { path: 'setting', loadChildren: './views/common/setting/setting.module#SettingModule' },
+      { path: 'theme', loadChildren: './views/common/theme/theme.module#ThemeModule' },
 
       { path: 'debug', loadChildren: './views/common/debug/debug.module#DebugModule' },
       { path: 'notification', loadChildren: './views/common/notification/notification.module#NotificationModule' },
@@ -77,7 +81,7 @@ export const routes: Routes = [
 
   // Modules Area - Module or Alphabet
   {
-    path: '', component: GkFullLayoutComponent, canActivateChild: [AuthGuard],
+    path: '', component: AppFullLayoutComponent, canActivateChild: [AuthGuard],
     data: { title: '' },
     children: [
       { path: 'gkm', loadChildren: './views/gkm/gkm.module#GkmModule' },

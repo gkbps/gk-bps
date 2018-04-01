@@ -22,7 +22,6 @@
   <!-- Styles -->
   <link id="layout-css" rel="stylesheet" type="text/css" href="./assets/layout/css/layout-moody.css">
   <link id="theme-css" rel="stylesheet" type="text/css" href="./assets/theme/theme-bluegrey.css">
-  <!-- <link id="toasty-css" rel="stylesheet" type="text/css" href="../node_modules/ngx-toasty/style.css"> -->
 
   <link id="mycss1" rel="stylesheet" type="text/css" href="./assets/css/none.css">
   <link id="mycss2" rel="stylesheet" type="text/css" href="./assets/css/none.css">
@@ -30,9 +29,12 @@
 </head>
 
 <body>
-  <noscript>Please enable JavaScript to use system</noscript>
-  <!-- App Loading... -->
+  <noscript>
+    Please enable JavaScript to use system
+  </noscript>
+
   <app-root>
+    <!-- App Loading... -->
     <div class="splash-screen">
       <div class="splash-loader-container">
         <svg class="splash-loader" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
@@ -40,8 +42,9 @@
         </svg>
       </div>
     </div>
+    <!-- ./App Loading... -->
+
   </app-root>
-  <!-- ./App Loading... -->
 
   <script>
     if (typeof module==='object') {
@@ -55,9 +58,11 @@
     if (window.module) module = window.module;
   </script>
 
-  <!-- <script>
+  <!--
+  <script>
     window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.min.js');
-  </script> -->
+  </script>
+  -->
 
   <script>
     if ('serviceWorker' in navigator) {

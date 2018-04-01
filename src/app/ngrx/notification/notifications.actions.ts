@@ -79,7 +79,7 @@ export function unmarkNotificationAction(id) {
   return {
     type: NotificationsActionTypes.UNMARK_NOTIFICATION,
     payload: { id: id }
-  }
+  };
 }
 
 export function deleteNotificationAction(id) {

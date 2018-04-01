@@ -1,0 +1,196 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="card">
+      <div class="ui-g">
+
+        <div class="ui-g-12">
+          <p-toolbar>
+            <div class="ui-toolbar-group-left">
+              <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:6px; margin-left: 6px;">
+                {{module|translate}}
+              </span>
+            </div>
+
+            <div class="ui-toolbar-group-right">
+                <button
+                  pButton type="button" icon="ui-icon-add"
+                  [disabled]="notInRights(module + actionSerial + '1')"
+                  (click)="tcodeService.executeTcode(module + actionSerial + '1')"
+                  pTooltip="{{'create'|translate}}" tooltipPosition="top">
+                </button>
+                <button
+                  pButton type="button" icon="ui-icon-search"
+                  [disabled]="notInRights(module + actionSerial + '2')"
+                  (click)="executeTcode(module + actionSerial + '2')"
+                  pTooltip="{{'view'|translate}}" tooltipPosition="top">
+                </button>
+                <button
+                  pButton type="button" icon="ui-icon-edit"
+                  [disabled]="notInRights(module + actionSerial + '3')"
+                  (click)="executeTcode(module + actionSerial + '3')"
+                  pTooltip="{{'edit'|translate}}" tooltipPosition="top">
+                </button>
+
+                <button
+                  *ngIf="isFullMenu()"
+                  pButton type="button" icon="ui-icon-bookmark"
+                  [disabled]="notInRights(module + actionSerial + '4')"
+                  (click)="executeTcode(module + actionSerial + '4')"
+                  pTooltip="{{'disable'|translate}}" tooltipPosition="top">
+                </button>
+                <button
+                  *ngIf="isFullMenu()"
+                  pButton type="button" icon="ui-icon-bookmark-border"
+                  [disabled]="notInRights(module + actionSerial + '5')"
+                  (click)="executeTcode(module + actionSerial + '5')"
+                  pTooltip="{{'enable'|translate}}" tooltipPosition="top">
+                </button>
+
+                <button
+                  pButton type="button" icon="ui-icon-visibility-off"
+                  [disabled]="notInRights(module + actionSerial + '6')"
+                  (click)="executeTcode(module + actionSerial + '6')"
+                  pTooltip="{{'mark'|translate}}" tooltipPosition="top">
+                </button>
+                <button
+                  pButton type="button" icon="ui-icon-visibility"
+                  [disabled]="notInRights(module + actionSerial + '7')"
+                  (click)="executeTcode(module + actionSerial + '7')"
+                  pTooltip="{{'unmark'|translate}}" tooltipPosition="top">
+                </button>
+                <button
+                  pButton type="button" icon="ui-icon-delete-forever"
+                  [disabled]="notInRights(module + actionSerial + '8')"
+                  (click)="executeTcode(module + actionSerial + '8')"
+                  pTooltip="{{'delete'|translate}}" tooltipPosition="top">
+                </button>
+                <button
+                  *ngIf="isFullMenu()"
+                  pButton type="button" icon="ui-icon-track-changes"
+                  [disabled]="notInRights(module + actionSerial + '9')"
+                  (click)="executeTcode(module + actionSerial + '9')"
+                  pTooltip="{{'viewChange'|translate}}" tooltipPosition="top">
+                </button>
+            </div>
+          </p-toolbar>
+        </div>
+
+        <div class="ui-g-12">
+          <p-dataView
+            #dv
+            [value]="body.data.data"
+
+            [lazy]="true"
+            (onLazyLoad) = "loadData($event)"
+
+            [paginator]="true"
+            [rows]="rows"
+            [totalRecords]="body.data.total"
+            [rowsPerPageOptions]="[10,20,30]"
+            paginatorPosition="both"
+
+            [sortField]="sortField"
+            [sortOrder]="sortOrder">
+
+              <p-header>
+                <div class="ui-helper-clearfix">
+                  <div class="ui-g">
+
+                    <div class="ui-g-12 ui-md-4">
+                      <p-multiSelect
+                        class="fixed-multiSelect"
+                        [options]="columnOptions"
+                        [(ngModel)]="selectedColumns"
+                        [selectedItemsLabel]="selectedItemsLabel"
+                        [style]="{minWidth: '200px'}"
+                        defaultLabel="{{'select_an_item'|translate}}">
+                      </p-multiSelect>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 filter-container">
+                      <p-dropdown
+                        [options]="sortOptions"
+                        [(ngModel)]="sortKey"
+                        placeholder="{{'sort_by'|translate}}"
+                        (onChange)="onSortChange($event)"
+                        [autoWidth]="false"
+                        [style]="{'minWidth':'200px', 'margin-top':'12px', 'color': '#ffffff'}">
+                      </p-dropdown>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4" style="text-align:right">
+                      <div style="position:relative; min-width:200px; margin-top: 12px; display: inline-block">
+                        <input
+                          style = "color: #ffffff"
+                          type="search" pInputText placeholder="Search by brand"
+                          [(ngModel)]="globalFilter"
+                          (keydown)="keyDownFunction($event)">
+                      </div>
+
+                      <button
+                        pButton type="button" icon="ui-icon-format-list-bulleted"
+                        (click)="dv.changeLayout('list')"
+                        pTooltip="{{'create'|translate}}" tooltipPosition="top">
+                      </button>
+                      <button
+                        pButton type="button" icon="ui-icon-apps"
+                        (click)="dv.changeLayout('grid')"
+                        pTooltip="{{'create'|translate}}" tooltipPosition="top">
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </p-header>
+
+              <ng-template let-item pTemplate="listItem">
+                <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+                  <div class="ui-g-12 ui-md-3" style="text-align:center">
+                    <img src="assets/showcase/images/car/Audi.png">
+                  </div>
+                  <div class="ui-g-12 ui-md-8 car-details">
+                    <div class="ui-g">
+                      <ng-container *ngFor="let col of selectedColumns">
+                        <div class="ui-g-2 ui-sm-6">{{col.header}}: </div>
+                        <div class="ui-g-10 ui-sm-6"><b>{{item[col.field]}}</b></div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-1 search-icon">
+                    <button
+                      pButton type="button" icon="ui-icon-flare"
+                      (click)="chooseItem($event, item)">
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+
+              <ng-template let-item pTemplate="gridItem">
+                  <div style="padding:.5em" class="ui-g-12 ui-md-3">
+                      <p-panel [header]="item._id" [style]="{'text-align':'center'}">
+                          <img src="assets/showcase/images/car/Audi.png" width="60">
+                          <div class="car-detail">
+                            <ng-container *ngFor="let col of selectedColumns">
+                              {{item[col.field]}}<br />
+                            </ng-container>
+                          </div>
+                          <hr class="ui-widget-content" style="border-top:0">
+                          <button pButton type="button" icon="ui-icon-flare"
+                            (click)="chooseItem($event, item)" style="margin-top:0">
+                          </button>
+                      </p-panel>
+                  </div>
+              </ng-template>
+              <p-footer>
+                <div style="text-align: left">
+                    {{'selected'|translate}}: {{selectedItem ? selectedItem._id : 'none'}}
+                </div>
+              </p-footer>
+          </p-dataView>
+          <p-contextMenu #cm [model]="items" [global]="true"></p-contextMenu>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

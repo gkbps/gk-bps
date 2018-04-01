@@ -1,0 +1,58 @@
+<div id="layout-wrapper" class="layout-wrapper layout-wrapper-static">  <!-- static: layout-wrapper-static; overlay menu: -->
+  <app-menu></app-menu>
+
+  <div class="layout-main">
+
+    <app-topbar></app-topbar>
+
+    <app-breadcrumbs></app-breadcrumbs>
+
+    <app-working></app-working>
+
+    <!-- Progress Bar -->
+    <p-progressBar *ngIf="blocked" mode="indeterminate" [style]="{'height': '4px'}"></p-progressBar>
+    <div *ngIf="!blocked" class="ui-helper-clearfix" style="height: 4px;"></div>
+    <!-- ./Progress Bar -->
+
+    <!-- Sidebar on the fly -->
+    <p-sidebar *ngIf="!sbFullScreen" [(visible)]="sbVisibility" [position]="sbPosition" [styleClass]="sbSizeList[sbSize]" [baseZIndex]="999999">
+        <h1 style="font-weight:normal">{{sbTitle}}</h1>
+    </p-sidebar>
+
+    <p-sidebar *ngIf="sbFullScreen" [(visible)]="sbVisibility" [fullScreen]="true" [baseZIndex]="999999">
+        <h1 style="font-weight:normal">{{sbTitle}}</h1>
+    </p-sidebar>
+    <!-- ./Sidebar on the fly -->
+
+    <ng2-toasty [position]="toastyPosition"></ng2-toasty>
+
+    <div class="layout-content">
+
+      <!-- System wide alert -->
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+
+          <div class="ui-messages ui-widget ui-corner-all ui-messages-{{msgStatus}}" style="margin: 0 0 1em 0; display: block">
+            <!-- ui-messages-warn ui-messages-error ui-messages-fatal ui-messages-success -->
+              <span class="ui-messages-icon fa fa-fw fa-2x fa-check"></span>
+              <ul>
+                <li>
+                  <span class="ui-messages-summary" style="font-size:16px">
+                    {{msgContent}}
+                  </span>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- ./System wide alert -->
+
+      <router-outlet></router-outlet>
+
+    </div>
+
+    <div class="fixed-layout-footer">
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

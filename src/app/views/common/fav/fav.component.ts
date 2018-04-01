@@ -424,13 +424,13 @@ export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
   */
   flagDocument() {
     if (!this.selectedNode) {
-      const toastData = {
+      const _toastData = {
         type: 'warning',
         title: this.langList['flag'],
         msg: this.langList['selectItemToExecute'],
         showClose: true,
       };
-      this.globalState.notifyMyDataChanged('toasty', '', toastData);
+      this.globalState.notifyMyDataChanged('toasty', '', _toastData);
 
       return false;
     }
@@ -549,7 +549,7 @@ export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
           msg: this.langList['selectItemToExecute'],
           showClose: true,
         };
-        this.globalState.notifyMyDataChanged('toasty','', toastData);
+        this.globalState.notifyMyDataChanged('toasty', '', toastData);
 
         return false;
       } else {

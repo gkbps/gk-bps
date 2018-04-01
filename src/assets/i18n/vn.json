@@ -1,4 +1,11 @@
 {
+	"sort_by": "Sắp xếp",
+	"asc": "Tăng",
+	"desc": "Giảm",
+	"default": "Mặc định",
+	"language": "Ngôn ngữ",
+	"locale": "Địa phương",
+	"time_zone": "Vùng giờ",
 	"request_is_sent": "Yêu cầu đã được gửi đi. Nếu phát sinh lỗi, gỡ lỗi dưới đây!",
 	"view_all": "Xem tất cả",
 	"deferral": "Đang xử lý yêu cầu!",

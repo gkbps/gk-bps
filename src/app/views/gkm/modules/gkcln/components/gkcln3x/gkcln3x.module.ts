@@ -12,6 +12,7 @@ import { RequestsEffects } from '../../../../../../ngrx/request/requests.effects
 import { RequestsServices } from '../../../../../../ngrx/request/requests.services';
 
 import { HDataTableByTrayModule } from '../../../../../../nga/components/hDataTableByTray';
+// import { HTurboTableForTrayModule } from '../../../../../../nga/components/hTurboTableForTray';
 
 import { GkCln3xComponent } from './gkcln3x.component';
 import { GkCln3xRoutingModule } from './gkcln3x-routing.module';
@@ -30,6 +31,7 @@ import { GkCln3xRoutingModule } from './gkcln3x-routing.module';
     EffectsModule.forFeature([RequestsEffects]),
 
     HDataTableByTrayModule,
+    // HTurboTableForTrayModule,
 
     GkCln3xRoutingModule
   ],

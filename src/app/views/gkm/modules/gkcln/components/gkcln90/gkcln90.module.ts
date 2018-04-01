@@ -1,14 +1,11 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
 
-// import { TranslateModule } from '@ngx-translate/core';
+import { HNavigationBoardModule } from '../../../../../../ngh/modules/N0/hNavigationBoard';
 
-import { HNavBoardModule } from '../../../../../../nga/components/hNavBoard';
+import { GkCln90RoutingModule } from './gkcln90-routing.module';
 
 import { GkCln90Component } from './gkcln90.component';
-import { GkCln90RoutingModule } from './gkcln90-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,16 +13,11 @@ import { GkCln90RoutingModule } from './gkcln90-routing.module';
   ],
   imports: [
     CommonModule,
-    // FormsModule,
-    // RouterModule,
 
-    // TranslateModule,
+    HNavigationBoardModule,
 
-    HNavBoardModule,
     GkCln90RoutingModule
-  ],
-  exports: [
-  ],
+  ]
 })
 export class GkCln90Module {
 }
