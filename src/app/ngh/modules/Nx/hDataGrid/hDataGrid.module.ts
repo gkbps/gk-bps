@@ -14,6 +14,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
 import { PanelModule } from 'primeng/panel';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { HDataGridComponent } from './hDataGrid.component';
 
@@ -36,6 +37,7 @@ import { HDataGridComponent } from './hDataGrid.component';
     MultiSelectModule,
     ToolbarModule,
     TooltipModule,
+    SplitButtonModule,
 
     PanelModule
   ],

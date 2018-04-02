@@ -6,7 +6,7 @@
         <div class="ui-g-12">
           <p-toolbar>
             <div class="ui-toolbar-group-left">
-              <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:6px; margin-left: 6px;">
+              <span class="ui-panel-title" style="font-size:16px; display:inline-block; margin-top:6px; margin-left: 6px;">
                 {{module|translate}}
               </span>
             </div>
@@ -107,22 +107,21 @@
                       </p-multiSelect>
                     </div>
 
-                    <div class="ui-g-12 ui-md-4 filter-container">
+                    <div class="ui-g-12 ui-md-4 filter-container" style="color: #ffffff">
                       <p-dropdown
                         [options]="sortOptions"
                         [(ngModel)]="sortKey"
                         placeholder="{{'sort_by'|translate}}"
                         (onChange)="onSortChange($event)"
-                        [autoWidth]="false"
-                        [style]="{'minWidth':'200px', 'margin-top':'12px', 'color': '#ffffff'}">
+                        [autoWidth]="true"
+                        [style]="{'minWidth':'200px', 'margin-top':'12px'}">
                       </p-dropdown>
                     </div>
 
                     <div class="ui-g-12 ui-md-4" style="text-align:right">
-                      <div style="position:relative; min-width:200px; margin-top: 12px; display: inline-block">
+                      <div style="position:relative; min-width:200px; margin-top: 12px; display: inline-block;">
                         <input
-                          style = "color: #ffffff"
-                          type="search" pInputText placeholder="Search by brand"
+                          type="search" pInputText placeholder="{{'filter'|translate}}"
                           [(ngModel)]="globalFilter"
                           (keydown)="keyDownFunction($event)">
                       </div>
@@ -148,7 +147,7 @@
                   <div class="ui-g-12 ui-md-3" style="text-align:center">
                     <img src="assets/showcase/images/car/Audi.png">
                   </div>
-                  <div class="ui-g-12 ui-md-8 car-details">
+                  <div class="ui-g-12 ui-md-7 car-details">
                     <div class="ui-g">
                       <ng-container *ngFor="let col of selectedColumns">
                         <div class="ui-g-2 ui-sm-6">{{col.header}}: </div>
@@ -156,11 +155,13 @@
                       </ng-container>
                     </div>
                   </div>
-                  <div class="ui-g-12 ui-md-1 search-icon">
-                    <button
-                      pButton type="button" icon="ui-icon-flare"
-                      (click)="chooseItem($event, item)">
-                    </button>
+                  <div class="ui-g-12 ui-md-2 search-icon">
+                    <p-splitButton
+                      label="{{'select'|translate}}" icon="ui-icon-flare"
+                      (onClick)="chooseItem($event, item)"
+                      (onDropdownClick)="chooseItem($event, item)"
+                      [model]="items">
+                    </p-splitButton>
                   </div>
                 </div>
               </ng-template>
@@ -175,9 +176,14 @@
                             </ng-container>
                           </div>
                           <hr class="ui-widget-content" style="border-top:0">
-                          <button pButton type="button" icon="ui-icon-flare"
-                            (click)="chooseItem($event, item)" style="margin-top:0">
-                          </button>
+
+                          <p-splitButton
+                            [style]="{'text-align':'left'}"
+                            label="{{'select'|translate}}" icon="ui-icon-flare"
+                            (onClick)="chooseItem($event, item)"
+                            (onDropdownClick)="chooseItem($event, item)"
+                            [model]="items">
+                          </p-splitButton>
                       </p-panel>
                   </div>
               </ng-template>
@@ -187,7 +193,6 @@
                 </div>
               </p-footer>
           </p-dataView>
-          <p-contextMenu #cm [model]="items" [global]="true"></p-contextMenu>
 
         </div>
       </div>

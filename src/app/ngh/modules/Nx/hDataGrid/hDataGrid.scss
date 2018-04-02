@@ -1,3 +1,22 @@
-.ui-fluid .ui-inputtext{
+.ui-inputtext {
   color: #ffffff !important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(200, 200, 170);
+  opacity: 1; /* Firefox */
+}
+
+input:focus {
+  border-width: 0 0 1px 0;
+  border-color: #ffffff;
+}
+
+.ui-dropdown .ui-dropdown-label {
+    color: #ffffff !important;
+  }
+
+.ui-dropdown .ui-state-focus {
+  border-width: 0 0 1px 0;
+  border-color: #ffffff;
 }
