@@ -97,8 +97,11 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
     this.globalState.unsubscribeEvent('language', this.myScope);
   }
 
+  // COMPONENT OPERATION
+
   /**
-  * COMPONENT OPERATION
+  * @function initDataTableColumn
+  * Initilize available Columns for Data table, also support language translation
   */
   initDataTableColumn() {
     this.translateService.get(['id', 'description', 'db', 'status', 'marked', 'selected_item_label'])
@@ -119,12 +122,14 @@ export class GkCln1xComponent extends BaseComponent implements OnInit, OnDestroy
         for (let i = 0; i < this.cols.length; i++) {
             this.columnOptions.push({ label: this.cols[i].header, value: this.cols[i] });
         }
-        // console.log(this.cols, this.columnOptions);
       });
   }
 
-  doSomething(event) {
-    // console.log(event);
+  /**
+  * @function doPageChange
+  * Receive event from Data Table or Data Grid to perform data refresh request
+  */
+  doPageChange(event) {
     this.store.dispatch(getGkClientsAction(
       event.filter,
       event.sort,

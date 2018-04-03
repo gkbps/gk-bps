@@ -3,12 +3,9 @@ import {
   Input, Output, EventEmitter, ChangeDetectionStrategy
 } from '@angular/core';
 
-import { Header } from 'primeng/shared';
-import { Footer } from 'primeng/shared';
 import { MenuItem } from 'primeng/api';
 import { SelectItem } from 'primeng/api';
 import { LazyLoadEvent } from 'primeng/api';
-import { SortEvent } from 'primeng/api';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -45,7 +42,7 @@ export class HTableComponent implements OnInit, OnDestroy {
 
   userRights: string[];
 
-  selectedClient: any;
+  selectedItem: any;
 
   // Pagination
   first = 0;
@@ -92,6 +89,12 @@ export class HTableComponent implements OnInit, OnDestroy {
 
   // COMPONENT OPERATION
 
+  /**
+  * @function initMenuItems
+  * Initialize Menu Items for splitButton
+  * - actionSerial === 1: Full menu includes: Create, View, Edit, Disable, Enable, Mark, Unmark, Delete, ViewChange
+  * - actionSerial !== 1: Simplified menu includes: View, Mark, Unmark, Delete
+  */
   initMenuItems() {
     switch (this.actionSerial) {
       case '1':
@@ -155,8 +158,8 @@ export class HTableComponent implements OnInit, OnDestroy {
               {
                 label: res.view, icon: 'ui-icon-search',
                 command: (event) => {
-                  // console.log(this.module + this.actionSerial + '2', this.selectedClient._id);
-                  this.tcodeService.executeTcode(this.module + this.actionSerial + '2', this.selectedClient.id);
+                  // console.log(this.module + this.actionSerial + '2', this.selectedItem._id);
+                  this.tcodeService.executeTcode(this.module + this.actionSerial + '2', this.selectedItem.id);
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '2'),
               },
@@ -184,12 +187,25 @@ export class HTableComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+  * @function notInRights
+  * Check if user rights include the tcode
+  *
+  * @param tcode
+  * @return {boolean}
+  */
   notInRights(tcode) {
     return !this.tcodeService.checkTcodeInEncodeArray(tcode, this.userRights);
   }
 
+  /**
+  * @function executeTcode
+  * Execute a Tcode based on selectedItem._id
+  *
+  * @param tcode
+  */
   executeTcode(tcode) {
-    this.tcodeService.executeTcode(tcode, this.selectedClient ? this.selectedClient._id : null);
+    this.tcodeService.executeTcode(tcode, this.selectedItem ? this.selectedItem._id : null);
   }
 
   /**

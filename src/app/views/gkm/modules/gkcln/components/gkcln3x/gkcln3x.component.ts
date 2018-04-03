@@ -21,6 +21,13 @@ import { TrayBaseComponent } from '../../../../../base/tray/tray.component';
 export class GkCln3xComponent extends TrayBaseComponent implements OnInit, OnDestroy {
 
   // Override Base class properties
+  // pageTitle = 'tray';
+  // sidebarMenuJSONFile = 'home.menu.json';
+  // globalConfig = {
+  //   language: false,
+  //   trackHistory: true
+  // };
+
   trayType = 'module';
   prefix = 'gkcln';
 

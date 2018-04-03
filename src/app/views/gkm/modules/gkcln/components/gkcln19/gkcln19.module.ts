@@ -1,15 +1,13 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { HLeadFormModule } from '../../../../../../nga/components/hLeadForm';
-import { HViewChangesModule } from '../../../../../../nga/components/hViewChanges';
+import { HLeadFormModule } from '../../../../../../ngh/modules/1n/hLeadForm';
+import { HViewChangesModule } from '../../../../../../ngh/modules/1n/hViewChanges';
 
-import { GkCln19Component } from './gkcln19.component';
 import { GkCln19RoutingModule } from './gkcln19-routing.module';
+import { GkCln19Component } from './gkcln19.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +15,6 @@ import { GkCln19RoutingModule } from './gkcln19-routing.module';
   ],
   imports: [
     CommonModule,
-    // FormsModule,
-    // RouterModule,
 
     TranslateModule,
 
@@ -26,9 +22,7 @@ import { GkCln19RoutingModule } from './gkcln19-routing.module';
     HViewChangesModule,
 
     GkCln19RoutingModule
-  ],
-  exports: [
-  ],
+  ]
 })
 export class GkCln19Module {
 }

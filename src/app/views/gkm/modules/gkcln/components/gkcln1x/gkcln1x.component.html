@@ -1,4 +1,4 @@
-<h-table 
+<h-table
   *ngIf="listType"
   [module] = "module"
   [actionSerial] = "actionSerial"
@@ -7,7 +7,7 @@
   [selectedItemsLabel] = "selectedItemsLabel"
   [columnOptions] = "columnOptions"
   [body] = "gkClients | async"
-  (onPageChange)="doSomething($event)">
+  (onPageChange)="doPageChange($event)">
 </h-table>
 
 <h-data-grid
@@ -19,5 +19,5 @@
   [selectedItemsLabel] = "selectedItemsLabel"
   [columnOptions] = "columnOptions"
   [body] = "gkClients | async"
-  (onPageChange)="doSomething($event)">
+  (onPageChange)="doPageChange($event)">
 </h-data-grid>

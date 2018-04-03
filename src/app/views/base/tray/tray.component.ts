@@ -3,11 +3,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { SelectItem } from 'primeng/api';
 
-// Store
+import { TranslateService } from '@ngx-translate/core';
+
 import { Store, select } from '@ngrx/store';
 import { getRequestsAction } from '../../../ngrx/request/requests.actions';
-
-import { TranslateService } from '@ngx-translate/core';
 
 import { GlobalState } from '../../../global.state';
 import { LocalStorageService } from '../../../nga/services/localStorage.service';
@@ -65,9 +64,20 @@ export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestro
     this.globalState.notifyMyDataChanged('help', '', this.trayType);
   }
 
-  onPageChange(event) {
-    console.log(event);
+  ngOnDestroy() {
+    // Base class destroy
+    super.ngOnDestroy();
 
+    // Derive class destroy here
+  }
+
+  // COMPONENT OPERATION
+
+  /**
+  * @function doPageChange
+  * Receive event from Data Table or Data Grid to perform data refresh request
+  */
+  doPageChange(event) {
     this.store.dispatch(getRequestsAction(
       event.filter,
       event.sort,
@@ -76,13 +86,6 @@ export class TrayBaseComponent extends BaseComponent implements OnInit, OnDestro
       this.trayType,
       this.prefix
     ));
-  }
-
-  ngOnDestroy() {
-    // Base class destroy
-    super.ngOnDestroy();
-
-    // Derive class destroy here
   }
 
 }

@@ -265,6 +265,8 @@
 	"lastname": "Lastname",
 	"layout_pallete": "Layout Pallete",
 	"leadingForm": "Leading Form",
+	"leading_form": "Leading Form",
+	"leading_form_subtitle": "Please provide id to proceed!",
 	"lge": "Legal Entity",
 	"lhs": "Before",
 	"light_blue_blue_grey": "Light Blue - Blue Grey",

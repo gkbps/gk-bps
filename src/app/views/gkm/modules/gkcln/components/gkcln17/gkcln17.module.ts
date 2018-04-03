@@ -1,17 +1,13 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { HLeadFormModule } from '../../../../../../nga/components/hLeadForm';
-
-// import { GkClnFormModule } from '../gkclnForm/gkclnForm.module';
-import { GkCln17Component } from './gkcln17.component';
-import { GkCln17RoutingModule } from './gkcln17-routing.module';
-
+import { HLeadFormModule } from '../../../../../../ngh/modules/1n/hLeadForm';
 import { GkClnSharedModule } from '../gkclnShared/gkclnShared.module';
+
+import { GkCln17RoutingModule } from './gkcln17-routing.module';
+import { GkCln17Component } from './gkcln17.component';
 
 @NgModule({
   declarations: [
@@ -19,20 +15,15 @@ import { GkClnSharedModule } from '../gkclnShared/gkclnShared.module';
   ],
   imports: [
     CommonModule,
-    // FormsModule,
-    // RouterModule,
 
     TranslateModule,
 
     HLeadFormModule,
 
-    // GkClnFormModule,
     GkClnSharedModule,
 
     GkCln17RoutingModule
-  ],
-  exports: [
-  ],
+  ]
 })
 export class GkCln17Module {
 }

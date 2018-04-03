@@ -97,7 +97,7 @@
             paginatorPosition="both"
 
             selectionMode="single"
-            [(selection)]="selectedClient"
+            [(selection)]="selectedItem"
             dataKey="_id"
 
             [responsive]="true"
@@ -106,7 +106,7 @@
             sortMode="multiple"
 
             [reorderableColumns]="true"
-            [(contextMenuSelection)]="selectedClient"
+            [(contextMenuSelection)]="selectedItem"
             [contextMenu]="cm"
 
             scrollHeight="200px"
@@ -167,7 +167,7 @@
 
             <ng-template pTemplate="summary">
               <div style="text-align: left">
-                  {{'selected'|translate}}: {{selectedClient ? selectedClient._id : 'none'}}
+                  {{'selected'|translate}}: {{selectedItem ? selectedItem._id : 'none'}}
               </div>
             </ng-template>
 
