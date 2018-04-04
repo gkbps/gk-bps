@@ -89,6 +89,13 @@ export class HttpClientService extends HttpClient {
       .catch(this.onCatch)
       .do((res: Response) => {
         // Hanle success response without notifying user
+        // console.log(res);
+        // console.log(options.isDeferral);
+        // if (options.isDeferral) {
+        //   this.handleSuccess(res, true, options);
+        // } else {
+        //   this.onSuccess(res, false);
+        // }
         this.onSuccess(res, false);
       }, (error: any) => {
         this.onError(error);
@@ -309,6 +316,7 @@ export class HttpClientService extends HttpClient {
     if (tmpOptions) {
       if (this.objectService.hasProp(tmpOptions, 'isDeferral')) {
         console.log('Update Store');
+        console.log(res);
         this.store.dispatch(addNotificationAction(res.body.data));
       }
     }
@@ -450,7 +458,7 @@ export class HttpClientService extends HttpClient {
   * @return {string}
   */
   private getFullUrl(prefix: string): string {
-    // console.log(this.apiUrl + prefix);
+    console.log(this.apiUrl + prefix);
     return this.apiUrl + prefix;
   }
 }

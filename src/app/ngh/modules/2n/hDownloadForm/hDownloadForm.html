@@ -1,0 +1,45 @@
+<div *ngIf="!isSubmited" class="ui-g">
+  <div class="ui-g-12 ui-md-6">
+
+    <p-card title="{{'download'|translate}}" subtitle="{{'leading_form_subtitle'|translate}}" styleClass="ui-card-shadow">
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-md-12">
+          <div class="ui-helper-clearfix" style="margin-top: 20px;">
+            <div class="ui-inputgroup">
+              <span class="md-inputfield">
+                <input #inputText type="text" pInputText name="filename">
+                <label>{{'filename'|translate}}</label>
+              </span>
+              <span class="ui-inputgroup-addon">.csv</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p-footer>
+        <div style="text-align: right">
+          <button style="width: auto;" pButton type="button" icon="ui-icon-file-download" label="{{'proceed'|translate}}" (click)="execute()" [disabled]=""></button>
+        </div>
+      </p-footer>
+    </p-card>
+  </div>
+</div>
+
+<div *ngIf="isSubmited" class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="ui-messages ui-widget ui-corner-all ui-messages-info" style="margin: 0 0 1em 0; display: block">
+        <span class="ui-messages-icon fa fa-fw fa-2x fa-close"></span>
+        <ul>
+            <li>
+              <span class="ui-messages-summary" style="font-size:16px">
+                {{'deferral_message'|translate}}
+              </span>
+            </li>
+        </ul>
+    </div>
+  </div>
+  <!-- Goto Notifications -->
+  <div class="ui-g-12" style="text-align: center;">
+    <button style="width: auto;" pButton type="button" icon="ui-icon-notifications" label="{{'notifications'|translate}}" (click)="gotoTcode('notification')"></button>
+  </div>
+</div>

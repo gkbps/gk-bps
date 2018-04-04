@@ -86,8 +86,8 @@ export const routes: Routes = [
     children: [
       { path: 'gkm', loadChildren: './views/gkm/gkm.module#GkmModule' },
       { path: 'gkcln', loadChildren: './views/gkm/modules/gkcln/gkcln.module#GkClnModule' },
-      { path: 'gksol', loadChildren: './views/gkm/modules/gksol/gksol.module#GkSolModule' },
-      { path: 'gktcd', loadChildren: './views/gkm/modules/gktcd/gktcd.module#GkTcdModule' },
+      // { path: 'gksol', loadChildren: './views/gkm/modules/gksol/gksol.module#GkSolModule' },
+      // { path: 'gktcd', loadChildren: './views/gkm/modules/gktcd/gktcd.module#GkTcdModule' },
     ]
   },
   { path: '**', redirectTo: '404', pathMatch: 'full' },

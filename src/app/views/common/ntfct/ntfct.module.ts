@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { HLeadFormModule } from '../../../nga/components/hLeadForm';
+import { HLeadFormModule } from '../../../ngh/modules/1n/hLeadForm';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';

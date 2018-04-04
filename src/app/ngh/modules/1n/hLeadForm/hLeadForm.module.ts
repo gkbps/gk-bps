@@ -7,7 +7,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HLeadForm } from './hLeadForm.component';
 
 import { CardModule } from 'primeng/card';
-import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
@@ -23,7 +22,6 @@ import { ButtonModule } from 'primeng/button';
     TranslateModule,
 
     CardModule,
-    PanelModule,
     InputTextModule,
     ButtonModule,
   ],
