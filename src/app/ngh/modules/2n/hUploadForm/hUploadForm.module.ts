@@ -1,12 +1,11 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
 import { HUploadForm } from './hUploadForm.component';
 
-import { PanelModule } from 'primeng/panel';
+import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 
@@ -16,11 +15,10 @@ import { ButtonModule } from 'primeng/button';
   ],
   imports: [
     CommonModule,
-    // FormsModule,
 
     TranslateModule,
 
-    PanelModule,
+    CardModule,
     InputTextModule,
     ButtonModule,
   ],

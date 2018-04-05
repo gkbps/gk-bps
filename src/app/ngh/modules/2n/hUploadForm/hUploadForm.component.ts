@@ -1,29 +1,13 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef, Renderer } from '@angular/core';
-import {
-  HttpClient,
-  HttpHandler,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 
-import { Http, Response } from '@angular/http';
-// import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Message } from 'primeng/components/common/api';
-// import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-// import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
 
-// Internal
-import { GlobalState } from '../../../global.state';
-import { AppConfig } from '../../../app.config';
-import {
-  SecurityService,
-  TcodeService,
-  APIResultHandlingService,
-  LocalStorageService,
-  HttpClientService
-} from '../../../nga/services';
+import { AppConfig } from '../../../../app.config';
+import { APIResultHandlingService } from '../../../../nga/services';
+import { GlobalState } from '../../../../global.state';
+import { HttpClientService } from '../../../../nga/services';
+import { TcodeService } from '../../../../nga/services';
 
 @Component({
   selector: 'h-upload-form',
@@ -44,30 +28,20 @@ export class HUploadForm implements OnInit, OnDestroy {
   actionUrl: String = '';
   url: string;
 
-  msgs: Message[] = [];
-
-  alertType: String;
-
-  alertSubscription: Subscription;
-
   isUploadCompleted = false;
 
   constructor(
-    private http: Http,
-    private httpClient: HttpClient,
     private el: ElementRef,
     private renderer: Renderer,
+    private httpClient: HttpClient,
+
     private translate: TranslateService,
 
-    private config: AppConfig,
-    private globalState: GlobalState,
-
-    // private router: Router,
-    private securityService: SecurityService,
-    private tcodeService: TcodeService,
+    private appConfig: AppConfig,
     private apiResultHandlingService: APIResultHandlingService,
+    private globalState: GlobalState,
     private httpClientService: HttpClientService,
-    private localStorage: LocalStorageService,
+    private tcodeService: TcodeService
   ) {
     this.subscribeGlobalState();
   }
@@ -108,9 +82,27 @@ export class HUploadForm implements OnInit, OnDestroy {
       default:
         break;
     }
-    this.url = this.config.apiUrl + '/' + this.module + this.actionUrl;
+    this.url = this.appConfig.apiUrl + '/' + this.module + this.actionUrl;
     // console.log(this.url);
   }
+
+  ngOnDestroy() {
+    this.unsubscribeGlobalState();
+  }
+
+  /* GLOBAL STATE */
+  subscribeGlobalState() {
+    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
+      console.log(lang);
+      this.translate.use(lang);
+    });
+  }
+
+  unsubscribeGlobalState() {
+    this.globalState.unsubscribeEvent('language', this.myScope);
+  }
+
+  // COMPONENT OPERATION
 
   bringFileSelector(): boolean {
     this.renderer.invokeElementMethod(this._fileUpload.nativeElement, 'click');
@@ -131,10 +123,8 @@ export class HUploadForm implements OnInit, OnDestroy {
     // const fileCount: number = inputEl.files.length;
     const formData = new FormData();
     if (files.length) {
-    // if (fileCount > 0) {
        const file = files[0];
        formData.append('file', file);
-       // formData.append('file', inputEl.files.item(0));
 
        // Deferral
        this.translate.get(['deferral', 'deferral_message'])
@@ -148,11 +138,7 @@ export class HUploadForm implements OnInit, OnDestroy {
            this.globalState.notifyMyDataChanged('toasty', '', toastData);
          });
 
-       // TODO: Remove http
-       // this.http.post(this.url, formData, this.securityService.jwt())
        this.httpClient.post(this.url, formData, this.httpClientService.attachHeader({}))
-         // Do not map to have full response headers and _body
-         // .map((res: Response) => res.json())
          .subscribe(
            (success) => {
              this.handleAPIReturn(success);
@@ -186,21 +172,4 @@ export class HUploadForm implements OnInit, OnDestroy {
   gotoTcode(tcode) {
     this.tcodeService.executeTcode(tcode, '');
   }
-
-  ngOnDestroy() {
-    this.unsubscribeGlobalState();
-  }
-
-  /* GLOBAL STATE */
-  subscribeGlobalState() {
-    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
-      this.translate.use(lang);
-    });
-  }
-
-  unsubscribeGlobalState() {
-    this.globalState.unsubscribeEvent('language', this.myScope);
-  }
-
 }

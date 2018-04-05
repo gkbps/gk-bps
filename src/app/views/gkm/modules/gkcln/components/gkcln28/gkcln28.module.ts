@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 
 // import { TranslateModule } from '@ngx-translate/core';
 
-import { HUploadFormModule } from '../../../../../../nga/components/hUploadForm';
+import { HUploadFormModule } from '../../../../../../ngh/modules/2n/hUploadForm';
 
 import { GkCln28Component } from './gkcln28.component';
 import { GkCln28RoutingModule } from './gkcln28-routing.module';

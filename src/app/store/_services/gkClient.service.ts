@@ -359,7 +359,7 @@ export class GkClientService {
    * @memberof GkClientService1
    */
   updateRequest(gkclient: any) {
-    return this.httpClientService.putCustomized(this.suffixUrl + 'request/' + gkclient._id, gkclient);
+    return this.httpClientService.put(this.suffixUrl + 'request/' + gkclient._id, gkclient);
     // .map((res) => {
     //   return res.body || {};
     // })

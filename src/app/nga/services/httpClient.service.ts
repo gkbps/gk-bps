@@ -22,13 +22,22 @@ import { ObjectService } from '../../nga/services/object.service';
 /**
 * @module HttpClientService
 * Customized HttpClient functions to support HTTP REQUEST CYCLE MANAGEMENT
-* 1. Do activity before sending the request (i.e.: Waiting notification)
+* 1. Pre-request activity: To show (Progress Bar) or (Deferral Message)
+*    + (handleShowLoader): Conditional helper
+*    + (showLoader): Show (Progress Bar) and/or (Deferral Message)
+*
 * 2. Send request by http verb (get, post, put, patch, delete)
+*
 * 3. Receive response and process
 * - Catch if error then handle error via (onCatch)
-* - Handle success response: onSuccess
-* - Handle error response: onError
-* 4. Complete the cycle by some activity: onEnd
+* - Handle success response:
+*   + (handleSuccess): Conditional helper (Update store or not)
+*   + (onSuccess): Toast the response after processed
+* - Handle error response: (onError)
+*
+* 4. Complete the cycle by some activity:
+* - (onEnd): Conditional helper
+* - (hideLoader): Hide (Progress Bar) or show (Deferral Complete Message)
 *
 * @function get
 * @function post
@@ -38,9 +47,14 @@ import { ObjectService } from '../../nga/services/object.service';
 *
 * @function handleShowLoader
 * @function showLoader
+*
 * @function onCatch
+*
+* @function handleSuccess
 * @function onSuccess
+*
 * @function onError
+*
 * @function onEnd
 * @function hideLoader
 *
@@ -76,7 +90,6 @@ export class HttpClientService extends HttpClient {
   *
   * Receive below parameters
   * @param {string} url
-  * @param {any} body
   * @param {any|object} options
   * - {boolean} isDeferral decide if deferral message or not
   *
@@ -89,14 +102,8 @@ export class HttpClientService extends HttpClient {
       .catch(this.onCatch)
       .do((res: Response) => {
         // Hanle success response without notifying user
-        // console.log(res);
-        // console.log(options.isDeferral);
-        // if (options.isDeferral) {
-        //   this.handleSuccess(res, true, options);
-        // } else {
-        //   this.onSuccess(res, false);
-        // }
-        this.onSuccess(res, false);
+        // this.onSuccess(res, false);
+          this.handleSuccess(res, false, options);
       }, (error: any) => {
         this.onError(error);
       })
@@ -156,23 +163,8 @@ export class HttpClientService extends HttpClient {
       .catch(this.onCatch)
       .do((res: Response) => {
           // Handle success including notifying user
-          this.onSuccess(res, true);
-        }, (error: any) => {
-          this.onError(error);
-        })
-      .finally(() => {
-        this.onEnd(options);
-      }
-    );
-  }
-
-  // TODO: To check and eliminate this
-  putCustomized(url: string, body: any | null, options?: any | {}): Observable<any> {
-    this.showLoader();
-    return super.put(this.getFullUrl(url), body, this.attachHeader(options))
-      .catch(this.onCatch)
-      .do((res: Response) => {
-          return res;
+          // this.onSuccess(res, true);
+          this.handleSuccess(res, true, options);
         }, (error: any) => {
           this.onError(error);
         })
@@ -201,7 +193,8 @@ export class HttpClientService extends HttpClient {
       .catch(this.onCatch)
       .do((res: Response) => {
           // Handle success including notifying user
-          this.onSuccess(res, true);
+          // this.onSuccess(res, true);
+          this.handleSuccess(res, true, options);
         }, (error: any) => {
           this.onError(error);
         })
@@ -217,7 +210,6 @@ export class HttpClientService extends HttpClient {
   *
   * Receive below parameters
   * @param {string} url
-  * @param {any} body
   * @param {any|object} options
   * - {boolean} isDeferral decide if deferral message or not
   *
@@ -230,7 +222,8 @@ export class HttpClientService extends HttpClient {
       .catch(this.onCatch)
       .do((res: Response) => {
           // Handle success including notifying user
-          this.onSuccess(res, true);
+          // this.onSuccess(res, true);
+          this.handleSuccess(res, true, options);
         }, (error: any) => {
           this.onError(error);
         })
@@ -242,15 +235,18 @@ export class HttpClientService extends HttpClient {
 
   /**
   * @function handleShowLoader
-  * To show/ not show a notification to user to alert if there is an deferral task or not
-  * and remove {isDeferral: value } from options for cleaned Header of request
+  * A conditional helper for
+  * - showing (Progress Bar) or
+  * - toasting (Deferral Message)
+  * NOTE: Remove {isDeferral: true} after toasting (Deferral Message)
+  * to keep options cleaned before sending request
   *
   * @param {object} options
   */
   private handleShowLoader(options) {
     const tmpOptions = Object.assign({}, options);
-
     // console.log(tmpOptions);
+
     if (!tmpOptions) {
       this.showLoader(false);
     } else if (this.objectService.hasProp(tmpOptions, 'isDeferral')) {
@@ -265,8 +261,8 @@ export class HttpClientService extends HttpClient {
 
   /**
   * @function showLoader
-  * To shor loader friendly by displaing loading bar or
-  * to shor a notification on a defferal task
+  * To show (Progress Bar) friendly or
+  * to toast (Deferral Message)
   */
   private showLoader(isDeferral = false): void {
     if (!isDeferral) {
@@ -283,7 +279,6 @@ export class HttpClientService extends HttpClient {
           this.globalState.notifyMyDataChanged('toasty','', toastData);
         });
     }
-    // console.log('showloader');
   }
 
   /**
@@ -297,15 +292,15 @@ export class HttpClientService extends HttpClient {
 
   /**
   * @function handleSuccess
-  * Dedicated function to handle Success response
-  * - Inform user on success (customizable: on/off)
+  * A helper to handle Success response
+  * - Inform user on success (alert: on/off)
   * - Update Notification if deferral tasks
   *
   * @param {http response} res
   * @param {boolean} alert - decide to inform user on success or not
   * @param {object} options - to store customized options, including isDeferral or not
   *
-  * @return null //TODO: To return null or return data
+  * @return {null}
   */
   handleSuccess(res, alert, options) {
     const tmpOptions = Object.assign({}, options);
@@ -334,13 +329,13 @@ export class HttpClientService extends HttpClient {
       this.apiResultHandlingService.processAPIResult(res)
       .then((msg) => {
         console.log(msg);
-        // const toastData = {
-        //   type: 'warning',
-        //   title: res.navigation,
-        //   msg: res.top_of_history,
-        //   showClose: true,
-        // };
-        // this.globalState.notifyMyDataChanged('toasty','', toastData);
+        const toastData = {
+          type: msg['type'],
+          title: msg['title'],
+          msg: msg['msg'],
+          showClose: true,
+        };
+        this.globalState.notifyMyDataChanged('toasty','', toastData);
       });
     }
   }
@@ -374,8 +369,8 @@ export class HttpClientService extends HttpClient {
   */
   private onEnd(options): void {
     const tmpOptions = Object.assign({}, options);
-
     // console.log(tmpOptions);
+
     if (!tmpOptions) {
       this.hideLoader(false);
     } else if (this.objectService.hasProp(tmpOptions, 'isDeferral')) {
@@ -383,13 +378,12 @@ export class HttpClientService extends HttpClient {
     } else {
       this.hideLoader(false);
     }
-    // console.log('end');
   }
 
   /**
   * @function hideLoader
-  * To hide loader friendly by removing loading bar or
-  * to show a notification on completion of a defferal task
+  * To hide (Progress Bar) after data loading finished
+  * To toast the (Deferral Complete Message) after deferral task completed
   */
   private hideLoader(isDeferral = false): void {
     if (!isDeferral) {
@@ -406,10 +400,7 @@ export class HttpClientService extends HttpClient {
           this.globalState.notifyMyDataChanged('toasty','', toastData);
         });
     }
-    // console.log('hideloader');
   }
-
-
 
   /**
   * @function attachHeader

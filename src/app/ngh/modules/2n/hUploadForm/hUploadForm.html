@@ -1,6 +1,6 @@
-<div *ngIf="!isSubmited" class="ui-g ui-fluid">
+<div *ngIf="!isUploadCompleted" class="ui-g ui-fluid">
   <div class="ui-g-12 ui-md-6">
-    <p-card title="{{'download'|translate}}" subtitle="{{'download_form_subtitle'|translate}}" styleClass="ui-card-shadow">
+    <p-card title="{{'upload'|translate}}" subtitle="{{'upload_form_subtitle'|translate}}" styleClass="ui-card-shadow">
       <div class="ui-g ui-fluid">
         <div class="ui-g-12">
           <div class="ui-helper-clearfix" style="margin-top: 20px;">
@@ -9,33 +9,36 @@
                 <input #inputText type="text" pInputText name="filename">
                 <label>{{'filename'|translate}}</label>
               </span>
-              <span class="ui-inputgroup-addon">.csv</span>
+              <button icon="ui-icon-search" pButton type="button" (click)="bringFileSelector();">
+                <!-- label="{{'selectFile'|translate}}" -->
+                <!-- <span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-search"></span> -->
+              </button>
             </div>
+            <input #fileUpload id="file" type="file" (change)="fileChanged($event)" accept=".csv" hidden="true"/>
           </div>
         </div>
       </div>
 
       <p-footer>
         <div style="text-align: right">
-          <button style="width: auto;" pButton type="button" icon="ui-icon-file-download" label="{{'proceed'|translate}}" (click)="execute()"></button>
+          <button style="width: auto;" pButton type="button" icon="ui-icon-file-upload" label="{{'proceed'|translate}}" (click)="execute()"></button>
         </div>
       </p-footer>
     </p-card>
   </div>
 </div>
 
-<div *ngIf="isSubmited" class="ui-g ui-fluid">
+<div *ngIf="isUploadCompleted" class="ui-g ui-fluid">
   <div class="ui-g-12">
     <p-card title="{{'upload'|translate}}" styleClass="ui-card-shadow">
       <div class="ui-g ui-fluid">
 
         <div class="ui-g-12">
           <div class="ui-messages ui-widget ui-corner-all ui-messages-info" style="margin: 0 0 1em 0; display: block">
-            <span class="ui-messages-icon fa fa-fw fa-2x fa-close"></span>
             <ul>
               <li>
                 <span class="ui-messages-summary" style="font-size:16px">
-                  {{'deferral_message'|translate}}
+                  {{'request_is_sent'|translate}}
                 </span>
               </li>
             </ul>
@@ -43,7 +46,7 @@
         </div>
 
         <div class="ui-g-12" style="text-align: center;">
-          <button style="width: auto;" pButton type="button" icon="ui-icon-notifications" label="{{'notifications'|translate}}" (click)="gotoTcode('notification')"></button>
+          <button style="width: auto;" pButton type="button" icon="ui-icon-bug-report" label="{{'debug'|translate}}" (click)="gotoTcode('debug')"></button>
         </div>
 
       </div>

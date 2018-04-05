@@ -1,4 +1,6 @@
 {
+	"download_form_subtitle": "Provide name for file download!",
+	"upload_form_subtitle": "Select file for upload!",
 	"sort_by": "Sort by",
 	"asc": "Asc",
 	"desc": "Desc",

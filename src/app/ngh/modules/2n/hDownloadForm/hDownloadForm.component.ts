@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef } from '@angular/core';
-import { Http, Response, RequestOptions, URLSearchParams, ResponseContentType } from '@angular/http';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
@@ -35,8 +34,6 @@ export class HDownloadForm implements OnInit, OnDestroy {
   langSubscription: Subscription;
 
   constructor(
-    private http: Http,
-
     public translateService: TranslateService,
 
     private apiResultHandlingService: APIResultHandlingService,
