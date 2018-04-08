@@ -121,7 +121,6 @@ export class HIndividualNav implements OnInit, OnDestroy {
   /* LOCAL STATE */
   subscribeLocalState() {
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translate.use(lang);
       this.initNav();
     });

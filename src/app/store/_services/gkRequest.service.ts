@@ -64,7 +64,7 @@ export class GkRequestService {
         return res.body || {};
       })
       .map((payload) => {
-        console.log(payload);
+        // console.log(payload);
         return { type: 'PAGINATE_GKREQUESTS', payload };
       })
       .subscribe((action) => {
@@ -160,7 +160,7 @@ export class GkRequestService {
      })
      .map((resBody) => {
        const payload = resBody['data'];
-       console.log(payload);
+       // console.log(payload);
        return { type: 'SUBMIT_GKREQUEST', payload };
      })
      .subscribe((action) => {
@@ -176,7 +176,7 @@ export class GkRequestService {
        })
        .map((resBody) => {
          const payload = resBody['data']
-         console.log(payload);
+         // console.log(payload);
          return { type: 'GENERATE_APPROVAL_FLOW_GKREQUEST', payload };
        })
        .subscribe((action) => {
@@ -199,7 +199,7 @@ export class GkRequestService {
       })
       .map((resBody) => {
         const payload = resBody['data'];
-        console.log(payload);
+        // console.log(payload);
         return { type: 'WITHDRAW_GKREQUEST', payload };
       })
       .subscribe((action) => {
@@ -223,7 +223,7 @@ export class GkRequestService {
       })
       .map((resBody) => {
         const payload = resBody['data'];
-        console.log(payload);
+        // console.log(payload);
         return { type: 'CANCEL_GKREQUEST', payload };
       })
       .subscribe((action) => {
@@ -247,7 +247,7 @@ export class GkRequestService {
       })
       .map((resBody) => {
         const payload = resBody['data'];
-        console.log(payload);
+        // console.log(payload);
         return { type: 'RETURN_GKREQUEST', payload };
       })
       .subscribe((action) => {
@@ -271,7 +271,7 @@ export class GkRequestService {
       })
       .map((resBody) => {
         const payload = resBody['data'];
-        console.log(payload);
+        // console.log(payload);
         return { type: 'REJECT_GKREQUEST', payload };
       })
       .subscribe((action) => {
@@ -287,7 +287,7 @@ export class GkRequestService {
       })
       .map((resBody) => {
         const payload = resBody['data'];
-        console.log(payload);
+        // console.log(payload);
         return { type: 'APPROVE_GKREQUEST', payload };
       })
       .subscribe((action) => {
@@ -303,7 +303,7 @@ export class GkRequestService {
       })
       .map((resBody) => {
         const payload = resBody['data'];
-        console.log(payload);
+        // console.log(payload);
         return { type: 'ABORT_GKREQUEST', payload };
       })
       .subscribe((action) => {
@@ -327,7 +327,7 @@ export class GkRequestService {
     })
     .map((resBody) => {
       const payload = JSON.parse(JSON.stringify(resBody.data));
-      console.log(payload);
+      // console.log(payload);
 
       return { type: 'MARK_GKREQUEST', payload };
     })
@@ -352,7 +352,7 @@ export class GkRequestService {
     })
     .map((resBody) => {
       const payload = JSON.parse(JSON.stringify(resBody.data));
-      console.log(payload);
+      // console.log(payload);
 
       return { type: 'UNMARK_GKREQUEST', payload };
     })
@@ -377,7 +377,7 @@ export class GkRequestService {
     })
     .map((resBody) => {
       const payload = {};
-      console.log(payload);
+      // console.log(payload);
 
       return { type: 'DELETE_GKREQUEST', payload };
     })

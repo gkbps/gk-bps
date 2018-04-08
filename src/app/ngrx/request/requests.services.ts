@@ -67,7 +67,7 @@ export class RequestsServices {
   }
 
   action12(_id: string) {
-    return this.httpClientService.get(this.suffixUrl + _id)
+    return this.httpClientService.get(this.suffixUrl + _id, { disableToast: true })
       .map((res) => {
         return res.body.data || {};
       });
@@ -248,7 +248,25 @@ export class RequestsServices {
   * REQUEST APPROVAL FLOW
   */
   generateApprovalFlow(_id) {
-    return this.httpClientService.put(this.suffixUrl + _id + '/approval/generateApprovalFlow', {})
+    return this.httpClientService.put(this.suffixUrl + _id + '/approval/generateApprovalFlow', {}, { disableToast: false })
+      .map((res) => {
+        // IMPORTANT: Need to return res with full data for getting status and make alert
+        return res.body.data || {};
+      });
+  }
+
+  insertApprover(_id, approval, position) {
+    return this.httpClientService.put(this.suffixUrl + _id + '/approval/inviteApprover', { approval, position: position }, { disableToast: false })
+    // return this.httpClientService.put(this.suffixUrl + _id + '/approval/inviteApprover', { approval, position: position, disableToast: false })
+      .map((res) => {
+        // IMPORTANT: Need to return res with full data for getting status and make alert
+        return res.body.data || {};
+      });
+  }
+
+  removeApprover(_id, sequence) {
+    return this.httpClientService.put(this.suffixUrl + _id + '/approval/removeApprover', { sequence: sequence}, {disableToast: false })
+    // return this.httpClientService.put(this.suffixUrl + _id + '/approval/removeApprover', { sequence: sequence, disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};

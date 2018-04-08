@@ -69,7 +69,7 @@ export class DownloadComponent extends BaseComponent implements OnInit, OnDestro
     this.notificationStore = store.pipe(select('notification'));
     this.notificationStore.subscribe(data => {
       this.notification = data;
-      console.log(this.notification);
+      // console.log(this.notification);
     });
   }
 
@@ -84,7 +84,7 @@ export class DownloadComponent extends BaseComponent implements OnInit, OnDestro
 
     this.activatedRoute.params.subscribe((params: Params) => {
         this.id = params['id'];
-        console.log(this.id);
+        // console.log(this.id);
         if (this.id) {
           this.store.dispatch(getNotificationAction(this.id));
         }
@@ -103,7 +103,7 @@ export class DownloadComponent extends BaseComponent implements OnInit, OnDestro
   * Download a file
   */
   downloadFile() {
-    console.log('DownloadFile');
+    // console.log('DownloadFile');
     this.fileService.downloadFileByFileName(this.notification.data.url);
   }
 

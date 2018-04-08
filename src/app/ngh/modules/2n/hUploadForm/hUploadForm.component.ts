@@ -93,7 +93,6 @@ export class HUploadForm implements OnInit, OnDestroy {
   /* GLOBAL STATE */
   subscribeGlobalState() {
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translate.use(lang);
     });
   }
@@ -110,7 +109,7 @@ export class HUploadForm implements OnInit, OnDestroy {
   }
 
   fileChanged(event) {
-    console.log(event.target.files[0]);
+    // console.log(event.target.files[0]);
     if (event.target.files[0]) {
       this._inputText.nativeElement.value = event.target.files[0].name;
     }
@@ -154,7 +153,7 @@ export class HUploadForm implements OnInit, OnDestroy {
   handleAPIReturn(result) {
     this.apiResultHandlingService.processAPIResult(result)
       .then((msg) => {
-        console.log(msg);
+        // console.log(msg);
 
         this.isUploadCompleted = true;
 

@@ -36,7 +36,7 @@ export class TcodeGuard implements CanActivate {
       // console.log(urls);
 
       const check = this.tcodeService.checkTcodeInMana(tcode);
-      console.log(`User privilege to ${urls[2]} is: ${check}`);
+      // console.log(`User privilege to ${urls[2]} is: ${check}`);
 
       if (check) {
         return true;

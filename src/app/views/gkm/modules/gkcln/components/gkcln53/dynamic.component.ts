@@ -100,7 +100,7 @@ export class DynamicSample1Component extends DynamicComponent {
   }
 
   selectLayout() {
-    console.log(this.selectedLayout);
+    // console.log(this.selectedLayout);
   }
 }
 

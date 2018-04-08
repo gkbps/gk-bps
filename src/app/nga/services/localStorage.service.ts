@@ -263,7 +263,7 @@ export class LocalStorageService {
   */
   getSetting() {
     const savedSession = JSON.parse(this.getLocalStorage('savedSession'));
-    console.log(savedSession.setting);
+    // console.log(savedSession.setting);
     return (savedSession.setting);
   }
 
@@ -461,7 +461,7 @@ export class LocalStorageService {
   */
   setNotificationMode(notificationMode: boolean = false) {
     const env = this.getEnv();
-    console.log(notificationMode);
+    // console.log(notificationMode);
     if (env.pref.notificationMode !== notificationMode) {
       env.pref.notificationMode = notificationMode;
       this.setEnv(JSON.stringify(env));

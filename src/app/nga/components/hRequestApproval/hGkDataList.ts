@@ -103,7 +103,7 @@ export class HGkDataList implements OnInit,AfterViewInit,AfterContentInit,DoChec
     ngOnInit() {
         // Insert
         this._value.subscribe(x => {
-            console.log(x);
+            // console.log(x);
             if(this.immutable) {
                 this.handleDataChange();
             }
@@ -150,7 +150,7 @@ export class HGkDataList implements OnInit,AfterViewInit,AfterContentInit,DoChec
         if(this.paginator) {
             this.updatePaginator();
         }
-        console.log(this.value);
+        // console.log(this.value);
         this.updateDataToRender(this.value);
     }
 

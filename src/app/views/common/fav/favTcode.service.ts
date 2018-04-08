@@ -261,11 +261,11 @@ export class FavTcodeService {
     getFavList() {
       const fav = this.localStorageService.getFav();
       if (!fav || (fav.length === 0)) {
-        console.log('Get default');
+        // console.log('Get default');
         this.localStorageService.setFav(this.files.data);
         return this.files.data;
       } else {
-        console.log('Get from Local Storage');
+        // console.log('Get from Local Storage');
         return fav;
       }
     }

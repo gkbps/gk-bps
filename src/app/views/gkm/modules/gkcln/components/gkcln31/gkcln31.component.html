@@ -34,18 +34,6 @@
                 </gkclient-form>
               </div>
             </div>
-
-            <!-- <div class="ui-g">
-              <div class="ui-g-12">
-                <gkclient-form
-                  #myRequestBody
-                  (getRequestBodyChange)="getRequestBodyChange($event)"
-                  [isRequest]="'true'"
-                  [isEditableRequest] = "isEditableRequest"
-                  [tcode]="tcode">
-                </gkclient-form>
-              </div>
-            </div> -->
           </p-panel>
         </div>
         <!-- ./BODY -->
@@ -56,22 +44,13 @@
             [tcode]="tcode">
           </request-documents>
         </div>
-        <!-- <div *ngIf="id" class="ui-g-12">
-          <h-request-documents
-            [tcode]="tcode">
-          </h-request-documents>
-        </div> -->
         <!-- ./DOCUMENTS -->
 
         <!-- APPROVAL -->
-        <!-- <div *ngIf="id" class="ui-g-12">
-          <request-approval-flow>
-          </request-approval-flow>
-        </div> -->
-        <!-- <div *ngIf="id" class="ui-g-12">
-          <h-request-approval-flow>
-          </h-request-approval-flow>
-        </div> -->
+        <div *ngIf="id" class="ui-g-12">
+          <request-approval>
+          </request-approval>
+        </div>
         <!-- ./APPROVAL -->
 
         <!-- AJE -->

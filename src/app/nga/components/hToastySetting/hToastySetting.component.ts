@@ -79,7 +79,7 @@ export class HToastySettingComponent implements OnInit {
           msg: 'Testing, testing, testing...',
           showClose: true,
         };
-        console.log(toastData);
+        // console.log(toastData);
         this.globalState.notifyMyDataChanged('toasty', '', toastData);
       }, i * 750);
     }

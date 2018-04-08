@@ -88,12 +88,12 @@ export class ForgotComponent {
   forgot() {
     this.loading = true;
     this.securityService.setToken(this.model.token);
-    console.log(this.model);
+    // console.log(this.model);
 
     this.userService.forgot(this.model)
       .subscribe(
           data => {
-            console.log(data);
+            // console.log(data);
             this.router.navigate(['/login']);
           },
           error => {

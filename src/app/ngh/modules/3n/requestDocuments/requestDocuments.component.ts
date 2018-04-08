@@ -1,23 +1,16 @@
 import { Component, OnInit, Input, OnDestroy, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Header } from 'primeng/shared';
-import { Footer } from 'primeng/shared';
+import { ConfirmationService } from 'primeng/api';
+import { FileUpload } from 'primeng/fileupload';
 import { MenuItem } from 'primeng/api';
 import { SelectItem } from 'primeng/api';
-// import { LazyLoadEvent } from 'primeng/api';
-import { SortEvent } from 'primeng/api';
 
-import { FileUpload } from 'primeng/fileupload';
-import { ConfirmationService } from 'primeng/api';
-import { Message } from 'primeng/components/common/api';
+import { TranslateService } from '@ngx-translate/core';
 
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-
-/**/
 import { Store, select } from '@ngrx/store';
 import {
+  // List
   getRequestDocumentsAction,
   saveRequestDocumentAction,
   uploadRequestDocumentAction,
@@ -25,46 +18,33 @@ import {
   unmarkRequestDocumentAction,
   deleteRequestDocumentAction,
 
+  // Item
   getRequestDocumentAction,
   downloadRequestDocumentAction,
-} from '../../../ngrx/requestDocument/requestDocuments.actions';
-/**/
+} from '../../../../ngrx/requestDocument/requestDocuments.actions';
 
-import { AppConfig } from '../../../app.config';
-
-import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../global.state';
-import {
-  SecurityService,
-  LocalStorageService,
-} from '../../../nga/services';
+import { AppConfig } from '../../../../app.config';
+import { GlobalState } from '../../../../global.state';
+import { LocalStorageService } from '../../../../nga/services/localStorage.service';
+import { SecurityService } from '../../../../nga/services/security.service';
 
 @Component({
   selector: 'request-documents',
   templateUrl: './requestDocuments.html',
   styleUrls: ['./requestDocuments.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RequestDocuments implements OnInit, OnDestroy {
 
   myScope = 'request-files';
 
   @Input() tcode: string;
-
   @ViewChild('singleFileUploader') singleFileUploader: FileUpload;
   // @ViewChild(FileUpload) fileUpload;
 
+  // Request id
   id = '';
 
-  storeRequestDocuments: any;
-  requestDocuments = [];
-  selectedDocument: any;
-
-  msgs: Message[] = [];
-
   // Header columns on the fly
-  loading: boolean;
-
   cols: any[];
   selectedColumns: any[];
   selectedItemsLabel = '{0} items selected';
@@ -95,20 +75,30 @@ export class RequestDocuments implements OnInit, OnDestroy {
   lblConfirm = 'Confirm';
   lblCancel = 'Cancel';
 
-  // Redux based variables
+  /**
+  * Redux based variables
+  */
+
+  // Store for request
   storeRequest: any;
   requestStatus = '';
 
+  // Store for request document
+  storeRequestDocuments: any;
+  requestDocuments = [];
+  selectedDocument: any;
+
   constructor(
-    private appConfig: AppConfig,
     private activatedRoute: ActivatedRoute,
 
-    private globalState: GlobalState,
-    private translateService: TranslateService,
-    private securityService: SecurityService,
-
-    private localStorageService: LocalStorageService,
     private confirmationService: ConfirmationService,
+
+    private translateService: TranslateService,
+
+    private appConfig: AppConfig,
+    private globalState: GlobalState,
+    private localStorageService: LocalStorageService,
+    private securityService: SecurityService,
 
     private store: Store<any>
   ) {
@@ -119,21 +109,21 @@ export class RequestDocuments implements OnInit, OnDestroy {
     this.rows = this.localStorageService.getRows();
     const clientSetting = this.localStorageService.getSetting();
     this.maxSize = clientSetting.maxUploadSize || 1000000;
-    console.log(this.maxSize);
+    // console.log(this.maxSize);
 
     // STORE
     // request
     this.storeRequest = this.store.pipe(select('request'));
     this.storeRequest.subscribe(request => {
-      console.log(request);
+      // console.log(request);
       this.requestStatus = request.data.status;
-      console.log(this.requestStatus);
+      // console.log(this.requestStatus);
     });
 
     // requestDocument
     this.storeRequestDocuments = this.store.pipe(select('requestDocuments'));
     this.storeRequestDocuments.subscribe(data => {
-      console.log(data);
+      // console.log(data);
       if (!data.pending && !data.error) {
         this.requestDocuments = Object.assign([], data.data);
       }
@@ -150,7 +140,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
         this.id = params['id'];
         // console.log(this.id);
         // this.requestFileService.findFilesByRequestId(this.id);
-        this.myUrl = this.appConfig.apiUrl + '/requestFiles/upload/' + this.id;
+        // this.myUrl = this.appConfig.apiUrl + '/requestFiles/upload/' + this.id;
 
         this.store.dispatch(getRequestDocumentsAction(this.id));
       }
@@ -160,6 +150,30 @@ export class RequestDocuments implements OnInit, OnDestroy {
     this.initMenuItems();
   }
 
+  ngOnDestroy() {
+    this.unsubscribeLocalState();
+  }
+
+  /* LOCAL STATE */
+  subscribeLocalState() {
+    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
+      // console.log(lang);
+      this.translateService.use(lang);
+      this.initDataTableColumn();
+      this.initMenuItems();
+    });
+  }
+
+  unsubscribeLocalState() {
+    this.globalState.unsubscribeEvent('language', this.myScope);
+  }
+
+  // COMPONENT OPERATION
+
+  /**
+  * @function initDataTableColumn
+  * Initialize on the fly columns by language for Data Table
+  */
   initDataTableColumn() {
     this.translateService.get(['description', 'username', 'size', 'status', 'updated_at', 'selected_item_label'])
       .subscribe((res) => {
@@ -177,19 +191,21 @@ export class RequestDocuments implements OnInit, OnDestroy {
         for (let i = 0; i < this.cols.length; i++) {
             this.columnOptions.push({ label: this.cols[i].header, value: this.cols[i] });
         }
-
-        // this.columnOptions = [];
-        // for (let i = 0; i < this.cols.length; i++) {
-        //     this.columnOptions.push({ label: this.cols[i].header, value: this.cols[i] });
-        // }
         // console.log(this.cols, this.columnOptions);
       });
   }
 
+  /**
+  * @function initMenuItems
+  * Initialize context menu items
+  *
+  * {@link @function downloadRequestFile}
+  * {@link @function unavailable}
+  * {@link @function confirmAction}
+  */
   initMenuItems() {
     this.translateService.get(['upload', 'download', 'rename', 'mark', 'unmark', 'delete'])
       .subscribe((res) => {
-
         this.items = [
           {
             label: res.upload, icon: 'ui-icon-file-upload',
@@ -198,7 +214,6 @@ export class RequestDocuments implements OnInit, OnDestroy {
               this.isUpload = !this.isUpload;
             },
           },
-          // { separator: true },
           {
             label: res.download, icon: 'ui-icon-file-download',
             command: (event) => {
@@ -221,7 +236,6 @@ export class RequestDocuments implements OnInit, OnDestroy {
             }
             // disabled: (this.requestStatus == 'Draft'),
           },
-          // { separator: true },
           {
             label: res.mark, icon: 'ui-icon-visibility-off',
             command: (event) => this.confirmAction('mark'),
@@ -230,32 +244,13 @@ export class RequestDocuments implements OnInit, OnDestroy {
             label: res.unmark, icon: 'ui-icon-visibility',
             command: (event) => this.confirmAction('unmark'),
           },
-          // { separator: true },
           {
             label: res.delete, icon: 'ui-icon-delete-forever',
+            // disabled: (this.requestStatus !== 'Draft'),
             command: (event) => this.confirmAction('delete'),
           }
         ];
-
       });
-  }
-
-  ngOnDestroy() {
-    this.unsubscribeLocalState();
-  }
-
-  /* LOCAL STATE */
-  subscribeLocalState() {
-    this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      // console.log(lang);
-      this.translateService.use(lang);
-      this.initDataTableColumn();
-      this.initMenuItems();
-    });
-  }
-
-  unsubscribeLocalState() {
-    this.globalState.unsubscribeEvent('language', this.myScope);
   }
 
   /**
@@ -271,17 +266,19 @@ export class RequestDocuments implements OnInit, OnDestroy {
 
       // Update uploadedFiles list for user awareness
       this.uploadedFiles.push(event.files[0]);
-      console.log(this.uploadedFiles);
+      // console.log(this.uploadedFiles);
 
       // Clear the cache for new upload
       this.singleFileUploader.clear();
     }
   }
 
-  /*****************************************************************************/
-
+  /**
+  * @function downloadRequestFile
+  * Download a file
+  */
   downloadRequestFile() {
-    console.log(this.selectedDocument._id);
+    // console.log(this.selectedDocument._id);
     this.store.dispatch(downloadRequestDocumentAction(this.selectedDocument._id, this.tcode));
   }
 
@@ -299,7 +296,15 @@ export class RequestDocuments implements OnInit, OnDestroy {
     }
   }
 
-  /*****************************************************************************/
+  /**
+  * @function confirmAction
+  * To confirm selected action again prior to execution
+  *
+  * @param {string} action
+  *
+  * {@link @function unavailable}
+  * {@link @function executeAction}
+  */
 
   confirmAction(action: string) {
     if (!this.selectedDocument) {
@@ -329,6 +334,16 @@ export class RequestDocuments implements OnInit, OnDestroy {
     }
   }
 
+  /**
+  * @function executeAction
+  * Execute action to modify the selected request document
+  *
+  * @param {string} action
+  *
+  * {@link @function unavailable}
+  *
+  * NOTE: Delete action is possible when request status = DRAFT
+  */
   executeAction(action: string): void {
     if (this.selectedDocument['_id']) {
       const docId = this.selectedDocument['_id'];
@@ -352,6 +367,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
           break;
 
         case 'delete':
+          // IMPORTANT: Only at request status (DRAFT) delete document is possible
           if (this.requestStatus === 'Draft') {
             this.store.dispatch(deleteRequestDocumentAction(docId));
             this.selectedDocument = null;
@@ -363,10 +379,15 @@ export class RequestDocuments implements OnInit, OnDestroy {
         default:
           break;
       }
+      // Reset state for further action
       this.selectedDocument = null;
     }
   }
 
+  /**
+  * @function unavailable
+  * Central toast once user has yet selected any document for actioning
+  */
   unavailable() {
     this.translateService.get(['unavailable', 'unavailable_msg'])
       .subscribe((res) => {
@@ -379,4 +400,5 @@ export class RequestDocuments implements OnInit, OnDestroy {
         this.globalState.notifyMyDataChanged('toasty', '', toastData);
       });
   }
+
 }

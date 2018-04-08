@@ -6,7 +6,6 @@ import { SharedModule } from 'primeng/shared';
 import { PanelModule } from 'primeng/panel';
 import { MenubarModule } from 'primeng/menubar';
 import { TooltipModule } from 'primeng/tooltip';
-// import { DataTableModule } from 'primeng/datatable';
 import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextModule } from 'primeng/inputtext';
@@ -21,14 +20,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { RequestDocumentsReducers } from '../../../ngrx/requestDocument/requestDocuments.reducers';
-import { RequestDocumentReducers } from '../../../ngrx/requestDocument/requestDocuments.reducers';
-import { RequestDocumentsEffects } from '../../../ngrx/requestDocument/requestDocuments.effects';
-import { RequestDocumentsServices } from '../../../ngrx/requestDocument/requestDocuments.services';
-
-// import { AppTranslationModule } from '../../../app.translation.module';
-// import { NgaModule } from '../../../nga/nga.module';
-// import { HoangModule } from '../../../nga/hoang.module';
+import { RequestDocumentsReducers } from '../../../../ngrx/requestDocument/requestDocuments.reducers';
+import { RequestDocumentReducers } from '../../../../ngrx/requestDocument/requestDocuments.reducers';
+import { RequestDocumentsEffects } from '../../../../ngrx/requestDocument/requestDocuments.effects';
+import { RequestDocumentsServices } from '../../../../ngrx/requestDocument/requestDocuments.services';
 
 import { RequestDocuments } from './requestDocuments.component';
 
@@ -41,7 +36,6 @@ import { RequestDocuments } from './requestDocuments.component';
     PanelModule,
     MenubarModule,
     TooltipModule,
-    // DataTableModule,
     TableModule,
     MultiSelectModule,
     InputTextModule,
@@ -50,7 +44,6 @@ import { RequestDocuments } from './requestDocuments.component';
     DialogModule,
     FileUploadModule,
     ButtonModule,
-    // ConfirmDialogModule
 
     TranslateModule,
 
@@ -59,10 +52,6 @@ import { RequestDocuments } from './requestDocuments.component';
     EffectsModule.forFeature([
       RequestDocumentsEffects,
     ]),
-
-    // AppTranslationModule,
-    // NgaModule,
-    // HoangModule,
   ],
   declarations: [
     RequestDocuments,

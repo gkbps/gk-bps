@@ -86,7 +86,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
     this.rows = this.localStorageService.getRows();
 
     this.initSortOptions();
-    console.log(this.selectedColumns);
+    // console.log(this.selectedColumns);
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
@@ -142,7 +142,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.create, icon: 'ui-icon-add',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.tcodeService.executeTcode(this.module + this.actionSerial + '1')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '1'),
@@ -150,7 +150,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.view, icon: 'ui-icon-search',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.executeTcode(this.module + this.actionSerial + '2')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '2'),
@@ -158,7 +158,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.edit, icon: 'ui-icon-edit',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.executeTcode(this.module + this.actionSerial + '3')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '3'),
@@ -166,7 +166,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.disable, icon: 'ui-icon-bookmark',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.executeTcode(this.module + this.actionSerial + '4')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '4'),
@@ -174,7 +174,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.enable, icon: 'ui-icon-bookmark-border',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.executeTcode(this.module + this.actionSerial + '5')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '5'),
@@ -182,7 +182,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.mark, icon: 'ui-icon-visibility-off',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.executeTcode(this.module + this.actionSerial + '6')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '6'),
@@ -190,7 +190,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.unmark, icon: 'ui-icon-visibility',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.executeTcode(this.module + this.actionSerial + '7')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '7'),
@@ -198,7 +198,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.delete, icon: 'ui-icon-delete-forever',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.executeTcode(this.module + this.actionSerial + '8')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '8'),
@@ -206,7 +206,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.viewChange, icon: 'ui-icon-track-changes',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.executeTcode(this.module + this.actionSerial + '9')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '9'),
@@ -223,7 +223,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.view, icon: 'ui-icon-search',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.tcodeService.executeTcode(this.module + this.actionSerial + '2', this.selectedItem.id);
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '2'),
@@ -231,7 +231,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.mark, icon: 'ui-icon-visibility-off',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.executeTcode(this.module + this.actionSerial + '6')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '6'),
@@ -239,7 +239,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.unmark, icon: 'ui-icon-visibility',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.executeTcode(this.module + this.actionSerial + '7')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '7'),
@@ -247,7 +247,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
               {
                 label: res.delete, icon: 'ui-icon-delete-forever',
                 command: (event) => {
-                  console.log(event);
+                  // console.log(event);
                   this.executeTcode(this.module + this.actionSerial + '8')
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '8'),
@@ -361,7 +361,7 @@ export class HDataGridComponent implements OnInit, OnDestroy, OnChanges {
       this.localStorageService.setRows(rows);
     }
 
-    console.log(pagination);
+    // console.log(pagination);
 
     // IMPORTANT: Event emits to smart component for pagination
     this.onPageChange.emit(pagination);

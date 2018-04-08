@@ -151,7 +151,7 @@ export class GkClnForm implements OnInit, OnDestroy {
         this.id = params['id'];
       }
     });
-    console.log(this.id);
+    // console.log(this.id);
 
     // Set blank form (action 11) or form filled with returned data (other actions)
     this.parseTCodeAndExecuteAction();
@@ -524,7 +524,7 @@ export class GkClnForm implements OnInit, OnDestroy {
    * - nga-contact
    ****************************************************************************/
   handleEvent($event) {
-    console.log($event);
+    // console.log($event);
     const addresses = <FormArray> this.myForm.controls['addresses'];
     const contacts = <FormArray> this.myForm.controls['contacts'];
 
@@ -571,17 +571,17 @@ export class GkClnForm implements OnInit, OnDestroy {
    */
 
   updateIsEditableRequest(status) {
-    console.log('Change isEditableRequest to: ', status);
+    // console.log('Change isEditableRequest to: ', status);
     this.isEditableRequest = status;
     this.buildForm();
   }
 
   saveRequest (action) {
-    console.log('Save gkClient Request Form data');
+    // console.log('Save gkClient Request Form data');
     if (this.myForm.valid) {
       this.gkClientService.updateRequest(this.myForm.value)
       .subscribe((result) => {
-        console.log(result);
+        // console.log(result);
 
         this.gkClientService.updateRequestStore(result.body.data);
 
@@ -627,7 +627,7 @@ export class GkClnForm implements OnInit, OnDestroy {
         // }
       })
     } else {
-      console.log('Validation Failed');
+      // console.log('Validation Failed');
 
       const toastData = {
         type: 'warning',
@@ -640,7 +640,7 @@ export class GkClnForm implements OnInit, OnDestroy {
   }
 
   updateParentOnRequestBody() {
-    console.log('Updating Request on the Request Body Data');
+    // console.log('Updating Request on the Request Body Data');
     this.getRequestBodyChange.emit({
       valid: this.myForm.valid,
       value: this.myForm.value
@@ -654,7 +654,7 @@ export class GkClnForm implements OnInit, OnDestroy {
     //   msg: 'Index: ' + event.index,
     //   showClose: true,
     // };
-    // this.globalState.notifyMyDataChanged('toasty','', toastData);      
+    // this.globalState.notifyMyDataChanged('toasty','', toastData);
   }
 
   ngOnDestroy() {
@@ -664,7 +664,6 @@ export class GkClnForm implements OnInit, OnDestroy {
   /* LOCAL STATE */
   subscribeLocalState() {
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translateService.use(lang);
     });
 

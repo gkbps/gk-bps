@@ -104,7 +104,7 @@ export class RegisterComponent {
   register() {
     this.loading = true;
     // this.securityService.setToken(this.model.token);
-    console.log(this.model);
+    // console.log(this.model);
     this.userService.create(this.model)
         .subscribe(
             data => {

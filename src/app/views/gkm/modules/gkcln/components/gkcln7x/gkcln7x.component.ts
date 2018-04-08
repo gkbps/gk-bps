@@ -98,7 +98,7 @@ export class GkCln7xComponent extends BaseComponent implements OnInit, OnDestroy
   }
 
   doSomething(event) {
-    console.log(event);
+    // console.log(event);
 
     this.store.dispatch(getGkClientReportsDetailAction(
       event.filter,

@@ -2,18 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { SharedModule } from 'primeng/shared';
 import { PanelModule } from 'primeng/panel';
 import { MenubarModule } from 'primeng/menubar';
-import { DataTableModule } from 'primeng/datatable';
+import { TooltipModule } from 'primeng/tooltip';
+import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { ContextMenuModule } from 'primeng/contextmenu';
-import { DialogModule } from 'primeng/dialog';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
-import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { FileUploadModule } from 'primeng/fileupload';
 import { ButtonModule } from 'primeng/button';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
-import { AppTranslationModule } from '../../../app.translation.module';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { UsersServices } from '../../../../ngrx/user/user.service';
 
 import { RequestApproval } from './requestApproval.component';
 
@@ -23,23 +28,27 @@ import { RequestApproval } from './requestApproval.component';
     FormsModule,
     ReactiveFormsModule,
 
+    SharedModule,
     PanelModule,
     MenubarModule,
-    DataTableModule,
+    TooltipModule,
+    TableModule,
     MultiSelectModule,
-    ContextMenuModule,
-    DialogModule,
-    DropdownModule,
     InputTextModule,
-    AutoCompleteModule,
+    ContextMenuModule,
+    DropdownModule,
+    DialogModule,
+    FileUploadModule,
     ButtonModule,
+    AutoCompleteModule,
 
-    AppTranslationModule,
+    TranslateModule,
   ],
   declarations: [
     RequestApproval,
   ],
   providers: [
+    UsersServices
   ],
   exports: [
     RequestApproval,

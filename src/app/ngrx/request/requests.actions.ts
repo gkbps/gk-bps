@@ -103,6 +103,22 @@ export enum RequestActionTypes {
   MOVE_REQUEST_STATUS = '[Request] Move Request Status',
   MOVE_REQUEST_STATUS_SUCCESS = '[Request] Move Request Status Success',
   MOVE_REQUEST_STATUS_ERROR = '[Request] Move Request Status Error',
+
+  GENERATE_REQUEST_APPROVAL = '[Request] Generate Request Approval',
+  GENERATE_REQUEST_APPROVAL_SUCCESS = '[Request] Generate Request Approval Success',
+  GENERATE_REQUEST_APPROVAL_ERROR = '[Request] Generate Request Approval Error',
+
+  INSERT_APPROVER_BEFORE = '[Request] Insert Approver (Before)',
+  INSERT_APPROVER_BEFORE_SUCCESS = '[Request] Insert Approver (Before) Success',
+  INSERT_APPROVER_BEFORE_ERROR = '[Request] Insert Approver (Before) Error',
+
+  INSERT_APPROVER_AFTER = '[Request] Insert Approver (After)',
+  INSERT_APPROVER_AFTER_SUCCESS = '[Request] Insert Approver (After) Success',
+  INSERT_APPROVER_AFTER_ERROR = '[Request] Insert Approver (After) Error',
+
+  REMOVE_APPROVER = '[Request] Remove Approver',
+  REMOVE_APPROVER_SUCCESS = '[Request] Remove Approver Success',
+  REMOVE_APPROVER_ERROR = '[Request] Remove Approver Error',
 }
 
 export function getRequestAction(id) {
@@ -240,6 +256,45 @@ export function moveRequestStatusAction(id, status) {
     payload: {
       id: id,
       status: status
+    }
+  };
+}
+
+export function generateRequestApprovalAction(id) {
+  return {
+    type: RequestActionTypes.GENERATE_REQUEST_APPROVAL,
+    payload: {
+      id: id
+    }
+  };
+}
+
+export function insertApproverBeforeAction(id, insertedApproval) {
+  return {
+    type: RequestActionTypes.INSERT_APPROVER_BEFORE,
+    payload: {
+      id: id,
+      approval: insertedApproval
+    }
+  };
+}
+
+export function insertApproverAfterAction(id, insertedApproval) {
+  return {
+    type: RequestActionTypes.INSERT_APPROVER_AFTER,
+    payload: {
+      id: id,
+      approval: insertedApproval
+    }
+  };
+}
+
+export function removeApproverAction(id, sequence) {
+  return {
+    type: RequestActionTypes.REMOVE_APPROVER,
+    payload: {
+      id: id,
+      sequence: sequence
     }
   };
 }

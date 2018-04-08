@@ -45,7 +45,7 @@ export class RequestDocumentsEffects {
       }),
       // If successful, dispatch success action with result
       map(requestDocuments => {
-        console.log(requestDocuments);
+        // console.log(requestDocuments);
         return ({ type: RequestDocumentsActionTypes.GET_REQUEST_DOCUMENTS_SUCCESS, payload: requestDocuments });
       })
     )
@@ -56,14 +56,14 @@ export class RequestDocumentsEffects {
     .pipe(
       ofType(RequestDocumentsActionTypes.UPLOAD_REQUEST_DOCUMENT),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
         return this.requestDocumentsServices.uploadRequestDocument(
           action['payload']['id'],
           action['payload']['formData'],
         )
           .pipe(
             map(requestDocument => {
-              console.log(requestDocument);
+              // console.log(requestDocument);
               return { type: RequestDocumentsActionTypes.UPLOAD_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentsActionTypes.UPLOAD_REQUEST_DOCUMENT_ERROR}))
@@ -75,14 +75,14 @@ export class RequestDocumentsEffects {
     .pipe(
       ofType(RequestDocumentsActionTypes.SAVE_REQUEST_DOCUMENT),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
         return this.requestDocumentsServices.action13(
           action['payload']['id'],
           action['payload']['desc']
         )
           .pipe(
             map(requestDocument => {
-              console.log(requestDocument);
+              // console.log(requestDocument);
               return { type: RequestDocumentsActionTypes.SAVE_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentsActionTypes.SAVE_REQUEST_DOCUMENT_ERROR}))
@@ -94,11 +94,11 @@ export class RequestDocumentsEffects {
     .pipe(
       ofType(RequestDocumentsActionTypes.MARK_REQUEST_DOCUMENT),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
         return this.requestDocumentsServices.action16(action['payload']['id'])
           .pipe(
             map(requestDocument => {
-              console.log(requestDocument);
+              // console.log(requestDocument);
               return { type: RequestDocumentsActionTypes.MARK_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentsActionTypes.MARK_REQUEST_DOCUMENT_ERROR}))
@@ -110,11 +110,11 @@ export class RequestDocumentsEffects {
     .pipe(
       ofType(RequestDocumentsActionTypes.UNMARK_REQUEST_DOCUMENT),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
         return this.requestDocumentsServices.action17(action['payload']['id'])
           .pipe(
             map(requestDocument => {
-              console.log(requestDocument);
+              // console.log(requestDocument);
               return { type: RequestDocumentsActionTypes.UNMARK_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentsActionTypes.UNMARK_REQUEST_DOCUMENT_ERROR}))
@@ -126,11 +126,11 @@ export class RequestDocumentsEffects {
     .pipe(
       ofType(RequestDocumentsActionTypes.DELETE_REQUEST_DOCUMENT),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
         return this.requestDocumentsServices.action18(action['payload']['id'])
           .pipe(
             map(requestDocument => {
-              console.log(requestDocument);
+              // console.log(requestDocument);
               return { type: RequestDocumentsActionTypes.DELETE_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentsActionTypes.DELETE_REQUEST_DOCUMENT_ERROR}))
@@ -147,11 +147,11 @@ export class RequestDocumentsEffects {
     .pipe(
       ofType(RequestDocumentActionTypes.GET_REQUEST_DOCUMENT),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
         return this.requestDocumentsServices.action12(action['payload']['id'])
           .pipe(
             map(requestDocument => {
-              console.log(requestDocument);
+              // console.log(requestDocument);
               return { type: RequestDocumentActionTypes.GET_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentActionTypes.GET_REQUEST_DOCUMENT_ERROR}))
@@ -170,7 +170,7 @@ export class RequestDocumentsEffects {
         )
           .pipe(
             map(requestDocument => {
-              console.log(requestDocument);
+              // console.log(requestDocument);
               return { type: RequestDocumentActionTypes.DOWNLOAD_REQUEST_DOCUMENT_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: RequestDocumentActionTypes.DOWNLOAD_REQUEST_DOCUMENT_ERROR}))

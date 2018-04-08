@@ -53,7 +53,7 @@ export class HDashboardChartBarComponent implements OnInit, OnChanges {
   updateStacked() {
     // [(ngModel)]="options.scales.yAxes[0].stacked"
     // this.stacked = !this.stacked;
-    console.log(this.stacked);
+    // console.log(this.stacked);
     this.options.scales.xAxes[0].stacked = this.stacked;
     this.options.scales.yAxes[0].stacked = this.stacked;
   }

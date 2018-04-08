@@ -26,7 +26,7 @@
  }
 
  export function addNotificationAction(notification) {
-   console.log(notification);
+   // console.log(notification);
    return {
      type: TopNotificationsActionTypes.ADD_NOTIFICATION,
      payload: { notification: notification }

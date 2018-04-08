@@ -89,7 +89,7 @@ export class GkClnShared implements OnInit, OnDestroy {
     // Parse TCode - this must be in OnInit or after steps, otherwise no input is parsable
     this.prefix = this.tcodeService.extractPrefix(this.tcode);
     this.action = this.tcodeService.extractAction(this.tcode);
-    console.log(this.prefix, this.action);
+    // console.log(this.prefix, this.action);
 
     switch (this.action) {
       case '11':
@@ -150,33 +150,33 @@ export class GkClnShared implements OnInit, OnDestroy {
   }
 
   handleEvent(event) {
-    console.log(event);
+    // console.log(event);
 
     if (event.valid) {
       switch (this.action) {
         case '11':
-          console.log('Save master data and present new id + 11/id!');
+          // console.log('Save master data and present new id + 11/id!');
           this.store.dispatch(addGkClientAction(event.data));
           break;
 
         case '13':
-          console.log('Save master data!');
+          // console.log('Save master data!');
           this.store.dispatch(saveGkClientAction(event.data));
           break;
 
         case '31':
-          console.log('Save detail of request!');
+          // console.log('Save detail of request!');
           break;
 
         case '33':
-          console.log('Save detail of request!');
+          // console.log('Save detail of request!');
           break;
 
         default:
           break;
       }
     } else {
-      console.log('Validation Failed');
+      // console.log('Validation Failed');
       const toastData = {
         type: 'warning',
         title: 'Validation Failed',
@@ -210,7 +210,6 @@ export class GkClnShared implements OnInit, OnDestroy {
   /* LOCAL STATE */
   subscribeLocalState() {
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translateService.use(lang);
     });
   }

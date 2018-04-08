@@ -27,7 +27,7 @@ export class FileService {
   */
   getDownloadPath(filename) {
     const url = this.appConfig.apiUrl + '/repo/download/' + filename;
-    console.log(url);
+    // console.log(url);
     return url;
   }
 

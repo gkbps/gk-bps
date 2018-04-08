@@ -17,7 +17,7 @@ export class SafeScriptPipe implements PipeTransform  {
   ) {}
 
   transform(value) {
-    console.log(this.sanitized.bypassSecurityTrustScript(value));
+    // console.log(this.sanitized.bypassSecurityTrustScript(value));
     return this.sanitized.bypassSecurityTrustScript(value);
   }
 

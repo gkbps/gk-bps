@@ -29,7 +29,7 @@ export class HDashboardChartLineComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.editMode);
+    // console.log(this.editMode);
   }
 
   ngOnChanges(changes: SimpleChanges) {

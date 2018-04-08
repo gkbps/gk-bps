@@ -92,6 +92,7 @@ export class HttpClientService extends HttpClient {
   * @param {string} url
   * @param {any|object} options
   * - {boolean} isDeferral decide if deferral message or not
+  * - {boolean} isToast decide if toast is executed
   *
   * @return {Observable}
   */
@@ -103,7 +104,7 @@ export class HttpClientService extends HttpClient {
       .do((res: Response) => {
         // Hanle success response without notifying user
         // this.onSuccess(res, false);
-          this.handleSuccess(res, false, options);
+          this.handleSuccess(res, options);
       }, (error: any) => {
         this.onError(error);
       })
@@ -132,9 +133,9 @@ export class HttpClientService extends HttpClient {
     return super.post(this.getFullUrl(url), body, this.attachHeader(reqOptions))
       .catch(this.onCatch)
       .do((res: Response) => {
-          console.log(res);
+          // console.log(res);
           // Handle success including notifying user
-          this.handleSuccess(res, true, options);
+          this.handleSuccess(res, options);
         }, (error: any) => {
           this.onError(error);
         })
@@ -164,7 +165,7 @@ export class HttpClientService extends HttpClient {
       .do((res: Response) => {
           // Handle success including notifying user
           // this.onSuccess(res, true);
-          this.handleSuccess(res, true, options);
+          this.handleSuccess(res, options);
         }, (error: any) => {
           this.onError(error);
         })
@@ -194,7 +195,7 @@ export class HttpClientService extends HttpClient {
       .do((res: Response) => {
           // Handle success including notifying user
           // this.onSuccess(res, true);
-          this.handleSuccess(res, true, options);
+          this.handleSuccess(res, options);
         }, (error: any) => {
           this.onError(error);
         })
@@ -223,7 +224,7 @@ export class HttpClientService extends HttpClient {
       .do((res: Response) => {
           // Handle success including notifying user
           // this.onSuccess(res, true);
-          this.handleSuccess(res, true, options);
+          this.handleSuccess(res, options);
         }, (error: any) => {
           this.onError(error);
         })
@@ -302,16 +303,20 @@ export class HttpClientService extends HttpClient {
   *
   * @return {null}
   */
-  handleSuccess(res, alert, options) {
+  handleSuccess(res, options) {
     const tmpOptions = Object.assign({}, options);
     // console.log(tmpOptions);
 
-    this.onSuccess(res, alert);
-
     if (tmpOptions) {
+      if (this.objectService.hasProp(tmpOptions, 'disableToast')) {
+        this.onSuccess(res, tmpOptions.disableToast);
+      } else {
+        this.onSuccess(res, true);
+      }
+
       if (this.objectService.hasProp(tmpOptions, 'isDeferral')) {
         console.log('Update Store');
-        console.log(res);
+        // console.log(res);
         this.store.dispatch(addNotificationAction(res.body.data));
       }
     }
@@ -324,11 +329,11 @@ export class HttpClientService extends HttpClient {
   * @param {http response} res
   * @param {boolean} alert - true: alert / false: silent
   */
-  private onSuccess(res: Response, alert: boolean): void {
-    if (alert) {
+  private onSuccess(res: Response, disableToast: boolean): void {
+    if (!disableToast) {
       this.apiResultHandlingService.processAPIResult(res)
       .then((msg) => {
-        console.log(msg);
+        // console.log(msg);
         const toastData = {
           type: msg['type'],
           title: msg['title'],
@@ -337,6 +342,8 @@ export class HttpClientService extends HttpClient {
         };
         this.globalState.notifyMyDataChanged('toasty','', toastData);
       });
+    } else {
+      console.log(res);
     }
   }
 
@@ -449,7 +456,7 @@ export class HttpClientService extends HttpClient {
   * @return {string}
   */
   private getFullUrl(prefix: string): string {
-    console.log(this.apiUrl + prefix);
+    // console.log(this.apiUrl + prefix);
     return this.apiUrl + prefix;
   }
 }

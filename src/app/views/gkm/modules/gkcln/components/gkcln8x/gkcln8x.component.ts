@@ -192,7 +192,7 @@ export class GkCln8xComponent extends BaseComponent implements OnInit, OnDestroy
     this.gkClientService.findMasterListPagination(event.globalFilter, JSON.stringify(sort), event.first, event.rows);
     // this.first = event.first;
     this.rows = event.rows;
-    console.log(this.first, this.rows);
+    // console.log(this.first, this.rows);
     this.localStorageService.setRows(event.rows);
   }
 

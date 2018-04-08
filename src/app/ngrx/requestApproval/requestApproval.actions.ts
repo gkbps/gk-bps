@@ -1,5 +1,7 @@
 /**
-* REQUESTAPPROVAL
+* REQUEST APPROVAL
+* @enum {RequestApprovalActionTypes}
+* @function getRequestApprovalAction
 */
 
 export enum RequestApprovalActionTypes {

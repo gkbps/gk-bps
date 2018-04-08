@@ -191,7 +191,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
 
     this.dashboardService.getDashboardItems('gkcln', params)
       .subscribe(responseBodyData => {
-        console.log(responseBodyData);
+        // console.log(responseBodyData);
         this.dashboardItemsList = responseBodyData['body'].data;
       }, error => {
         console.log(error);
@@ -313,7 +313,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
   }
 
   doAction(action) {
-    console.log(action);
+    // console.log(action);
     switch (action) {
       case 'new':
         this.displayDialog = true;
@@ -332,7 +332,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
 
   selectDashboardItem($event) {
     this.selectedItem = this.helperService.cloneObject($event.value);
-    console.log($event.value, this.selectedItem[0]);
+    // console.log($event.value, this.selectedItem[0]);
   }
 
   ngOnDestroy() {
@@ -352,7 +352,7 @@ export class GkCln85Component extends BaseComponent implements OnInit, OnDestroy
     // Redux store + initial value
     this.datasourceSubscription = this.datasource
     .subscribe(responseBody => {
-      console.log(responseBody);
+      // console.log(responseBody);
 
     }, error => {
       console.log(error);

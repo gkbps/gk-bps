@@ -124,9 +124,9 @@
                     <h-address
                       [isEditable]="isEditable"
                       [item]="i"
-                      [(formGroup)]="myForm.controls.addresses.controls[i]"
+                      [(addressItem)]="myForm.controls.addresses.controls[i]"
                       (itemEvent)="handleEvent($event)">
-                    </h-address>
+                    </h-address>                    
                 </div>
               </div>
               <p-footer *ngIf="isEditable">

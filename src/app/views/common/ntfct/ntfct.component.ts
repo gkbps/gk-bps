@@ -64,7 +64,7 @@ export class NtfctComponent extends BaseComponent implements OnInit, OnDestroy {
     this.notificationStore = store.pipe(select('notification'));
     this.notificationStore.subscribe(data => {
       this.notification = data;
-      console.log(this.notification);
+      // console.log(this.notification);
     });
   }
 
@@ -79,7 +79,7 @@ export class NtfctComponent extends BaseComponent implements OnInit, OnDestroy {
 
     this.activatedRoute.params.subscribe((params: Params) => {
         this.id = params['id'];
-        console.log(this.id);
+        // console.log(this.id);
         if (this.id) {
           this.store.dispatch(getNotificationAction(this.id));
         }

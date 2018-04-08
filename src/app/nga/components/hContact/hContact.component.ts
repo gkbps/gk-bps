@@ -19,8 +19,9 @@ export class HContact implements OnInit, OnDestroy {
 
   @Input() isEditable = false;
   @Input() item: number;
-  // @Input('formGroup') public contactItem: FormGroup;
-  @Input() contactItem: FormGroup;
+  @Input('formGroup') public contactItem: FormGroup;
+  // Not work, error
+  // @Input() contactItem: FormGroup;
 
   @Output() itemEvent: EventEmitter<any> = new EventEmitter();
   editStatus = false;
@@ -46,17 +47,17 @@ export class HContact implements OnInit, OnDestroy {
   }
 
   setControlStatus() {
-    if (this.isEditable) {
-      this.contactItem.controls.name.enable();
-      this.contactItem.controls.title.enable();
-      this.contactItem.controls.phone.enable();
-      this.contactItem.controls.email.enable();
-    } else {
-      this.contactItem.controls.name.disable();
-      this.contactItem.controls.title.disable();
-      this.contactItem.controls.phone.disable();
-      this.contactItem.controls.email.disable();
-    }
+    // if (this.isEditable) {
+    //   this.contactItem.controls.name.enable();
+    //   this.contactItem.controls.title.enable();
+    //   this.contactItem.controls.phone.enable();
+    //   this.contactItem.controls.email.enable();
+    // } else {
+    //   this.contactItem.controls.name.disable();
+    //   this.contactItem.controls.title.disable();
+    //   this.contactItem.controls.phone.disable();
+    //   this.contactItem.controls.email.disable();
+    // }
   }
 
   ngOnDestroy() {
@@ -66,7 +67,6 @@ export class HContact implements OnInit, OnDestroy {
   /* GLOBAL STATE */
   subscribeGlobalState() {
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translate.use(lang);
     });
   }

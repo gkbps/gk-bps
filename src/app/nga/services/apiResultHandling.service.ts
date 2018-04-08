@@ -30,7 +30,7 @@ export class APIResultHandlingService {
   * @return {Promise}
   */
   public processAPIResult(result) {
-    console.log(result);
+    // console.log(result);
 
     return new Promise(
       (resolve, reject) => {

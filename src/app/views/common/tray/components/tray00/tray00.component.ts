@@ -89,7 +89,6 @@ export class Tray00Component extends BaseComponent implements OnInit, OnDestroy 
   subscribeLocalState() {
     // Register Language Callback in Global Status
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translateService.use(lang);
       this.initNavBoard();
     });

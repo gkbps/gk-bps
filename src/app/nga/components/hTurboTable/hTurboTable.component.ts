@@ -152,7 +152,7 @@ export class HTurboTableComponent implements OnInit, OnDestroy {
               {
                 label: res.view, icon: 'ui-icon-search',
                 command: (event) => {
-                  console.log(this.module + this.actionSerial + '2', this.selectedClient._id);
+                  // console.log(this.module + this.actionSerial + '2', this.selectedClient._id);
                   this.tcodeService.executeTcode(this.module + this.actionSerial + '5', this.selectedClient.id);
                 },
                 disabled: this.notInRights(this.module + this.actionSerial + '2'),

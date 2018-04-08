@@ -272,7 +272,7 @@ export class HRequestDocuments implements OnInit, OnDestroy {
             this.singleFileUploader.clear();
           },
           (error) => {
-            console.log('not ok');
+            console.log(error);
 
             // Clear the cache for new upload
             // this.fileUpload.clear();
@@ -295,7 +295,7 @@ export class HRequestDocuments implements OnInit, OnDestroy {
           window.open(this.appConfig.apiUrl + '/repo/download/' + result['body'].data);
         },
         (error) => {
-          console.log('not ok');
+          console.log(error);
         },
         () => { console.log('Subscription is completed'); },
       );

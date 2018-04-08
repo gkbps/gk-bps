@@ -14,7 +14,7 @@ export function TopNotificationsReducers( state = initialState, { type, payload 
     *
     */
     case TopNotificationsActionTypes.ADD_NOTIFICATION_SUCCESS:
-      console.log(payload);
+      // console.log(payload);
 
       if (state.data['total'] >= 5) {
         state.data['data'].pop();
@@ -25,7 +25,7 @@ export function TopNotificationsReducers( state = initialState, { type, payload 
       const listAfterUpload = [...state.data['data']];
       const countAfterUpload = state.data['total'] + 1;
 
-      console.log(listAfterUpload, countAfterUpload);
+      // console.log(listAfterUpload, countAfterUpload);
       return Object.assign({}, state, {data: {
           data: listAfterUpload,
           total: countAfterUpload
@@ -52,12 +52,12 @@ export function NotificationsReducers( state = initialState, { type, payload }) 
 
     case NotificationsActionTypes.MARK_NOTIFICATION_SUCCESS:
     case NotificationsActionTypes.UNMARK_NOTIFICATION_SUCCESS:
-      console.log(payload);
-      console.log(state);
+      // console.log(payload);
+      // console.log(state);
       const listAfterModified = state.data['data'].map(requestDocument => {
         return requestDocument._id === payload._id ? Object.assign({}, requestDocument, payload) : requestDocument;
       });
-      console.log(listAfterModified);
+      // console.log(listAfterModified);
       return Object.assign(
         {},
         state,
@@ -69,11 +69,11 @@ export function NotificationsReducers( state = initialState, { type, payload }) 
       });
 
     case NotificationsActionTypes.DELETE_NOTIFICATION_SUCCESS:
-      console.log(payload);
+      // console.log(payload);
       const listAfterDeleted = state.data['data'].filter(requestDocument => {
         return requestDocument._id !== payload._id;
       });
-      console.log(listAfterDeleted);
+      // console.log(listAfterDeleted);
       return Object.assign(
         {},
         state,

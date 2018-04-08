@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 
-/**/
+import { TranslateService } from '@ngx-translate/core';
+
 import { Store, select } from '@ngrx/store';
 import {
   getRequestAction,
@@ -26,7 +25,6 @@ import {
   // moveRequestApprovalAction,
   // moveRequestStatusAction
 } from '../../../../../../ngrx/request/requests.actions';
-/**/
 
 import {
   getGkClientRequestAction,
@@ -35,7 +33,6 @@ import {
   revertGkClientRequestAction
 } from '../../../../../../ngrx/gkClient/gkClients.actions';
 
-import { TranslateService } from '@ngx-translate/core';
 
 import { GlobalState } from '../../../../../../global.state';
 import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
@@ -47,7 +44,7 @@ import { TcodeService } from '../../../../../../nga/services/tcode.service';
 
 import { BaseComponent } from '../../../../../base';
 
-import { RequestHeader } from '../../../../../../nga/components/requestHeader/requestHeader.component';
+import { RequestHeader } from '../../../../../../ngh/modules/3n/requestHeader/requestHeader.component';
 
 import { GkClnForm } from '../gkclnForm/gkclnForm.component';
 
@@ -65,15 +62,21 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
   };
 
   // Derive class properties
+
+  // To access the children components
   @ViewChild(RequestHeader) myRequestHeader;
   @ViewChild(GkClnForm) myRequestBody;
 
+  // Tcode related varivables
   tcode = 'gkcln31'; // For new Item
   prefix = 'gkcln';
   action = '31';
+
+  // State related variables
   isRequest = true;
   isEditable: boolean;
 
+  // Request related variables
   id = '';
   request: any;
   requestBody: any;
@@ -82,8 +85,6 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
   // Approval: Store with header to reduce read at server and client. Check Approval valid at frontend and backend
   requestComment: any;
   requestHistory: any;
-
-  // user: any;
 
   constructor(
     // Base class services
@@ -117,7 +118,7 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
 
     // Get status of request to define the isEditable
     this.request.subscribe(res => {
-      console.log(res);
+      // console.log(res);
       if (!res.pending && ! res.error) {
         if (['New', 'Draft'].includes(res.data.status)) {
           this.isEditable = true;
@@ -145,105 +146,10 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
         this.store.dispatch(resetRequestAction(this.tcode));
       }
     });
-    //
-    // this.subscribeLocalState();
-    //
-    // Get user and preference
-    // this.user = this.securityService.getCurrentUser();
-  }
-  /****************************************************************************/
 
-  // Get Action from requestHeader Component to instruct the process
-  onSelectAction(event) {
-    console.log(event);
-
-    switch (event.action) {
-      case 'save':
-        console.log('save.01-Save requestHeader to request!');
-        if (event.valid) {
-          if (event.data.status === 'New') {
-            this.store.dispatch(addRequestAction(event.data));
-          } else {
-            this.store.dispatch(saveRequestAction(event.data));
-
-            console.log('save.02.-Save requestBody to module request!');
-            this.myRequestBody.saveRequest();
-          }
-        }
-        break;
-
-      case 'submit':
-        console.log('save.01-Submit requestHeader to request!');
-        this.store.dispatch(submitRequestAction(event.data));
-
-        console.log('save.02.-Save requestBody to module request!');
-        this.myRequestBody.saveRequest();
-        break;
-
-      case 'withdraw':
-        console.log('withdraw.00-Withdraw requestHeader to request!');
-        this.store.dispatch(withdrawRequestAction(this.id));
-        break;
-
-      case 'cancel':
-        console.log('cancel.00-Cancel requestHeader to request!');
-        this.store.dispatch(cancelRequestAction(this.id));
-        break;
-
-      case 'return':
-        console.log('return.00-Return requestHeader to request!');
-        this.store.dispatch(returnRequestAction(this.id));
-        break;
-
-      case 'approve':
-        console.log('approve.00-Approve requestHeader to request!');
-        // this.store.dispatch(approveRequestAction(this.id, event.data));
-        break;
-
-      case 'reject':
-        console.log('reject.00-Reject requestHeader to request!');
-        // this.store.dispatch(rejectRequestAction(this.id));
-        break;
-
-      case 'abort':
-        console.log('abort.00-Abort requestHeader to request!');
-        this.store.dispatch(abortRequestAction(this.id));
-        break;
-
-      // case 'journal':
-      //   console.log('post.00-Post data to master data/ transaction data');
-      //   // this.store.dispatch(postRequestAction(this.id));
-      //   break;
-
-      case 'post':
-        console.log('post.00-Post data to master data/ transaction data');
-        // this.store.dispatch(postRequestAction(this.id));
-        break;
-
-      case 'revert':
-        console.log('Revert data from transaction data');
-        // if success then back to change status of request to "APPROVED"
-        break;
-
-      case 'copy':
-        console.log('Copy data from request data');
-        // if success then back to open new request with "DRAFT" status and id
-        break;
-
-      case 'print':
-        break;
-
-      default:
-        break;
-    }
+    this.subscribeLocalState();
   }
 
-  saveRequestBody(event) {
-    console.log(event);
-    this.store.dispatch(saveGkClientRequestAction(event.data));
-  }
-
-  /****************************************************************************/
   ngOnDestroy() {
     // Base class destroy
     super.ngOnDestroy();
@@ -257,10 +163,105 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
   }
 
   unsubscribeLocalState() {
-    // this.subscription.unsubscribe();
-    // this.request.unsubscribe();
   }
 
+  // COMPONENT OPERATION
 
+  /**
+  * @function onSelectAction
+  * Listen event from (requestHeader) component to instruct the process
+  *
+  * @param event
+  */
+  onSelectAction(event) {
+    // console.log(event);
+
+    switch (event.action) {
+      case 'save':
+        // console.log('save.01-Save requestHeader to request!');
+        if (event.valid) {
+          if (event.data.status === 'New') {
+            this.store.dispatch(addRequestAction(event.data));
+          } else {
+            this.store.dispatch(saveRequestAction(event.data));
+
+            // console.log('save.02.-Save requestBody to module request!');
+            this.myRequestBody.saveRequest();
+          }
+        }
+        break;
+
+      case 'submit':
+        // console.log('save.01-Submit requestHeader to request!');
+        this.store.dispatch(submitRequestAction(event.data));
+
+        // console.log('save.02.-Save requestBody to module request!');
+        this.myRequestBody.saveRequest();
+        break;
+
+      case 'withdraw':
+        // console.log('withdraw.00-Withdraw requestHeader to request!');
+        this.store.dispatch(withdrawRequestAction(this.id));
+        break;
+
+      case 'cancel':
+        // console.log('cancel.00-Cancel requestHeader to request!');
+        this.store.dispatch(cancelRequestAction(this.id));
+        break;
+
+      case 'return':
+        // console.log('return.00-Return requestHeader to request!');
+        this.store.dispatch(returnRequestAction(this.id));
+        break;
+
+      case 'approve':
+        // console.log('approve.00-Approve requestHeader to request!');
+        // this.store.dispatch(approveRequestAction(this.id, event.data));
+        break;
+
+      case 'reject':
+        // console.log('reject.00-Reject requestHeader to request!');
+        // this.store.dispatch(rejectRequestAction(this.id));
+        break;
+
+      case 'abort':
+        // console.log('abort.00-Abort requestHeader to request!');
+        this.store.dispatch(abortRequestAction(this.id));
+        break;
+
+      // Below are reserved for other Tcode
+      // case 'journal':
+      //   console.log('post.00-Post data to master data/ transaction data');
+      //   // this.store.dispatch(postRequestAction(this.id));
+      //   break;
+
+      // case 'post':
+      //   console.log('post.00-Post data to master data/ transaction data');
+      //   // this.store.dispatch(postRequestAction(this.id));
+      //   break;
+
+      // case 'revert':
+      //   console.log('Revert data from transaction data');
+      //   // if success then back to change status of request to "APPROVED"
+      //   break;
+
+      case 'copy':
+        // console.log('Copy data from request data');
+        // if success then back to open new request with "DRAFT" status and id
+        break;
+
+      case 'print':
+        // console.log('To show form in printable format');
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  saveRequestBody(event) {
+    // console.log(event);
+    this.store.dispatch(saveGkClientRequestAction(event.data));
+  }
 
 }

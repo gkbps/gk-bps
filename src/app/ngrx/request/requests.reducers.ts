@@ -32,6 +32,10 @@ export function RequestReducers( state = initialState, { type, payload }) {
     case RequestActionTypes.ABORT_REQUEST:
     case RequestActionTypes.POST_REQUEST:
     case RequestActionTypes.REVERT_REQUEST:
+    case RequestActionTypes.GENERATE_REQUEST_APPROVAL:
+    case RequestActionTypes.INSERT_APPROVER_BEFORE:
+    case RequestActionTypes.INSERT_APPROVER_AFTER:
+    case RequestActionTypes.REMOVE_APPROVER:
       return Object.assign({}, state, {pending: true, error: null});
 
     case RequestActionTypes.GET_REQUEST_SUCCESS:
@@ -47,7 +51,19 @@ export function RequestReducers( state = initialState, { type, payload }) {
     case RequestActionTypes.ABORT_REQUEST_SUCCESS:
     case RequestActionTypes.POST_REQUEST_SUCCESS:
     case RequestActionTypes.REVERT_REQUEST_SUCCESS:
+    // Payload return the full request
+    // case RequestActionTypes.GENERATE_REQUEST_APPROVAL_SUCCESS:
       return Object.assign({}, state, {data: payload, pending: false});
+
+    // Payload return only approval field
+    case RequestActionTypes.GENERATE_REQUEST_APPROVAL_SUCCESS:
+    case RequestActionTypes.INSERT_APPROVER_BEFORE_SUCCESS:
+    case RequestActionTypes.INSERT_APPROVER_AFTER_SUCCESS:
+    case RequestActionTypes.REMOVE_APPROVER_SUCCESS:
+      console.log(payload);
+      const modifiedPayload = Object.assign({}, state.data);
+      modifiedPayload['approval'] = payload;
+      return Object.assign({}, state, {data: modifiedPayload, pending: false});
 
     case RequestActionTypes.GET_REQUEST_ERROR:
     case RequestActionTypes.RESET_REQUEST_ERROR:
@@ -62,6 +78,10 @@ export function RequestReducers( state = initialState, { type, payload }) {
     case RequestActionTypes.ABORT_REQUEST_ERROR:
     case RequestActionTypes.POST_REQUEST_ERROR:
     case RequestActionTypes.REVERT_REQUEST_ERROR:
+    case RequestActionTypes.GENERATE_REQUEST_APPROVAL_ERROR:
+    case RequestActionTypes.INSERT_APPROVER_BEFORE_ERROR:
+    case RequestActionTypes.INSERT_APPROVER_AFTER_ERROR:
+    case RequestActionTypes.REMOVE_APPROVER_ERROR:
       return Object.assign({}, state, {pending: false, error: 'Error'});
 
     default:

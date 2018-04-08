@@ -241,7 +241,7 @@ export class GkClientService {
       })
       .map((resBody) => {
         const payload = JSON.parse(JSON.stringify(resBody.data));
-        console.log(payload);
+        // console.log(payload);
 
         return { type: 'DISABLE_GKCLIENT', payload };
       })
@@ -266,7 +266,7 @@ export class GkClientService {
       })
       .map((resBody) => {
         const payload = JSON.parse(JSON.stringify(resBody.data));
-        console.log(payload);
+        // console.log(payload);
 
         return { type: 'ENABLE_GKCLIENT', payload };
       })
@@ -291,7 +291,7 @@ export class GkClientService {
     })
     .map((resBody) => {
       const payload = JSON.parse(JSON.stringify(resBody.data));
-      console.log(payload);
+      // console.log(payload);
 
       return { type: 'MARK_GKCLIENT', payload };
     })
@@ -316,7 +316,7 @@ export class GkClientService {
     })
     .map((resBody) => {
       const payload = JSON.parse(JSON.stringify(resBody.data));
-      console.log(payload);
+      // console.log(payload);
 
       return { type: 'UNMARK_GKCLIENT', payload };
     })
@@ -341,7 +341,7 @@ export class GkClientService {
     })
     .map((resBody) => {
       const payload = {};
-      console.log(payload);
+      // console.log(payload);
 
       return { type: 'DELETE_GKCLIENT', payload };
     })
@@ -373,7 +373,7 @@ export class GkClientService {
   }
 
   updateRequestStore(gkclient: any) {
-    console.log(gkclient);
+    // console.log(gkclient);
 
     const payload = gkclient;
     this.store.dispatch({ type: 'UPDATE_GKCLIENT_REQUEST', payload });

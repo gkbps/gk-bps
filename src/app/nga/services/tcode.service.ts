@@ -217,7 +217,7 @@ export class TcodeService {
     const targetUrl: string = id
       ? this.urlForm(tcode, id)
       : this.urlLead(tcode);
-     console.log(targetUrl);
+     // console.log(targetUrl);
      this.router.navigate([targetUrl]);
      return false;
   }
@@ -229,7 +229,7 @@ export class TcodeService {
   * @param {string} url
   */
   executeUrl(url: string) {
-    console.log(url);
+    // console.log(url);
     this.router.navigate([url]);
     return false;
   }

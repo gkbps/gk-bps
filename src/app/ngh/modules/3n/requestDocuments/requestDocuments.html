@@ -99,10 +99,10 @@
           <tr>
             <th
               *ngFor="let col of columns"
-              style="width: {{col.width}}"
               [pSortableColumn]="col.field"
               pResizableColumn
               pReorderableColumn>
+              <!-- style="width: {{col.width}}" -->
               <!-- [style]="{'width': col.width}" -->
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
@@ -150,75 +150,3 @@
     </div>
   </div>
 </p-panel>
-
-<!-- <p-dataTable
-  [value]="requestDocuments"
-  [loading]="loading"
-  loadingIcon="fa-spinner"
-
-  [globalFilter]="gb" #dt
-
-  selectionMode="single"
-  [(selection)]="selectedDocument"
-  dataKey="_id"
-
-  [responsive]="true"
-  [resizableColumns]="true"
-  [multiSortMeta]="multiSortMeta"
-
-  [reorderableColumns]="true"
-  [contextMenu]="cm"
-
-  [paginator]="true"
-  [rows]="rows"
-  [(first)]="first"
-
-  scrollHeight="200px"
-  [style]="{'overflow':'visible'}">
-    <p-header>
-      <div class="ui-g" style="padding: 0px">
-        <div class="ui-g-12 ui-md-6 ui-lg-4" style="text-align:left">
-          <p-multiSelect [options]="columnOptions" [(ngModel)]="cols"></p-multiSelect>
-        </div>
-        <div class="ui-g-12 ui-md-6 ui-lg-4"></div>
-        <div class="ui-g-12 ui-lg-4" style="text-align:right">
-          <input #gb type="text" pInputText size="50" placeholder="{{'filter'|translate}}" style="::placeholder {color: #ffffff;}">
-        </div>
-      </div>
-    </p-header>
-    <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [style]="{'width': col.width}" sortable="true"></p-column>
-</p-dataTable> -->
-
-<!-- <p-fileUpload
-  #singleFileUploader
-  name="files"
-  [url]="myUrl"
-
-  accept=".docx,.doc,.xls,xlsx,ppt,.pptx,application/pdf,application/rtf,text/plain,application/x-zip-compressed,image/*"
-
-  invalidFileSizeMessageSummary = "{{'invalid_file_size_summary'|translate}}"
-  invalidFileSizeMessageDetail = "{{'invalid_file_size_detail'|translate}}"
-  invalidFileTypeMessageSummary = "{{'invalid_file_type_summary'|translate}}"
-  invalidFileTypeMessageDetail = "{{'invalid_file_type_detail'|translate}}"
-
-  customUpload="'true'"
-  (uploadHandler)="uploadSingleFileHandler($event)"
-
-  chooseLabel="{{'selectFile'|translate}}"
-  uploadLabel="{{'upload'|translate}}"
-  cancelLabel="{{'cancel'|translate}}"
-
-  [maxFileSize]="maxSize">
-</p-fileUpload> -->
-
-
-<!-- <ul *ngIf="uploadedFiles.length">
-  <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-</ul> -->
-
-<!-- <p-confirmDialog #cd1>
-  <p-footer>
-        <button type="button" pButton icon="fa-close" label="{{lblCancel}}" (click)="cd1.reject()"></button>
-        <button type="button" pButton icon="fa-check" label="{{lblConfirm}}" (click)="cd1.accept()"></button>
-    </p-footer>
-</p-confirmDialog> -->

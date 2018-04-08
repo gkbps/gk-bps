@@ -28,8 +28,8 @@ export class HTaskListComponent implements OnInit {
   }
 
   ngOnInit () {
-    console.log(this.gkClients);
-    console.log(this.menuItems);
+    // console.log(this.gkClients);
+    // console.log(this.menuItems);
   }
 
 }

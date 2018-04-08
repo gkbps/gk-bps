@@ -18,13 +18,13 @@ export class RequestApprovalEffects {
     .pipe(
       ofType(RequestApprovalActionTypes.GET_MANY_REQUEST_APPROVAL),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
 
         return this.requestApprovalServices.findApprovalTypesByTcode(action['payload']['tcode'])
           .pipe(
             // If successful, dispatch success action with result
             map(requestApprovalItems => {
-              console.log(requestApprovalItems);
+              // console.log(requestApprovalItems);
               return ({type: RequestApprovalActionTypes.GET_MANY_REQUEST_APPROVAL_SUCCESS, payload: requestApprovalItems});
             }),
             // If request fails, dispatch failed action

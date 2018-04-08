@@ -82,7 +82,7 @@ export class HDownloadForm implements OnInit, OnDestroy {
     this.httpClientService.post(this.url, {tcode: 'dl'}, reqOptions)
       .subscribe(
         (response) => {
-          console.log(response);
+          // console.log(response);
           // window.open(url);
         }
       );

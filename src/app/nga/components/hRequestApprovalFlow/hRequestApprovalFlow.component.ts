@@ -113,7 +113,7 @@ export class HRequestApprovalFlow implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params['id']) {
         this.id = params['id'];
-        console.log(this.id);
+        // console.log(this.id);
         // this.myUrl = this.appConfig.apiUrl + '/requestFiles/upload/' + this.id;
       }
     });
@@ -153,7 +153,7 @@ export class HRequestApprovalFlow implements OnInit, OnDestroy {
     this.apiGkUsers = this.gkUserService.apiGkUsers;
     this.gkUserSubscription = this.apiGkUsers
       .subscribe(responseBodyData => {
-        console.log(responseBodyData);
+        // console.log(responseBodyData);
         this.filteredUsersSingle = responseBodyData['data'];
       }, error => {
         console.log(error);
@@ -220,7 +220,7 @@ export class HRequestApprovalFlow implements OnInit, OnDestroy {
           {
             label: res.stimulate_approval, icon: 'ui-icon-group-add',
             command: (event) => {
-              console.log(this.selectedApprover);
+              // console.log(this.selectedApprover);
               this.gkRequestService.generateApprovalFlow(this.id);
             }
           },
@@ -325,7 +325,7 @@ export class HRequestApprovalFlow implements OnInit, OnDestroy {
 
   filterUserSingle(event) {
     const query = event.query;
-    console.log(query);
+    // console.log(query);
     if (query.length > 1) {
       this.gkUserService.findAPIListPagination(query, '{}', 0, 20);
     }
@@ -340,7 +340,7 @@ export class HRequestApprovalFlow implements OnInit, OnDestroy {
           filtered.push(user);
       }
     }
-    console.log(filtered);
+    // console.log(filtered);
     return filtered;
   }
 

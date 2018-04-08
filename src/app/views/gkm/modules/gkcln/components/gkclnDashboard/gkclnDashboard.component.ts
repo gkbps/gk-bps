@@ -110,7 +110,7 @@ export class DbGrid3 {
   }
 
   selectLayout() {
-    console.log(this.selectedLayout);
+    // console.log(this.selectedLayout);
   }
 }
 

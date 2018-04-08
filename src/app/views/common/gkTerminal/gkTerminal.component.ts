@@ -81,7 +81,7 @@ export class GkTerminalComponent extends BaseComponent implements OnInit, OnDest
     this.terminalService.commandHandler.subscribe(command => {
 
       const parts = command.toLowerCase().trim().split(' ');
-      console.log(parts);
+      // console.log(parts);
       switch (parts[0]) {
         case 'date':
           this.response = {response: 'Today is: ' + new Date().toDateString()};

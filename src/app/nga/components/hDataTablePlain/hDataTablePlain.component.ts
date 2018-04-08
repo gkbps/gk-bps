@@ -93,7 +93,7 @@ export class HDataTablePlainComponent implements OnInit, OnDestroy {
           {
             label: res.open, icon: 'ui-icon-search',
             command: (event) => {
-              console.log(this.selectedClient.tcode, this.selectedClient._id);
+              // console.log(this.selectedClient.tcode, this.selectedClient._id);
               this.tcodeService.executeTcode(this.selectedClient.tcode, this.selectedClient.id);
             }
           },

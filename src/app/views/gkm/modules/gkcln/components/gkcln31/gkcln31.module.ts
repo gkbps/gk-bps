@@ -1,7 +1,5 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -23,18 +21,15 @@ import { GkClientsServices } from '../../../../../../ngrx/gkClient/gkClients.ser
 
 import { PanelModule } from 'primeng/panel';
 
-import { RequestHeaderModule } from '../../../../../../nga/components/requestHeader';
-import { RequestDocumentsModule } from '../../../../../../nga/components/requestDocuments';
-import { RequestApprovalModule } from '../../../../../../nga/components/requestApproval';
-
-// import { HRequestDocumentsModule } from '../../../../../../nga/components/hRequestDocuments';
-// import { HRequestApprovalFlowModule } from '../../../../../../nga/components/hRequestApprovalFlow';
+import { RequestHeaderModule } from '../../../../../../ngh/modules/3n/requestHeader';
+import { RequestDocumentsModule } from '../../../../../../ngh/modules/3n/requestDocuments';
+import { RequestApprovalModule } from '../../../../../../ngh/modules/3n/requestApproval';
 
 import { GkClnFormModule } from '../gkclnForm/gkclnForm.module';
-// import { GkClnSharedModule } from '../gkclnShared/gkclnShared.module';
+
+import { GkCln31RoutingModule } from './gkcln31-routing.module';
 
 import { GkCln31Component } from './gkcln31.component';
-import { GkCln31RoutingModule } from './gkcln31-routing.module';
 
 @NgModule({
   declarations: [
@@ -42,8 +37,8 @@ import { GkCln31RoutingModule } from './gkcln31-routing.module';
   ],
   imports: [
     CommonModule,
-    // FormsModule,
-    // RouterModule,
+
+    PanelModule,
 
     TranslateModule,
 
@@ -57,19 +52,13 @@ import { GkCln31RoutingModule } from './gkcln31-routing.module';
       GkClientsEffects
     ]),
 
-    PanelModule,
-
     RequestHeaderModule,
     RequestDocumentsModule,
     RequestApprovalModule,
-    // HRequestDocumentsModule,
-    // HRequestApprovalFlowModule,
 
     GkClnFormModule,
-    // GkClnSharedModule,
+
     GkCln31RoutingModule
-  ],
-  exports: [
   ],
   providers: [
     RequestsServices,

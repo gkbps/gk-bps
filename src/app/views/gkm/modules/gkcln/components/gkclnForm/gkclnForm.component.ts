@@ -1,25 +1,20 @@
 import {
-  Component,
-  OnInit, Input, Output, OnDestroy, EventEmitter,
+  Component, OnInit, Input, Output, OnDestroy, EventEmitter,
   ChangeDetectionStrategy, SimpleChanges, OnChanges
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AbstractControl, FormControl } from '@angular/forms';
-import { Message } from 'primeng/components/common/api';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 
 import { TranslateService } from '@ngx-translate/core';
+
+import { APIResultHandlingService } from '../../../../../../nga/services/apiResultHandling.service';
 import { GlobalState } from '../../../../../../global.state';
-import {
-  SecurityService,
-  TcodeService,
-  NavigationService,
-  ObjectService,
-  APIResultHandlingService,
-  LocalStorageService,
-} from '../../../../../../nga/services';
+import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
+import { NavigationService } from '../../../../../../nga/services/navigation.service';
+import { ObjectService } from '../../../../../../nga/services/object.service';
+import { SecurityService } from '../../../../../../nga/services/security.service';
+import { TcodeService } from '../../../../../../nga/services/tcode.service';
 
 @Component({
   selector: 'gkclient-form',
@@ -33,6 +28,7 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
 
   @Input() prefix: any;
   @Input() action: any;
+
   @Input() isRequest: boolean;
   @Input() isEditable: boolean;
 
@@ -45,8 +41,8 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   isDeletionSuccess = false;
 
   myForm: FormGroup;
+
   debugMode = false;
-  msgs: Message[] = [];
 
   industryList = [
     { label: 'Select industry', value: null },
@@ -101,21 +97,23 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   ];
 
   constructor(
-    private globalState: GlobalState,
-    private securityService: SecurityService,
-    private navigationService: NavigationService,
-    private tcodeService: TcodeService,
-    private objectService: ObjectService,
-    private apiResultHandlingService: APIResultHandlingService,
     private _fb: FormBuilder,
 
-    private localStorage: LocalStorageService,
     private translateService: TranslateService,
-  ) { }
+
+    private apiResultHandlingService: APIResultHandlingService,
+    private globalState: GlobalState,
+    private localStorage: LocalStorageService,
+    private navigationService: NavigationService,
+    private objectService: ObjectService,
+    private securityService: SecurityService,
+    private tcodeService: TcodeService,
+    ) { }
 
   ngOnInit() {
     // Local subscription to global state
-    this.subscribeLocalState(); // IMPORTANT: Only from and after OnInit, all inputs is fully passed to component
+    // IMPORTANT: After OnInit, inputs is fully passed to component
+    this.subscribeLocalState();
 
     this.debugMode = this.localStorage.getDebugMode();
   }
@@ -123,7 +121,7 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     // Persistently monitoring changes of source from ngrx store
     if (changes['source']) {
-      console.log(this.source);
+      // console.log(this.source);
 
       if (this.source) {
         if ((this.action === '11') && (this.source.data._id)) {
@@ -146,7 +144,7 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
     }
 
     if (changes['isEditable']) {
-      console.log(this.isEditable);
+      // console.log(this.isEditable);
       // this.buildForm();
     }
   }
@@ -158,7 +156,6 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   /* LOCAL STATE */
   subscribeLocalState() {
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translateService.use(lang);
     });
   }
@@ -166,6 +163,8 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   unsubscribeLocalState() {
     this.globalState.unsubscribeEvent('language', this.myScope);
   }
+
+  // COMPONENT OPERATION
 
   /**
    * FORM CONSTRUCTION
@@ -178,19 +177,20 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
       name: [this.source.data.name, [ Validators.required, Validators.minLength(5) ]],
       industry: [this.source.data.industry],
       service: [this.source.data.service],
-      addresses: this._fb.array([]),
-      contacts: this._fb.array([]),
       clientDb: [this.source.data.clientDb,
         [
           Validators.required,
-          Validators.pattern('^[a-zA-Z0-9]*$'),       // Alphanumeric
+          Validators.pattern('^[a-zA-Z0-9]*$'), // Alphanumeric
           Validators.minLength(3),
         ]
       ],
-      solutions: this._fb.array([]),
-      remarks: this._fb.array([]),
       status1: [this.source.data.status1],
       status2: [this.source.data.status2],
+
+      addresses: this._fb.array([]),
+      contacts: this._fb.array([]),
+      solutions: this._fb.array([]),
+      remarks: this._fb.array([]),
     });
 
     // Data Block 1 - Addresses
@@ -248,6 +248,8 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   newAddress() {
     const control = <FormArray> this.myForm.controls['addresses'];
     control.push(this.addAddress());
+    // console.log(control);
+    // console.log(this.myForm);
   }
 
   removeAddress(i: number) {
@@ -281,6 +283,7 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   newContact() {
     const control = <FormArray> this.myForm.controls['contacts'];
     control.push(this.addContact());
+    // console.log(control);
   }
 
   removeContact(i: number) {
@@ -328,7 +331,7 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
    *
    */
   handleEvent($event) {
-    console.log($event);
+    // console.log($event);
     const addresses = <FormArray> this.myForm.controls['addresses'];
     const contacts = <FormArray> this.myForm.controls['contacts'];
 
@@ -351,7 +354,7 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   * @function submitForm
   */
   submitForm() {
-    console.log('I am going to emit info via debounceClick!');
+    // console.log('I am going to emit info via debounceClick!');
     this.onSaveAction.emit({
       valid: this.myForm.valid,
       data: this.myForm.value
@@ -363,14 +366,14 @@ export class GkClnForm implements OnInit, OnDestroy, OnChanges {
   * @function saveRequest
   */
   saveRequest() {
-    console.log('Save gkClient Request Form data');
+    // console.log('Save gkClient Request Form data');
     if (this.myForm.valid) {
       this.onSaveAction.emit({
         valid: this.myForm.valid,
         data: this.myForm.value
       });
     } else {
-      console.log('Validation Failed');
+      // console.log('Validation Failed');
       this.markAllDirty(this.myForm);
 
       const toastData = {

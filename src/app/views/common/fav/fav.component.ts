@@ -231,7 +231,7 @@ export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
     ])
       .subscribe((res) => {
         this.langList = res;
-        console.log(this.langList);
+        // console.log(this.langList);
 
         this.items = [];
         this.items.push(
@@ -292,7 +292,7 @@ export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
   */
   refreshTree() {
     this.favList = JSON.parse(JSON.stringify(this.favListService.getFavList()));
-    console.log(this.favList);
+    // console.log(this.favList);
     this.selectedNode = null;
     this.expandAll();
   }
@@ -471,7 +471,7 @@ export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
   * A local helper to check if selected node then perform a callback
   */
   checkNodeThenProceed(cb) {
-    console.log(this.selectedNode);
+    // console.log(this.selectedNode);
     if (!this.selectedNode) {
       const toastData = {
         type: 'warning',
@@ -531,7 +531,7 @@ export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
   */
   showRenameSectionDialog(isRename: boolean = false, node: TreeNode = null) {
     if (!isRename) {
-      console.log('New Section');
+      // console.log('New Section');
       this.sectionForm.reset();
       this.dialogTitle = this.langList['newSection'];
       this.sectionForm = this.fb.group({
@@ -541,7 +541,7 @@ export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
       this.displaySectionDialog = true;
       this.isRenameDialog = false;
     } else {
-      console.log('Rename Section');
+      // console.log('Rename Section');
       if (!node) {
         const toastData = {
           type: 'warning',
@@ -553,7 +553,7 @@ export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
 
         return false;
       } else {
-        console.log(node.data);
+        // console.log(node.data);
         this.sectionForm.reset();
         this.dialogTitle = this.langList['rename'];
 
@@ -576,7 +576,7 @@ export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
   */
   showRenameItemDialog(isRename: boolean = false, node: TreeNode = null) {
     if (!isRename) {
-      console.log('New Item');
+      // console.log('New Item');
       this.documentForm.reset();
       this.dialogTitle = this.langList['newItem'];
       this.documentForm = this.fb.group({
@@ -589,7 +589,7 @@ export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
       this.displayDocumentDialog = true;
       this.isRenameDialog = false;
     } else {
-      console.log('Rename Item');
+      // console.log('Rename Item');
       if (!node) {
         const toastData = {
           type: 'warning',
@@ -636,10 +636,10 @@ export class FavComponent extends BaseComponent implements OnInit, OnDestroy {
       return false;
     } else {
       if (node.data.type === 'section') {
-        console.log('Show Rename Section Dialog');
+        // console.log('Show Rename Section Dialog');
         this.showRenameSectionDialog(true, node);
       } else {
-        console.log('Show Rename Document Dialog');
+        // console.log('Show Rename Document Dialog');
         this.showRenameItemDialog(true, node);
       }
     }

@@ -547,7 +547,7 @@ export class GkCln51Component implements OnInit, OnDestroy {
   }
 
   saveDashboard() {
-    console.log(this.selectedDashboardItems);
+    // console.log(this.selectedDashboardItems);
   }
 
   addBlankItem() {
@@ -566,7 +566,6 @@ export class GkCln51Component implements OnInit, OnDestroy {
   subscribeGlobalState() {
     // Register Language Callback in Global Status
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translate.use(lang);
     });
   }

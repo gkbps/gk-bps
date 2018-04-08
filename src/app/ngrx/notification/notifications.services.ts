@@ -25,6 +25,7 @@ export class NotificationsServices {
     };
 
     const reqOptions = {
+      disableToast: true,
       params: pagination
     };
 
@@ -42,7 +43,7 @@ export class NotificationsServices {
   action12(_id) {
     return this.httpClientService.get(this.suffixUrl + _id)
       .map((res) => {
-        console.log(res);
+        // console.log(res);
         return res.body.data || {};
       });
   }
@@ -50,7 +51,7 @@ export class NotificationsServices {
   action16(_id) {
     return this.httpClientService.put(this.suffixUrl + _id + '/mark', {})
       .map((res) => {
-        console.log(res);
+        // console.log(res);
         return res.body.data || {};
       });
   }
@@ -58,7 +59,7 @@ export class NotificationsServices {
   action17(_id) {
     return this.httpClientService.put(this.suffixUrl + _id + '/unmark', {})
       .map((res) => {
-        console.log(res);
+        // console.log(res);
         return res.body.data || {};
       });
   }
@@ -66,7 +67,7 @@ export class NotificationsServices {
   action18(_id) {
     return this.httpClientService.delete(this.suffixUrl + _id)
       .map((res) => {
-        console.log(res);
+        // console.log(res);
         return res.body.data || {};
       });
   }

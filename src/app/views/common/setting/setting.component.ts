@@ -133,7 +133,6 @@ export class SettingComponent extends BaseComponent implements OnInit, OnDestroy
   /* LOCAL STATE */
   subscribeLocalState() {
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translateService.use(lang);
       this.initLangList();
     });

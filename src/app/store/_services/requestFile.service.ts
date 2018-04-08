@@ -41,7 +41,7 @@ export class RequestFileService {
   findFilesByRequestId(_id) {
     return this.httpClientService.get(this.suffixUrl + 'list/' + _id)
       .map((res) => {
-        console.log(res);
+        // console.log(res);
         return res.body.data || {};
       })
       .map((payload) => {
@@ -68,7 +68,7 @@ export class RequestFileService {
   addRequestFile(payload) {
     return new Observable((observer) => observer.next(payload))
     .map((payload) => {
-      console.log(payload);
+      // console.log(payload);
       return { type: 'ADD_REQUEST_FILE', payload };
     })
     .subscribe((action) => {
@@ -88,7 +88,7 @@ export class RequestFileService {
   renameRequestFile(_id, desc) {
     return this.httpClientService.put(this.suffixUrl + _id, {desc: desc})
       .map((res) => {
-        console.log(res);
+        // console.log(res);
         return res.body.data || {};
       })
       .map((payload) => {
@@ -102,7 +102,7 @@ export class RequestFileService {
   markRequestFile(_id) {
     return this.httpClientService.patch(this.suffixUrl + 'mark/' + _id, {})
       .map((res) => {
-        console.log(res);
+        // console.log(res);
         return res.body.data || {};
       })
       .map((payload) => {
@@ -116,7 +116,7 @@ export class RequestFileService {
   unmarkRequestFile(_id) {
     return this.httpClientService.patch(this.suffixUrl + 'unmark/' + _id, {})
       .map((res) => {
-        console.log(res);
+        // console.log(res);
         return res.body.data || {};
       })
       .map((payload) => {
@@ -130,7 +130,7 @@ export class RequestFileService {
   deleteRequestFile(_id) {
     return this.httpClientService.delete(this.suffixUrl + _id)
       .map((res) => {
-        console.log(res);
+        // console.log(res);
         return res.body.data || {};
       })
       .map((payload) => {

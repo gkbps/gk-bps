@@ -18,13 +18,13 @@ export class ApprovalItemsEffects {
     .pipe(
       ofType(ApprovalItemsActionTypes.GET_MANY_APPROVAL_ITEMS),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
 
         return this.approvalItemsServices.findStandardApprovalItems()
           .pipe(
             // If successful, dispatch success action with result
             map(standardApprovalItems => {
-              console.log(standardApprovalItems);
+              // console.log(standardApprovalItems);
               return ({type: ApprovalItemsActionTypes.GET_MANY_APPROVAL_ITEMS_SUCCESS, payload: standardApprovalItems});
             }),
             // If request fails, dispatch failed action

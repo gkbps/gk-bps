@@ -49,12 +49,12 @@ export class HLeadForm implements OnInit, OnDestroy {
       const urlComponents = this.router.url.split('/');
       // console.log(urlComponents);
       const url = '/' + urlComponents[1] + '/' + urlComponents[2] + '/' + this.myForm.controls['id'].value;
-      console.log(url);
+      // console.log(url);
       this.router.navigate([url]);
     } else {
       const urlComponents = this.router.url.split('/');
       const url = '/' + urlComponents[1] + '/' + this.myForm.controls['id'].value;
-      console.log(url);
+      // console.log(url);
       this.router.navigate([url]);
     }
 
@@ -67,7 +67,6 @@ export class HLeadForm implements OnInit, OnDestroy {
   /* GLOBAL STATE */
   subscribeGlobalState() {
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translate.use(lang);
     });
   }

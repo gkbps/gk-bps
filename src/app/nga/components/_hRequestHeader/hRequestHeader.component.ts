@@ -133,7 +133,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
       if (changes['myForm.valid']) {
-          console.log('Oh yeah');
+          console.log('Form is valid!');
       }
   }
 
@@ -295,7 +295,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
             break;
 
           case 'In progress':
-            console.log(this.username, this.requestHeader.owner, this.requestHeader.pic);
+            // console.log(this.username, this.requestHeader.owner, this.requestHeader.pic);
             if (this.requestHeader.owner.includes(this.username)) {
               this.items.push({ label: res.withdraw, icon: 'ui-icon-subdirectory-arrow-left', command: (event) => this.confirmAction('withdraw') });
               this.items.push({ label: res.cancel, icon: 'ui-icon-no-sim', command: (event) => this.confirmAction('cancel') });
@@ -354,7 +354,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
             break;
         }
       });
-      console.log(this.items);
+      // console.log(this.items);
   }
 
   confirmAction(action: string) {
@@ -411,7 +411,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
           this.globalState.notifyMyDataChanged('toasty', '', toastData);
         });
     } else {
-      console.log(this.myForm.controls['status'].value);
+      // console.log(this.myForm.controls['status'].value);
 
       switch (action) {
         case 'save':
@@ -527,7 +527,6 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
   /* LOCAL STATE */
   subscribeLocalState() {
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translateService.use(lang);
       this.initNav();
     });
@@ -616,7 +615,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
 
   filterUserSingle(event) {
     const query = event.query;
-    console.log(query);
+    // console.log(query);
     if (query.length > 1) {
       this.gkUserService.findAPIListPagination(query, '{}', 0, 20);
     }
@@ -631,7 +630,7 @@ export class HRequestHeader implements OnInit, OnDestroy, OnChanges {
           filtered.push(user);
       }
     }
-    console.log(filtered);
+    // console.log(filtered);
     return filtered;
   }
 

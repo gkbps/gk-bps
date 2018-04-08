@@ -20,7 +20,20 @@ export class HAddress implements OnInit, OnDestroy {
 
   @Input() isEditable = false;
   @Input() item: number;
-  // @Input('formGroup') public addressItem: FormGroup;
+
+  /**
+  * There are 2 ways to pass (form group) into component
+  * Way 1:
+  * @Input('formGroup') public addressItem: FormGroup;
+  * This way only allow in template:
+  * [(formGroup)]="myForm.controls.addresses.controls[i]"
+  *
+  * Way 2:
+  * @Input() addressItem: FormGroup;
+  * This way only allow
+  * [(addressItem)]="myForm.controls.addresses.controls[i]"
+  */
+
   @Input() addressItem: FormGroup;
 
   @Output() itemEvent: EventEmitter<any> = new EventEmitter();

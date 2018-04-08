@@ -34,7 +34,7 @@ export class HHistory implements OnInit, OnDestroy {
     private apiResultHandlingService: APIResultHandlingService,
     private globalState: GlobalState,
     private httpClientService: HttpClientService,
-    private localStorageService: LocalStorageService,  
+    private localStorageService: LocalStorageService,
   ) {
     this.subscribeLocalState();
   }
@@ -101,7 +101,7 @@ export class HHistory implements OnInit, OnDestroy {
   handleAPIReturn(result) {
     this.apiResultHandlingService.processAPIResult(result)
       .then((msg) => {
-        console.log(msg);
+        // console.log(msg);
 
         const toastData = {
           type: msg['type'],

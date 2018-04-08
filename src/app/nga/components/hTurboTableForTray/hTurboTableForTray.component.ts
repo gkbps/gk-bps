@@ -157,7 +157,7 @@ export class HTurboTableForTrayComponent implements OnInit, OnDestroy {
             {
               label: res.view, icon: 'ui-icon-search',
               command: (event) => {
-                console.log(this.selectedRequest);
+                // console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   this.tcodeService.executeTcode(this.selectedRequest.tcode, this.selectedRequest._id);
                 } else {
@@ -176,7 +176,7 @@ export class HTurboTableForTrayComponent implements OnInit, OnDestroy {
             {
               label: res.view, icon: 'ui-icon-search',
               command: (event) => {
-                console.log(this.selectedRequest);
+                // console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '32';
                   this.tcodeService.executeTcode(tcode, this.selectedRequest._id);
@@ -189,7 +189,7 @@ export class HTurboTableForTrayComponent implements OnInit, OnDestroy {
             {
               label: res.create_journal, icon: 'ui-icon-create',
               command: (event) => {
-                console.log(this.selectedRequest);
+                // console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '41';
                   this.tcodeService.executeTcode(tcode, this.selectedRequest._id);
@@ -202,7 +202,7 @@ export class HTurboTableForTrayComponent implements OnInit, OnDestroy {
             {
               label: res.post_journal, icon: 'ui-icon-subdirectory-arrow-right',
               command: (event) => {
-                console.log(this.selectedRequest);
+                // console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '42';
                   this.tcodeService.executeTcode(tcode, this.selectedRequest._id);
@@ -215,7 +215,7 @@ export class HTurboTableForTrayComponent implements OnInit, OnDestroy {
             {
               label: res.revert_journal, icon: 'ui-icon-subdirectory-arrow-left',
               command: (event) => {
-                console.log(this.selectedRequest);
+                // console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '43';
                   this.tcodeService.executeTcode(tcode, this.selectedRequest._id);
@@ -228,7 +228,7 @@ export class HTurboTableForTrayComponent implements OnInit, OnDestroy {
             {
               label: res.move_approval, icon: 'ui-icon-group',
               command: (event) => {
-                console.log(this.selectedRequest);
+                // console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '45';
                   this.tcodeService.executeTcode(tcode, this.selectedRequest._id);
@@ -241,7 +241,7 @@ export class HTurboTableForTrayComponent implements OnInit, OnDestroy {
             {
               label: res.move_status, icon: 'ui-icon-hdr-strong',
               command: (event) => {
-                console.log(this.selectedRequest);
+                // console.log(this.selectedRequest);
                 if (this.selectedRequest) {
                   const tcode = this.prefix + '46';
                   this.tcodeService.executeTcode(tcode, this.selectedRequest._id);

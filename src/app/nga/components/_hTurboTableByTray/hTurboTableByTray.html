@@ -95,8 +95,8 @@
                   *ngFor="let col of columns"
                   [pSortableColumn]="col.field"
                   pResizableColumn
-                  pReorderableColumn
-                  [style]="{'width': col.width}">
+                  pReorderableColumn>
+                    <!-- [style]="{'width': col.width}" -->
                     {{col.header}}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                 </th>

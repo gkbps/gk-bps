@@ -50,7 +50,7 @@ export class ChatService {
          this.httpClientService.attachHeader()
        )
      .map((response) => {
-       console.log(response);
+       // console.log(response);
        return response;
      });
    }

@@ -139,7 +139,7 @@ export class HChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // Listen socket for new message
     this.chatService.messages.subscribe(msg => {
-      console.log(msg);
+      // console.log(msg);
       const receivedMsg = JSON.parse(msg.text);
 
       switch (receivedMsg.type) {
@@ -205,7 +205,7 @@ export class HChatComponent implements OnInit, OnDestroy, AfterViewChecked {
           date: receivedMsg.date
         });
 
-        console.log(this.chatData);
+        // console.log(this.chatData);
         break;
       }
     }
@@ -248,14 +248,14 @@ export class HChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   sendMessage(msg) {
     this.chatService.sendMsg(msg);
-    console.log(msg);
+    // console.log(msg);
   }
 
   addIntoRoom(id) {
     this.invitedUser = id;
 
-    console.log(id);
-    console.log(this.selectedChatRoomIndex);
+    // console.log(id);
+    // console.log(this.selectedChatRoomIndex);
 
     if (this.selectedChatRoomIndex !== 0) {
       if (!this.chatData[this.selectedChatRoomIndex]['data']['members'].includes(id)) {
@@ -289,7 +289,7 @@ export class HChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   chatWith(id) {
     this.invitedUser = id;
 
-    console.log(id);
+    // console.log(id);
     if (this.username !== id) {
       // Register a new room
       this.chatService.registerRoom()
@@ -367,7 +367,6 @@ export class HChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     // });
 
     this.globalState.subscribeEvent('language', this.myScope, (lang) => {
-      console.log(lang);
       this.translateService.use(lang);
       this.updateLanguageChange();
     });

@@ -43,7 +43,13 @@
               </div>
             </div>
           </p-header>
-          <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [style]="{'width': col.width}" sortable="true"></p-column>
+          <p-column
+            *ngFor="let col of cols" 
+            [field]="col.field"
+            [header]="col.header"
+            sortable="true">
+            <!-- [style]="{'width': col.width}"  -->
+          </p-column>
       </p-dataTable>
       <p-contextMenu #cm [model]="items"></p-contextMenu>
 

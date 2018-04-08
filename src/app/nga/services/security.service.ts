@@ -42,7 +42,7 @@ export class SecurityService {
     const currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
     const awt: string = JSON.stringify(currentUser.awt);
     const token: string = this.getToken();
-    console.log(token);
+    // console.log(token);
     if (currentUser && currentUser.token) {
       const headers = new Headers({
         'authorization': 'Bearer ' + currentUser.token,

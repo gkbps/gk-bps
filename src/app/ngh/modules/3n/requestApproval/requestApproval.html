@@ -1,0 +1,123 @@
+<p-panel [toggleable]="true" [collapsed]="true">
+  <p-header>
+    <span class="ui-panel-title"><i class="fa ui-icon-people-outline"></i> {{'req_approval'|translate}}</span>
+  </p-header>
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-menubar [model]="items"></p-menubar>
+
+      <div *ngIf="display" class="ui-g">
+        <div class="ui-g-12 ui-md-3">
+          <span class="md-inputfield fixed-form">
+            <input type="text" pInputText [(ngModel)]="step" [ngModelOptions]="{standalone: true}">
+            <label>{{'step'|translate}}</label>
+          </span>
+        </div>
+
+        <div class="ui-g-12 ui-md-7">
+          <span class="md-inputfield fixed-form">
+            <p-autoComplete
+              [(ngModel)]="selectedUser"
+              [ngModelOptions]="{standalone: true}"
+              [suggestions]="filteredUsersSingle"
+              (completeMethod)="filterUserSingle($event)"
+              [delay]="500"
+              field="fullname"
+              [size]="30"
+              [minLength]="1"
+              [dropdown]="false">
+                <ng-template let-user pTemplate="item">
+                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                      <div style="float:left; margin:10px 10px 0 0">{{user.username}}</div>
+                      <div style="float:right; margin:10px 0 0 10px">{{user.fullname}}</div>
+                  </div>
+                </ng-template>
+            </p-autoComplete>
+            <label>{{'requestor'|translate}} * <small *ngIf="!selectedUser" class="text-warning">{{'required'|translate}}</small></label>
+          </span>
+        </div>
+
+        <div class="ui-g-12 ui-md-2">
+          <button pButton type="button" icon="ui-icon-check" [disabled]="!legitimateApprover()" label="{{'proceed'|translate}}" (click)="insertApprover()"></button>
+        </div>
+      </div>
+
+      <p-table
+        #dt
+        [value]="requestApproval"
+
+        selectionMode="single"
+        [(selection)]="selectedApprover"
+
+        [responsive]="true"
+        [resizableColumns]="true"
+
+        sortMode="multiple"
+
+        [reorderableColumns]="true"
+        [(contextMenuSelection)]="selectedApprover"
+        [contextMenu]="cm"
+
+        [columns]="selectedColumns"
+
+        scrollHeight="200px"
+        [style]="{'overflow':'visible'}">
+
+        <ng-template pTemplate="caption">
+          <p-header>
+            <div class="ui-g form-group">
+
+              <div class="ui-g-12 ui-md-6">
+                <div style="text-align:left">
+                  <p-multiSelect
+                    class="fixed-multiSelect"
+                    [options]="columnOptions"
+                    [(ngModel)]="selectedColumns"
+                    [selectedItemsLabel]="selectedItemsLabel"
+                    [style]="{minWidth: '200px'}"
+                    defaultLabel="{{'select_an_item'|translate}}">
+                  </p-multiSelect>
+                </div>
+              </div>
+
+              <div class="ui-g-12 ui-md-6">
+                <div class="ui-inputgroup" style="float:right">
+                </div>
+              </div>
+
+            </div>
+          </p-header>
+        </ng-template>
+
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th
+              *ngFor="let col of columns"
+              [pSortableColumn]="col.field"
+              pResizableColumn
+              pReorderableColumn>
+              <!-- style="width: {{col.width}}" -->
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr [pSelectableRow]="rowData" [pContextMenuRow]="rowData">
+            <td *ngFor="let col of columns">{{rowData[col.field]}}</td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+          <div style="text-align: left">
+              {{'selected'|translate}}: {{selectedApprover ? selectedApprover.fullname : 'none'}}
+          </div>
+        </ng-template>
+
+      </p-table>
+      <p-contextMenu #cm [model]="items"></p-contextMenu>
+
+    </div>
+  </div>
+</p-panel>

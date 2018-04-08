@@ -52,7 +52,7 @@ export class NotificationsEffects {
       ofType(TopNotificationsActionTypes.ADD_NOTIFICATION),
       // If successful, dispatch success action with result
       map(action => {
-        console.log(action);
+        // console.log(action);
         return ({ type: TopNotificationsActionTypes.ADD_NOTIFICATION_SUCCESS, payload: action['payload']['notification'] });
       })
     )
@@ -96,11 +96,11 @@ export class NotificationsEffects {
     .pipe(
       ofType(NotificationsActionTypes.MARK_NOTIFICATION),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
         return this.notificationsServices.action16(action['payload']['id'])
           .pipe(
             map(requestDocument => {
-              console.log(requestDocument);
+              // console.log(requestDocument);
               return { type: NotificationsActionTypes.MARK_NOTIFICATION_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: NotificationsActionTypes.MARK_NOTIFICATION_ERROR}))
@@ -112,11 +112,11 @@ export class NotificationsEffects {
     .pipe(
       ofType(NotificationsActionTypes.UNMARK_NOTIFICATION),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
         return this.notificationsServices.action17(action['payload']['id'])
           .pipe(
             map(requestDocument => {
-              console.log(requestDocument);
+              // console.log(requestDocument);
               return { type: NotificationsActionTypes.UNMARK_NOTIFICATION_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: NotificationsActionTypes.UNMARK_NOTIFICATION_ERROR}))
@@ -128,11 +128,11 @@ export class NotificationsEffects {
     .pipe(
       ofType(NotificationsActionTypes.DELETE_NOTIFICATION),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
         return this.notificationsServices.action18(action['payload']['id'])
           .pipe(
             map(requestDocument => {
-              console.log(requestDocument);
+              // console.log(requestDocument);
               return { type: NotificationsActionTypes.DELETE_NOTIFICATION_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: NotificationsActionTypes.DELETE_NOTIFICATION_ERROR}))
@@ -149,11 +149,11 @@ export class NotificationsEffects {
     .pipe(
       ofType(NotificationActionTypes.GET_NOTIFICATION),
       switchMap(action => {
-        console.log(action);
+        // console.log(action);
         return this.notificationsServices.action12(action['payload']['id'])
           .pipe(
             map(requestDocument => {
-              console.log(requestDocument);
+              // console.log(requestDocument);
               return { type: NotificationActionTypes.GET_NOTIFICATION_SUCCESS, payload: requestDocument };
             }),
             catchError((err, caught) => Observable.of({type: NotificationActionTypes.GET_NOTIFICATION_ERROR}))
