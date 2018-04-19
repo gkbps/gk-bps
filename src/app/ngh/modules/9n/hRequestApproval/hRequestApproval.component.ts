@@ -1,17 +1,16 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges  } from '@angular/core';
+
+import { TranslateService } from '@ngx-translate/core';
+
 import { MenuItem } from 'primeng/api';
 import { SelectItem } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
-import { Message } from 'primeng/components/common/api';
 
-import { TranslateService } from '@ngx-translate/core';
-import { GlobalState } from '../../../global.state';
-import {
-  SecurityService,
-  LocalStorageService,
-} from '../../../nga/services';
+import { GlobalState } from '../../../../global.state';
+import { LocalStorageService } from '../../../../nga/services/localStorage.service';
+import { SecurityService } from '../../../../nga/services/security.service';
 
-import { ApprovalItemService } from '../../../store/_services/approvalItem.service';
+import { ApprovalItemsServices } from '../../../../ngrx/approvalItem/approvalItems.services';
 
 @Component({
   selector: 'h-request-approval',
@@ -22,79 +21,62 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
 
   myScope = 'h-request-approval';
 
+  /**
+  * For request related tcode (where request approval is necessary):
+  * 1. There are different approval types (i.e.: Standard, Fast track, Exception) for that tcode
+  * 2. Each approval type include list of standard approval items already selected
+  * 3. Other standard approval items available for further selection is filtered from full standard approval items list
+  */
+
   @Input() tcode: any;
   @Input() standardApprovalItems = [];
 
-  approvalTypeList = []; // List of approval types for particular request tcode
-  selectedApprovalType: any; // Specific approval type is selected for operation
+  // Approval Types
+  approvalTypesList = []; // List of approval types of a particular request tcode
+  selectedApprovalType: any; // Approval type is selected for operation
 
+  // Approval Items
   sourceApprovalItems: any[]; // List of standard approval items (after reduced) as source
   targetApprovalItems: any[]; // List of approval items selected for specific & selected approval type
-
-  token: string;
 
   items: MenuItem[];
 
   // Notification
-  msgs: Message[] = [];
   notification = '';
   messageText = '';
 
-  // Dialog variables
+  // Dialog
   display = false;
-  approvalTypeDesc = '';
   dialogType = 'new';
+  approvalTypeDesc = '';
 
   constructor(
-
     private globalState: GlobalState,
     private translateService: TranslateService,
     private securityService: SecurityService,
 
     private localStorageService: LocalStorageService,
     private confirmationService: ConfirmationService,
-    private approvalItemService: ApprovalItemService
+    private approvalItemsService: ApprovalItemsServices
   ) {
-    // Local subscription to global state
-    this.translateService.use(this.localStorageService.getLang());
   }
 
   ngOnInit() {
     // Local subscription to global state
-    // console.log(this.tcode);
-    // console.log(this.standardApprovalItems); // [] at first, use ngOnChanges to detect
-
     this.subscribeLocalState(); // IMPORTANT: Can only get Input tcode from and after OnInit
 
     // Get user and preference
     const user = this.securityService.getCurrentUser();
 
-    this.token = this.securityService.getToken();
-
     this.initNav();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // if (changes['standardApprovalItems']) {
-    //   console.log(this.standardApprovalItems);
-    // }
+    if (changes['standardApprovalItems']) {
+      // console.log(this.standardApprovalItems);
+    }
   }
 
-  selectApprovalType(selectedApprovalType) {
-    // console.log('Selected Approval Type:', selectedApprovalType);
-    this.selectedApprovalType = selectedApprovalType;
-    this.initApprovalPickList(selectedApprovalType.items);
-  }
-
-  initApprovalPickList(selectedApprovalItems) {
-    // console.log('Selected Approval Items:', selectedApprovalItems);
-    this.targetApprovalItems = selectedApprovalItems;
-    const selectedFx = selectedApprovalItems.map((item) => item.fx);
-    // console.log(selectedFx);
-    this.sourceApprovalItems = this.standardApprovalItems.filter((item, index) => !selectedFx.includes(item.fx));
-  }
-
-  /****************************************************************************/
   ngOnDestroy() {
     this.unsubscribeLocalState();
   }
@@ -107,10 +89,10 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
       this.initNav();
     });
 
-    this.approvalItemService.findApprovalTypesByTcode(this.tcode)
+    this.approvalItemsService.findApprovalTypesByTcode(this.tcode)
       .subscribe(responseBodyData => {
         // console.log(responseBodyData);
-        this.approvalTypeList = responseBodyData['body'].data;
+        this.approvalTypesList = responseBodyData['body'].data;
       }, error => {
         console.log(error);
       });
@@ -120,8 +102,48 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
     this.globalState.unsubscribeEvent('language', this.myScope);
   }
 
-  /****************************************************************************/
+  // COMPONENT OPERATION
 
+  /**
+  * @function selectApprovalType
+  * Select an approval type defined for particular tcode to initialize Pick List
+  *
+  * @param selectedApprovalType
+  * - selectedApprovalType._id
+  * - selectedApprovalType.desc
+  * - selectedApprovalType.items - contain an array of approval items selected from standard list
+  * - selectedApprovalType.status1
+  * - selectedApprovalType.status2
+  *
+  * {@link initApprovalPickList}
+  */
+  selectApprovalType(selectedApprovalType) {
+    // console.log('Selected Approval Type:', selectedApprovalType);
+    this.selectedApprovalType = selectedApprovalType;
+    this.initApprovalPickList(selectedApprovalType.items);
+  }
+
+  /**
+  * @function initApprovalPickList
+  * Initialize approval pick list for a selected approval type of a particular tcode
+  * By calculating the remaining standard approval items available for further selection
+  *
+  * @param selectedApprovalItems
+  */
+  initApprovalPickList(selectedApprovalItems) {
+    // console.log('Selected Approval Items:', selectedApprovalItems);
+
+    this.targetApprovalItems = selectedApprovalItems;
+    const selectedFx = selectedApprovalItems.map((item) => item.fx);
+    // console.log(selectedFx);
+
+    this.sourceApprovalItems = this.standardApprovalItems.filter((item, index) => !selectedFx.includes(item.fx));
+  }
+
+  /**
+  * @function initNav
+  * Initialize navigation bar
+  */
   initNav() {
     this.translateService.get([
       'create', 'view', 'edit', 'save',
@@ -140,7 +162,6 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
               this.showDialog('new');
             }
           },
-          { separator: true },
           {
             label: res.edit, icon: 'ui-icon-edit',
             command: (event) => {
@@ -152,7 +173,6 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
               }
             }
           },
-          { separator: true },
           {
             label: res.save, icon: 'ui-icon-save',
             command: (event) => {
@@ -163,7 +183,6 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
               }
             }
           },
-          { separator: true },
           {
             label: res.disable, icon: 'ui-icon-bookmark',
             command: (event) => this.changeStatus('disable')
@@ -172,7 +191,6 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
             label: res.enable, icon: 'ui-icon-bookmark-border',
             command: (event) => this.changeStatus('enable')
           },
-          { separator: true },
           {
             label: res.mark, icon: 'ui-icon-visibility-off',
             command: (event) => this.changeStatus('mark')
@@ -181,7 +199,6 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
             label: res.unmark, icon: 'ui-icon-visibility',
             command: (event) => this.changeStatus('unmark')
           },
-          { separator: true },
           {
             label: res.delete, icon: 'ui-icon-delete-forever',
             command: (event) => {
@@ -192,7 +209,6 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
               }
             }
           },
-          { separator: true },
           {
             label: res.viewChange, icon: 'ui-icon-track-changes',
             command: (event) => alert('Show change here')
@@ -205,7 +221,10 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
       });
   }
 
-  /****************************************************************************/
+  /**
+  * @function selectItemRequired
+  * Notify user to select item for action
+  */
   selectItemRequired() {
     const toastData = {
       type: 'warning',
@@ -216,11 +235,21 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
     this.globalState.notifyMyDataChanged('toasty', '', toastData);
   }
 
+  /**
+  * @function showDialog
+  * Display dialog for action
+  */
   showDialog(dialogType) {
     this.dialogType = dialogType;
     this.display = true;
   }
 
+  /**
+  * @function saveApprovalType
+  * Save or update approval type
+  *
+  * @param dialogType
+  */
   saveApprovalType(dialogType) {
     let updatedApprovalType;
 
@@ -234,14 +263,15 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
             status1: 'Active',
             status2: 'Unmarked'
           };
-          this.approvalItemService.createApprovalType(updatedApprovalType)
+          this.approvalItemsService.createApprovalType(updatedApprovalType)
             .subscribe(responseBodyData => {
               // console.log(responseBodyData);
-              const newApprovalList = JSON.parse(JSON.stringify(this.approvalTypeList));
+
+              const newApprovalList = JSON.parse(JSON.stringify(this.approvalTypesList));
               updatedApprovalType['_id'] = responseBodyData['body'].data;
               newApprovalList.push(updatedApprovalType);
-              this.approvalTypeList = newApprovalList;
-              // console.log(this.approvalTypeList);
+              this.approvalTypesList = newApprovalList;
+              // console.log(this.approvalTypesList);
             }, error => {
               console.log(error);
             });
@@ -259,11 +289,12 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
             tcode: this.selectedApprovalType.tcode
           };
 
-          this.approvalItemService.updateApprovalType(updatedApprovalType)
+          this.approvalItemsService.updateApprovalType(updatedApprovalType)
             .subscribe(responseBodyData => {
               // console.log(responseBodyData);
+
               this.selectedApprovalType.desc = this.approvalTypeDesc;
-              // console.log(this.approvalTypeList);
+              // console.log(this.approvalTypesList);
             }, error => {
               console.log(error);
             });
@@ -280,11 +311,12 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
           tcode: this.selectedApprovalType.tcode
         };
 
-        this.approvalItemService.updateApprovalType(updatedApprovalType)
+        this.approvalItemsService.updateApprovalType(updatedApprovalType)
           .subscribe(responseBodyData => {
             // console.log(responseBodyData);
+
             this.selectedApprovalType.items = this.targetApprovalItems;
-            console.log(this.approvalTypeList);
+            // console.log(this.approvalTypesList);
           }, error => {
             console.log(error);
           });
@@ -295,27 +327,41 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
     this.display = false;
   }
 
+  /**
+  * @function deleteApprovalType
+  * Delete an apprval type
+  *
+  * @param id
+  */
   deleteApprovalType(id) {
-    this.approvalItemService.deleteApprovalType(id)
+    this.approvalItemsService.deleteApprovalType(id)
       .subscribe(responseBodyData => {
         // console.log(responseBodyData);
-        const tmpList = this.approvalTypeList.filter((element) => {
+
+        const tmpList = this.approvalTypesList.filter((element) => {
           return element._id !== id;
         });
         this.selectedApprovalType = null;
-        this.approvalTypeList = tmpList;
+        this.approvalTypesList = tmpList;
       }, error => {
         console.log(error);
       });
   }
 
+  /**
+  * @function changeStatus
+  * Patch status of approval type
+  *
+  * @param changeType
+  */
   changeStatus(changeType) {
     if (this.selectedApprovalType) {
       switch (changeType) {
         case 'disable':
-          this.approvalItemService.disableApprovalType(this.selectedApprovalType._id)
+          this.approvalItemsService.disableApprovalType(this.selectedApprovalType._id)
             .subscribe(responseBodyData => {
               // console.log(responseBodyData);
+
               this.selectedApprovalType.status1 = 'Inactive';
             }, error => {
               console.log(error);
@@ -323,9 +369,10 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
           break;
 
         case 'enable':
-          this.approvalItemService.enableApprovalType(this.selectedApprovalType._id)
+          this.approvalItemsService.enableApprovalType(this.selectedApprovalType._id)
             .subscribe(responseBodyData => {
               // console.log(responseBodyData);
+
               this.selectedApprovalType.status1 = 'Active';
             }, error => {
               console.log(error);
@@ -333,9 +380,10 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
           break;
 
         case 'mark':
-          this.approvalItemService.markApprovalType(this.selectedApprovalType._id)
+          this.approvalItemsService.markApprovalType(this.selectedApprovalType._id)
             .subscribe(responseBodyData => {
               // console.log(responseBodyData);
+
               this.selectedApprovalType.status2 = 'Marked';
             }, error => {
               console.log(error);
@@ -343,9 +391,10 @@ export class HRequestApproval implements OnInit, OnDestroy, OnChanges {
           break;
 
         case 'unmark':
-          this.approvalItemService.unmarkApprovalType(this.selectedApprovalType._id)
+          this.approvalItemsService.unmarkApprovalType(this.selectedApprovalType._id)
             .subscribe(responseBodyData => {
               // console.log(responseBodyData);
+
               this.selectedApprovalType.status2 = 'Unmarked';
             }, error => {
               console.log(error);

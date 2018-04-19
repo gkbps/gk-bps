@@ -109,7 +109,10 @@ export class RequestsEffects {
       ofType(RequestActionTypes.ADD_REQUEST),
       switchMap(action => {
         // console.log(action);
-        return this.requestsServices.action11(action['payload']['data'])
+        return this.requestsServices.action11(
+          action['payload']['data'],
+          action['payload']['tcode']
+        )
           .pipe(
             map(request => {
               // console.log(request);

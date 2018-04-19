@@ -1,4 +1,7 @@
 {
+	"select_and_save_approval_type": "Select and save approval type before processing!",
+	"comment_input": "Provide your comment here...",
+	"comment_more": "More comments",
 	"download_form_subtitle": "Provide name for file download!",
 	"upload_form_subtitle": "Select file for upload!",
 	"sort_by": "Sort by",

@@ -9,6 +9,18 @@ export class HelperService {
     console.log(item, null, 4);
   }
 
+  extractDateTime(value) {
+    const jsDate = new Date(value);
+
+    const rDate = jsDate.getDate() + '/' + (jsDate.getMonth() + 1) + '/' + jsDate.getFullYear();
+    const rTime = jsDate.getHours() + ':' + jsDate.getMinutes();
+
+    return {
+      date: rDate,
+      time: rTime
+    }
+  }
+
   /**
   * @function isNullOrUndef
 	* Returns true if `value` is neither null nor undefined, else returns false.

@@ -41,7 +41,7 @@ export class NotificationsServices {
   }
 
   action12(_id) {
-    return this.httpClientService.get(this.suffixUrl + _id)
+    return this.httpClientService.get(this.suffixUrl + _id, { disableToast: true })
       .map((res) => {
         // console.log(res);
         return res.body.data || {};
@@ -49,7 +49,7 @@ export class NotificationsServices {
   }
 
   action16(_id) {
-    return this.httpClientService.put(this.suffixUrl + _id + '/mark', {})
+    return this.httpClientService.put(this.suffixUrl + _id + '/mark', {}, { disableToast: false })
       .map((res) => {
         // console.log(res);
         return res.body.data || {};
@@ -57,7 +57,7 @@ export class NotificationsServices {
   }
 
   action17(_id) {
-    return this.httpClientService.put(this.suffixUrl + _id + '/unmark', {})
+    return this.httpClientService.put(this.suffixUrl + _id + '/unmark', {}, { disableToast: false })
       .map((res) => {
         // console.log(res);
         return res.body.data || {};
@@ -65,7 +65,7 @@ export class NotificationsServices {
   }
 
   action18(_id) {
-    return this.httpClientService.delete(this.suffixUrl + _id)
+    return this.httpClientService.delete(this.suffixUrl + _id, { disableToast: false })
       .map((res) => {
         // console.log(res);
         return res.body.data || {};

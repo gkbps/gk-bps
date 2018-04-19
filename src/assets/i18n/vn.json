@@ -1,4 +1,7 @@
 {
+	"select_and_save_approval_type": "Chọn và lưu loại phê duyệt trước khi giả lập!",
+	"comment_input": "Nhập ý kiến trao đổi của bạn vào đây ...",
+	"comment_more": "Thêm thông tin",
 	"download_form_subtitle": "Đặt tên cho tập tin tải xuống!",
 	"upload_form_subtitle": "Chọn tập tin tải lên!",
 	"sort_by": "Sắp xếp",

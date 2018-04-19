@@ -49,6 +49,7 @@ export class RequestApproval implements OnInit, OnDestroy {
   // Select item required
   notification = '';
   messageText = '';
+  msgApprovalType = '';
 
   // Remove mandatory approver
   lblApprover = '';
@@ -71,6 +72,7 @@ export class RequestApproval implements OnInit, OnDestroy {
 
   // Redux based variables
   storeRequest: any;
+  requestApprovalType = null;
   requestStatus = '';
   requestApproval: any;
 
@@ -99,8 +101,10 @@ export class RequestApproval implements OnInit, OnDestroy {
     this.storeRequest = this.store.pipe(select('request'));
     this.storeRequest.subscribe(request => {
       // console.log(request);
+      this.requestApprovalType = request.data.approval_type;
       this.requestStatus = request.data.status;
-      this.requestApproval = request.data.approval;
+
+      this.requestApproval = request.data.approval || [];
       if (this.requestApproval) {
         this.requestApproval.forEach((obj, index) => {
           obj['seq'] = index;
@@ -155,7 +159,7 @@ export class RequestApproval implements OnInit, OnDestroy {
   initMenuItems() {
     this.translateService.get([
       'stimulate_approval', 'invite_approver_before', 'invite_approver_after', 'remove_approver',
-      'notifications', 'selectItemToExecute',
+      'notifications', 'selectItemToExecute', 'select_and_save_approval_type',
       'confirmation', 'wouldYouConfirm', 'cancel', 'confirm',
       'approver', 'approver_remove_mandatory',
       'select_an_item', 'before', 'after'
@@ -173,7 +177,11 @@ export class RequestApproval implements OnInit, OnDestroy {
                 header: res.confirmation,
                 icon: 'ui-icon-help',
                 accept: () => {
-                  this.store.dispatch(generateRequestApprovalAction(this.id));
+                  if (this.requestApprovalType) {
+                    this.store.dispatch(generateRequestApprovalAction(this.id));
+                  } else {
+                    this.notifyApprovalTypeSelectionRequired();
+                  }
                 },
                 reject: () => {
                 }
@@ -244,6 +252,7 @@ export class RequestApproval implements OnInit, OnDestroy {
         // Toast: Select item required
         this.notification = res.notifications;
         this.messageText = res.selectItemToExecute;
+        this.msgApprovalType = res.select_and_save_approval_type;
 
         // Toast: Can not remove mandatory approver
         this.lblApprover = res.approver;
@@ -335,6 +344,20 @@ export class RequestApproval implements OnInit, OnDestroy {
     } else {
       return false;
     }
+  }
+
+  /**
+  * @function notifyApprovalTypeSelectionRequired
+  * Notify user to select an approver item before operation
+  */
+  notifyApprovalTypeSelectionRequired() {
+    const toastData = {
+      type: 'warning',
+      title: this.notification,
+      msg: this.msgApprovalType,
+      showClose: true,
+    };
+    this.globalState.notifyMyDataChanged('toasty', '', toastData);
   }
 
   /**

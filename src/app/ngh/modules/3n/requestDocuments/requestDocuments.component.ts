@@ -123,7 +123,7 @@ export class RequestDocuments implements OnInit, OnDestroy {
     // requestDocument
     this.storeRequestDocuments = this.store.pipe(select('requestDocuments'));
     this.storeRequestDocuments.subscribe(data => {
-      // console.log(data);
+      console.log(data);
       if (!data.pending && !data.error) {
         this.requestDocuments = Object.assign([], data.data);
       }

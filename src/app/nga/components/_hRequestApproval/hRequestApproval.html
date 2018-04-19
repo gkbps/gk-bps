@@ -1,0 +1,93 @@
+<p-panel header="{{tcode|translate}}" [toggleable]="true" [collapsed]="true" [style]="{'margin-bottom':'20px'}">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <p-menubar [model]="items"></p-menubar>
+    </div>
+
+    <div class="ui-g-12 ui-md-3">
+      <p-dataList
+        [value]="approvalTypeList"
+        [paginator]="true"
+        [rows]="5"
+        [style]="{'height':'500px'}">
+          <p-header>
+              {{'approval'|translate}}
+          </p-header>
+
+          <ng-template let-item pTemplate="item">
+              <div class="clearfix contact-item" [ngClass]="{'ui-state-highlight': (item == selectedApprovalType)}">
+
+                <div class="contact-details">
+                    <p>{{item.desc}}</p>
+
+                    <p style="color:#757575">
+                      <span class="badge" [ngClass]="{'bg-warning': (item.status1=='Inactive'), 'bg-info': (item.status1=='Active')}">{{item.status1}}</span>
+                      <span class="badge" [ngClass]="{'bg-danger': (item.status2=='Marked'), 'bg-info': (item.status2=='Unmarked')}">{{item.status2}}</span>
+                    </p>
+                </div>
+                <button pbutton="" type="button" (click)="selectApprovalType(item)" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"><span class="ui-button-icon-left ui-clickable fa fa-fw ui-icon-chevron-right"></span><span class="ui-button-text ui-clickable">ui-btn</span></button>
+              </div>
+          </ng-template>
+      </p-dataList>
+    </div>
+    <!-- ui-picklist-item  -->
+
+    <!-- filterBy="brand"
+    dragdrop="true"
+    filterBy="brand"
+    sourceFilterPlaceholder="Search by brand"
+    targetFilterPlaceholder="Search by brand"
+     -->
+
+    <div *ngIf="selectedApprovalType" class="ui-g-12 ui-md-9">
+      <p-pickList
+        [source]="sourceApprovalItems"
+        [target]="targetApprovalItems"
+        sourceHeader="{{'available'|translate}}"
+        targetHeader="{{'selected'|translate}}"
+        [responsive]="true"
+        dragdrop="true"
+        [sourceStyle]="{'height':'420px'}"
+        [targetStyle]="{'height':'420px'}">
+
+          <ng-template let-item pTemplate="item">
+              <div class="ui-g">
+                <div class="ui-g-3">
+                  <img src="assets/modules/approval/{{item.type}}.png" width="48">
+                </div>
+                <div class="ui-g-9">
+                  <div class="fixed-menu-item">{{item.desc}}</div>
+                </div>
+              </div>
+          </ng-template>
+      </p-pickList>
+    </div>
+
+  </div>
+</p-panel>
+
+<!-- style="display:inline-block;margin:2px 0 2px 2px" -->
+<!-- <div class="ui-helper-clearfix">
+    <img style="float:left; display: inline" src="assets/modules/approval/{{item.type}}.png" style="display:inline-block;margin:2px 0 2px 2px" width="48">
+    <div class="fixed-menu-item">{{item.desc}}</div>
+    style="font-size:14px;float:right;margin:15px 5px 0 20px"
+</div> -->
+<!-- <div class="ui-helper-clearfix" style="margin-bottom: 10px"></div> -->
+
+<!-- <p-dialog header="{{'approval'|translate}}" [(visible)]="display" modal="modal" width="300" [responsive]="true">
+  <form>
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <span class="md-inputfield fixed-form">
+          <input id="desc" type="text" style="width: 100%; color: black; border-color: #bdbdbd" pInputText [(ngModel)]="approvalTypeDesc" [ngModelOptions]="{standalone: true}">
+          <label for="desc">{{'description'|translate}} <span *ngIf="!approvalTypeDesc" style="color: red;">({{'required'|translate}})</span></label>
+        </span>
+      </div>
+    </div>
+  </form>
+
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="saveApprovalType(dialogType)" label="{{'yes'|translate}}" [disabled]="!approvalTypeDesc.trim()"></button>
+    <button type="button" pButton icon="fa-close" (click)="display=false" label="{{'no'|translate}}"></button>
+  </p-footer>
+</p-dialog> -->

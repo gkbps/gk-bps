@@ -1,110 +1,132 @@
 <div class="ui-g ui-fluid">
+
   <div class="ui-g-12">
-    <div class="card card-w-title">
+
       <h1>{{'gkcln'|translate}}</h1>
 
-      <div class="ui-g form-group">
+      <div class="form-group">
+
         <!-- HEADER -->
-        <div class="ui-g-12">
-          <request-header
-            [tcode]="tcode"
-            [source]="request|async"
-            (onSelectAction)="onSelectAction($event)">
-          </request-header>
+        <div class="ui-g-12 ui-g-nopad">
+          <div class="card">
+            <request-header
+              [tcode]="tcode"
+              [source]="request|async"
+              (onSelectAction)="onSelectAction($event)">
+            </request-header>
+          </div>
         </div>
         <!-- ./HEADER -->
 
         <!-- BODY -->
-        <div *ngIf="id" class="ui-g-12">
-          <p-panel [toggleable]="true" [collapsed]="false">
-            <p-header>
-              <span class="ui-panel-title"><i class="fa ui-icon-subject"></i> {{'req_body'|translate}}</span>
-            </p-header>
+        <div *ngIf="id" class="ui-g-12 ui-g-nopad">
+          <div class="card">
+            <p-panel [toggleable]="true" [collapsed]="false">
+              <p-header>
+                <span class="ui-panel-title"><i class="fa ui-icon-subject"></i> {{'req_body'|translate}}</span>
+              </p-header>
 
-            <div class="ui-g ui-fluid">
-              <div class="ui-g-12">
-                <gkclient-form
-                  #myRequestBody
-                  [prefix]="prefix"
-                  [action]="action"
-                  [isRequest]="isRequest"
-                  [isEditable]="isEditable"
-                  [source]="requestBody|async"
-                  (onSaveAction)="saveRequestBody($event)">
-                </gkclient-form>
+              <div class="ui-g ui-fluid">
+                <div class="ui-g-12">
+                  <gkclient-form
+                    #myRequestBody
+                    [prefix]="prefix"
+                    [action]="action"
+                    [isRequest]="isRequest"
+                    [isEditable]="isEditable"
+                    [source]="requestBody|async"
+                    (onSaveAction)="saveRequestBody($event)">
+                  </gkclient-form>
+                </div>
               </div>
-            </div>
-          </p-panel>
+            </p-panel>
+          </div>
         </div>
         <!-- ./BODY -->
 
         <!-- DOCUMENTS -->
-        <div *ngIf="id" class="ui-g-12">
-          <request-documents
-            [tcode]="tcode">
-          </request-documents>
+        <div *ngIf="id" class="ui-g-12 ui-g-nopad">
+          <div class="card">
+            <request-documents
+              [tcode]="tcode">
+            </request-documents>
+          </div>
         </div>
         <!-- ./DOCUMENTS -->
 
+
         <!-- APPROVAL -->
-        <div *ngIf="id" class="ui-g-12">
-          <request-approval>
-          </request-approval>
+        <div *ngIf="id" class="ui-g-12 ui-g-nopad">
+          <div class="card">
+            <request-approval></request-approval>
+          </div>
         </div>
         <!-- ./APPROVAL -->
 
         <!-- AJE -->
-        <div *ngIf="id" class="ui-g-12">
-          <p-panel [toggleable]="true" [collapsed]="true">
-            <p-header>
-              <span class="ui-panel-title"><i class="fa ui-icon-ac-unit"></i> {{'req_aje'|translate}}</span>
-            </p-header>
-            <div class="ui-g">
-              <div class="ui-g-12">
-                Auto Journal Entry is here
+        <div *ngIf="id" class="ui-g-12 ui-g-nopad">
+          <div class="card">
+            <p-panel [toggleable]="true" [collapsed]="true">
+              <p-header>
+                <span class="ui-panel-title"><i class="fa ui-icon-ac-unit"></i> {{'req_aje'|translate}}</span>
+              </p-header>
+              <div class="ui-g">
+                <div class="ui-g-12">
+                  Auto Journal Entry is here
+                </div>
               </div>
-            </div>
-          </p-panel>
+            </p-panel>
+          </div>
         </div>
         <!-- ./AJE -->
 
-        <!-- COMMENTS -->
-        <div *ngIf="id" class="ui-g-12">
-          <p-panel [toggleable]="true" [collapsed]="true">
-            <p-header>
-              <span class="ui-panel-title"><i class="fa ui-icon-question-answer"></i> {{'req_comment'|translate}}</span>
-            </p-header>
+        <div *ngIf="id" class="ui-g-12 ui-md-6 ui-g-nopad">
+          <div class="card">
             <div class="ui-g">
-              <div class="ui-g-12">
-                Comment is here
+              <!-- HISTORY -->
+              <div class="ui-g-12 ui-g-nopad">
+                <p-panel [toggleable]="true" [collapsed]="true">
+                  <p-header>
+                    <span class="ui-panel-title"><i class="fa ui-icon-history"></i> {{'req_history'|translate}}</span>
+                  </p-header>
+                  <div class="ui-g">
+                    <div class="ui-g-12">
+                      <request-history></request-history>
+                    </div>
+                  </div>
+                </p-panel>
               </div>
+              <!-- ./HISTORY -->
             </div>
-          </p-panel>
+          </div>
         </div>
-        <!-- ./COMMENTS -->
 
-        <!-- HISTORY -->
-        <div *ngIf="id" class="ui-g-12">
-          <p-panel [toggleable]="true" [collapsed]="true">
-            <p-header>
-              <span class="ui-panel-title"><i class="fa ui-icon-history"></i> {{'req_history'|translate}}</span>
-            </p-header>
+        <div *ngIf="id" class="ui-g-12 ui-md-6 ui-g-nopad">
+          <div class="card">
             <div class="ui-g">
-              <div class="ui-g-12">
-                History is here
+              <!-- COMMENTS -->
+              <div class="ui-g-12 ui-g-nopad">
+                <p-panel [toggleable]="true" [collapsed]="true">
+                  <p-header>
+                    <span class="ui-panel-title"><i class="fa ui-icon-question-answer"></i> {{'req_comment'|translate}}</span>
+                  </p-header>
+                  <div class="ui-g">
+                    <div class="ui-g-12">
+                      <request-comment></request-comment>
+                    </div>
+                  </div>
+                </p-panel>
               </div>
+              <!-- ./COMMENTS -->
             </div>
-          </p-panel>
+          </div>
         </div>
-        <!-- ./HISTORY -->
 
       </div>
-
-    </div>
   </div>
 </div>
 
-<!-- <br />
+<br />
 <p-panel header ="{{'debug'|translate}}" [toggleable]="true" [collapsed]="true">
   <div class="ui-g">
     <div class="ui-g-12">
@@ -123,4 +145,4 @@
       </div>
     </div>
   </div>
-</p-panel> -->
+</p-panel>

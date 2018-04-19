@@ -1,0 +1,23 @@
+<div class="box {{boxStyle}} {{boxSolid?'box-solid':''}}">
+  <div class="box-header {{border?'with-border':''}}">
+    <h3 class="box-title">{{title|translate}}</h3>
+
+    <div class="box-tools pull-right">      
+      <button *ngIf="collapsable" type="button" class="btn btn-box-tool" (click)="toggleCollapsed()"><i [class]="collapsed ? 'fa fa-fw fa-plus' : 'fa fa-fw fa-minus'"></i></button>
+      <button *ngIf="removable" type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa ui-icon-close"></i></button>
+    </div>
+  </div>
+
+  <div *ngIf="!collapsed" class="box-body">
+    <!-- <div *ngIf="loading" class="overlay" style="margin-top: 15px; margin-bottom: 15px;">
+      <i class="fa ui-icon-refresh fa-spin"></i>
+    </div> -->
+    <!-- *ngIf="!loading" -->
+    <ng-content select="[box-body]"></ng-content>
+
+  </div>
+
+  <div *ngIf="!collapsed" class="box-footer">
+    <ng-content select="[box-footer]"></ng-content>
+  </div>
+</div>

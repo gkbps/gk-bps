@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { HttpClientService, SecurityService } from '../../nga/services/';
+import { HttpClientService } from '../../nga/services/httpClient.service';
+import { SecurityService } from '../../nga/services/security.service';
+import { TcodeService } from '../../nga/services/tcode.service';
+
 import { Request } from './requests.models';
 
 @Injectable()
@@ -12,6 +15,7 @@ export class RequestsServices {
   constructor(
     private httpClientService: HttpClientService,
     private securityService: SecurityService,
+    private tcodeService: TcodeService
   ) { }
 
   /**
@@ -56,12 +60,17 @@ export class RequestsServices {
     return Observable.of(value);
   }
 
-  action11(gkrequest: any) {
-    return this.httpClientService.post(this.suffixUrl + 'entry', gkrequest)
+  action11(gkrequest: any, tcode) {
+    return this.httpClientService.post(this.suffixUrl + 'entry', gkrequest, { disableToast: false })
       .map((res) => {
         // res only return id of new document
         gkrequest['_id'] = res.body.data;
         gkrequest['status'] = 'Draft';
+
+        setTimeout(() => {
+          this.tcodeService.executeTcode(tcode, res.body.data);
+        }, 1000);
+
         return gkrequest || '';
       });
   }
@@ -74,7 +83,7 @@ export class RequestsServices {
   }
 
   action13(gkrequest: any) {
-    return this.httpClientService.put(this.suffixUrl + gkrequest._id, gkrequest)
+    return this.httpClientService.put(this.suffixUrl + gkrequest._id, gkrequest, { disableToast: false })
     .map((res) => {
       return res.body.data || {};
     });
@@ -91,6 +100,7 @@ export class RequestsServices {
     };
 
     const reqOptions = {
+      disableToast: true,
       params: pagination
     };
 
@@ -116,14 +126,14 @@ export class RequestsServices {
   */
 
   submitRequest(gkrequest: any) {
-    return this.httpClientService.put(this.suffixUrl + gkrequest._id + '/submit', gkrequest)
+    return this.httpClientService.put(this.suffixUrl + gkrequest._id + '/submit', gkrequest, { disableToast: false })
     .map((res) => {
       return res.body.data || {};
     });
   }
 
   withdrawRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + _id + '/withdraw' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/withdraw' , {}, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -131,7 +141,7 @@ export class RequestsServices {
   }
 
   cancelRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl  + _id + '/cancel', {})
+    return this.httpClientService.patch(this.suffixUrl  + _id + '/cancel', {}, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -139,7 +149,7 @@ export class RequestsServices {
   }
 
   returnRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + _id + '/return' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/return' , {}, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -147,7 +157,7 @@ export class RequestsServices {
   }
 
   rejectRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + _id + '/reject' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/reject' , {}, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -155,7 +165,7 @@ export class RequestsServices {
   }
 
   approveRequest(_id: string, approverId = '', step = '') {
-    return this.httpClientService.patch(this.suffixUrl + _id + '/approve' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/approve' , {}, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -163,7 +173,7 @@ export class RequestsServices {
   }
 
   abortRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + _id + '/abort' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/abort' , {}, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -181,7 +191,7 @@ export class RequestsServices {
 
   postRequest(_id: string) {
     // : Observable<any>
-    return this.httpClientService.patch(this.suffixUrl + _id + '/post' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/post' , {}, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -189,7 +199,7 @@ export class RequestsServices {
   }
 
   revertRequest(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + _id + '/revert' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/revert' , {}, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -198,7 +208,7 @@ export class RequestsServices {
 
   createRequestJournal(_id: string, journal) {
     // : Observable<any>
-    return this.httpClientService.post(this.suffixUrl + _id + '/journal/create' , journal)
+    return this.httpClientService.post(this.suffixUrl + _id + '/journal/create' , journal, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -207,7 +217,7 @@ export class RequestsServices {
 
   postRequestJournal(_id: string) {
     // : Observable<any>
-    return this.httpClientService.patch(this.suffixUrl + _id + '/journal/post' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/journal/post' , {}, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -215,7 +225,7 @@ export class RequestsServices {
   }
 
   revertRequestJournal(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + _id + '/journal/revert' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/journal/revert' , {}, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -229,7 +239,7 @@ export class RequestsServices {
   */
 
   moveRequestApproval(_id, approval) {
-    return this.httpClientService.post(this.suffixUrl + _id + '/approval' , approval)
+    return this.httpClientService.post(this.suffixUrl + _id + '/approval' , approval, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};
@@ -237,7 +247,7 @@ export class RequestsServices {
   }
 
   moveRequestStatus(_id, status) {
-    return this.httpClientService.post(this.suffixUrl + _id + '/approval' , status)
+    return this.httpClientService.post(this.suffixUrl + _id + '/approval' , status, { disableToast: false })
       .map((res) => {
         // IMPORTANT: Need to return res with full data for getting status and make alert
         return res.body.data || {};

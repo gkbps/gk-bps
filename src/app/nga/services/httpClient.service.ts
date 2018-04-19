@@ -23,16 +23,27 @@ import { ObjectService } from '../../nga/services/object.service';
 * @module HttpClientService
 * Customized HttpClient functions to support HTTP REQUEST CYCLE MANAGEMENT
 * 1. Pre-request activity: To show (Progress Bar) or (Deferral Message)
-*    + (handleShowLoader): Conditional helper
-*    + (showLoader): Show (Progress Bar) and/or (Deferral Message)
+* - default: options = {} -> Show (Progress Bar)
+* - options = { isDeferral: boolean }
+*   + false: Show (Progress Bar)
+*   + true: Show deferral message
+*
+* {@link handleShowLoader} Conditional helper
+* {@link showLoader} Show (Progress Bar) and/or (Deferral Message)
 *
 * 2. Send request by http verb (get, post, put, patch, delete)
 *
 * 3. Receive response and process
 * - Catch if error then handle error via (onCatch)
 * - Handle success response:
-*   + (handleSuccess): Conditional helper (Update store or not)
-*   + (onSuccess): Toast the response after processed
+*   + default: options = {} -> Toast (Success message)
+*   + options = { disableToast: boolean }
+*     * true: Log the result
+*     * false: Toast (Success message)
+*
+*   {@link handleSuccess} Conditional helper (Update store or not)
+*   {@link onSuccess} Toast the response after processed
+*
 * - Handle error response: (onError)
 *
 * 4. Complete the cycle by some activity:
@@ -92,18 +103,18 @@ export class HttpClientService extends HttpClient {
   * @param {string} url
   * @param {any|object} options
   * - {boolean} isDeferral decide if deferral message or not
-  * - {boolean} isToast decide if toast is executed
+  * - {boolean} disableToast decide if toast is executed
   *
   * @return {Observable}
   */
   get(url: string, options?: any | {}): Observable<any> {
+    console.log(options);
     const reqOptions = this.handleShowLoader(options);
 
     return super.get(this.getFullUrl(url), this.attachHeader(reqOptions))
       .catch(this.onCatch)
       .do((res: Response) => {
-        // Hanle success response without notifying user
-        // this.onSuccess(res, false);
+          console.log(options, this.getFullUrl(url));
           this.handleSuccess(res, options);
       }, (error: any) => {
         this.onError(error);
@@ -236,10 +247,14 @@ export class HttpClientService extends HttpClient {
 
   /**
   * @function handleShowLoader
-  * A conditional helper for
-  * - showing (Progress Bar) or
-  * - toasting (Deferral Message)
-  * NOTE: Remove {isDeferral: true} after toasting (Deferral Message)
+  * A conditional helper for showing (Progress Bar) or toasting (Deferral Message)
+  * - Defaul: options = {} -> Show {Progress Bar}
+  * - options = { isDeferral: boolean }
+  *   + true: Toast (Deferral message)
+  *   + false: Show {Progress Bar}
+  *
+  * NOTE:
+  * Remove {isDeferral: true} after toasting (Deferral Message)
   * to keep options cleaned before sending request
   *
   * @param {object} options
@@ -249,12 +264,12 @@ export class HttpClientService extends HttpClient {
     // console.log(tmpOptions);
 
     if (!tmpOptions) {
-      this.showLoader(false);
-    } else if (this.objectService.hasProp(tmpOptions, 'isDeferral')) {
       this.showLoader(true);
+    } else if (this.objectService.hasProp(tmpOptions, 'isDeferral')) {
+      this.showLoader(!tmpOptions.isDeferral);
       delete tmpOptions['isDeferral'];
     } else {
-      this.showLoader(false);
+      this.showLoader(true);
     }
 
     return tmpOptions;
@@ -262,11 +277,14 @@ export class HttpClientService extends HttpClient {
 
   /**
   * @function showLoader
-  * To show (Progress Bar) friendly or
-  * to toast (Deferral Message)
+  * To show (Progress Bar) friendly or to toast (Deferral Message)
+  *
+  * @param {boolean} isLoader
+  * - true: Show {Progress bar}
+  * - false: Toast {Deferral message}
   */
-  private showLoader(isDeferral = false): void {
-    if (!isDeferral) {
+  private showLoader(isLoader = false): void {
+    if (isLoader) {
       this.loaderService.show();
     } else {
       this.translateService.get(['deferral', 'deferral_message'])
@@ -304,19 +322,20 @@ export class HttpClientService extends HttpClient {
   * @return {null}
   */
   handleSuccess(res, options) {
-    const tmpOptions = Object.assign({}, options);
-    // console.log(tmpOptions);
+    // console.log(res);
+    console.log(options);
 
-    if (tmpOptions) {
-      if (this.objectService.hasProp(tmpOptions, 'disableToast')) {
-        this.onSuccess(res, tmpOptions.disableToast);
+    if (!options) {
+      this.onSuccess(res, true);
+    } else {
+      if (this.objectService.hasProp(options, 'disableToast')) {
+        this.onSuccess(res, !options.disableToast);
       } else {
         this.onSuccess(res, true);
       }
 
-      if (this.objectService.hasProp(tmpOptions, 'isDeferral')) {
+      if (this.objectService.hasProp(options, 'isDeferral')) {
         console.log('Update Store');
-        // console.log(res);
         this.store.dispatch(addNotificationAction(res.body.data));
       }
     }
@@ -327,13 +346,15 @@ export class HttpClientService extends HttpClient {
   * Inform user based on alert status and http response
   *
   * @param {http response} res
-  * @param {boolean} alert - true: alert / false: silent
+  * @param {boolean} toast - true: alert / false: silent
   */
-  private onSuccess(res: Response, disableToast: boolean): void {
-    if (!disableToast) {
+  private onSuccess(res: Response, toast: boolean): void {
+    if (toast) {
+      // console.log(toast, res);
       this.apiResultHandlingService.processAPIResult(res)
       .then((msg) => {
         // console.log(msg);
+
         const toastData = {
           type: msg['type'],
           title: msg['title'],

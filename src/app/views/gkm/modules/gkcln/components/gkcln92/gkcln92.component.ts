@@ -1,21 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 
 import { TranslateService } from '@ngx-translate/core';
+
+import { Store, select } from '@ngrx/store';
+import { getApprovalItemsAction } from '../../../../../../ngrx/approvalItem/approvalItems.actions';
 
 import { GlobalState } from '../../../../../../global.state';
 import { LocalStorageService } from '../../../../../../nga/services/localStorage.service';
 import { MenuService } from '../../../../../../nga/services/menu.service';
 import { NavigationService } from '../../../../../../nga/services/navigation.service';
 
-import { SecurityService } from '../../../../../../nga/services/security.service';
-import { TcodeService } from '../../../../../../nga/services/tcode.service';
-
 import { BaseComponent } from '../../../../../base';
-
-import { ApprovalItem } from '../../../../../../store/_models/approvalItem.model';
-import { ApprovalItemService } from '../../../../../../store/_services/approvalItem.service';
 
 @Component({
   templateUrl: 'gkcln92.component.html'
@@ -34,9 +29,9 @@ export class GkCln92Component extends BaseComponent implements OnInit, OnDestroy
   tcode = 'gkcln92';
   tcodes = ['gkcln31', 'gkcln33', 'gkcln34'];
 
-  standardApprovalItems: any;
-  approvalItems: Observable<Array<ApprovalItem>>;
-  private approvalItemSubscription: Subscription;
+  // Store for request document
+  storeApprovalItems: any;
+  approvalItems = [];
 
   constructor(
     // Base class services
@@ -47,10 +42,23 @@ export class GkCln92Component extends BaseComponent implements OnInit, OnDestroy
     public menuService: MenuService,
 
     // Derive class services
-    private approvalItemService: ApprovalItemService
+    private store: Store<any>
   ) {
     // Base class constructor: Re-injection for inheritance
     super(translateService, globalState, localStorageService, menuService, navigationService);
+
+    // STORE
+    this.storeApprovalItems = this.store.pipe(select('approvalItems'));
+
+    // PENDING
+    this.storeApprovalItems.subscribe(data => {
+      // console.log(data);
+      if (!data.pending && !data.error) {
+        this.approvalItems = Object.assign([], data.data);
+      }
+    });
+
+    this.storeApprovalItems.dispatch(getApprovalItemsAction());
   }
 
   ngOnInit() {
@@ -64,7 +72,6 @@ export class GkCln92Component extends BaseComponent implements OnInit, OnDestroy
 
     // Get Standard List once for all
     this.subscribeLocalState();
-    this.approvalItemService.findStandardApprovalItems();
   }
 
   ngOnDestroy() {
@@ -77,19 +84,9 @@ export class GkCln92Component extends BaseComponent implements OnInit, OnDestroy
 
   /* LOCAL STATE */
   subscribeLocalState() {
-    this.approvalItems = this.approvalItemService.standardApprovalItems;
-    this.approvalItemSubscription = this.approvalItems
-      .subscribe(responseBodyData => {
-        // console.log(responseBodyData);
-        this.standardApprovalItems = responseBodyData['data'];
-      }, error => {
-        console.log(error);
-      });
-
   }
 
   unsubscribeLocalState() {
     this.globalState.unsubscribeEvent('language', this.myScope);
-    this.approvalItemSubscription.unsubscribe();
   }
 }

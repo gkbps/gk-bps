@@ -1,0 +1,13 @@
+<div class="ui-g ui-g-12">
+
+	<div *ngFor="let item of requestHistories; let i=index" class="timeline-item" [attr.date-is]="item.date + ' (' + item.time + ')'">
+		<u><b><h4 [innerHTML]="item.header"></h4></b></u>
+		<p *ngIf="item.body" [innerHTML]="item.body"></p>
+		<p *ngIf="item.footer" [innerHTML]="item.footer"></p>
+	</div>
+
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+  <p-button label="{{'comment_more'|translate}}" (onClick)="loadMore($event)"></p-button>
+</div>

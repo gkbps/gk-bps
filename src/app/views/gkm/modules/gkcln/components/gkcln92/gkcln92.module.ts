@@ -1,12 +1,16 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { HNavBoardModule } from '../../../../../../nga/components/hNavBoard';
-import { HRequestApprovalModule } from '../../../../../../nga/components/hRequestApproval';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { ApprovalItemsReducers } from '../../../../../../ngrx/approvalItem/approvalItems.reducers';
+import { ApprovalItemsEffects } from '../../../../../../ngrx/approvalItem/approvalItems.effects';
+import { ApprovalItemsServices } from '../../../../../../ngrx/approvalItem/approvalItems.services';
+
+import { HRequestApprovalModule } from '../../../../../../ngh/modules/9n/hRequestApproval';
 
 import { GkCln92Component } from './gkcln92.component';
 import { GkCln92RoutingModule } from './gkcln92-routing.module';
@@ -17,17 +21,20 @@ import { GkCln92RoutingModule } from './gkcln92-routing.module';
   ],
   imports: [
     CommonModule,
-    // FormsModule,
-    // RouterModule,
 
     TranslateModule,
 
-    HNavBoardModule,
+    StoreModule.forFeature('approvalItems', ApprovalItemsReducers),
+    EffectsModule.forFeature([
+      ApprovalItemsEffects
+    ]),
+
     HRequestApprovalModule,
     GkCln92RoutingModule
   ],
-  exports: [
-  ],
+  providers: [
+    ApprovalItemsServices
+  ]
 })
 export class GkCln92Module {
 }

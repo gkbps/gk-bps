@@ -2,6 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { TranslateModule } from '@ngx-translate/core';
+
+// import { StoreModule } from '@ngrx/store';
+// import { EffectsModule } from '@ngrx/effects';
+//
+// import { ApprovalItemsReducers } from '../../../ngrx/approvalItem/approvalItems.reducers';
+// import { ApprovalItemsEffects } from '../../../ngrx/approvalItem/approvalItems.effects';
+// import { ApprovalItemsServices } from '../../../ngrx/approvalItem/approvalItems.services';
+
 import { PanelModule } from 'primeng/panel';
 import { MenubarModule } from 'primeng/menubar';
 import { DataListModule } from 'primeng/datalist';
@@ -10,11 +19,11 @@ import { PickListModule } from 'primeng/picklist';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 
-import { AppTranslationModule } from '../../../app.translation.module';
-import { NgaModule } from '../../../nga/nga.module';
+// import { AppTranslationModule } from '../../../app.translation.module';
+// import { NgaModule } from '../../../nga/nga.module';
 // import { HoangModule } from '../../../nga/hoang.module';
 
-import { HGkDataListModule } from './hGkDataList';
+// import { HGkDataListModule } from './hGkDataList';
 import { HRequestApproval } from './hRequestApproval.component';
 
 @NgModule({
@@ -22,6 +31,8 @@ import { HRequestApproval } from './hRequestApproval.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+
+    TranslateModule,
 
     PanelModule,
     MenubarModule,
@@ -31,16 +42,22 @@ import { HRequestApproval } from './hRequestApproval.component';
     DialogModule,
     InputTextModule,
 
-    AppTranslationModule,
-    NgaModule,
+    // AppTranslationModule,
+    // NgaModule,
     // HoangModule,
 
-    HGkDataListModule
+    // HGkDataListModule
+
+    // StoreModule.forFeature('approvalItems', ApprovalItemsReducers),
+    // EffectsModule.forFeature([
+    //   ApprovalItemsEffects
+    // ]),
   ],
   declarations: [
     HRequestApproval,
   ],
   providers: [
+    // ApprovalItemsServices
   ],
   exports: [
     HRequestApproval,

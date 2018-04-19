@@ -146,7 +146,13 @@ export class NotificationTableComponent implements OnInit, OnDestroy {
           },
           {
             label: res.delete, icon: 'ui-icon-delete-forever',
-            command: (event) => this.emitAction('delete'),
+            command: (event) => {
+              if (this.selectedClient.isMark) {
+                this.emitAction('delete');
+              } else {
+                alert('Not marked');
+              }
+            },
           },
         ];
 

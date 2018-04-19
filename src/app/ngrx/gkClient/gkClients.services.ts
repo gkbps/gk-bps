@@ -42,6 +42,7 @@ export class GkClientsServices {
     };
 
     const reqOptions = {
+      disableToast: true,
       params: pagination
     };
 
@@ -57,28 +58,28 @@ export class GkClientsServices {
   }
 
   action11(gkrequest: any) {
-    return this.httpClientService.post(this.suffixUrl + 'entry', gkrequest)
+    return this.httpClientService.post(this.suffixUrl + 'entry', gkrequest, { disableToast: false })
       .map((res) => {
         return res.body.data || '';
       });
   }
 
   action12(_id: string) {
-    return this.httpClientService.get(this.suffixUrl + _id)
+    return this.httpClientService.get(this.suffixUrl + _id, { disableToast: true })
       .map((res) => {
         return res.body.data || {};
       });
   }
 
   action13(gkrequest: any) {
-    return this.httpClientService.put(this.suffixUrl + gkrequest._id, gkrequest)
+    return this.httpClientService.put(this.suffixUrl + gkrequest._id, gkrequest, { disableToast: false })
     .map((res) => {
       return res.body.data || {};
     });
   }
 
   action14(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + _id + '/disable' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/disable' , {}, { disableToast: false })
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
       return res.body.data || {};
@@ -86,7 +87,7 @@ export class GkClientsServices {
   }
 
   action15(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + _id + '/enable' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/enable' , {}, { disableToast: false })
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
       return res.body.data || {};
@@ -94,7 +95,7 @@ export class GkClientsServices {
   }
 
   action16(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + _id + '/mark' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/mark' , {}, { disableToast: false })
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
       return res.body.data || {};
@@ -102,7 +103,7 @@ export class GkClientsServices {
   }
 
   action17(_id: string) {
-    return this.httpClientService.patch(this.suffixUrl + _id + '/unmark' , {})
+    return this.httpClientService.patch(this.suffixUrl + _id + '/unmark' , {}, { disableToast: false })
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
       return res.body.data || {};
@@ -110,7 +111,7 @@ export class GkClientsServices {
   }
 
   action18(_id: string) {
-    return this.httpClientService.delete(this.suffixUrl + _id)
+    return this.httpClientService.delete(this.suffixUrl + _id, { disableToast: false })
     .map((res) => {
       // IMPORTANT: Need to return res with full data for getting status and make alert
       return res.body.data || {};
@@ -149,28 +150,28 @@ export class GkClientsServices {
   */
 
   action32(_id) {
-    return this.httpClientService.get(this.suffixUrl + 'requests/' + _id)
+    return this.httpClientService.get(this.suffixUrl + 'requests/' + _id, { disableToast: true })
       .map((res) => {
         return res.body.data || {};
       });
   }
 
   action33(request) {
-    return this.httpClientService.put(this.suffixUrl + 'requests/' + request._id, request)
+    return this.httpClientService.put(this.suffixUrl + 'requests/' + request._id, request, { disableToast: true })
       .map((res) => {
         return res.body.data || {};
       });
   }
 
   action42(_id) {
-    return this.httpClientService.patch(this.suffixUrl + 'requests/' + _id + '/post', {})
+    return this.httpClientService.patch(this.suffixUrl + 'requests/' + _id + '/post', {}, { disableToast: false })
       .map((res) => {
         return res.body.data || {};
       });
   }
 
   action43(_id) {
-    return this.httpClientService.patch(this.suffixUrl + 'requests/' + _id + '/revert', {})
+    return this.httpClientService.patch(this.suffixUrl + 'requests/' + _id + '/revert', {}, { disableToast: false })
       .map((res) => {
         return res.body.data || {};
       });
@@ -189,6 +190,7 @@ export class GkClientsServices {
     };
 
     const reqOptions = {
+      disableToast: true,
       params: pagination
     };
 
@@ -216,6 +218,7 @@ export class GkClientsServices {
     };
 
     const reqOptions = {
+      disableToast: true,
       params: pagination
     };
 
@@ -243,6 +246,7 @@ export class GkClientsServices {
     };
 
     const reqOptions = {
+      disableToast: true,
       params: pagination
     };
 

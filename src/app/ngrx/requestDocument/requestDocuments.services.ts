@@ -25,7 +25,7 @@ export class RequestDocumentsServices {
   }
 
   action12(_id) {
-    return this.httpClientService.get(this.suffixUrl + 'list/' + _id)
+    return this.httpClientService.get(this.suffixUrl + 'list/' + _id, { disableToast: true })
       .map((res) => {
         // console.log(res);
         return res.body.data || {};

@@ -125,6 +125,9 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
         } else {
           this.isEditable = false;
         }
+
+        // IMPORTANT: To assign id after save new
+        // this.id = res.data._id;
       }
     });
 
@@ -181,7 +184,7 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
         // console.log('save.01-Save requestHeader to request!');
         if (event.valid) {
           if (event.data.status === 'New') {
-            this.store.dispatch(addRequestAction(event.data));
+            this.store.dispatch(addRequestAction(event.data, this.tcode));
           } else {
             this.store.dispatch(saveRequestAction(event.data));
 
@@ -216,7 +219,11 @@ export class GkCln31Component extends BaseComponent implements OnInit, OnDestroy
 
       case 'approve':
         // console.log('approve.00-Approve requestHeader to request!');
-        // this.store.dispatch(approveRequestAction(this.id, event.data));
+        const invitedApprover = {
+          id: 'htdong',     // event.data
+          step: 'Invited'   // event.data
+        }
+        this.store.dispatch(approveRequestAction(this.id, invitedApprover.id, invitedApprover.step));
         break;
 
       case 'reject':

@@ -1,41 +1,42 @@
-<p-panel [toggleable]="true" [collapsed]="true">
+<p-panel [toggleable]="true" [collapsed]="false">
   <p-header>
     <span class="ui-panel-title"><i class="fa ui-icon-library-books"></i> {{'req_document'|translate}}</span>
   </p-header>
-  <div class="ui-g">
+
+  <div class="ui-g  ui-fluid">
     <div class="ui-g-12">
+
       <p-menubar [model]="items"></p-menubar>
-    </div>
 
-    <div *ngIf="isUpload" class="ui-g-12">
-      <p-fileUpload
-        #singleFileUploader
-        name="files"
-        [url]="myUrl"
+      <div *ngIf="isUpload" class="ui-g">
+        <div class="ui-g-12">
+          <p-fileUpload
+            #singleFileUploader
+            name="files"
+            [url]="myUrl"
 
-        accept=".docx,.doc,.xls,xlsx,ppt,.pptx,application/pdf,application/rtf,text/plain,application/x-zip-compressed,image/*"
+            accept=".docx,.doc,.xls,xlsx,ppt,.pptx,application/pdf,application/rtf,text/plain,application/x-zip-compressed,image/*"
 
-        invalidFileSizeMessageSummary = "{{'invalid_file_size_summary'|translate}}"
-        invalidFileSizeMessageDetail = "{{'invalid_file_size_detail'|translate}}"
-        invalidFileTypeMessageSummary = "{{'invalid_file_type_summary'|translate}}"
-        invalidFileTypeMessageDetail = "{{'invalid_file_type_detail'|translate}}"
+            invalidFileSizeMessageSummary = "{{'invalid_file_size_summary'|translate}}"
+            invalidFileSizeMessageDetail = "{{'invalid_file_size_detail'|translate}}"
+            invalidFileTypeMessageSummary = "{{'invalid_file_type_summary'|translate}}"
+            invalidFileTypeMessageDetail = "{{'invalid_file_type_detail'|translate}}"
 
-        customUpload="'true'"
-        (uploadHandler)="uploadSingleFileHandler($event)"
+            customUpload="'true'"
+            (uploadHandler)="uploadSingleFileHandler($event)"
 
-        chooseLabel="{{'selectFile'|translate}}"
-        uploadLabel="{{'upload'|translate}}"
-        cancelLabel="{{'cancel'|translate}}"
+            chooseLabel="{{'selectFile'|translate}}"
+            uploadLabel="{{'upload'|translate}}"
+            cancelLabel="{{'cancel'|translate}}"
 
-        [maxFileSize]="maxSize">
-      </p-fileUpload>
+            [maxFileSize]="maxSize">
+          </p-fileUpload>
 
-      <ul *ngIf="uploadedFiles.length">
-        <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-      </ul>
-    </div>
-
-    <div class="ui-g-12">
+          <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+          </ul>
+        </div>
+      </div>
 
       <p-table
         #dt
@@ -123,30 +124,31 @@
         </ng-template>
 
       </p-table>
+
       <p-contextMenu #cm [model]="items"></p-contextMenu>
-
-      <p-dialog header="{{'upload'|translate}}" [(visible)]="displayUploadDialog" modal="modal" width="600" [responsive]="true">
-        <p-footer>
-            <button type="button" pButton icon="fa-close" (click)="displayUploadDialog=false;" label="{{'close'|translate}}"></button>
-        </p-footer>
-      </p-dialog>
-
-      <p-dialog header="{{'rename'|translate}}" [(visible)]="displayRenameDialog" modal="modal" width="600" [responsive]="true">
-        <form>
-          <div class="ui-g">
-            <div class="ui-g-12">
-              <span class="md-inputfield fixed-form">
-                <input id="desc" type="text" style="width: 100%; color: black; border-color: #bdbdbd" pInputText [(ngModel)]="desc" [ngModelOptions]="{standalone: true}">
-                <label for="desc">{{'description'|translate}} <span *ngIf="!desc" style="color: red;">({{'required'|translate}})</span></label>
-              </span>
-            </div>
-          </div>
-        </form>
-        <p-footer>
-            <button [disabled]="!desc" type="button" pButton icon="fa-close" (click)="renameRequestFile()" label="{{'rename'|translate}}"></button>
-        </p-footer>
-      </p-dialog>
 
     </div>
   </div>
 </p-panel>
+
+<p-dialog header="{{'upload'|translate}}" [(visible)]="displayUploadDialog" modal="modal" width="600" [responsive]="true">
+  <p-footer>
+      <button type="button" pButton icon="fa-close" (click)="displayUploadDialog=false;" label="{{'close'|translate}}"></button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="{{'rename'|translate}}" [(visible)]="displayRenameDialog" modal="modal" width="600" [responsive]="true">
+  <form>
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <span class="md-inputfield fixed-form">
+          <input id="desc" type="text" style="width: 100%; color: black; border-color: #bdbdbd" pInputText [(ngModel)]="desc" [ngModelOptions]="{standalone: true}">
+          <label for="desc">{{'description'|translate}} <span *ngIf="!desc" style="color: red;">({{'required'|translate}})</span></label>
+        </span>
+      </div>
+    </div>
+  </form>
+  <p-footer>
+      <button [disabled]="!desc" type="button" pButton icon="fa-close" (click)="renameRequestFile()" label="{{'rename'|translate}}"></button>
+  </p-footer>
+</p-dialog>

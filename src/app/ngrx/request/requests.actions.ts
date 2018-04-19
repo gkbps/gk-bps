@@ -135,10 +135,13 @@ export function resetRequestAction(tcode) {
   };
 }
 
-export function addRequestAction(Request) {
+export function addRequestAction(Request, tcode) {
   return {
     type: RequestActionTypes.ADD_REQUEST,
-    payload: { data: Request }
+    payload: {
+      data: Request,
+      tcode: tcode
+    }
   };
 }
 

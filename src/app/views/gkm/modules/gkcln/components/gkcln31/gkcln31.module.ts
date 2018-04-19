@@ -24,6 +24,13 @@ import { PanelModule } from 'primeng/panel';
 import { RequestHeaderModule } from '../../../../../../ngh/modules/3n/requestHeader';
 import { RequestDocumentsModule } from '../../../../../../ngh/modules/3n/requestDocuments';
 import { RequestApprovalModule } from '../../../../../../ngh/modules/3n/requestApproval';
+import { RequestCommentModule } from '../../../../../../ngh/modules/3n/requestComment';
+import { RequestHistoryModule } from '../../../../../../ngh/modules/3n/requestHistory';
+
+import { AlBoxModule } from '../../../../../../ngh/modules/adminLTE/alBox';
+import { AlCommentModule } from '../../../../../../ngh/modules/adminLTE/alComment';
+
+import { AlHistoryModule } from '../../../../../../ngh/modules/adminLTE/alHistory';
 
 import { GkClnFormModule } from '../gkclnForm/gkclnForm.module';
 
@@ -55,6 +62,12 @@ import { GkCln31Component } from './gkcln31.component';
     RequestHeaderModule,
     RequestDocumentsModule,
     RequestApprovalModule,
+    RequestCommentModule,
+    RequestHistoryModule,
+
+    AlBoxModule,
+    AlCommentModule,
+    AlHistoryModule,
 
     GkClnFormModule,
 
